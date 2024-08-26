@@ -15,7 +15,7 @@ Este estándar contiene las siguientes secciones:
 
 ---
 
-## Propósito (david)
+## Propósito
 Éste estandar servirá como guia para la escritura homogenea, legible y segura del codigo en el proyecto de tecnologías para la construcción de software, el cual estará escrito en C# y apegandose mayormente al estandar establecido por microsoft.
 
 El proyecto seguirá el paradigma de orientación a objetos y estará escrito en inglés.
@@ -163,7 +163,6 @@ private Foo() {
 **Comentarios**
 
 Procurar utilizarlos solamente cuando sea necesario explicar la razón por la que se codificó de una manera específica en alguna parte o con finalidades de documentación para la API de la aplicación
-- **Comentario multilinea:** (PENDIENTE)
 - **Comentarios de documentación:** Todas las clases, structs, enum, funciones, propiedades y campos públicos deben describirse en cuanto a su propósito y uso. Esta regla garantiza que la documentación se genere y difunda correctamente para todas las clases, métodos y propiedades.
 
 ***Ejemplo:***
@@ -248,10 +247,10 @@ Para facilitar el registro de errores en bitacora y mensajes de error para el us
 
 ---
 
-## Prácticas seguras de construcción (pale)
+## Prácticas seguras de construcción
 
 1. **Utilizar una cuenta solo con los permisos esenciales para acceder a la base de datos.** Con el fin de reducir el daño potencial en caso de un compromiso de la cuenta, debido a un atacante externo o por un error de programación.
-2. **Las credenciales de la cuenta de acceso a la base de datos no deben estar situada dentro del código.** Ya que el código de este proyecto es público y cualquier persona puede utilizarlas para acceder a la base de datos. Es necesario almacenar las credenciales en (PENDIENTE)
+2. **Las credenciales de la cuenta de acceso a la base de datos no deben estar situada dentro del código.** Ya que el código de este proyecto es público y cualquier persona puede utilizarlas para acceder a la base de datos.
 3. **Liberar los recursos después de utilzarlos.** Liberar los recursos (como conexiones a bases de datos, Flujos a archivos, etc.) evita consumo innecesario de memoria. Si no se liberan, pueden agotarse los recursos del sistema y llevar a errores durante la ejecución de la aplicación.
 4. **Validación de parámetros de entrada en una función.** Para asegurarse que los datos se encuentren como se esperan y garantizar el correcto funcionamiento de la función.
 5. **Ningún método debe devolver null como valor de retorno.** Devolver null puede llevar a NullPointerExceptions. Considere devolver un *valor por defecto, una excepción o un objeto opcional* para indicar la ausencia de un valor.
