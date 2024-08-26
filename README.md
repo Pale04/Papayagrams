@@ -17,7 +17,9 @@ Este estándar contiene las siguientes secciones:
 
 ## Propósito (david)
 Éste estandar servirá como guia para la escritura homogenea, legible y segura del codigo en el proyecto de tecnologías para la construcción de software, el cual estará escrito en C# y apegandose mayormente al estandar establecido por microsoft.
+
 El proyecto seguirá el paradigma de orientación a objetos y estará escrito en inglés.
+
 El proyecto se trata de un juego multijugador en linea ...
 
 ---
@@ -190,6 +192,7 @@ public class Controller
 
 ### Estructuras de control
 - Debe haber un espacio entre la declaración de la estructura de control y el paréntesis.
+- Las llaves son necesarias, incluso si solo contendrán una linea.
 
 ***Ejemplo***
 ```C#
@@ -220,22 +223,25 @@ while  (true)
 
 ## Manejo de excepciones (david)
 Las excepciones se manejarán con bloques *try-catch,* y se usará *using* cuando sea posible y más legible que un bloque try-catch.
+
 No se usará en bloques try-catch el tipo de excepción más alto (Exception), sino errores especificos.
+
 Se usarán filtros de excepciones en vez de bloques _if_ cuando sean necesarios.
 
-### Bitacora de errores
-Se usará la librería _log4net_ para la bitacora de errores.
-Los errores se registrarán a la bitacora en ..., y si es necesario, serán propagados a las capas superiores para informar al usuario del error.
+### Bitacora
+Se usará la librería _log4net_ para la bitacora.
+
+Los errores se registrarán a la bitacora en ...(que capa o clase) , y si es necesario, serán propagados a las capas superiores para informar al usuario del error.
 
 **Fatal**:
 - FileNotFoundException
 - SqlException
 
 **Warning**:
-- 
+- (excepción de falta de conexión)
 
-**Info**:
--
+También se regitrarán mensajes de información varia:
+- Guardado de datos de usuario
 
 ---
 
