@@ -231,6 +231,9 @@ Se usarán filtros de excepciones en vez de bloques _if_ cuando sean necesarios.
 ### Bitacora
 Se usará la librería _log4net_ para la bitacora.
 
+Se regitrarán mensajes de información varia (**Info**):
+- Guardado de datos de usuario
+
 Los errores se registrarán a la bitacora en ...(que capa o clase) , y si es necesario, serán propagados a las capas superiores para informar al usuario del error.
 
 **Fatal**:
@@ -240,8 +243,8 @@ Los errores se registrarán a la bitacora en ...(que capa o clase) , y si es nec
 **Warning**:
 - (excepción de falta de conexión)
 
-También se regitrarán mensajes de información varia:
-- Guardado de datos de usuario
+### Errores personalizados
+Para facilitar el registro de errores en bitacora y mensajes de error para el usuario, se manejará la clase _(nombre de clase)_ para propagar los errores y mensajes para el usuario y bitacora.
 
 ---
 
