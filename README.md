@@ -257,6 +257,7 @@ Para facilitar el registro de errores en bitacora y mensajes de error para el us
 6. **Validación de las entradas de datos del usuario por medio de campos.** Para asegurarse que el usuario introduzca datos válidos para la aplicación y evitar errores en el procesamiento y consistencia de estos.
 7. **Respetar el principio de encapsulación.** Utilice siempre campos privados y propiedades públicas si se necesita acceder al campo desde fuera de la clase o struct. Asegúrese de ubicar en el mismo lugar el campo privado y la propiedad pública.
 8. **Limitar la cantidad de información crítica al usuario.** No mostrar el error especifico al usuario para evitar revelar información sensible sobre la aplicación, en su lugar, notificarle con un mensaje breve y descriptivo de lo que sucedió.
+9. **Encriptación de información de contraseñas de usuario en la base de datos.**
 
 ---
 
