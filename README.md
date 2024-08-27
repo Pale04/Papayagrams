@@ -16,7 +16,7 @@ Este estándar contiene las siguientes secciones:
 ---
 
 ## Propósito
-Éste estandar servirá como guia para la escritura homogenea, legible y segura del codigo en el proyecto de tecnologías para la construcción de software, el cual estará escrito en C# y apegandose mayormente al estandar establecido por microsoft.
+Éste estandar servirá como guia para la escritura homogenea, legible y segura del código en el proyecto de tecnologías para la construcción de software, el cual estará escrito en C# y apegandose mayormente al estandar establecido por microsoft.
 
 El proyecto seguirá el paradigma de orientación a objetos y estará escrito en inglés.
 
