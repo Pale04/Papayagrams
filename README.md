@@ -162,6 +162,7 @@ private Foo() {
 ```
 
 **Comentarios**
+
 Solo se utilizarán comentarios de linea, y se escribirán sobre la linea o lineas de codigo del que se habla, al mismo nivel de indentación, y con un espacio despues de los diagonales.
 
 Procurar utilizarlos solamente cuando sea necesario explicar la razón por la que se codificó de una manera específica en alguna parte o con finalidades de documentación para la API de la aplicación
