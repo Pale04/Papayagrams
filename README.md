@@ -224,13 +224,10 @@ while  (true)
 ---
 
 ## Manejo de excepciones (david)
-Las excepciones se manejarán con bloques *try-catch,* y se usará *using* cuando sea posible y más legible que un bloque try-catch.
-
-No se usará en bloques try-catch el tipo de excepción más alto (Exception), sino errores especificos.
-
-Se usarán filtros de excepciones en vez de bloques _if_ cuando sean necesarios.
-
-Las excepciones atrapadas por bloques catch se nombrarán "error".
+- Las excepciones se manejarán con bloques *try-catch,* y se usará *using* cuando sea posible y más legible que un bloque try-catch.
+- No se usará en bloques try-catch el tipo de excepción más alto (Exception), sino errores especificos.
+- Se usarán filtros de excepciones en vez de bloques _if_ cuando sean necesarios.
+- Las excepciones atrapadas por bloques catch se nombrarán "error".
 
 ### Bitacora
 Se usará la librería _log4net_ para la bitacora.
