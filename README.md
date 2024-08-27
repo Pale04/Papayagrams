@@ -132,12 +132,13 @@ namespace application
 - Utilizar 4 espacios para la indentación, no tabulación.
 - Se usará estilo de llaves Allman, es decir, las llaves que abren y cierran bloques de código, deben ocupar una sola línea, y empezar a escribir código en la siguiente línea.
 - Evitar usar _this_, a menos que sea absolutamente necesario.
+- Espacios entre operadores binarios.
 
 ***Ejemplo***
 ```C#
 private Foo()
 {
-   if (Bar==null)
+   if (Bar == null)
    {
        DoThing();
    }
@@ -161,15 +162,17 @@ private Foo() {
 ```
 
 **Comentarios**
-Solo se utilizarán comentarios de linea, y se escribirán sobre la linea o lineas de codigo del que se habla.
+Solo se utilizarán comentarios de linea, y se escribirán sobre la linea o lineas de codigo del que se habla, al mismo nivel de indentación, y con un espacio despues de los diagonales.
+
 Procurar utilizarlos solamente cuando sea necesario explicar la razón por la que se codificó de una manera específica en alguna parte o con finalidades de documentación para la API de la aplicación
 - **Comentarios de documentación:** Todas las clases, structs, enum, funciones, propiedades y campos públicos deben describirse en cuanto a su propósito y uso. Esta regla garantiza que la documentación se genere y difunda correctamente para todas las clases, métodos y propiedades.
+- **Marcas de codigo incompleto:** Se utilizarán comentarios "*todo*" (por hacer) en ubicaciones del codigo que se terminarán despues.
 
 ***Ejemplo:***
 ```c#
-/// <summary>
-/// The Controller definition defines ...
-/// </summary>
+// <summary>
+// The Controller definition defines ...
+// </summary>
 public class Controller
 {
     /// <summary>
