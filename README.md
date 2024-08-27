@@ -230,6 +230,8 @@ No se usará en bloques try-catch el tipo de excepción más alto (Exception), s
 
 Se usarán filtros de excepciones en vez de bloques _if_ cuando sean necesarios.
 
+Las excepciones atrapadas por bloques catch se nombrarán "error".
+
 ### Bitacora
 Se usará la librería _log4net_ para la bitacora.
 
