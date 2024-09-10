@@ -28,7 +28,7 @@ El proyecto se trata de un juego multijugador en linea ...
 
 **Generales**
 - Utilice nombres descriptivos para variables, constantes, métodos, clases, propiedades y espacios de nombre (namespaces).
-- Utilice la notación PascalCase para los nombres de *propiedades, métodos, clases y namespaces*. Esta consiste en comenzar cada palabra en mayúsculas, sin espacios ni guiones.
+- Utilice la notación PascalCase para los nombres de *propiedades, métodos, clases, proyectos y namespaces*. Esta consiste en comenzar cada palabra en mayúsculas, sin espacios ni guiones.
 - Utilice la notación camelCase para los parámetros de métodos y las variables. Esta consiste en comenzar la primera palabra con minúscula y las siguiente con mayúscula, sin espacios ni guiones.
     - Las variables internas y privadas deberán tener el prefijo "\_" y se usará _readonly_ siempre que sea posible.
 - Los nombres de las interfaces deben llevar el prefijo "I".
