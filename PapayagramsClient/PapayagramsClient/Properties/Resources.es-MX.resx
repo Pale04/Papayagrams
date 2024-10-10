@@ -118,129 +118,129 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="globalSignIn" xml:space="preserve">
-    <value>Sign in</value>
+    <value>Iniciar sesión</value>
   </data>
   <data name="signInSignUp" xml:space="preserve">
-    <value>Sign up</value>
+    <value>¿No tienes cuenta? Registrate</value>
   </data>
   <data name="globalUsername" xml:space="preserve">
     <value>Username</value>
   </data>
   <data name="signInWrongUsername" xml:space="preserve">
-    <value>Wrong username</value>
+    <value>Usuario incorrecto</value>
   </data>
   <data name="globalPassword" xml:space="preserve">
-    <value>Password</value>
+    <value>Contraseña</value>
   </data>
   <data name="signInForgotPassword" xml:space="preserve">
-    <value>Forgot password?</value>
+    <value>¿Olvidaste tu contraseña?</value>
   </data>
   <data name="signInJoinAsGuest" xml:space="preserve">
-    <value>Join game as guest</value>
+    <value>Unirse a juego como invitado</value>
   </data>
   <data name="registerSignUp" xml:space="preserve">
-    <value>Sign up</value>
+    <value>Registrate</value>
   </data>
   <data name="registerAlreadyRegistered" xml:space="preserve">
-    <value>Already have an account? Sign in</value>
+    <value>¿Ya tienes cuenta? Inicia sesión</value>
   </data>
   <data name="registerEmailAlreadyLinked" xml:space="preserve">
-    <value>There is already an account linked to this email</value>
+    <value>Ya existe una cuenta vinculada a este correo</value>
   </data>
   <data name="globalEmail" xml:space="preserve">
-    <value>Email</value>
+    <value>Correo electronico</value>
   </data>
   <data name="registerExistingUsername" xml:space="preserve">
-    <value>This username already exists</value>
+    <value>El nombre de usuario ya existe</value>
   </data>
   <data name="registerWeakPassword" xml:space="preserve">
-    <value>Weak password</value>
+    <value>Contraseña debil</value>
   </data>
   <data name="registerInvalidEmail" xml:space="preserve">
-    <value>Invalid email</value>
+    <value>Correo invalido</value>
   </data>
   <data name="mainMenuCreateGame" xml:space="preserve">
-    <value>Create game</value>
+    <value>Crear partida</value>
   </data>
   <data name="mainMenuJoinGame" xml:space="preserve">
-    <value>Join game</value>
+    <value>Unirse a partida</value>
   </data>
   <data name="mainMenuProfile" xml:space="preserve">
-    <value>Profile</value>
+    <value>Perfil</value>
   </data>
   <data name="mainMenuAchievements" xml:space="preserve">
-    <value>Achievements</value>
+    <value>Logros</value>
   </data>
   <data name="mainMenuSignOut" xml:space="preserve">
-    <value>Sign out</value>
+    <value>Cerrar sesión</value>
   </data>
   <data name="createGameTitle" xml:space="preserve">
-    <value>Create game</value>
+    <value>Crear partida</value>
   </data>
   <data name="createGameGameMode" xml:space="preserve">
-    <value>Game mode</value>
+    <value>Modo de juego</value>
   </data>
   <data name="createGamePieces" xml:space="preserve">
-    <value>Initial pieces</value>
+    <value>Piezas iniciales</value>
   </data>
   <data name="createGameMaxPlayers" xml:space="preserve">
-    <value>Max players</value>
+    <value>Maximo de jugadores</value>
   </data>
   <data name="createGameLanguage" xml:space="preserve">
-    <value>Words language</value>
+    <value>Lenguaje de palabras</value>
   </data>
   <data name="createGameTimeLimit" xml:space="preserve">
-    <value>Time limit</value>
+    <value>Límite de tiempo</value>
   </data>
   <data name="createGameCreate" xml:space="preserve">
-    <value>Create papaya</value>
+    <value>Crear papaya</value>
   </data>
   <data name="gameModeTimeAttack" xml:space="preserve">
-    <value>Time attack</value>
+    <value>Contra reloj</value>
   </data>
   <data name="gameModeSuddenDeath" xml:space="preserve">
-    <value>Sudden death</value>
+    <value>Muerte subita</value>
   </data>
   <data name="gameModeClasic" xml:space="preserve">
-    <value>Clasic</value>
+    <value>Clasico</value>
   </data>
   <data name="joinGameTitle" xml:space="preserve">
-    <value>Join game</value>
+    <value>Unirse a juego</value>
   </data>
   <data name="joinGameCode" xml:space="preserve">
-    <value>Game code</value>
+    <value>Código de juego</value>
   </data>
   <data name="joinGameJoin" xml:space="preserve">
-    <value>Join</value>
+    <value>Unirse</value>
   </data>
   <data name="joinGameWrongCode" xml:space="preserve">
-    <value>Wrong code, try again</value>
+    <value>Código incorrecto. Intentalo de nuevo</value>
   </data>
   <data name="gameInvitationMessage" xml:space="preserve">
-    <value>is inviting you to a game</value>
+    <value>te está invitando a un juego</value>
   </data>
   <data name="gameInvitationAccept" xml:space="preserve">
-    <value>Accept</value>
+    <value>Aceptar</value>
   </data>
   <data name="gameInvitationReject" xml:space="preserve">
-    <value>Reject</value>
+    <value>Rechazar</value>
   </data>
   <data name="changePasswordTitle" xml:space="preserve">
-    <value>Change password</value>
+    <value>Cambiar contraseña</value>
   </data>
   <data name="changePasswordCurrent" xml:space="preserve">
-    <value>Current password</value>
+    <value>Contraseña actual</value>
   </data>
   <data name="changePasswordNew" xml:space="preserve">
-    <value>New password</value>
+    <value>Nueva contraseña</value>
   </data>
   <data name="changePasswordNewConfirm" xml:space="preserve">
-    <value>Confirm password</value>
+    <value>Confirmar contraseña</value>
   </data>
   <data name="changePasswordSave" xml:space="preserve">
-    <value>Save</value>
+    <value>Guardar</value>
   </data>
   <data name="changePasswordPinMessage" xml:space="preserve">
-    <value>We've sent a pin to your email</value>
+    <value>Hemos enviado un pin a tu correo</value>
   </data>
 </root>

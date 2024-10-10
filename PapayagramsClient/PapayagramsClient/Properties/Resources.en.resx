@@ -121,10 +121,10 @@
     <value>Sign in</value>
   </data>
   <data name="signInSignUp" xml:space="preserve">
-    <value>Sign up</value>
+    <value>Don't have an account? Sign up</value>
   </data>
   <data name="globalUsername" xml:space="preserve">
-    <value>Username</value>
+    <value>Nombre de usuario</value>
   </data>
   <data name="signInWrongUsername" xml:space="preserve">
     <value>Wrong username</value>
