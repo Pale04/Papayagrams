@@ -3,24 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\epale\\Documents\\Tareas\\5to semestre\\Tecnologias\\proyecto tecnologias\\PapayagramsServer\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{10DA9605-0CA0-48BD-8649-5750F652AAE3}|DomainClasses\\DomainClasses.csproj|c:\\users\\epale\\documents\\tareas\\5to semestre\\tecnologias\\proyecto tecnologias\\papayagramsserver\\domainclasses\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{10DA9605-0CA0-48BD-8649-5750F652AAE3}|DomainClasses\\DomainClasses.csproj|solutionrelative:domainclasses\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{10DA9605-0CA0-48BD-8649-5750F652AAE3}|DomainClasses\\DomainClasses.csproj|C:\\Users\\epale\\Documents\\Tareas\\5to semestre\\Tecnologias\\proyecto tecnologias\\PapayagramsServer\\domainclasses\\gameroom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{10DA9605-0CA0-48BD-8649-5750F652AAE3}|DomainClasses\\DomainClasses.csproj|solutionrelative:domainclasses\\gameroom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81A2241C-462D-47FD-8A31-F2AA2611DB0D}|PapayagramsServer\\PapayagramsServer.csproj|C:\\Users\\epale\\Documents\\Tareas\\5to semestre\\Tecnologias\\proyecto tecnologias\\PapayagramsServer\\papayagramsserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{81A2241C-462D-47FD-8A31-F2AA2611DB0D}|PapayagramsServer\\PapayagramsServer.csproj|solutionrelative:papayagramsserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4D29DBA0-353A-4C4B-A438-7FEEF958D621}|Contracts\\Contracts.csproj|C:\\Users\\epale\\Documents\\Tareas\\5to semestre\\Tecnologias\\proyecto tecnologias\\PapayagramsServer\\contracts\\chatserviceimplementation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D29DBA0-353A-4C4B-A438-7FEEF958D621}|Contracts\\Contracts.csproj|solutionrelative:contracts\\chatserviceimplementation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4D29DBA0-353A-4C4B-A438-7FEEF958D621}|Contracts\\Contracts.csproj|C:\\Users\\epale\\Documents\\Tareas\\5to semestre\\Tecnologias\\proyecto tecnologias\\PapayagramsServer\\contracts\\ichatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D29DBA0-353A-4C4B-A438-7FEEF958D621}|Contracts\\Contracts.csproj|solutionrelative:contracts\\ichatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81A2241C-462D-47FD-8A31-F2AA2611DB0D}|PapayagramsServer\\PapayagramsServer.csproj|C:\\Users\\epale\\Documents\\Tareas\\5to semestre\\Tecnologias\\proyecto tecnologias\\PapayagramsServer\\papayagramsserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81A2241C-462D-47FD-8A31-F2AA2611DB0D}|PapayagramsServer\\PapayagramsServer.csproj|solutionrelative:papayagramsserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,40 +22,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 163,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Player.cs",
-              "DocumentMoniker": "C:\\Users\\epale\\Documents\\Tareas\\5to semestre\\Tecnologias\\proyecto tecnologias\\PapayagramsServer\\DomainClasses\\Player.cs",
-              "RelativeDocumentMoniker": "DomainClasses\\Player.cs",
-              "ToolTip": "C:\\Users\\epale\\Documents\\Tareas\\5to semestre\\Tecnologias\\proyecto tecnologias\\PapayagramsServer\\DomainClasses\\Player.cs",
-              "RelativeToolTip": "DomainClasses\\Player.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-11T15:02:29.557Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GameRoom.cs",
-              "DocumentMoniker": "C:\\Users\\epale\\Documents\\Tareas\\5to semestre\\Tecnologias\\proyecto tecnologias\\PapayagramsServer\\DomainClasses\\GameRoom.cs",
-              "RelativeDocumentMoniker": "DomainClasses\\GameRoom.cs",
-              "ToolTip": "C:\\Users\\epale\\Documents\\Tareas\\5to semestre\\Tecnologias\\proyecto tecnologias\\PapayagramsServer\\DomainClasses\\GameRoom.cs",
-              "RelativeToolTip": "DomainClasses\\GameRoom.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-11T15:02:30.069Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "ChatServiceImplementation.cs",
               "DocumentMoniker": "C:\\Users\\epale\\Documents\\Tareas\\5to semestre\\Tecnologias\\proyecto tecnologias\\PapayagramsServer\\Contracts\\ChatServiceImplementation.cs",
               "RelativeDocumentMoniker": "Contracts\\ChatServiceImplementation.cs",
@@ -71,19 +42,21 @@
               "RelativeToolTip": "Contracts\\ChatServiceImplementation.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-11T15:02:30.076Z"
+              "WhenOpened": "2024-10-11T15:02:30.076Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "IChatService.cs",
               "DocumentMoniker": "C:\\Users\\epale\\Documents\\Tareas\\5to semestre\\Tecnologias\\proyecto tecnologias\\PapayagramsServer\\Contracts\\IChatService.cs",
               "RelativeDocumentMoniker": "Contracts\\IChatService.cs",
               "ToolTip": "C:\\Users\\epale\\Documents\\Tareas\\5to semestre\\Tecnologias\\proyecto tecnologias\\PapayagramsServer\\Contracts\\IChatService.cs",
               "RelativeToolTip": "Contracts\\IChatService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-11T15:02:30.081Z"
+              "WhenOpened": "2024-10-11T15:02:30.081Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -93,9 +66,10 @@
               "RelativeDocumentMoniker": "PapayagramsServer\\Program.cs",
               "ToolTip": "C:\\Users\\epale\\Documents\\Tareas\\5to semestre\\Tecnologias\\proyecto tecnologias\\PapayagramsServer\\PapayagramsServer\\Program.cs",
               "RelativeToolTip": "PapayagramsServer\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAgwA8AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-11T15:02:30.082Z"
+              "WhenOpened": "2024-10-11T15:02:30.082Z",
+              "EditorCaption": ""
             }
           ]
         },
