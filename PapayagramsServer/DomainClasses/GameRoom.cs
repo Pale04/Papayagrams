@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DomainClasses
 {
@@ -15,7 +11,7 @@ namespace DomainClasses
 
     public class GameRoom
     {
-        public string RoomCode { get; set; }
+        public int RoomCode { get; set; }
         public List<Player> Players { get; set; }
         public GameRoomState state { get; set; }
     }

@@ -44,7 +44,15 @@
   <ItemGroup>
     <Compile Include="ChatServiceImplementation.cs" />
     <Compile Include="IChatService.cs" />
+    <Compile Include="IGameService.cs" />
+    <Compile Include="ILoginService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DomainClasses\DomainClasses.csproj">
+      <Project>{10DA9605-0CA0-48BD-8649-5750F652AAE3}</Project>
+      <Name>DomainClasses</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

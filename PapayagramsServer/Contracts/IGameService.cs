@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 
 namespace Contracts
 {
-    [ServiceContract(CallbackContract = typeof(IChatServiceCallback))]
-    public interface IChatService
+    [ServiceContract(CallbackContract = typeof(IGameServiceCallback))]
+    public interface IGameService
     {
         [OperationContract]
-        void SendMessage(string message, int roomCode);
+        void CreateGame();
+        void JoinGame(int roomCode);
     }
 
     [ServiceContract]
-    public interface IChatServiceCallback
+    public interface IGameServiceCallback 
     {
         [OperationContract]
-        void ReceiveMessage(string message);
+        void JoinGame(int roomCode);
     }
 }
