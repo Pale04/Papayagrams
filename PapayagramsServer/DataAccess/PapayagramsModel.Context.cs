@@ -12,6 +12,8 @@ namespace DataAccess
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class papayagramsEntities : DbContext
     {
@@ -34,5 +36,22 @@ namespace DataAccess
         public virtual DbSet<UserConfiguration> UserConfiguration { get; set; }
         public virtual DbSet<UserRelationship> UserRelationship { get; set; }
         public virtual DbSet<UserStatus> UserStatus { get; set; }
+    
+        public virtual int register_user(string parametro1, string parametro2, string parametro3)
+        {
+            var parametro1Parameter = parametro1 != null ?
+                new ObjectParameter("Parametro1", parametro1) :
+                new ObjectParameter("Parametro1", typeof(string));
+    
+            var parametro2Parameter = parametro2 != null ?
+                new ObjectParameter("Parametro2", parametro2) :
+                new ObjectParameter("Parametro2", typeof(string));
+    
+            var parametro3Parameter = parametro3 != null ?
+                new ObjectParameter("Parametro3", parametro3) :
+                new ObjectParameter("Parametro3", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("register_user", parametro1Parameter, parametro2Parameter, parametro3Parameter);
+        }
     }
 }

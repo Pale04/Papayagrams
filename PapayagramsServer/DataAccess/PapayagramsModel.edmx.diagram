@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ebca5a8c984b4563a5a2291ba29bcdff" Name="Diagram1" ZoomLevel="59">
+      <Diagram DiagramId="ebca5a8c984b4563a5a2291ba29bcdff" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="papayagramsModel.Achievement" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="papayagramsModel.OriginalGameHistory" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="papayagramsModel.SuddenDeathHistory" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="papayagramsModel.TimeAtackHistory" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="papayagramsModel.User" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="papayagramsModel.User" Width="1.75" PointX="0.75" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="papayagramsModel.UserAchieved" Width="1.5" PointX="6" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="papayagramsModel.UserConfiguration" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="papayagramsModel.UserRelationship" Width="1.5" PointX="3" PointY="17.75" IsExpanded="true" />

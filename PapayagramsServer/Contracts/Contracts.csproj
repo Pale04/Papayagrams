@@ -44,7 +44,21 @@
   <ItemGroup>
     <Compile Include="ChatServiceImplementation.cs" />
     <Compile Include="IChatService.cs" />
+    <Compile Include="ILoginService.cs" />
+    <Compile Include="LoginServiceImplementation.cs" />
+    <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserServiceImplementation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{2cca7d4f-8faf-442c-be9a-06859735fc92}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DomainClasses\DomainClasses.csproj">
+      <Project>{10da9605-0ca0-48bd-8649-5750f652aae3}</Project>
+      <Name>DomainClasses</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

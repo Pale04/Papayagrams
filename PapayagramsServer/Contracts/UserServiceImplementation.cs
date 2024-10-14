@@ -1,12 +1,13 @@
-﻿using System;
+﻿using DataAccess;
+using DomainClasses;
 
 namespace Contracts
 {
     public class UserServiceImplementation : IUserService
     {
-        public void RegisterUser(string username, string password)
+        public void RegisterUser(Player player)
         {
-            throw new NotImplementedException();
+            UserDB.RegisterUser(player);
         }
     }
 }

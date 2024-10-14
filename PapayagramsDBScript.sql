@@ -1,8 +1,14 @@
+--Creating an Asymmetric Key (for encrypt data)
+CREATE ASYMMETRIC KEY asy_TRIGGERDB
+WITH ALGORITHM = RSA_2048
+ENCRYPTION BY PASSWORD = 'RD_afAmGsRMYi29'
+
+--Creating tables
 CREATE TABLE [User] (
   [id] int PRIMARY KEY IDENTITY(1, 1),
-  [username] varchar(50),
-  [email] varchar(50),
-  [password] varchar(100)
+  [username] varchar(50) NOT NULL,
+  [email] varchar(50) NOT NULL,
+  [password] varbinary(MAX) NOT NULL
 )
 GO
 

@@ -87,6 +87,7 @@
     <Compile Include="UserConfiguration.cs">
       <DependentUpon>PapayagramsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserDB.cs" />
     <Compile Include="UserRelationship.cs">
       <DependentUpon>PapayagramsModel.tt</DependentUpon>
     </Compile>
@@ -121,6 +122,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DomainClasses\DomainClasses.csproj">
+      <Project>{10da9605-0ca0-48bd-8649-5750f652aae3}</Project>
+      <Name>DomainClasses</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

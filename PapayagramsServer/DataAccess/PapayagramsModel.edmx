@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="papayagramsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="papayagramsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Achievement">
           <Key>
             <PropertyRef Name="id" />
@@ -47,9 +47,9 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="username" Type="varchar" MaxLength="50" />
-          <Property Name="email" Type="varchar" MaxLength="50" />
-          <Property Name="password" Type="varchar" MaxLength="100" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varbinary(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="UserAchieved">
           <Key>
@@ -64,9 +64,9 @@
             <PropertyRef Name="userId" />
           </Key>
           <Property Name="userId" Type="int" Nullable="false" />
-          <Property Name="selectedLanguage" Type="varchar" MaxLength="7" />
+          <Property Name="selectedLanguage" Type="varchar" MaxLength="20" />
           <Property Name="typography" Type="int" />
-          <Property Name="pieceSize" Type="varchar" MaxLength="6" />
+          <Property Name="pieceSize" Type="varchar" MaxLength="20" />
           <Property Name="pieceColor" Type="int" />
           <Property Name="icon" Type="int" />
         </EntityType>
@@ -77,15 +77,15 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="senderId" Type="int" />
           <Property Name="receiverId" Type="int" />
-          <Property Name="requestState" Type="varchar" MaxLength="8" />
-          <Property Name="relationType" Type="varchar" MaxLength="7" />
+          <Property Name="requestState" Type="varchar" MaxLength="20" />
+          <Property Name="relationType" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="UserStatus">
           <Key>
             <PropertyRef Name="userId" />
           </Key>
           <Property Name="userId" Type="int" Nullable="false" />
-          <Property Name="status" Type="varchar" MaxLength="7" />
+          <Property Name="status" Type="varchar" MaxLength="20" />
           <Property Name="since" Type="datetime" />
         </EntityType>
         <Association Name="FK__OriginalG__userI__4BAC3F29">
@@ -196,6 +196,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="register_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Parametro1" Type="varchar" Mode="In" />
+          <Parameter Name="Parametro2" Type="varchar" Mode="In" />
+          <Parameter Name="Parametro3" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="papayagramsModelStoreContainer">
           <EntitySet Name="Achievement" EntityType="Self.Achievement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OriginalGameHistory" EntityType="Self.OriginalGameHistory" Schema="dbo" store:Type="Tables" />
@@ -243,8 +248,7 @@
             <End Role="UserStatus" EntitySet="UserStatus" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="papayagramsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -294,9 +298,9 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="OriginalGameHistory" Relationship="Self.FK__OriginalG__userI__4BAC3F29" FromRole="User" ToRole="OriginalGameHistory" />
           <NavigationProperty Name="SuddenDeathHistory" Relationship="Self.FK__SuddenDea__userI__4CA06362" FromRole="User" ToRole="SuddenDeathHistory" />
           <NavigationProperty Name="TimeAtackHistory" Relationship="Self.FK__TimeAtack__userI__4D94879B" FromRole="User" ToRole="TimeAtackHistory" />
@@ -321,9 +325,9 @@
             <PropertyRef Name="userId" />
           </Key>
           <Property Name="userId" Type="Int32" Nullable="false" />
-          <Property Name="selectedLanguage" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="selectedLanguage" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="typography" Type="Int32" />
-          <Property Name="pieceSize" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="pieceSize" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="pieceColor" Type="Int32" />
           <Property Name="icon" Type="Int32" />
           <NavigationProperty Name="User" Relationship="Self.FK__UserConfi__userI__534D60F1" FromRole="UserConfiguration" ToRole="User" />
@@ -335,8 +339,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="senderId" Type="Int32" />
           <Property Name="receiverId" Type="Int32" />
-          <Property Name="requestState" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="relationType" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="requestState" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="relationType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User" Relationship="Self.FK__UserRelat__recei__4F7CD00D" FromRole="UserRelationship" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Self.FK__UserRelat__sende__4E88ABD4" FromRole="UserRelationship" ToRole="User" />
         </EntityType>
@@ -345,7 +349,7 @@
             <PropertyRef Name="userId" />
           </Key>
           <Property Name="userId" Type="Int32" Nullable="false" />
-          <Property Name="status" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="since" Type="DateTime" Precision="3" />
           <NavigationProperty Name="User" Relationship="Self.FK__UserStatu__userI__52593CB8" FromRole="UserStatus" ToRole="User" />
         </EntityType>
@@ -503,6 +507,11 @@
             <End Role="User" EntitySet="User" />
             <End Role="UserStatus" EntitySet="UserStatus" />
           </AssociationSet>
+          <FunctionImport Name="register_user">
+            <Parameter Name="Parametro1" Mode="In" Type="String" />
+            <Parameter Name="Parametro2" Mode="In" Type="String" />
+            <Parameter Name="Parametro3" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -602,6 +611,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="register_user" FunctionName="papayagramsModel.Store.register_user" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

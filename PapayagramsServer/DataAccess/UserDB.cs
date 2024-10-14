@@ -6,7 +6,11 @@ namespace DataAccess
     {
         public static void RegisterUser(Player player)
         {
-            throw new System.NotImplementedException();
+            using (var context = new papayagramsEntities())
+            {
+                context.register_user(player.Username,player.Email,player.Password);
+                context.SaveChanges();
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using DomainClasses;
+using System.ServiceModel;
 
 namespace Contracts
 {
@@ -6,7 +7,7 @@ namespace Contracts
     public interface IUserService
     {
         [OperationContract(IsOneWay = true)]
-        void RegisterUser(string username, string password);
+        void RegisterUser(Player player);
     }
 
     [ServiceContract]
