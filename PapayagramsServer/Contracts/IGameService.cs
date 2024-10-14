@@ -12,13 +12,13 @@ namespace Contracts
     {
         [OperationContract]
         void CreateGame();
-        void JoinGame(int roomCode);
+        void JoinGame(string roomCode);
     }
 
     [ServiceContract]
     public interface IGameServiceCallback 
     {
         [OperationContract]
-        void JoinGame(int roomCode);
+        void JoinGame(string roomCode);
     }
 }

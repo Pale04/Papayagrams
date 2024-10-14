@@ -11,7 +11,7 @@ namespace Contracts
     public interface IChatService
     {
         [OperationContract]
-        void SendMessage(string message, int roomCode);
+        void SendMessage(string message, string roomCode);
     }
 
     [ServiceContract]

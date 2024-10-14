@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4D29DBA0-353A-4C4B-A438-7FEEF958D621}</ProjectGuid>
+    <ProjectGuid>{C72D3471-500C-45E7-BF83-744CEAA44BCE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Contracts</RootNamespace>
-    <AssemblyName>Contracts</AssemblyName>
+    <RootNamespace>BussinessLogic</RootNamespace>
+    <AssemblyName>BussinessLogic</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -42,18 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChatServiceImplementation.cs" />
-    <Compile Include="GameServiceImplementation.cs" />
-    <Compile Include="IChatService.cs" />
-    <Compile Include="IGameService.cs" />
-    <Compile Include="ILoginService.cs" />
-    <Compile Include="LoginServiceImplementation.cs" />
+    <Compile Include="ServerData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BussinessLogic\BussinessLogic.csproj">
-      <Project>{c72d3471-500c-45e7-bf83-744ceaa44bce}</Project>
-      <Name>BussinessLogic</Name>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{2cca7d4f-8faf-442c-be9a-06859735fc92}</Project>
+      <Name>DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\DomainClasses\DomainClasses.csproj">
       <Project>{10DA9605-0CA0-48BD-8649-5750F652AAE3}</Project>

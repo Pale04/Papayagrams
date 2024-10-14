@@ -1,8 +1,8 @@
-﻿using System;
+﻿using BussinessLogic;
+using DomainClasses;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ServiceModel;
 
 namespace Contracts
 {
@@ -10,10 +10,18 @@ namespace Contracts
     {
         public void CreateGame()
         {
-            throw new NotImplementedException();
+            GameRoom gameRoom = new GameRoom();
+            gameRoom.state = GameRoomState.Waiting;
+            gameRoom.Players = new List<Player>
+            {
+                ServerData.GetPlayerByContext(OperationContext.Current)
+            };
+            gameRoom.RoomCode = ServerData.AddGameRoom(gameRoom);
+
+            OperationContext.Current.GetCallbackChannel<IGameServiceCallback>().JoinGame(gameRoom.RoomCode);
         }
 
-        public void JoinGame(int roomCode)
+        public void JoinGame(string roomCode)
         {
             throw new NotImplementedException();
         }

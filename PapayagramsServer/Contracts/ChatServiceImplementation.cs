@@ -1,31 +1,26 @@
-﻿using DomainClasses;
-using System.Collections;
-using System.Collections.Generic;
+﻿using BussinessLogic;
+using DomainClasses;
 using System.ServiceModel;
 
 namespace Contracts
 {
     public class ChatServiceImplementation : IChatService
     {
-        public static Hashtable GameRooms = new Hashtable();
-
-        public void SendMessage(string message, int roomCode)
+        public void SendMessage(string message, string roomCode)
         {
-            GameRoom currentGameRoom = (GameRoom)GameRooms[roomCode];
-
-            if (currentGameRoom == null)
-            {
-                return;
-            }
-
-            BroadcastMessage(message, currentGameRoom);
+            BroadcastMessage(message, ServerData.GetGameRoom(roomCode));
         }
 
         private void BroadcastMessage(string message, GameRoom room)
         {
             foreach (Player player in room.Players)
             {
-                player.Context.GetCallbackChannel<IChatServiceCallback>().ReceiveMessage(message);
+                OperationContext playerContext = ServerData.GetPlayerContext(player);
+
+                if (playerContext != null)
+                {
+                    playerContext.GetCallbackChannel<IChatServiceCallback>().ReceiveMessage(message);
+                }
             }
         }
     }

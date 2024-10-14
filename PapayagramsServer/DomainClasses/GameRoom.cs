@@ -11,8 +11,14 @@ namespace DomainClasses
 
     public class GameRoom
     {
-        public int RoomCode { get; set; }
-        public List<Player> Players { get; set; }
+        public string RoomCode { get; set; }
+        private List<Player> _players = new List<Player>();
+        public List<Player> Players
+        {
+            get => _players;
+            set => _players = value;
+        }
+
         public GameRoomState state { get; set; }
     }
 }
