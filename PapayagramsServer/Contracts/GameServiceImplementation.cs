@@ -14,9 +14,9 @@ namespace Contracts
             gameRoom.state = GameRoomState.Waiting;
             gameRoom.Players = new List<Player>
             {
-                ServerData.GetPlayerByContext(OperationContext.Current)
+                PlayerData.GetPlayerByContext(OperationContext.Current)
             };
-            gameRoom.RoomCode = ServerData.AddGameRoom(gameRoom);
+            gameRoom.RoomCode = GameData.AddGameRoom(gameRoom);
 
             OperationContext.Current.GetCallbackChannel<IGameServiceCallback>().JoinGame(gameRoom.RoomCode);
         }
@@ -24,6 +24,12 @@ namespace Contracts
         public void JoinGame(string roomCode)
         {
             throw new NotImplementedException();
+        }
+
+        public int LeaveGame(string code)
+        {
+            GameData.RemovePlayerFromGameRoom(OperationContext.Current, code);
+            return 0;
         }
     }
 }

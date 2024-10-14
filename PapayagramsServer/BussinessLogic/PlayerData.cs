@@ -5,10 +5,9 @@ using System.ServiceModel;
 
 namespace BussinessLogic
 {
-    public class ServerData
+    public class PlayerData
     {
         private static Hashtable Players = new Hashtable();
-        private static Hashtable GameRooms = new Hashtable();
 
         /// <summary>
         /// Get a player instance based on its operation context
@@ -48,47 +47,9 @@ namespace BussinessLogic
             Players.Add(playerContext, player);
         }
 
-        /// <summary>
-        /// Get an instance of a game room based on its game room code
-        /// </summary>
-        /// <param name="code">The game room code to search for</param>
-        /// <returns>The instance of the game room with the code specified</returns>
-        public static GameRoom GetGameRoom(string code)
+        public static void RemovePlayer(OperationContext playerContext)
         {
-            return (GameRoom)GameRooms[code];
-        }
-
-        /// <summary>
-        /// Add game room to map of all game rooms and generate its game room code
-        /// </summary>
-        /// <param name="gameRoom">The game room to add</param>
-        /// <returns>The new game room code assigned</returns>
-        public static string AddGameRoom(GameRoom gameRoom)
-        {
-            string gameRoomCode = GenerateGameRoomCode();
-            gameRoom.RoomCode = gameRoomCode;
-            GameRooms.Add(gameRoomCode, gameRoom);
-            return gameRoomCode;
-        }
-
-        /// <summary>
-        /// Generate a random, not in use, 4 character code
-        /// </summary>
-        /// <returns>A random 4 character, not in use game room code</returns>
-        private static string GenerateGameRoomCode()
-        {
-            string code = string.Empty;
-            Random random = new Random();
-
-            do
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    code += (char)random.Next(65, 91);
-                }
-            } while (GameRooms[code] != null);
-
-            return code;
+            Players.Remove(playerContext);
         }
     }
 }

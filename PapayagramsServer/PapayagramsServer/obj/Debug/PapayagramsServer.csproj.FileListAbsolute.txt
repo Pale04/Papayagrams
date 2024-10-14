@@ -1,0 +1,14 @@
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\bin\Debug\PapayagramsServer.exe.config
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\bin\Debug\PapayagramsServer.exe
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\bin\Debug\PapayagramsServer.pdb
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\bin\Debug\Contracts.dll
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\bin\Debug\DomainClasses.dll
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\bin\Debug\BussinessLogic.dll
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\bin\Debug\Contracts.pdb
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\bin\Debug\DomainClasses.pdb
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\bin\Debug\BussinessLogic.pdb
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\obj\Debug\PapayagramsServer.csproj.AssemblyReference.cache
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\obj\Debug\PapayagramsServer.csproj.CoreCompileInputs.cache
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\obj\Debug\Papayagr.91A05625.Up2Date
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\obj\Debug\PapayagramsServer.exe
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\obj\Debug\PapayagramsServer.pdb

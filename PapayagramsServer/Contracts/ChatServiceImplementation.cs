@@ -8,14 +8,14 @@ namespace Contracts
     {
         public void SendMessage(string message, string roomCode)
         {
-            BroadcastMessage(message, ServerData.GetGameRoom(roomCode));
+            BroadcastMessage(message, GameData.GetGameRoom(roomCode));
         }
 
         private void BroadcastMessage(string message, GameRoom room)
         {
             foreach (Player player in room.Players)
             {
-                OperationContext playerContext = ServerData.GetPlayerContext(player);
+                OperationContext playerContext = PlayerData.GetPlayerContext(player);
 
                 if (playerContext != null)
                 {
