@@ -3,18 +3,15 @@ using System.ServiceModel;
 
 namespace Contracts
 {
-    [ServiceContract(CallbackContract = typeof(IUserServiceCallback))]
+    [ServiceContract]
     public interface IUserService
     {
-        [OperationContract(IsOneWay = true)]
-        void RegisterUser(Player player);
-    }
-
-    [ServiceContract]
-    public interface IUserServiceCallback
-    {
+        /// <summary>
+        /// Create an account for a new user
+        /// </summary>
+        /// <param name="player">Player object with the user's data</param>
+        /// <returns>1 if the registration was successful, 0 otherwise</returns>
         [OperationContract]
-        void RegisterUserResponse(bool success);
-
+        int RegisterUser(Player player);
     }
 }

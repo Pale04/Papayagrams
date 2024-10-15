@@ -12,9 +12,14 @@ C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\P
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\Contracts.dll
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\Contracts.pdb
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\BussinessLogic.dll
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\DataAccess.dll
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\DomainClasses.dll
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\EntityFramework.dll
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\BussinessLogic.pdb
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\DataAccess.pdb
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\DataAccess.dll.config
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\DomainClasses.pdb
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\EntityFramework.xml
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.csproj.AssemblyReference.cache
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.csproj.CoreCompileInputs.cache
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.csproj.Up2Date

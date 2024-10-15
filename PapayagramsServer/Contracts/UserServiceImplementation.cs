@@ -1,13 +1,24 @@
 ﻿using DataAccess;
 using DomainClasses;
+using System.ServiceModel;
 
 namespace Contracts
 {
-    public class UserServiceImplementation : IUserService
+    public partial class ServiceImplementation : IUserService
     {
-        public void RegisterUser(Player player)
+        public int RegisterUser(Player player)
         {
-            UserDB.RegisterUser(player);
+            int result = 0;
+            if (player != null && player.HasValidAtributes())
+            {
+                result = UserDB.RegisterUser(player);        
+            }
+            else
+            {
+                //TODO: Send error message to client, maybe a personalized exception
+            }
+
+            return result;
         }
     }
 }
