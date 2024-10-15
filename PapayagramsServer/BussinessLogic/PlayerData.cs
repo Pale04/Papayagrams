@@ -10,46 +10,28 @@ namespace BussinessLogic
         private static Hashtable Players = new Hashtable();
 
         /// <summary>
-        /// Get a player instance based on its operation context
+        /// Get a player instance based on its username
         /// </summary>
-        /// <param name="context">The operation context of the user</param>
-        /// <returns>The instance of the player with that operation context</returns>
-        public static Player GetPlayerByContext(OperationContext context)
+        /// <param name="username">The username of the player</param>
+        /// <returns>The instance of the player with that username</returns>
+        public static Player GetPlayerByUsername(string username)
         {
-            return Players[context] as Player;
+            return Players[username] as Player;
         }
 
         /// <summary>
-        /// Get the operation context of a player based on its instance
+        /// Add a player and its username to the list of connected players
         /// </summary>
         /// <param name="player">The instance of the player</param>
-        /// <returns>The operation context of the specified player</returns>
-        public static OperationContext GetPlayerContext(Player player)
+        /// <param name="username">The username of the player</param>
+        public static void AddPlayer(Player player, string username)
         {
-            foreach (OperationContext context in Players.Keys)
-            {
-                if (Players[context] == player)
-                {
-                    return context;
-                }
-            }
-
-            return null;
+            Players.Add(username, player);
         }
 
-        /// <summary>
-        /// Add a player and its operation context to the list of connected players
-        /// </summary>
-        /// <param name="player">The instance of the player</param>
-        /// <param name="playerContext">The context of the player to add</param>
-        public static void AddPlayer(Player player, OperationContext playerContext)
+        public static void RemovePlayer(string username)
         {
-            Players.Add(playerContext, player);
-        }
-
-        public static void RemovePlayer(OperationContext playerContext)
-        {
-            Players.Remove(playerContext);
+            Players.Remove(username);
         }
     }
 }

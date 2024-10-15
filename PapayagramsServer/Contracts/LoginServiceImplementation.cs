@@ -11,13 +11,14 @@ namespace Contracts
         {
             Console.WriteLine("Login attempt for user: " + username);
             Player player = new Player() { Email = "mail@example.com", UserName = username};
-            PlayerData.AddPlayer(player, OperationContext.Current);
+            PlayerData.AddPlayer(player, username);
             return 0;
         }
 
-        public int Logout()
+        public int Logout(string username)
         {
-            PlayerData.RemovePlayer(OperationContext.Current);
+            PlayerData.RemovePlayer(username);
+            Console.WriteLine("User " + username + " logged out");
             return 0;
         }
     }

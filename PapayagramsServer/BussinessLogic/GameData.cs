@@ -14,9 +14,9 @@ namespace BussinessLogic
         /// </summary>
         /// <param name="context">The context of the player to remove</param>
         /// <param name="gameRoomCode">The game room code of the player</param>
-        public static void RemovePlayerFromGameRoom(OperationContext context, string gameRoomCode)
+        public static void RemovePlayerFromGameRoom(string username, string gameRoomCode)
         {
-            Player player = PlayerData.GetPlayerByContext(context);
+            Player player = PlayerData.GetPlayerByUsername(username);
             GameRoom gameRoom = (GameRoom)GameRooms[gameRoomCode];
             gameRoom.Players.Remove(player);
         }

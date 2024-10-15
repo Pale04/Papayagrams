@@ -7,8 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="425,191,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <Label Name="L1" Content="Label" HorizontalAlignment="Left" Margin="445,98,0,0" VerticalAlignment="Top"/>
-
+        <Button Name="BtLogin" Content="Login" HorizontalAlignment="Left" Margin="69,60,0,0" VerticalAlignment="Top" Click="LogIntoServer"/>
+        <Label Name="LbLogin" Content="Not logged in" HorizontalAlignment="Left" Margin="218,57,0,0" VerticalAlignment="Top"/>
+        <Button Name="BtJoinGame" Content="Join game" HorizontalAlignment="Left" Margin="69,125,0,0" VerticalAlignment="Top" Click="SendJoinGameRequest"/>
+        <Button Name="BtLeaveGame" Content="Leave game" HorizontalAlignment="Left" Margin="69,159,0,0" VerticalAlignment="Top" Click="SendLeaveGameRequest"/>
+        <Label Name="LbGameRoom" Content="Not in game room" HorizontalAlignment="Left" Margin="218,122,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="TMessage" HorizontalAlignment="Left" Margin="69,266,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button Name="BtSendMessage" Content="Send message" HorizontalAlignment="Left" Margin="69,302,0,0" VerticalAlignment="Top" Click="SendMessageToRoom"/>
+        <Label Name="LbLastMessage" Content="" HorizontalAlignment="Left" Margin="316,262,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
