@@ -266,4 +266,51 @@ namespace PapayagramsClient.PapayagramsService {
             return base.Channel.LogoutAsync(username);
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.IUserService")]
+    public interface IUserService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/RegisterUser", ReplyAction="http://tempuri.org/IUserService/RegisterUserResponse")]
+        int RegisterUser(string user, string email, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/RegisterUser", ReplyAction="http://tempuri.org/IUserService/RegisterUserResponse")]
+        System.Threading.Tasks.Task<int> RegisterUserAsync(string user, string email, string password);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IUserServiceChannel : PapayagramsClient.PapayagramsService.IUserService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class UserServiceClient : System.ServiceModel.ClientBase<PapayagramsClient.PapayagramsService.IUserService>, PapayagramsClient.PapayagramsService.IUserService {
+        
+        public UserServiceClient() {
+        }
+        
+        public UserServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public UserServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public UserServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public UserServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public int RegisterUser(string user, string email, string password) {
+            return base.Channel.RegisterUser(user, email, password);
+        }
+        
+        public System.Threading.Tasks.Task<int> RegisterUserAsync(string user, string email, string password) {
+            return base.Channel.RegisterUserAsync(user, email, password);
+        }
+    }
 }

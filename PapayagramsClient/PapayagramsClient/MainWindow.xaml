@@ -15,5 +15,6 @@
         <TextBox Name="TMessage" HorizontalAlignment="Left" Margin="69,266,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Button Name="BtSendMessage" Content="Send message" HorizontalAlignment="Left" Margin="69,302,0,0" VerticalAlignment="Top" Click="SendMessageToRoom"/>
         <Label Name="LbLastMessage" Content="" HorizontalAlignment="Left" Margin="316,262,0,0" VerticalAlignment="Top"/>
+        <Button Content="Agregar usuario" HorizontalAlignment="Left" Margin="69,20,0,0" VerticalAlignment="Top" Click="Button_Click"/>
     </Grid>
 </Window>

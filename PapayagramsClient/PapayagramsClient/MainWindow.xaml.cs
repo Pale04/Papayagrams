@@ -92,5 +92,11 @@ namespace PapayagramsClient
 
             chat.SendMessage(message);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            PapayagramsService.UserServiceClient userServiceClient = new PapayagramsService.UserServiceClient();
+            Console.WriteLine(userServiceClient.RegisterUser("pale","epale","123"));
+        }
     }
 }

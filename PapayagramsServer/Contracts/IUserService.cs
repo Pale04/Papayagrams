@@ -12,6 +12,6 @@ namespace Contracts
         /// <param name="player">Player object with the user's data</param>
         /// <returns>1 if the registration was successful, 0 otherwise</returns>
         [OperationContract]
-        int RegisterUser(Player player);
+        int RegisterUser(string user, string email, string password);
     }
 }

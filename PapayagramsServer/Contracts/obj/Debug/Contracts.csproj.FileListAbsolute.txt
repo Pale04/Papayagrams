@@ -1,3 +1,14 @@
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\Contracts.dll
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\Contracts.pdb
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\BussinessLogic.dll
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\DomainClasses.dll
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\BussinessLogic.pdb
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\DomainClasses.pdb
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.csproj.AssemblyReference.cache
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.csproj.CoreCompileInputs.cache
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.csproj.Up2Date
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.dll
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.pdb
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\Contracts.dll
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\Contracts.pdb
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\BussinessLogic.dll
@@ -14,14 +25,3 @@ C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\Pa
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.csproj.Up2Date
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.dll
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.pdb
-C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\Contracts.dll
-C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\Contracts.pdb
-C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\BussinessLogic.dll
-C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\DomainClasses.dll
-C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\BussinessLogic.pdb
-C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\DomainClasses.pdb
-C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.csproj.AssemblyReference.cache
-C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.csproj.CoreCompileInputs.cache
-C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.csproj.Up2Date
-C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.dll
-C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.pdb
