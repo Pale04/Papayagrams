@@ -60,10 +60,6 @@
       <Project>{4d29dba0-353a-4c4b-a438-7feef958d621}</Project>
       <Name>Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DomainClasses\DomainClasses.csproj">
-      <Project>{10DA9605-0CA0-48BD-8649-5750F652AAE3}</Project>
-      <Name>DomainClasses</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
