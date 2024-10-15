@@ -1,8 +1,5 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DomainClasses
 {
@@ -16,7 +13,7 @@ namespace DomainClasses
     public class GameRoom
     {
         public string RoomCode { get; set; }
-        public List<Player> Players { get; set; }
+        public Hashtable Players = new Hashtable();
         public GameRoomState state { get; set; }
     }
 }
