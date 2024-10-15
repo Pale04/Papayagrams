@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\proyecto tecnologias\PapayagramsServer\PapayagramsServer\bin\Debug\PapayagramsServer.exe.config
-C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\proyecto tecnologias\PapayagramsServer\PapayagramsServer\bin\Debug\PapayagramsServer.exe
-C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\proyecto tecnologias\PapayagramsServer\PapayagramsServer\bin\Debug\PapayagramsServer.pdb
-C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\proyecto tecnologias\PapayagramsServer\PapayagramsServer\bin\Debug\Contracts.dll
-C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\proyecto tecnologias\PapayagramsServer\PapayagramsServer\bin\Debug\Contracts.pdb
-C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\proyecto tecnologias\PapayagramsServer\PapayagramsServer\obj\Debug\PapayagramsServer.csproj.AssemblyReference.cache
-C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\proyecto tecnologias\PapayagramsServer\PapayagramsServer\obj\Debug\PapayagramsServer.csproj.CoreCompileInputs.cache
-C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\proyecto tecnologias\PapayagramsServer\PapayagramsServer\obj\Debug\Papayagr.91A05625.Up2Date
-C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\proyecto tecnologias\PapayagramsServer\PapayagramsServer\obj\Debug\PapayagramsServer.exe
-C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\proyecto tecnologias\PapayagramsServer\PapayagramsServer\obj\Debug\PapayagramsServer.pdb
-=======
 C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\bin\Debug\PapayagramsServer.exe.config
 C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\bin\Debug\PapayagramsServer.exe
 C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\bin\Debug\PapayagramsServer.pdb
@@ -38,4 +26,3 @@ C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\Pa
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\obj\Debug\Papayagr.91A05625.Up2Date
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\obj\Debug\PapayagramsServer.exe
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\PapayagramsServer\obj\Debug\PapayagramsServer.pdb
->>>>>>> chat_client

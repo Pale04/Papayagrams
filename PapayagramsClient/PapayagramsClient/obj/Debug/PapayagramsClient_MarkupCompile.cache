@@ -4,28 +4,16 @@
 winexe
 C#
 .cs
-<<<<<<< HEAD
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\proyecto tecnologias\PapayagramsClient\PapayagramsClient\obj\Debug\
-=======
-C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsClient\PapayagramsClient\obj\Debug\
->>>>>>> chat_client
 PapayagramsClient
 none
 false
 DEBUG;TRACE
-<<<<<<< HEAD
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\proyecto tecnologias\PapayagramsClient\PapayagramsClient\App.xaml
 1219584333
 
 81127539525
 13-38814620
-=======
-C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsClient\PapayagramsClient\App.xaml
-1219584333
-
-8-583171441
-15-472223226
->>>>>>> chat_client
 MainWindow.xaml;
 
 True

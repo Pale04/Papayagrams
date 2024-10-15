@@ -16,4 +16,3 @@ namespace Contracts
         void ReceiveMessage(string message);
     }
 }
-}
