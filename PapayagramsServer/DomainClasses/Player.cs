@@ -1,4 +1,4 @@
-﻿
+
 namespace DomainClasses
 {
     public class Player
