@@ -19,45 +19,78 @@ namespace PapayagramsClient
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, PapayagramsService.IChatServiceCallback, PapayagramsService.IGameServiceCallback
+    public partial class MainWindow : Window, PapayagramsService.IPregameServiceCallback
     {
         private string _roomCode;
 
         public MainWindow()
         {
             InitializeComponent();
+            BtJoinGame.IsEnabled = false;
+            BtLeaveGame.IsEnabled = false;
         }
 
-        public void GameResponse(string roomCodeResponse)
+        public void JoinGameResponse(string roomCodeResponse)
         {
-            //L1.Content = roomCodeResponse;
             _roomCode = roomCodeResponse;
-            System.ServiceModel.InstanceContext context = new System.ServiceModel.InstanceContext(this);
-            PapayagramsService.ChatServiceClient chatService = new PapayagramsService.ChatServiceClient(context);
-            chatService.SendMessage("Hello from the client",roomCodeResponse);
-
-            Console.WriteLine("Room code: " + roomCodeResponse);
-
-            PapayagramsService.LoginServiceClient loginService = new PapayagramsService.LoginServiceClient();
-            loginService.Logout();
+            LbGameRoom.Content = "In room " + _roomCode;
+            BtJoinGame.IsEnabled = false;
+            BtLeaveGame.IsEnabled = true;
         }
 
-        public void ReceiveMessage(string message)
+        public void ReceiveMessage(PapayagramsService.Message message)
         {
-            L1.Content = message;
+            LbLastMessage.Content = message.Content;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void LogIntoServer(object sender, RoutedEventArgs e)
+        {
+            PapayagramsService.LoginServiceClient loginService = new PapayagramsService.LoginServiceClient();
+            if (loginService.Login("pale", "123") == 0)
+            {
+                LbLogin.Content = "Logged in";
+                BtJoinGame.IsEnabled = true;
+                BtLogin.IsEnabled = false;
+            }
+            else
+            {
+                LbLogin.Content = "Error logging in";
+            }
+        }
+
+        private void SendJoinGameRequest(object sender, RoutedEventArgs e)
         {
             System.ServiceModel.InstanceContext context = new System.ServiceModel.InstanceContext(this);
 
-            PapayagramsService.LoginServiceClient loginService = new PapayagramsService.LoginServiceClient();
-            loginService.Login("pale", "123");
+            PapayagramsService.PregameServiceClient gameService = new PapayagramsService.PregameServiceClient(context);
+            gameService.CreateGame("pale");
+        }
 
-            PapayagramsService.GameServiceClient gameService = new PapayagramsService.GameServiceClient(context);
-            gameService.CreateGame();
+        private void SendLeaveGameRequest(object sender, RoutedEventArgs e)
+        {
+            System.ServiceModel.InstanceContext context = new System.ServiceModel.InstanceContext(this);
 
-            
+            PapayagramsService.PregameServiceClient gameService = new PapayagramsService.PregameServiceClient(context);
+            if (gameService.LeaveGame("pale", _roomCode) == 0)
+            {
+                LbGameRoom.Content = "Not in game room";
+                BtJoinGame.IsEnabled = true;
+                BtLeaveGame.IsEnabled = false;
+            }
+        }
+
+        private void SendMessageToRoom(object sender, RoutedEventArgs e)
+        {
+            System.ServiceModel.InstanceContext context = new System.ServiceModel.InstanceContext(this);
+
+            PapayagramsService.PregameServiceClient chat = new PapayagramsService.PregameServiceClient(context);
+            PapayagramsService.Message message = new PapayagramsService.Message();
+            message.Content = TMessage.Text;
+            message.AuthorUsername = "pale";
+            message.GameRoomCode = _roomCode;
+            message.Time = DateTime.Now;
+
+            chat.SendMessage(message);
         }
     }
 }

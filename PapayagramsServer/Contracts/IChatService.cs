@@ -5,14 +5,15 @@ namespace Contracts
     [ServiceContract(CallbackContract = typeof(IChatServiceCallback))]
     public interface IChatService
     {
-        [OperationContract(IsOneWay = true)]
-        void SendMessage(string message, string roomCode);
+        //[OperationContract(IsOneWay = true)]
+        [OperationContract]
+        void SendMessage(string message);
     }
 
     [ServiceContract]
     public interface IChatServiceCallback
     {
-        [OperationContract(IsOneWay = true)]
+        [OperationContract]
         void ReceiveMessage(string message);
     }
 }

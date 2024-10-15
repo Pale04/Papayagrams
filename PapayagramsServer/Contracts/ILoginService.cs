@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -25,7 +25,7 @@ namespace Contracts
         /// </summary>
         /// <returns>0 if logout successfully</returns>
         [OperationContract]
-        int Logout();
+        int Logout(string username);
     }
 
 }
