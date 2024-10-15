@@ -4,17 +4,22 @@
 winexe
 C#
 .cs
-C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsClient\PapayagramsClient\obj\Debug\
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\proyecto tecnologias\PapayagramsClient\PapayagramsClient\obj\Debug\
 PapayagramsClient
 none
 false
 DEBUG;TRACE
-C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsClient\PapayagramsClient\App.xaml
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\proyecto tecnologias\PapayagramsClient\PapayagramsClient\App.xaml
 1219584333
 
+<<<<<<< HEAD
 8-583171441
 15-472223226
+=======
+81127539525
+13-38814620
+>>>>>>> 6ccf44027d443ee2e786bf9982bc62204fe9d45a
 MainWindow.xaml;
 
-False
+True
 
