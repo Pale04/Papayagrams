@@ -13,14 +13,14 @@ namespace Contracts
         /// <summary>
         /// Create a game room and add the player to it
         /// </summary>
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void CreateGame();
 
         /// <summary>
         /// Add a player to the game room of the specified code
         /// </summary>
         /// <param name="roomCode">The game room code to add the player to</param>
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void JoinGame(string roomCode);
 
         /// <summary>
@@ -35,7 +35,8 @@ namespace Contracts
     [ServiceContract]
     public interface IGameServiceCallback 
     {
-        [OperationContract]
-        void JoinGame(string roomCode);
+        [OperationContract(IsOneWay = true)]
+        //void JoinGameResponse(string roomCodeResponse);
+        void GameResponse(string roomCodeResponse);
     }
 }

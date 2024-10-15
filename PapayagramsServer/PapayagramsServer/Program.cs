@@ -7,7 +7,7 @@ namespace PapayagramsServer
     {
         static void Main(string[] args)
         {
-            using (ServiceHost host = new ServiceHost(typeof(Contracts.ChatServiceImplementation)))
+            using (ServiceHost host = new ServiceHost(typeof(Contracts.ServiceImplementation)))
             {
                 host.Open();
                 Console.WriteLine("Server running...");

@@ -5,10 +5,11 @@ using System.ServiceModel;
 
 namespace Contracts
 {
-    public class LoginServiceImplementation : ILoginService
+    public partial class ServiceImplementation : ILoginService
     {
         public int Login(string username, string password)
         {
+            Console.WriteLine("Login attempt for user: " + username);
             Player player = new Player() { Email = "mail@example.com", UserName = username};
             PlayerData.AddPlayer(player, OperationContext.Current);
             return 0;

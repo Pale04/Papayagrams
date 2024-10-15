@@ -1,10 +1,12 @@
 ﻿using BussinessLogic;
 using DomainClasses;
+using System;
 using System.ServiceModel;
 
 namespace Contracts
 {
-    public class ChatServiceImplementation : IChatService
+    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Reentrant)]
+    public partial class ServiceImplementation : IChatService
     {
         public void SendMessage(string message, string roomCode)
         {
@@ -13,6 +15,7 @@ namespace Contracts
 
         private void BroadcastMessage(string message, GameRoom room)
         {
+            Console.Write(message);
             foreach (Player player in room.Players)
             {
                 OperationContext playerContext = PlayerData.GetPlayerContext(player);

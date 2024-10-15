@@ -6,7 +6,7 @@ using System.ServiceModel;
 
 namespace Contracts
 {
-    public class GameServiceImplementation : IGameService
+    public partial class ServiceImplementation : IGameService
     {
         public void CreateGame()
         {
@@ -17,13 +17,13 @@ namespace Contracts
                 PlayerData.GetPlayerByContext(OperationContext.Current)
             };
             gameRoom.RoomCode = GameData.AddGameRoom(gameRoom);
-
-            OperationContext.Current.GetCallbackChannel<IGameServiceCallback>().JoinGame(gameRoom.RoomCode);
+            Console.WriteLine("sala de juego creada" + gameRoom.RoomCode);
+            OperationContext.Current.GetCallbackChannel<IGameServiceCallback>().GameResponse(gameRoom.RoomCode);
         }
 
         public void JoinGame(string roomCode)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("hello");
         }
 
         public int LeaveGame(string code)
