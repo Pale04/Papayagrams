@@ -96,7 +96,7 @@ namespace PapayagramsClient
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             PapayagramsService.UserServiceClient userServiceClient = new PapayagramsService.UserServiceClient();
-            Console.WriteLine(userServiceClient.RegisterUser("pale","epale","123"));
+            Console.WriteLine(userServiceClient.RegisterUser("pale","epalemolia@gmail.com","1234"));
         }
     }
 }
