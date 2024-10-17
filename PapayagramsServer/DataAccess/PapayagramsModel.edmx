@@ -1,0 +1,638 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="papayagramsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Achievement">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="OriginalGameHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="wonGames" Type="int" />
+          <Property Name="lostGames" Type="int" />
+          <Property Name="totalGames" Type="int" />
+        </EntityType>
+        <EntityType Name="SuddenDeathHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="wonGames" Type="int" />
+          <Property Name="lostGames" Type="int" />
+          <Property Name="totalGames" Type="int" />
+        </EntityType>
+        <EntityType Name="TimeAtackHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="wonGames" Type="int" />
+          <Property Name="lostGames" Type="int" />
+          <Property Name="totalGames" Type="int" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserAchieved">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="achievementId" Type="int" />
+        </EntityType>
+        <EntityType Name="UserConfiguration">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="selectedLanguage" Type="varchar" MaxLength="20" />
+          <Property Name="typography" Type="int" />
+          <Property Name="pieceSize" Type="varchar" MaxLength="20" />
+          <Property Name="pieceColor" Type="int" />
+          <Property Name="icon" Type="int" />
+        </EntityType>
+        <EntityType Name="UserRelationship">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="senderId" Type="int" />
+          <Property Name="receiverId" Type="int" />
+          <Property Name="requestState" Type="varchar" MaxLength="20" />
+          <Property Name="relationType" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="UserStatus">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="20" />
+          <Property Name="since" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__OriginalG__userI__4BAC3F29">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="OriginalGameHistory" Type="Self.OriginalGameHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OriginalGameHistory">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SuddenDea__userI__4CA06362">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="SuddenDeathHistory" Type="Self.SuddenDeathHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuddenDeathHistory">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TimeAtack__userI__4D94879B">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="TimeAtackHistory" Type="Self.TimeAtackHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TimeAtackHistory">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserAchie__achie__5165187F">
+          <End Role="Achievement" Type="Self.Achievement" Multiplicity="0..1" />
+          <End Role="UserAchieved" Type="Self.UserAchieved" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Achievement">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserAchieved">
+              <PropertyRef Name="achievementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserAchie__userI__5070F446">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserAchieved" Type="Self.UserAchieved" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserAchieved">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserConfi__userI__534D60F1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserConfiguration" Type="Self.UserConfiguration" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserConfiguration">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRelat__recei__4F7CD00D">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserRelationship" Type="Self.UserRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserRelationship">
+              <PropertyRef Name="receiverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRelat__sende__4E88ABD4">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserRelationship" Type="Self.UserRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserRelationship">
+              <PropertyRef Name="senderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserStatu__userI__52593CB8">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserStatus" Type="Self.UserStatus" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserStatus">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="register_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Parametro1" Type="varchar" Mode="In" />
+          <Parameter Name="Parametro2" Type="varchar" Mode="In" />
+          <Parameter Name="Parametro3" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="papayagramsModelStoreContainer">
+          <EntitySet Name="Achievement" EntityType="Self.Achievement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OriginalGameHistory" EntityType="Self.OriginalGameHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuddenDeathHistory" EntityType="Self.SuddenDeathHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimeAtackHistory" EntityType="Self.TimeAtackHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAchieved" EntityType="Self.UserAchieved" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserConfiguration" EntityType="Self.UserConfiguration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRelationship" EntityType="Self.UserRelationship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserStatus" EntityType="Self.UserStatus" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__OriginalG__userI__4BAC3F29" Association="Self.FK__OriginalG__userI__4BAC3F29">
+            <End Role="User" EntitySet="User" />
+            <End Role="OriginalGameHistory" EntitySet="OriginalGameHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SuddenDea__userI__4CA06362" Association="Self.FK__SuddenDea__userI__4CA06362">
+            <End Role="User" EntitySet="User" />
+            <End Role="SuddenDeathHistory" EntitySet="SuddenDeathHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TimeAtack__userI__4D94879B" Association="Self.FK__TimeAtack__userI__4D94879B">
+            <End Role="User" EntitySet="User" />
+            <End Role="TimeAtackHistory" EntitySet="TimeAtackHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserAchie__achie__5165187F" Association="Self.FK__UserAchie__achie__5165187F">
+            <End Role="Achievement" EntitySet="Achievement" />
+            <End Role="UserAchieved" EntitySet="UserAchieved" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserAchie__userI__5070F446" Association="Self.FK__UserAchie__userI__5070F446">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserAchieved" EntitySet="UserAchieved" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserConfi__userI__534D60F1" Association="Self.FK__UserConfi__userI__534D60F1">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserConfiguration" EntitySet="UserConfiguration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRelat__recei__4F7CD00D" Association="Self.FK__UserRelat__recei__4F7CD00D">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRelationship" EntitySet="UserRelationship" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRelat__sende__4E88ABD4" Association="Self.FK__UserRelat__sende__4E88ABD4">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRelationship" EntitySet="UserRelationship" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserStatu__userI__52593CB8" Association="Self.FK__UserStatu__userI__52593CB8">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserStatus" EntitySet="UserStatus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="papayagramsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Achievement">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserAchieved" Relationship="Self.FK__UserAchie__achie__5165187F" FromRole="Achievement" ToRole="UserAchieved" />
+        </EntityType>
+        <EntityType Name="OriginalGameHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="wonGames" Type="Int32" />
+          <Property Name="lostGames" Type="Int32" />
+          <Property Name="totalGames" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK__OriginalG__userI__4BAC3F29" FromRole="OriginalGameHistory" ToRole="User" />
+        </EntityType>
+        <EntityType Name="SuddenDeathHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="wonGames" Type="Int32" />
+          <Property Name="lostGames" Type="Int32" />
+          <Property Name="totalGames" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK__SuddenDea__userI__4CA06362" FromRole="SuddenDeathHistory" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TimeAtackHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="wonGames" Type="Int32" />
+          <Property Name="lostGames" Type="Int32" />
+          <Property Name="totalGames" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK__TimeAtack__userI__4D94879B" FromRole="TimeAtackHistory" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="OriginalGameHistory" Relationship="Self.FK__OriginalG__userI__4BAC3F29" FromRole="User" ToRole="OriginalGameHistory" />
+          <NavigationProperty Name="SuddenDeathHistory" Relationship="Self.FK__SuddenDea__userI__4CA06362" FromRole="User" ToRole="SuddenDeathHistory" />
+          <NavigationProperty Name="TimeAtackHistory" Relationship="Self.FK__TimeAtack__userI__4D94879B" FromRole="User" ToRole="TimeAtackHistory" />
+          <NavigationProperty Name="UserAchieved" Relationship="Self.FK__UserAchie__userI__5070F446" FromRole="User" ToRole="UserAchieved" />
+          <NavigationProperty Name="UserConfiguration" Relationship="Self.FK__UserConfi__userI__534D60F1" FromRole="User" ToRole="UserConfiguration" />
+          <NavigationProperty Name="UserRelationship" Relationship="Self.FK__UserRelat__recei__4F7CD00D" FromRole="User" ToRole="UserRelationship" />
+          <NavigationProperty Name="UserRelationship1" Relationship="Self.FK__UserRelat__sende__4E88ABD4" FromRole="User" ToRole="UserRelationship" />
+          <NavigationProperty Name="UserStatus" Relationship="Self.FK__UserStatu__userI__52593CB8" FromRole="User" ToRole="UserStatus" />
+        </EntityType>
+        <EntityType Name="UserAchieved">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="achievementId" Type="Int32" />
+          <NavigationProperty Name="Achievement" Relationship="Self.FK__UserAchie__achie__5165187F" FromRole="UserAchieved" ToRole="Achievement" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserAchie__userI__5070F446" FromRole="UserAchieved" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserConfiguration">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="selectedLanguage" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="typography" Type="Int32" />
+          <Property Name="pieceSize" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pieceColor" Type="Int32" />
+          <Property Name="icon" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserConfi__userI__534D60F1" FromRole="UserConfiguration" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserRelationship">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="senderId" Type="Int32" />
+          <Property Name="receiverId" Type="Int32" />
+          <Property Name="requestState" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="relationType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserRelat__recei__4F7CD00D" FromRole="UserRelationship" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK__UserRelat__sende__4E88ABD4" FromRole="UserRelationship" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserStatus">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="since" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserStatu__userI__52593CB8" FromRole="UserStatus" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__UserAchie__achie__5165187F">
+          <End Role="Achievement" Type="Self.Achievement" Multiplicity="0..1" />
+          <End Role="UserAchieved" Type="Self.UserAchieved" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Achievement">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserAchieved">
+              <PropertyRef Name="achievementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OriginalG__userI__4BAC3F29">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="OriginalGameHistory" Type="Self.OriginalGameHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OriginalGameHistory">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SuddenDea__userI__4CA06362">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="SuddenDeathHistory" Type="Self.SuddenDeathHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuddenDeathHistory">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TimeAtack__userI__4D94879B">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="TimeAtackHistory" Type="Self.TimeAtackHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TimeAtackHistory">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserAchie__userI__5070F446">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserAchieved" Type="Self.UserAchieved" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserAchieved">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserConfi__userI__534D60F1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserConfiguration" Type="Self.UserConfiguration" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserConfiguration">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRelat__recei__4F7CD00D">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserRelationship" Type="Self.UserRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserRelationship">
+              <PropertyRef Name="receiverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRelat__sende__4E88ABD4">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserRelationship" Type="Self.UserRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserRelationship">
+              <PropertyRef Name="senderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserStatu__userI__52593CB8">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserStatus" Type="Self.UserStatus" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserStatus">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="papayagramsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Achievement" EntityType="Self.Achievement" />
+          <EntitySet Name="OriginalGameHistory" EntityType="Self.OriginalGameHistory" />
+          <EntitySet Name="SuddenDeathHistory" EntityType="Self.SuddenDeathHistory" />
+          <EntitySet Name="TimeAtackHistory" EntityType="Self.TimeAtackHistory" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="UserAchieved" EntityType="Self.UserAchieved" />
+          <EntitySet Name="UserConfiguration" EntityType="Self.UserConfiguration" />
+          <EntitySet Name="UserRelationship" EntityType="Self.UserRelationship" />
+          <EntitySet Name="UserStatus" EntityType="Self.UserStatus" />
+          <AssociationSet Name="FK__UserAchie__achie__5165187F" Association="Self.FK__UserAchie__achie__5165187F">
+            <End Role="Achievement" EntitySet="Achievement" />
+            <End Role="UserAchieved" EntitySet="UserAchieved" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OriginalG__userI__4BAC3F29" Association="Self.FK__OriginalG__userI__4BAC3F29">
+            <End Role="User" EntitySet="User" />
+            <End Role="OriginalGameHistory" EntitySet="OriginalGameHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SuddenDea__userI__4CA06362" Association="Self.FK__SuddenDea__userI__4CA06362">
+            <End Role="User" EntitySet="User" />
+            <End Role="SuddenDeathHistory" EntitySet="SuddenDeathHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TimeAtack__userI__4D94879B" Association="Self.FK__TimeAtack__userI__4D94879B">
+            <End Role="User" EntitySet="User" />
+            <End Role="TimeAtackHistory" EntitySet="TimeAtackHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserAchie__userI__5070F446" Association="Self.FK__UserAchie__userI__5070F446">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserAchieved" EntitySet="UserAchieved" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserConfi__userI__534D60F1" Association="Self.FK__UserConfi__userI__534D60F1">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserConfiguration" EntitySet="UserConfiguration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRelat__recei__4F7CD00D" Association="Self.FK__UserRelat__recei__4F7CD00D">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRelationship" EntitySet="UserRelationship" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRelat__sende__4E88ABD4" Association="Self.FK__UserRelat__sende__4E88ABD4">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRelationship" EntitySet="UserRelationship" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserStatu__userI__52593CB8" Association="Self.FK__UserStatu__userI__52593CB8">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserStatus" EntitySet="UserStatus" />
+          </AssociationSet>
+          <FunctionImport Name="register_user">
+            <Parameter Name="Parametro1" Mode="In" Type="String" />
+            <Parameter Name="Parametro2" Mode="In" Type="String" />
+            <Parameter Name="Parametro3" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="papayagramsModelStoreContainer" CdmEntityContainer="papayagramsEntities">
+          <EntitySetMapping Name="Achievement">
+            <EntityTypeMapping TypeName="papayagramsModel.Achievement">
+              <MappingFragment StoreEntitySet="Achievement">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OriginalGameHistory">
+            <EntityTypeMapping TypeName="papayagramsModel.OriginalGameHistory">
+              <MappingFragment StoreEntitySet="OriginalGameHistory">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="wonGames" ColumnName="wonGames" />
+                <ScalarProperty Name="lostGames" ColumnName="lostGames" />
+                <ScalarProperty Name="totalGames" ColumnName="totalGames" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuddenDeathHistory">
+            <EntityTypeMapping TypeName="papayagramsModel.SuddenDeathHistory">
+              <MappingFragment StoreEntitySet="SuddenDeathHistory">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="wonGames" ColumnName="wonGames" />
+                <ScalarProperty Name="lostGames" ColumnName="lostGames" />
+                <ScalarProperty Name="totalGames" ColumnName="totalGames" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeAtackHistory">
+            <EntityTypeMapping TypeName="papayagramsModel.TimeAtackHistory">
+              <MappingFragment StoreEntitySet="TimeAtackHistory">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="wonGames" ColumnName="wonGames" />
+                <ScalarProperty Name="lostGames" ColumnName="lostGames" />
+                <ScalarProperty Name="totalGames" ColumnName="totalGames" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="papayagramsModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAchieved">
+            <EntityTypeMapping TypeName="papayagramsModel.UserAchieved">
+              <MappingFragment StoreEntitySet="UserAchieved">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="achievementId" ColumnName="achievementId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserConfiguration">
+            <EntityTypeMapping TypeName="papayagramsModel.UserConfiguration">
+              <MappingFragment StoreEntitySet="UserConfiguration">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="selectedLanguage" ColumnName="selectedLanguage" />
+                <ScalarProperty Name="typography" ColumnName="typography" />
+                <ScalarProperty Name="pieceSize" ColumnName="pieceSize" />
+                <ScalarProperty Name="pieceColor" ColumnName="pieceColor" />
+                <ScalarProperty Name="icon" ColumnName="icon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRelationship">
+            <EntityTypeMapping TypeName="papayagramsModel.UserRelationship">
+              <MappingFragment StoreEntitySet="UserRelationship">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="senderId" ColumnName="senderId" />
+                <ScalarProperty Name="receiverId" ColumnName="receiverId" />
+                <ScalarProperty Name="requestState" ColumnName="requestState" />
+                <ScalarProperty Name="relationType" ColumnName="relationType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserStatus">
+            <EntityTypeMapping TypeName="papayagramsModel.UserStatus">
+              <MappingFragment StoreEntitySet="UserStatus">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="since" ColumnName="since" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="register_user" FunctionName="papayagramsModel.Store.register_user" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
