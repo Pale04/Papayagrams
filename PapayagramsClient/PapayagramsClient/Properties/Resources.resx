@@ -243,4 +243,10 @@
   <data name="changePasswordPinMessage" xml:space="preserve">
     <value>We've sent a pin to your email</value>
   </data>
+  <data name="globalLeaderboard" xml:space="preserve">
+    <value>Leaderboard</value>
+  </data>
+  <data name="registerTitle" xml:space="preserve">
+    <value>Create account</value>
+  </data>
 </root>

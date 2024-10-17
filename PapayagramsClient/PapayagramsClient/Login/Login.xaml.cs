@@ -27,7 +27,11 @@ namespace PapayagramsClient.Login
 
         private void SignIn(object sender, RoutedEventArgs e)
         {
-            //TODO
+            string Username = UsernameTextbox.Text;
+            string Password = PasswordTextbox.Text;
+
+            PapayagramsService.LoginServiceClient host = new PapayagramsService.LoginServiceClient();
+            host.Login(Username, Password);
         }
     }
 }

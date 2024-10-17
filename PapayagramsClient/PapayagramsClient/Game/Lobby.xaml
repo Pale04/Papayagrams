@@ -5,10 +5,26 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PapayagramsClient.Game"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Lobby">
+      Title="Lobby"
+      d:DesignHeight="720" d:DesignWidth="1080"
+      Background="#D9D9D9">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Margin="0, 30, 0, 0">
+            <Label Content="Chat" FontSize="30" HorizontalAlignment="Center"/>
+
+            <StackPanel Name="ChatPanel" Height="500" Width="500"  Margin="0, 20, 0, 10"/>
+
+            <TextBox Name="MessageTextbox" FontSize="20" TextWrapping="Wrap"/>
+            <Button FontSize="26" HorizontalAlignment="Center" Content="Send" Margin="20"/>
+        </StackPanel>
+
+        <Button Content="Button" HorizontalAlignment="Left" Margin="57,51,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Center" Margin="0,51,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>

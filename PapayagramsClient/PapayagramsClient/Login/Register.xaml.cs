@@ -18,11 +18,17 @@ namespace PapayagramsClient.Login
     /// <summary>
     /// Lógica de interacción para Signin.xaml
     /// </summary>
-    public partial class Signin : Page
+    public partial class Register : Page
     {
-        public Signin()
+        public Register()
         {
             InitializeComponent();
+        }
+
+        private void RegisterUser()
+        {
+            string Username = Username
+            PapayagramsService.UserServiceClient host = new PapayagramsService.UserServiceClient();
         }
     }
 }
