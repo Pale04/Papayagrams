@@ -12,12 +12,22 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE get_player
+CREATE PROCEDURE get_player_by_username
 	@username VARCHAR(50)
 AS
 BEGIN
 	SELECT id, username, email, CAST(DecryptByAsymKey (AsymKey_ID('asy_triggerdb'),password,N'RD_afAmGsRMYi29') AS VARCHAR(100)) password 
 	FROM [User] 
 	WHERE username = @username;
+END;
+GO
+
+CREATE PROCEDURE get_player_by_email
+	@email VARCHAR(50)
+AS
+BEGIN
+	SELECT id, username, email, CAST(DecryptByAsymKey (AsymKey_ID('asy_triggerdb'),password,N'RD_afAmGsRMYi29') AS VARCHAR(100)) password 
+	FROM [User] 
+	WHERE email = @email;
 END;
 GO

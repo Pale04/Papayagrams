@@ -196,7 +196,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="get_player" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="get_player_by_email" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="get_player_by_username" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="varchar" Mode="In" />
         </Function>
         <Function Name="register_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -522,6 +525,12 @@
           <FunctionImport Name="get_player" ReturnType="Collection(papayagramsModel.get_player_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="get_player_by_email" ReturnType="Collection(papayagramsModel.get_player_by_email_Result)">
+            <Parameter Name="email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="get_player_by_username" ReturnType="Collection(papayagramsModel.get_player_by_username_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="login_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -530,6 +539,18 @@
           <Property Type="String" Name="password" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="get_player_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="password" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="get_player_by_email_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="password" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="get_player_by_username_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
           <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
@@ -634,9 +655,19 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="register_user" FunctionName="papayagramsModel.Store.register_user" />
-          <FunctionImportMapping FunctionImportName="get_player" FunctionName="papayagramsModel.Store.get_player">
+          <FunctionImportMapping FunctionImportName="get_player_by_email" FunctionName="papayagramsModel.Store.get_player_by_email">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="papayagramsModel.get_player_Result">
+              <ComplexTypeMapping TypeName="papayagramsModel.get_player_by_email_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="get_player_by_username" FunctionName="papayagramsModel.Store.get_player_by_username">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="papayagramsModel.get_player_by_username_Result">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="email" ColumnName="email" />

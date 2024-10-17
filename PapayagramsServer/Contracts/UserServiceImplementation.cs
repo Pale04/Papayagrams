@@ -16,6 +16,21 @@ namespace Contracts
                 Password = player.Password
             };
 
+            Option<Player> userWithSameUsername = UserDB.GetPlayerByUsername(newPlayer.Username);
+
+            if (userWithSameUsername.IsSome)
+            {
+                throw new Exception("An account with the same username exists");
+            }
+            else
+            {
+                Option<Player> userWithSameEmail = UserDB.GetPlayerByEmail(newPlayer.Email);
+                if (userWithSameEmail.IsSome)
+                {
+                    throw new Exception("An account with the same email exists");
+                }
+            }
+
             return UserDB.RegisterUser(newPlayer);
         }
 
@@ -29,13 +44,13 @@ namespace Contracts
             }
             else
             {
-                Option<Player> foundPlayer = UserDB.GetPlayer(username);
+                Option<Player> foundPlayer = UserDB.GetPlayerByUsername(username);
                 if (foundPlayer.IsSome)
                 {
                     Player player = (Player)foundPlayer.Case;
                     if (player.Password == password)
                     {
-                        playerLogged = ConvertToContractClass(player);
+                        playerLogged = ConvertPlayerToDataContract(player);
                     }
                     else
                     {
@@ -51,7 +66,7 @@ namespace Contracts
             return playerLogged;
         }
 
-        private PlayerDC ConvertToContractClass(Player player)
+        private PlayerDC ConvertPlayerToDataContract(Player player)
         {
             return new PlayerDC()
             {

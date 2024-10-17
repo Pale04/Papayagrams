@@ -83,6 +83,12 @@
     <Compile Include="Achievement.cs">
       <DependentUpon>PapayagramsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="get_player_by_email_Result.cs">
+      <DependentUpon>PapayagramsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="get_player_by_username_Result.cs">
+      <DependentUpon>PapayagramsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="get_player_Result.cs">
       <DependentUpon>PapayagramsModel.tt</DependentUpon>
     </Compile>

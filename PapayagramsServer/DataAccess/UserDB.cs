@@ -32,16 +32,47 @@ namespace DataAccess
         /// </summary>
         /// <param name="username">Username of the user's account</param>
         /// <returns>Option object with the Player</returns>
-        public static Option<Player> GetPlayer(string username)
+        public static Option<Player> GetPlayerByUsername(string username)
         {
             Option<Player> optionPlayer;
 
             using (var context = new papayagramsEntities())
             {
-                var playerResult = context.get_player(username);
-                List<get_player_Result> playerResultList = playerResult.ToList();
+                var playerResult = context.get_player_by_username(username);
+                List<get_player_by_username_Result> playerResultList = playerResult.ToList();
 
-                optionPlayer = playerResultList.Count == 0 ? Option<Player>.None : Option<Player>.Some(ConvertToDomainClass(playerResultList.First()));
+                optionPlayer = playerResultList.Count == 0 ?
+                    Option<Player>.None :
+                    Option<Player>.Some(new Player
+                    {
+                        Id = playerResultList.First().id,
+                        Username = playerResultList.First().username,
+                        Email = playerResultList.First().email,
+                        Password = playerResultList.First().password
+                    });
+            }
+
+            return optionPlayer;
+        }
+
+        public static Option<Player> GetPlayerByEmail(string email)
+        {
+            Option<Player> optionPlayer;
+
+            using (var context = new papayagramsEntities())
+            {
+                var playerResult = context.get_player_by_email(email);
+                List<get_player_by_email_Result> playerResultList = playerResult.ToList();
+
+                optionPlayer = playerResultList.Count == 0 ?
+                    Option<Player>.None :
+                    Option<Player>.Some(new Player
+                    {
+                        Id = playerResultList.First().id,
+                        Username = playerResultList.First().username,
+                        Email = playerResultList.First().email,
+                        Password = playerResultList.First().password
+                    });
             }
 
             return optionPlayer;
@@ -55,17 +86,6 @@ namespace DataAccess
         public static void recordUserLogOut()
         {
             //TODO: Implement recordUserLogOut method
-        }
-
-        private static Player ConvertToDomainClass(get_player_Result result)
-        {
-            return new Player()
-            {
-                Id = result.id,
-                Username = result.username,
-                Email = result.email,
-                Password = result.password
-            };
         }
     }
 }

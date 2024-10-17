@@ -60,6 +60,12 @@
     <Compile Include="Achievement.cs">
       <DependentUpon>PapayagramsModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="get_player_by_email_Result.cs">
+      <DependentUpon>PapayagramsModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="get_player_by_username_Result.cs">
+      <DependentUpon>PapayagramsModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="get_player_Result.cs">
       <DependentUpon>PapayagramsModel1.tt</DependentUpon>
     </Compile>
