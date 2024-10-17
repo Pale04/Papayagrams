@@ -96,7 +96,13 @@ namespace PapayagramsClient
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             PapayagramsService.UserServiceClient userServiceClient = new PapayagramsService.UserServiceClient();
-            Console.WriteLine(userServiceClient.RegisterUser("pale","epalemolia@gmail.com","1234"));
+            PapayagramsService.PlayerDC newPlayer = new PapayagramsService.PlayerDC
+            {
+                Username = "Pale",
+                Email = "epalemolina@hotmail.com",
+                Password = "1234"
+            };
+            Console.WriteLine(userServiceClient.RegisterUser(newPlayer));
         }
     }
 }

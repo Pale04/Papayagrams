@@ -1,7 +1,6 @@
 ﻿using BussinessLogic;
 using DomainClasses;
 using System;
-using System.ServiceModel;
 
 namespace Contracts
 {

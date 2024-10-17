@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="papayagramsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PapayagramsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Achievement">
           <Key>
             <PropertyRef Name="id" />
@@ -205,7 +205,7 @@
           <Parameter Name="Parametro2" Type="varchar" Mode="In" />
           <Parameter Name="Parametro3" Type="varchar" Mode="In" />
         </Function>
-        <EntityContainer Name="papayagramsModelStoreContainer">
+        <EntityContainer Name="PapayagramsModelStoreContainer">
           <EntitySet Name="Achievement" EntityType="Self.Achievement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OriginalGameHistory" EntityType="Self.OriginalGameHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SuddenDeathHistory" EntityType="Self.SuddenDeathHistory" Schema="dbo" store:Type="Tables" />
@@ -255,7 +255,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="papayagramsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="PapayagramsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Achievement">
           <Key>
             <PropertyRef Name="id" />
@@ -304,7 +304,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="password" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <NavigationProperty Name="OriginalGameHistory" Relationship="Self.FK__OriginalG__userI__4BAC3F29" FromRole="User" ToRole="OriginalGameHistory" />
           <NavigationProperty Name="SuddenDeathHistory" Relationship="Self.FK__SuddenDea__userI__4CA06362" FromRole="User" ToRole="SuddenDeathHistory" />
           <NavigationProperty Name="TimeAtackHistory" Relationship="Self.FK__TimeAtack__userI__4D94879B" FromRole="User" ToRole="TimeAtackHistory" />
@@ -516,7 +516,7 @@
             <Parameter Name="Parametro2" Mode="In" Type="String" />
             <Parameter Name="Parametro3" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="login" ReturnType="Collection(papayagramsModel.login_Result)">
+          <FunctionImport Name="login" ReturnType="Collection(PapayagramsModel.login_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
@@ -532,9 +532,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="papayagramsModelStoreContainer" CdmEntityContainer="papayagramsEntities">
+        <EntityContainerMapping StorageEntityContainer="PapayagramsModelStoreContainer" CdmEntityContainer="papayagramsEntities">
           <EntitySetMapping Name="Achievement">
-            <EntityTypeMapping TypeName="papayagramsModel.Achievement">
+            <EntityTypeMapping TypeName="PapayagramsModel.Achievement">
               <MappingFragment StoreEntitySet="Achievement">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="description" ColumnName="description" />
@@ -542,7 +542,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OriginalGameHistory">
-            <EntityTypeMapping TypeName="papayagramsModel.OriginalGameHistory">
+            <EntityTypeMapping TypeName="PapayagramsModel.OriginalGameHistory">
               <MappingFragment StoreEntitySet="OriginalGameHistory">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
@@ -553,7 +553,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SuddenDeathHistory">
-            <EntityTypeMapping TypeName="papayagramsModel.SuddenDeathHistory">
+            <EntityTypeMapping TypeName="PapayagramsModel.SuddenDeathHistory">
               <MappingFragment StoreEntitySet="SuddenDeathHistory">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
@@ -564,7 +564,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TimeAtackHistory">
-            <EntityTypeMapping TypeName="papayagramsModel.TimeAtackHistory">
+            <EntityTypeMapping TypeName="PapayagramsModel.TimeAtackHistory">
               <MappingFragment StoreEntitySet="TimeAtackHistory">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
@@ -575,7 +575,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="papayagramsModel.User">
+            <EntityTypeMapping TypeName="PapayagramsModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="username" ColumnName="username" />
@@ -585,7 +585,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserAchieved">
-            <EntityTypeMapping TypeName="papayagramsModel.UserAchieved">
+            <EntityTypeMapping TypeName="PapayagramsModel.UserAchieved">
               <MappingFragment StoreEntitySet="UserAchieved">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
@@ -594,7 +594,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserConfiguration">
-            <EntityTypeMapping TypeName="papayagramsModel.UserConfiguration">
+            <EntityTypeMapping TypeName="PapayagramsModel.UserConfiguration">
               <MappingFragment StoreEntitySet="UserConfiguration">
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="selectedLanguage" ColumnName="selectedLanguage" />
@@ -606,7 +606,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserRelationship">
-            <EntityTypeMapping TypeName="papayagramsModel.UserRelationship">
+            <EntityTypeMapping TypeName="PapayagramsModel.UserRelationship">
               <MappingFragment StoreEntitySet="UserRelationship">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="senderId" ColumnName="senderId" />
@@ -617,7 +617,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserStatus">
-            <EntityTypeMapping TypeName="papayagramsModel.UserStatus">
+            <EntityTypeMapping TypeName="PapayagramsModel.UserStatus">
               <MappingFragment StoreEntitySet="UserStatus">
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="status" ColumnName="status" />
@@ -625,10 +625,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="register_user" FunctionName="papayagramsModel.Store.register_user" />
-          <FunctionImportMapping FunctionImportName="login" FunctionName="papayagramsModel.Store.login">
+          <FunctionImportMapping FunctionImportName="register_user" FunctionName="PapayagramsModel.Store.register_user" />
+          <FunctionImportMapping FunctionImportName="login" FunctionName="PapayagramsModel.Store.login">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="papayagramsModel.login_Result">
+              <ComplexTypeMapping TypeName="PapayagramsModel.login_Result">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="email" ColumnName="email" />

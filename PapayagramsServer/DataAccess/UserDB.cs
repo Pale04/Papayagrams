@@ -1,4 +1,7 @@
 ﻿using DomainClasses;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace DataAccess
 {
@@ -9,19 +12,42 @@ namespace DataAccess
             int result = 0;
             using (var context = new papayagramsEntities())
             {
-                context.register_user(player.Username,player.Email,player.Password);
-                result = context.SaveChanges();
+                //The stored procedure register_user that provide the PapayagramsModel does not return the number of rows affected and the ExecuteSqlCommand method does
+                SqlParameter usernameParameter = new SqlParameter("@param1", player.Username);
+                SqlParameter emailParameter = new SqlParameter("@param2", player.Email);
+                SqlParameter passwordParameter = new SqlParameter("@param3", player.Password);
+                result = context.Database.ExecuteSqlCommand("EXEC register_user @param1, @param2, @param3", usernameParameter, emailParameter, passwordParameter);
             }
             return result;
         }
 
-        public static void LoginUser(Player player)
+        public static Player LogIn(string username, string password)
         {
+            Player player = null;
+
             using (var context = new papayagramsEntities())
             {
-                //context.login_user(player.Username, player.Password);
-                //context.SaveChanges();
+                var result = context.login(username, password);
+                List<login_Result> userLogged = result.ToList();
+
+                if (userLogged.Count > 0)
+                {
+                    player = convertToDomainClass(userLogged[0]);
+                }
             }
+
+            return player;
+        }
+
+        private static Player convertToDomainClass(login_Result result)
+        {
+            return new Player()
+            {
+                Id = result.id,
+                Username = result.username,
+                Email = result.email,
+                Password = result.password
+            };
         }
     }
 }
