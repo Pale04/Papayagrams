@@ -31,7 +31,21 @@ namespace PapayagramsClient.Login
             string Password = PasswordTextbox.Text;
 
             PapayagramsService.LoginServiceClient host = new PapayagramsService.LoginServiceClient();
-            host.Login(Username, Password);
+            host.Open();
+
+            int result = host.Login(Username, Password);
+
+            host.Close();
+
+            if (result == 0)
+            {
+                this.NavigationService.Navigate(new MainMenu());
+            }
+        }
+
+        private void RegisterNewUser(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Register());
         }
     }
 }

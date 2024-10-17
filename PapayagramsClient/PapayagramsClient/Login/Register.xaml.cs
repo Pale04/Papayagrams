@@ -25,10 +25,33 @@ namespace PapayagramsClient.Login
             InitializeComponent();
         }
 
-        private void RegisterUser()
+        private void RegisterUser(object sender, RoutedEventArgs e)
         {
-            string Username = Username
+            PapayagramsService.PlayerDC player = new PapayagramsService.PlayerDC();
+            player.Username = UsernameTextbox.Text;
+            player.Password = PasswordTextbox.Text;
+            player.Email = EmailTextbox.Text;
+
             PapayagramsService.UserServiceClient host = new PapayagramsService.UserServiceClient();
+            host.Open();
+
+            int result = host.RegisterUser(player);
+
+            host.Close();
+
+            if (result == 1)
+            {
+                this.NavigationService.GoBack();
+            }
+            else
+            {
+                Console.WriteLine("error");
+            }
+        }
+        
+        private void GoToLogin(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
         }
     }
 }

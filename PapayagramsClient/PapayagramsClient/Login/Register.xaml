@@ -21,23 +21,23 @@
             <Separator Opacity="0" Height="40"/>
 
             <Label Content="{x:Static p:Resources.globalUsername}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36"/>
-            <TextBox HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="425" FontSize="30"/>
+            <TextBox Name="UsernameTextbox" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="425" FontSize="30"/>
             <Label Name="UsernameErrorText" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Foreground="Red"/>
             <Separator Opacity="0" Height="20"/>
 
             <Label Content="{x:Static p:Resources.globalPassword}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36"/>
-            <TextBox HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="425" FontSize="30"/>
+            <TextBox Name="PasswordTextbox" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="425" FontSize="30"/>
             <Label Name="PasswordErrorText" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Foreground="Red"/>
             <Separator Opacity="0" Height="20"/>
 
             <Label Content="{x:Static p:Resources.globalEmail}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36"/>
-            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="425" FontSize="30"/>
+            <TextBox Name="EmailTextbox" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="425" FontSize="30"/>
             <Label Name="EmailErrorText" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Foreground="Red"/>
             <Separator Opacity="0" Height="40"/>
             
-            <Button Content="{x:Static p:Resources.registerSignUp}" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="36" Width="220"/>
+            <Button Content="{x:Static p:Resources.registerSignUp}" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="36" Width="220" Click="RegisterUser"/>
             <Separator Opacity="0" Height="15"/>
-            <Button Content="{x:Static p:Resources.registerAlreadyRegistered}"/>
+            <Button Content="{x:Static p:Resources.registerAlreadyRegistered}" Click="GoToLogin"/>
         </StackPanel>
 
         <Button Content="Button" HorizontalAlignment="Left" Margin="28,42,0,0" VerticalAlignment="Top"/>

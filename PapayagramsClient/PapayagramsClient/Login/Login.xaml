@@ -31,11 +31,11 @@
 
             <Button x:Name="SigninButton" Content="{x:Static p:Resources.globalSignIn}" Click="SignIn" VerticalAlignment="Center" FontSize="36" Width="220"/>
             <Separator Opacity="0" Height="10"/>
-            <Button x:Name="ForgotPasswordButton" Content="{x:Static p:Resources.signInForgotPassword}" Click="SignIn" VerticalAlignment="Center" FontSize="16"/>
+            <Button x:Name="ForgotPasswordButton" Content="{x:Static p:Resources.signInForgotPassword}" VerticalAlignment="Center" FontSize="16"/>
             <Separator Opacity="0" Height="5"/>
-            <Button x:Name="RegisterButton" Content="{x:Static p:Resources.signInSignUp}" Click="SignIn" VerticalAlignment="Center" FontSize="16"/>
+            <Button x:Name="RegisterButton" Content="{x:Static p:Resources.signInSignUp}" Click="RegisterNewUser" VerticalAlignment="Center" FontSize="16"/>
             <Separator Opacity="0" Height="5"/>
-            <Button x:Name="JoinAsGuestButton" Content="{x:Static p:Resources.signInJoinAsGuest}" Click="SignIn" VerticalAlignment="Center" FontSize="16"/>
+            <Button x:Name="JoinAsGuestButton" Content="{x:Static p:Resources.signInJoinAsGuest}" VerticalAlignment="Center" FontSize="16"/>
         </StackPanel>
     </Grid>
 </Page>
