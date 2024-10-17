@@ -1,5 +1,6 @@
 ﻿using DataAccess;
 using DomainClasses;
+using LanguageExt;
 using System;
 
 namespace Contracts
@@ -8,33 +9,57 @@ namespace Contracts
     {
         public int RegisterUser(PlayerDC player)
         {
-            int result = 0;
-            Player newPlayer = new Player();
-
-            try
+            Player newPlayer = new Player()
             {
-                newPlayer.Username = player.Username;
-                newPlayer.Email = player.Email;
-                newPlayer.Password = player.Password;
-            }
-            catch (ArgumentException error)
-            {
-                //TODO: Log error
-                result = -1;
-            }
+                Username = player.Username,
+                Email = player.Email,
+                Password = player.Password
+            };
 
-            if (result != -1)
-            {
-                result = UserDB.RegisterUser(newPlayer);
-            }
-
-            return result;
+            return UserDB.RegisterUser(newPlayer);
         }
 
         public PlayerDC LogIn(string username, string password)
         {
-            //TODO: Implement
-            throw new NotImplementedException();
+            PlayerDC playerLogged;
+
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                throw new ArgumentException("Username and password cannot be empty");
+            }
+            else
+            {
+                Option<Player> foundPlayer = UserDB.GetPlayer(username);
+                if (foundPlayer.IsSome)
+                {
+                    Player player = (Player)foundPlayer.Case;
+                    if (player.Password == password)
+                    {
+                        playerLogged = ConvertToContractClass(player);
+                    }
+                    else
+                    {
+                        throw new Exception("Incorrect password");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Player not found");
+                }
+            }
+
+            return playerLogged;
+        }
+
+        private PlayerDC ConvertToContractClass(Player player)
+        {
+            return new PlayerDC()
+            {
+                Id = player.Id,
+                Username = player.Username,
+                Email = player.Email,
+                Password = player.Password
+            };
         }
     }
 }

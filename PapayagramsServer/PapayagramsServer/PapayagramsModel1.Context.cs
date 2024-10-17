@@ -53,5 +53,14 @@ namespace PapayagramsServer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("register_user", parametro1Parameter, parametro2Parameter, parametro3Parameter);
         }
+    
+        public virtual ObjectResult<get_player_Result> get_player(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<get_player_Result>("get_player", usernameParameter);
+        }
     }
 }

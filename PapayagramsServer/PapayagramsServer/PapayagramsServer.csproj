@@ -60,6 +60,9 @@
     <Compile Include="Achievement.cs">
       <DependentUpon>PapayagramsModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="get_player_Result.cs">
+      <DependentUpon>PapayagramsModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="OriginalGameHistory.cs">
       <DependentUpon>PapayagramsModel1.tt</DependentUpon>
     </Compile>

@@ -66,5 +66,14 @@ namespace DataAccess
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<login_Result>("login", usernameParameter, passwordParameter);
         }
+    
+        public virtual ObjectResult<get_player_Result> get_player(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<get_player_Result>("get_player", usernameParameter);
+        }
     }
 }

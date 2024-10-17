@@ -1,11 +1,15 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DomainClasses;
+using LanguageExt;
 
 namespace DataAccess.Tests
 {
     [TestClass()]
     public class UserDBTests
     {
+        //TODO: Implement set up
+        //TODO: Implement tear down
+
         [TestMethod()]
         public void RegisterUserSuccesfulTest()
         {
@@ -23,8 +27,10 @@ namespace DataAccess.Tests
         }
 
         [TestMethod()]
-        public void LogInSuccesfulTest()
+        public void GetPlayerSuccesfulTest()
         {
+            //TODO: Implement set up method to insert a player in the database
+
             Player expected = new Player()
             {
                 Id = 1,
@@ -33,9 +39,16 @@ namespace DataAccess.Tests
                 Password = "asdfl_´.468*-"
             };
 
-            Player result = UserDB.LogIn("Pale47", "asdfl_´.468*-");
+            Option<Player> result = UserDB.GetPlayer("Pale47");
 
-            Assert.AreEqual(expected, result, "LogInSuccesfulTest");
+            Assert.AreEqual(expected, result.Case, "LogInSuccesfulTest");
+        }
+
+        [TestMethod()]
+        public void GetPlayerInexistentTest()
+        {
+            Option<Player> result = UserDB.GetPlayer("Pale");
+            Assert.IsTrue(result.IsNone, "GetPlayerInexistentTest");
         }
     }
 }

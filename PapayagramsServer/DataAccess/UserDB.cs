@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using LanguageExt;
 
 namespace DataAccess
 {
     public class UserDB
     {
+        /// <summary>
+        /// Register a new player in the database
+        /// </summary>
+        /// <param name="player">Player object with his information</param>
+        /// <returns>1 if the registration was successful, 0 otherwise</returns>
         public static int RegisterUser(Player player)
         {
             int result = 0;
@@ -21,25 +27,37 @@ namespace DataAccess
             return result;
         }
 
-        public static Player LogIn(string username, string password)
+        /// <summary>
+        /// Search for a user in the database
+        /// </summary>
+        /// <param name="username">Username of the user's account</param>
+        /// <returns>Option object with the Player</returns>
+        public static Option<Player> GetPlayer(string username)
         {
-            Player player = null;
+            Option<Player> optionPlayer;
 
             using (var context = new papayagramsEntities())
             {
-                var result = context.login(username, password);
-                List<login_Result> userLogged = result.ToList();
+                var playerResult = context.get_player(username);
+                List<get_player_Result> playerResultList = playerResult.ToList();
 
-                if (userLogged.Count > 0)
-                {
-                    player = convertToDomainClass(userLogged[0]);
-                }
+                optionPlayer = playerResultList.Count == 0 ? Option<Player>.None : Option<Player>.Some(ConvertToDomainClass(playerResultList.First()));
             }
 
-            return player;
+            return optionPlayer;
         }
 
-        private static Player convertToDomainClass(login_Result result)
+        public static void recordUserLogIn()
+        {
+            //TODO: Implement recordUserLogIn method
+        }
+
+        public static void recordUserLogOut()
+        {
+            //TODO: Implement recordUserLogOut method
+        }
+
+        private static Player ConvertToDomainClass(get_player_Result result)
         {
             return new Player()
             {

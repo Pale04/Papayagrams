@@ -98,7 +98,7 @@ namespace PapayagramsClient
             PapayagramsService.UserServiceClient userServiceClient = new PapayagramsService.UserServiceClient();
             PapayagramsService.PlayerDC newPlayer = new PapayagramsService.PlayerDC
             {
-                Username = "Pale",
+                Username = "David",
                 Email = "epalemolina@hotmail.com",
                 Password = "1234"
             };

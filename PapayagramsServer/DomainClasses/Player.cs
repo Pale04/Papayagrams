@@ -12,8 +12,8 @@ namespace DomainClasses
 
         /// <summary>
         /// Obtain or set the username of the player
-        /// Throws <see cref="ArgumentException"/> if try to set a empty username
         /// </summary>
+        /// <exception cref="ArgumentException">Thrown when try to set a empty username</exception>
         public string Username 
         { 
             get { return _username; } 
@@ -29,8 +29,8 @@ namespace DomainClasses
 
         /// <summary>
         /// Obtain or set the email of the player
-        /// Throws <see cref="ArgumentException"/> if try to set a empty email
         /// </summary>
+        /// <exception cref="ArgumentException">Thrown when try to set a empty email</exception>"
         public string Email 
         {
             get { return _email; }
@@ -46,8 +46,8 @@ namespace DomainClasses
 
         /// <summary>
         /// Obtain or set the password of the player
-        /// Throws <see cref="ArgumentException"/> if try to set a empty password
         /// </summary>
+        /// <exception cref="ArgumentException">Thrown when try to set a empty password</exception>"
         public string Password 
         {
             get { return _password; }
@@ -59,6 +59,19 @@ namespace DomainClasses
                 }
                 _password = value;
             }
+        }
+
+        public override bool Equals(object other)
+        {
+            bool isEqual = false;
+
+            if (other != null && GetType() == other.GetType())
+            {
+                Player player = (Player)other;
+                isEqual = Id == player.Id && Username == player.Username && Email == player.Email && Password == player.Password;
+            }
+
+            return isEqual;
         }
     }
 }

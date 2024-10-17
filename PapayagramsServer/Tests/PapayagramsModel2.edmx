@@ -196,9 +196,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="get_player" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="varchar" Mode="In" />
-          <Parameter Name="password" Type="varchar" Mode="In" />
         </Function>
         <Function Name="register_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Parametro1" Type="varchar" Mode="In" />
@@ -520,8 +519,17 @@
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="get_player" ReturnType="Collection(PapayagramsModel.get_player_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="login_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="password" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="get_player_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
           <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
@@ -626,9 +634,9 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="register_user" FunctionName="PapayagramsModel.Store.register_user" />
-          <FunctionImportMapping FunctionImportName="login" FunctionName="PapayagramsModel.Store.login">
+          <FunctionImportMapping FunctionImportName="get_player" FunctionName="PapayagramsModel.Store.get_player">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="PapayagramsModel.login_Result">
+              <ComplexTypeMapping TypeName="PapayagramsModel.get_player_Result">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="email" ColumnName="email" />

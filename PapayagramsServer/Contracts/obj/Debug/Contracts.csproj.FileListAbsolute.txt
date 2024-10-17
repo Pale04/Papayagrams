@@ -9,16 +9,34 @@ C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\P
 C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.csproj.Up2Date
 C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.dll
 C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.pdb
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\Contracts.dll.config
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\Contracts.dll
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\Contracts.pdb
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\BussinessLogic.dll
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\DataAccess.dll
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\DomainClasses.dll
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\LanguageExt.Core.dll
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\System.Buffers.dll
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\System.Memory.dll
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\System.ValueTuple.dll
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\EntityFramework.dll
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\BussinessLogic.pdb
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\BussinessLogic.dll.config
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\DataAccess.pdb
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\DataAccess.dll.config
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\DomainClasses.pdb
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\LanguageExt.Core.xml
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\System.Buffers.xml
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\System.Memory.xml
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\System.ValueTuple.xml
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\bin\Debug\EntityFramework.xml
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.csproj.AssemblyReference.cache
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\Contracts\obj\Debug\Contracts.csproj.CoreCompileInputs.cache
