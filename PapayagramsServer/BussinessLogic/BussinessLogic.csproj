@@ -52,9 +52,12 @@
       <Name>DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\DomainClasses\DomainClasses.csproj">
-      <Project>{10DA9605-0CA0-48BD-8649-5750F652AAE3}</Project>
+      <Project>{6e3fb959-fd63-443a-9148-889c4ad1ce2d}</Project>
       <Name>DomainClasses</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

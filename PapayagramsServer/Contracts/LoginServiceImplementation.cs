@@ -1,7 +1,6 @@
 ﻿using BussinessLogic;
 using DomainClasses;
 using System;
-using System.ServiceModel;
 
 namespace Contracts
 {
@@ -10,7 +9,7 @@ namespace Contracts
         public int Login(string username, string password)
         {
             Console.WriteLine("Login attempt for user: " + username);
-            Player player = new Player() { Email = "mail@example.com", UserName = username};
+            Player player = new Player() { Email = "mail@example.com", Username = username};
             PlayerData.AddPlayer(player, username);
             return 0;
         }

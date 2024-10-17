@@ -53,5 +53,45 @@ namespace DataAccess
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("register_user", parametro1Parameter, parametro2Parameter, parametro3Parameter);
         }
+    
+        public virtual ObjectResult<login_Result> login(string username, string password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<login_Result>("login", usernameParameter, passwordParameter);
+        }
+    
+        public virtual ObjectResult<get_player_Result> get_player(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<get_player_Result>("get_player", usernameParameter);
+        }
+    
+        public virtual ObjectResult<get_player_by_email_Result> get_player_by_email(string email)
+        {
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<get_player_by_email_Result>("get_player_by_email", emailParameter);
+        }
+    
+        public virtual ObjectResult<get_player_by_username_Result> get_player_by_username(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<get_player_by_username_Result>("get_player_by_username", usernameParameter);
+        }
     }
 }

@@ -1,7 +1,5 @@
-﻿using DomainClasses;
-using System;
-using System.Collections;
-using System.ServiceModel;
+﻿using System.Collections;
+using DomainClasses;
 
 namespace BussinessLogic
 {

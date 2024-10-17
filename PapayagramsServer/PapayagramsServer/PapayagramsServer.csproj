@@ -33,8 +33,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.8.0.1\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,21 +57,91 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Achievement.cs">
+      <DependentUpon>PapayagramsModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="get_player_by_email_Result.cs">
+      <DependentUpon>PapayagramsModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="get_player_by_username_Result.cs">
+      <DependentUpon>PapayagramsModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="get_player_Result.cs">
+      <DependentUpon>PapayagramsModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OriginalGameHistory.cs">
+      <DependentUpon>PapayagramsModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PapayagramsModel1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PapayagramsModel1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PapayagramsModel1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PapayagramsModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PapayagramsModel1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PapayagramsModel1.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SuddenDeathHistory.cs">
+      <DependentUpon>PapayagramsModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TimeAtackHistory.cs">
+      <DependentUpon>PapayagramsModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>PapayagramsModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserAchieved.cs">
+      <DependentUpon>PapayagramsModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserConfiguration.cs">
+      <DependentUpon>PapayagramsModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserRelationship.cs">
+      <DependentUpon>PapayagramsModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserStatus.cs">
+      <DependentUpon>PapayagramsModel1.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="PapayagramsModel1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PapayagramsModel1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="PapayagramsModel1.edmx.diagram">
+      <DependentUpon>PapayagramsModel1.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Contracts\Contracts.csproj">
       <Project>{4d29dba0-353a-4c4b-a438-7feef958d621}</Project>
       <Name>Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DomainClasses\DomainClasses.csproj">
-      <Project>{10DA9605-0CA0-48BD-8649-5750F652AAE3}</Project>
-      <Name>DomainClasses</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PapayagramsModel1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PapayagramsModel1.Context.cs</LastGenOutput>
+      <DependentUpon>PapayagramsModel1.edmx</DependentUpon>
+    </Content>
+    <Content Include="PapayagramsModel1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PapayagramsModel1.edmx</DependentUpon>
+      <LastGenOutput>PapayagramsModel1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

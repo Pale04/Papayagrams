@@ -147,6 +147,9 @@
     <None Include="Connected Services\PapayagramsService\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.PlayerDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\PapayagramsService\ServiceImplementation.wsdl" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
