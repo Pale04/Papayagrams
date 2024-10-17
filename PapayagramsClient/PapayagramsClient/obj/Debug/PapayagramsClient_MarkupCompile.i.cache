@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsClient\PapayagramsClient\App.xaml
-1219584333
+51564934051
 
-91338606680
+131198042602
 15-472223226
-MainWindow.xaml;
+Game\Lobby.xaml;Login\Login.xaml;Login\Register.xaml;Menu\MainMenu.xaml;Menu\Profile.xaml;
 
 False
 
