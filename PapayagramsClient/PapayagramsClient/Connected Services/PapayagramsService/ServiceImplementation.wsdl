@@ -133,12 +133,6 @@
   <wsdl:message name="IUserService_RegisterUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterUserResponse" />
   </wsdl:message>
-  <wsdl:message name="IUserService_LogIn_InputMessage">
-    <wsdl:part name="parameters" element="tns:LogIn" />
-  </wsdl:message>
-  <wsdl:message name="IUserService_LogIn_OutputMessage">
-    <wsdl:part name="parameters" element="tns:LogInResponse" />
-  </wsdl:message>
   <wsdl:portType name="IPregameService">
     <wsdl:operation name="CreateGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/CreateGame" message="tns:IPregameService_CreateGame_InputMessage" />
@@ -174,10 +168,6 @@
     <wsdl:operation name="RegisterUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/RegisterUser" message="tns:IUserService_RegisterUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/RegisterUserResponse" message="tns:IUserService_RegisterUser_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="LogIn">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/LogIn" message="tns:IUserService_LogIn_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/LogInResponse" message="tns:IUserService_LogIn_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IPregameService" type="tns:IPregameService">
@@ -250,15 +240,6 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="RegisterUser">
       <soap12:operation soapAction="http://tempuri.org/IUserService/RegisterUser" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="LogIn">
-      <soap12:operation soapAction="http://tempuri.org/IUserService/LogIn" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

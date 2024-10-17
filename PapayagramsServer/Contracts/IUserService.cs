@@ -14,16 +14,5 @@ namespace Contracts
         /// <exception cref="Exception">when the username or email are already in use</exception>
         [OperationContract]
         int RegisterUser(PlayerDC user);
-
-        /// <summary>
-        /// Log in the Papayagrams application
-        /// </summary>
-        /// <param name="username">Username of the account</param>
-        /// <param name="password">Password of the account</param>
-        /// <returns>The PLayerDC object with the user's information</returns>
-        /// <exception cref="ArgumentException">when the username or password are empty</exception>"
-        /// <exception cref="Exception">when the username or password are incorrect</exception>""
-        [OperationContract]
-        PlayerDC LogIn(string username, string password);
     }
 }

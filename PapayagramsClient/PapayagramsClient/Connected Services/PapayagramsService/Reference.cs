@@ -304,10 +304,10 @@ namespace PapayagramsClient.PapayagramsService {
     public interface ILoginService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Login", ReplyAction="http://tempuri.org/ILoginService/LoginResponse")]
-        int Login(string username, string password);
+        PapayagramsClient.PapayagramsService.PlayerDC Login(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Login", ReplyAction="http://tempuri.org/ILoginService/LoginResponse")]
-        System.Threading.Tasks.Task<int> LoginAsync(string username, string password);
+        System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC> LoginAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Logout", ReplyAction="http://tempuri.org/ILoginService/LogoutResponse")]
         int Logout(string username);
@@ -343,11 +343,11 @@ namespace PapayagramsClient.PapayagramsService {
                 base(binding, remoteAddress) {
         }
         
-        public int Login(string username, string password) {
+        public PapayagramsClient.PapayagramsService.PlayerDC Login(string username, string password) {
             return base.Channel.Login(username, password);
         }
         
-        public System.Threading.Tasks.Task<int> LoginAsync(string username, string password) {
+        public System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC> LoginAsync(string username, string password) {
             return base.Channel.LoginAsync(username, password);
         }
         
@@ -369,12 +369,6 @@ namespace PapayagramsClient.PapayagramsService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/RegisterUser", ReplyAction="http://tempuri.org/IUserService/RegisterUserResponse")]
         System.Threading.Tasks.Task<int> RegisterUserAsync(PapayagramsClient.PapayagramsService.PlayerDC user);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/LogIn", ReplyAction="http://tempuri.org/IUserService/LogInResponse")]
-        PapayagramsClient.PapayagramsService.PlayerDC LogIn(string username, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/LogIn", ReplyAction="http://tempuri.org/IUserService/LogInResponse")]
-        System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC> LogInAsync(string username, string password);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -410,14 +404,6 @@ namespace PapayagramsClient.PapayagramsService {
         
         public System.Threading.Tasks.Task<int> RegisterUserAsync(PapayagramsClient.PapayagramsService.PlayerDC user) {
             return base.Channel.RegisterUserAsync(user);
-        }
-        
-        public PapayagramsClient.PapayagramsService.PlayerDC LogIn(string username, string password) {
-            return base.Channel.LogIn(username, password);
-        }
-        
-        public System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC> LogInAsync(string username, string password) {
-            return base.Channel.LogInAsync(username, password);
         }
     }
 }

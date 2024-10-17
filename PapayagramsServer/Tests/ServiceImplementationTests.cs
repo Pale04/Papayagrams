@@ -39,7 +39,7 @@ namespace Contracts.Tests
                 Password = "asdfas´461ds+"
             };
 
-            PlayerDC result = ServiceImplementation.LogIn("Pale04", "asdfas´461ds+");
+            PlayerDC result = ServiceImplementation.Login("Pale04", "asdfas´461ds+");
             Assert.AreEqual(expected, result, "LogInSuccesfulTest");
         }
 
@@ -49,7 +49,7 @@ namespace Contracts.Tests
             //TODO: Implement set up method to insert a player in the database
             try
             {
-                PlayerDC result = ServiceImplementation.LogIn("Pale", "asdfas´461ds+");
+                PlayerDC result = ServiceImplementation.Login("Pale", "asdfas´461ds+");
                 Assert.Fail("LogInInexistentTest");
             }
             catch (Exception error)
@@ -64,7 +64,7 @@ namespace Contracts.Tests
             //TODO: Implement set up method to insert a player in the database
             try
             {
-                PlayerDC result = ServiceImplementation.LogIn("Pale04", "asdfas´461ds");
+                PlayerDC result = ServiceImplementation.Login("Pale04", "asdfas´461ds");
                 Assert.Fail("LogInIncorrectPasswordTest");
             }
             catch (Exception error)

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ServiceModel;
 
 namespace Contracts
 {
@@ -11,14 +6,15 @@ namespace Contracts
     public interface ILoginService
     {
         /// <summary>
-        /// Login as the specified user
+        /// Log in the Papayagrams application
         /// </summary>
-        /// <param name="username">The username of the user to login</param>
-        /// <param name="password">The password of the user</param>
-        /// <returns>0 if the login was successful
-        /// 1 if the password was incorrect</returns>
+        /// <param name="username">Username of the account</param>
+        /// <param name="password">Password of the account</param>
+        /// <returns>The PLayerDC object with the user's information</returns>
+        /// <exception cref="ArgumentException">when the username or password are empty</exception>"
+        /// <exception cref="Exception">when the username or password are incorrect</exception>""
         [OperationContract]
-        int Login(string username, string password);
+        PlayerDC Login(string username, string password);
 
         /// <summary>
         /// Logout the current user
