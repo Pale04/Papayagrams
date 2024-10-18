@@ -9,7 +9,7 @@ namespace Contracts
 {
     public partial class ServiceImplementation : IPregameService
     {
-        public void CreateGame(string username)
+        public string CreateGame(string username)
         {
             GameRoom gameRoom = new GameRoom();
             gameRoom.state = GameRoomState.Waiting;
@@ -18,12 +18,15 @@ namespace Contracts
 
             Console.WriteLine("sala de juego creada: " + gameRoom.RoomCode);
 
-            OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>().JoinGameResponse(gameRoom.RoomCode);
+            return gameRoom.RoomCode;
         }
 
-        public void JoinGame(string username, string roomCode)
+        public string JoinGame(string username, string roomCode)
         {
-            Console.WriteLine("hello");
+            Player player = PlayerData.GetPlayerByUsername(username);
+            GameRoom room = GameData.GetGameRoom(roomCode);
+            room.Players.Add(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
+            return roomCode;
         }
 
         public int LeaveGame(string username, string code)
