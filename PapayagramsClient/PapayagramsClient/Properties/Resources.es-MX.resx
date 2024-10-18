@@ -249,4 +249,10 @@
   <data name="registerTitle" xml:space="preserve">
     <value>Crear cuenta</value>
   </data>
+  <data name="globalEmptyUsername" xml:space="preserve">
+    <value>El nombre de usuario no puede estár vacío</value>
+  </data>
+  <data name="signInEmptyPassword" xml:space="preserve">
+    <value>La contraseña no puede estár vacía</value>
+  </data>
 </root>

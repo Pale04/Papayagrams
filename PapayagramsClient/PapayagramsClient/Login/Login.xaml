@@ -22,11 +22,12 @@
 
             <Label Content="{x:Static p:Resources.globalUsername}" HorizontalContentAlignment="Center" FontSize="36"/>
             <TextBox Name="UsernameTextbox" TextWrapping="Wrap" Width="430" FontSize="30"/>
+            <Label Name="UsernameErrorText" HorizontalContentAlignment="Center" Foreground="Red" FontSize="24"/>
             <Separator Opacity="0" Height="15"/>
 
             <Label Content="{x:Static p:Resources.globalPassword}" HorizontalContentAlignment="Center" FontSize="36"/>
             <TextBox Name="PasswordTextbox" TextWrapping="Wrap" Width="430" FontSize="30"/>
-            <Label Name="ErrorText" HorizontalContentAlignment="Center" Foreground="Red" FontSize="24"/>
+            <Label Name="PasswordErrorText" HorizontalContentAlignment="Center" Foreground="Red" FontSize="24"/>
             <Separator Opacity="0" Height="25"/>
 
             <Button x:Name="SigninButton" Content="{x:Static p:Resources.globalSignIn}" Click="SignIn" VerticalAlignment="Center" FontSize="36" Width="220"/>

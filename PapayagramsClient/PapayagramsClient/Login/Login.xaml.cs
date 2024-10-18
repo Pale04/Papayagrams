@@ -27,25 +27,61 @@ namespace PapayagramsClient.Login
 
         private void SignIn(object sender, RoutedEventArgs e)
         {
+            ClearErrorLabels();
+
+            if (string.IsNullOrEmpty(UsernameTextbox.Text))
+            {
+                // No se como poner los recursos en cs en vez del xaml
+                UsernameErrorText.Content = "El usuario no puede quedarse vacío";
+                return;
+            }
+            if (string.IsNullOrEmpty(PasswordTextbox.Text))
+            {
+                PasswordErrorText.Content = "La contraseña no puede ser vacía";
+                return;
+            }
+
             string Username = UsernameTextbox.Text;
             string Password = PasswordTextbox.Text;
 
             PapayagramsService.LoginServiceClient host = new PapayagramsService.LoginServiceClient();
             host.Open();
 
-            int result = host.Login(Username, Password);
-
-            host.Close();
-
-            if (result == 0)
+            try
             {
-                this.NavigationService.Navigate(new MainMenu());
+                PapayagramsService.PlayerDC player = host.Login(Username, Password);
             }
+            catch (ArgumentException ex)
+            {
+                return;
+            }
+            catch (System.ServiceModel.EndpointNotFoundException ex)
+            {
+                Console.WriteLine("No se pudo conectar al server");
+                return;
+            }
+            catch (Exception ex)
+            {
+                PasswordErrorText.Content += ex.ToString();
+                return;
+            }
+            finally
+            {
+                host.Close();
+            }
+
+            this.NavigationService.Navigate(new MainMenu());
         }
 
         private void RegisterNewUser(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Register());
+        }
+
+        private void ClearErrorLabels()
+        {
+            PasswordErrorText.Content = "";
+            UsernameErrorText.Content = "";
         }
     }
 }

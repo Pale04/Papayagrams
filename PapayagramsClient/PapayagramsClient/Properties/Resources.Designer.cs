@@ -241,6 +241,15 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Username cannot be empty.
+        /// </summary>
+        public static string globalEmptyUsername {
+            get {
+                return ResourceManager.GetString("globalEmptyUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Leaderboard.
         /// </summary>
         public static string globalLeaderboard {
@@ -417,6 +426,15 @@ namespace PapayagramsClient.Properties {
         public static string registerWeakPassword {
             get {
                 return ResourceManager.GetString("registerWeakPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The password cannot be empty.
+        /// </summary>
+        public static string signInEmptyPassword {
+            get {
+                return ResourceManager.GetString("signInEmptyPassword", resourceCulture);
             }
         }
         
