@@ -4,3 +4,9 @@ C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\Pa
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\DomainClasses\obj\Debug\DomainClasses.csproj.CoreCompileInputs.cache
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\DomainClasses\obj\Debug\DomainClasses.dll
 C:\Users\epale\Documents\Tareas\5to semestre\Tecnologias\Proyecto-tecnologias\PapayagramsServer\DomainClasses\obj\Debug\DomainClasses.pdb
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\DomainClasses\bin\Debug\DomainClasses.dll
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\DomainClasses\bin\Debug\DomainClasses.pdb
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\DomainClasses\obj\Debug\DomainClasses.csproj.AssemblyReference.cache
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\DomainClasses\obj\Debug\DomainClasses.csproj.CoreCompileInputs.cache
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\DomainClasses\obj\Debug\DomainClasses.dll
+C:\Users\david\Documents\escuela\tecnologias_construccion\Proyecto-tecnologias\PapayagramsServer\DomainClasses\obj\Debug\DomainClasses.pdb

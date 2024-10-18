@@ -11,10 +11,10 @@
       Background="#D9D9D9">
 
     <Grid>
-        <Button Content="{x:Static p:Resources.mainMenuCreateGame}" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="125,185,0,0" VerticalAlignment="Top" Width="400" FontSize="36"/>
-        <Button Content="{x:Static p:Resources.mainMenuJoinGame}" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="125,285,0,0" VerticalAlignment="Top" Width="400" FontSize="36"/>
-        <Button Content="{x:Static p:Resources.mainMenuProfile}" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="125,385,0,0" VerticalAlignment="Top" Width="400" FontSize="36"/>
-        <Button Content="{x:Static p:Resources.globalLeaderboard}" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="125,485,0,0" VerticalAlignment="Top" Width="400" FontSize="36"/>
+        <Button Name="CreateGameButton" Content="{x:Static p:Resources.mainMenuCreateGame}" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="125,185,0,0" VerticalAlignment="Top" Width="400" FontSize="36" Click="CreateNewGame"/>
+        <Button Name="JoinGameButton" Content="{x:Static p:Resources.mainMenuJoinGame}" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="125,285,0,0" VerticalAlignment="Top" Width="400" FontSize="36"/>
+        <Button Name="ProfileButton" Content="{x:Static p:Resources.mainMenuProfile}" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="125,385,0,0" VerticalAlignment="Top" Width="400" FontSize="36"/>
+        <Button Name="LeaderboardButton" Content="{x:Static p:Resources.globalLeaderboard}" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="125,485,0,0" VerticalAlignment="Top" Width="400" FontSize="36"/>
         <Label Content="Papayagrams" HorizontalAlignment="Left" Margin="95,54,0,0" VerticalAlignment="Top" FontSize="64" Width="467" HorizontalContentAlignment="Center"/>
 
     </Grid>

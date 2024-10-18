@@ -25,6 +25,6 @@
         </StackPanel>
 
         <Button Content="Button" HorizontalAlignment="Left" Margin="57,51,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Center" Margin="0,51,0,0" VerticalAlignment="Top"/>
+        <Label Name="GameRoomCodeText" Content="Label" HorizontalAlignment="Center" Margin="0,51,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>

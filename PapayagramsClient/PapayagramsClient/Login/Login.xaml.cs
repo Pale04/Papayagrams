@@ -50,6 +50,7 @@ namespace PapayagramsClient.Login
             try
             {
                 PapayagramsService.PlayerDC player = host.Login(Username, Password);
+                CurrentPlayer.Player = player;
             }
             catch (ArgumentException ex)
             {
