@@ -1,6 +1,5 @@
 ﻿using DataAccess;
 using DomainClasses;
-using LanguageExt;
 using System;
 
 namespace Contracts
@@ -16,19 +15,13 @@ namespace Contracts
                 Password = player.Password
             };
 
-            Option<Player> userWithSameUsername = UserDB.GetPlayerByUsername(newPlayer.Username);
-
-            if (userWithSameUsername.IsSome)
+            if (UserDB.GetPlayerByUsername(newPlayer.Username).IsSome)
             {
                 throw new Exception("An account with the same username exists");
             }
-            else
+            else if (UserDB.GetPlayerByEmail(newPlayer.Email).IsSome)
             {
-                Option<Player> userWithSameEmail = UserDB.GetPlayerByEmail(newPlayer.Email);
-                if (userWithSameEmail.IsSome)
-                {
-                    throw new Exception("An account with the same email exists");
-                }
+                throw new Exception("An account with the same email exists");
             }
 
             return UserDB.RegisterUser(newPlayer);

@@ -8,9 +8,9 @@ namespace Contracts
 {
     public partial class ServiceImplementation : ILoginService
     {
-        public PlayerDC Login(string username, string password)
+        public int Login(string username, string password)
         {
-            PlayerDC playerLogged;
+            int succesfulLogin;
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
@@ -21,15 +21,7 @@ namespace Contracts
                 Option<Player> foundPlayer = UserDB.GetPlayerByUsername(username);
                 if (foundPlayer.IsSome)
                 {
-                    Player player = (Player)foundPlayer.Case;
-                    if (player.Password == password)
-                    {
-                        playerLogged = ConvertPlayerToDataContract(player);
-                    }
-                    else
-                    {
-                        throw new Exception("Incorrect password");
-                    }
+                    succesfulLogin = UserDB.LogIn(username, password);
                 }
                 else
                 {
@@ -37,7 +29,7 @@ namespace Contracts
                 }
             }
 
-            return playerLogged;
+            return succesfulLogin;
         }
 
         public int Logout(string username)

@@ -10,11 +10,11 @@ namespace Contracts
         /// </summary>
         /// <param name="username">Username of the account</param>
         /// <param name="password">Password of the account</param>
-        /// <returns>The PLayerDC object with the user's information</returns>
+        /// <returns>0 if the log in operation was succesful, -1 if the password is wrong</returns>
         /// <exception cref="ArgumentException">when the username or password are empty</exception>"
         /// <exception cref="Exception">when the username or password are incorrect</exception>""
         [OperationContract]
-        PlayerDC Login(string username, string password);
+        int Login(string username, string password);
 
         /// <summary>
         /// Logout the current user

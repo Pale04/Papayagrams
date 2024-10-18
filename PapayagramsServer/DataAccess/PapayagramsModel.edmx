@@ -202,6 +202,10 @@
         <Function Name="get_player_by_username" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="log_in" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="register_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Parametro1" Type="varchar" Mode="In" />
           <Parameter Name="Parametro2" Type="varchar" Mode="In" />
@@ -526,10 +530,14 @@
             <Parameter Name="username" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="get_player_by_email" ReturnType="Collection(papayagramsModel.get_player_by_email_Result)">
-            <Parameter Name="email" Mode="In" Type="String" />
+          <Parameter Name="email" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="get_player_by_username" ReturnType="Collection(papayagramsModel.get_player_by_username_Result)">
+          <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="log_in">
             <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="login_Result">
@@ -675,6 +683,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="log_in" FunctionName="papayagramsModel.Store.log_in" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
