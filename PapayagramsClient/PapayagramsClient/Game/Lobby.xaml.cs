@@ -33,9 +33,14 @@ namespace PapayagramsClient.Game
             PregameServiceClient host = new PregameServiceClient(context);
             host.Open();
 
-            host.NotifyServer(CurrentPlayer.Player);
+            //host.NotifyServer(CurrentPlayer.Player);
 
             host.Close();
+        }
+
+        public void JoinGameResponse(string roomCode)
+        {
+            throw new NotImplementedException();
         }
 
         public void ReceiveMessage(Message message)

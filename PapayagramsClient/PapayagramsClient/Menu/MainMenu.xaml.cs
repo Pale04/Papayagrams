@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PapayagramsClient.Game;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -28,13 +29,12 @@ namespace PapayagramsClient
 
         private void CreateNewGame(object sender, RoutedEventArgs e)
         {
-            InstanceContext context = new InstanceContext(this);
-            PapayagramsService.IMainMenuClient host = new PapayagramsService.IMainMenuClient(context);
-            host.Open();
+            NavigationService.Navigate(new GameCreation());
+        }
 
-            host.CreateGame(CurrentPlayer.Player);
-
-            host.Close();
+        private void JoinGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new JoinGame());
         }
     }
 }

@@ -4,6 +4,107 @@
              xmlns:local="clr-namespace:PapayagramsClient"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <Style x:Key="PrimaryButton" TargetType="Button">
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border" CornerRadius="30" BorderThickness="8" BorderBrush="#E67506" Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Opacity" Value="0.8"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#eadead" Offset="0"/>
+                            <GradientStop Color="#e9ba73" Offset="0.7"/>
+                            <GradientStop Color="#e6b306" Offset="0.9"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontSize" Value="36"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="SecondaryButton" TargetType="Button">
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border" CornerRadius="30" BorderThickness="8" BorderBrush="#E67506" Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Opacity" Value="0.8"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#eadead" Offset="0"/>
+                            <GradientStop Color="#e9ba73" Offset="0.7"/>
+                            <GradientStop Color="#e6b306" Offset="0.9"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="FontSize" Value="36"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="LinkButton" TargetType="Button">
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border" BorderThickness="0" Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="CustomTextBox" TargetType="TextBox">
+                <Setter Property="BorderBrush" Value="#3D2020"/>
+                <Setter Property="BorderThickness" Value="4"/>
+                <Setter Property="FontSize" Value="28"/>
+                <Setter Property="Padding" Value="20,0,0,10"/>
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+
+                <Style.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="30"/>
+                    </Style>
+                </Style.Resources>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

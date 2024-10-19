@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PapayagramsClient
+namespace PapayagramsClient.Game
 {
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// Lógica de interacción para JoinGame.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class JoinGame : Page
     {
-        public MainWindow()
+        public JoinGame()
         {
             InitializeComponent();
-            Cursor = new Cursor(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\papaya.cur");
-            MainFrame.Navigate(new Login.Login());
         }
     }
 }
