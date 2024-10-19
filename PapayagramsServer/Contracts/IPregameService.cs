@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ServiceModel;
 
 namespace Contracts
 {
@@ -22,7 +16,7 @@ namespace Contracts
         /// </summary>
         /// <param name="roomCode">The game room code to add the player to</param>
         [OperationContract]
-        string JoinGame(string username, string roomCode);
+        int JoinGame(string username, string roomCode);
 
         /// <summary>
         /// Remove a player from the game room of the specified code
@@ -34,6 +28,13 @@ namespace Contracts
 
         [OperationContract(IsOneWay = true)]
         void SendMessage(Message message);
+
+        [OperationContract(IsOneWay = true)]
+        void StartGame(string roomCode);
+
+        [OperationContract(IsOneWay = true)]
+        [FaultContract(typeof(ServerException))]
+        void InviteFriend(string username);
     }
 
     [ServiceContract]
@@ -41,18 +42,9 @@ namespace Contracts
     {
         [OperationContract(IsOneWay = true)]
         void ReceiveMessage(Message message);
-    }
-
-    [DataContract]
-    public class Message
-    {
-        [DataMember]
-        public string AuthorUsername;
-        [DataMember]
-        public string GameRoomCode;
-        [DataMember]
-        public DateTime Time;
-        [DataMember]
-        public string Content;
+        [OperationContract(IsOneWay = true)]
+        void StartGameResponse(string roomCode);
+        [OperationContract(IsOneWay = true)]
+        void RefreshGameRoom(string roomCode);
     }
 }

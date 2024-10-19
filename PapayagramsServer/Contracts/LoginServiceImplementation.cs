@@ -8,9 +8,30 @@ namespace Contracts
 {
     public partial class ServiceImplementation : ILoginService
     {
-        public PlayerDC Login(string username, string password)
+        public int RegisterUser(PlayerDC player)
         {
-            PlayerDC playerLogged;
+            Player newPlayer = new Player()
+            {
+                Username = player.Username,
+                Email = player.Email,
+                Password = player.Password
+            };
+
+            if (UserDB.GetPlayerByUsername(newPlayer.Username).IsSome)
+            {
+                throw new Exception("An account with the same username exists");
+            }
+            else if (UserDB.GetPlayerByEmail(newPlayer.Email).IsSome)
+            {
+                throw new Exception("An account with the same email exists");
+            }
+
+            return UserDB.RegisterUser(newPlayer);
+        }
+
+        public int Login(string username, string password)
+        {
+            int succesfulLogin;
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
@@ -21,15 +42,7 @@ namespace Contracts
                 Option<Player> foundPlayer = UserDB.GetPlayerByUsername(username);
                 if (foundPlayer.IsSome)
                 {
-                    Player player = (Player)foundPlayer.Case;
-                    if (player.Password == password)
-                    {
-                        playerLogged = ConvertPlayerToDataContract(player);
-                    }
-                    else
-                    {
-                        throw new Exception("Incorrect password");
-                    }
+                    succesfulLogin = UserDB.LogIn(username, password);
                 }
                 else
                 {
@@ -37,7 +50,7 @@ namespace Contracts
                 }
             }
 
-            return playerLogged;
+            return succesfulLogin;
         }
 
         public int Logout(string username)

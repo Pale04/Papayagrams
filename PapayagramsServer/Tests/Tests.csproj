@@ -108,6 +108,7 @@
     <Compile Include="login_Result.cs">
       <DependentUpon>PapayagramsModel2.tt</DependentUpon>
     </Compile>
+    <Compile Include="MailserviceTests.cs" />
     <Compile Include="OriginalGameHistory.cs">
       <DependentUpon>PapayagramsModel2.tt</DependentUpon>
     </Compile>
@@ -127,7 +128,7 @@
       <DependentUpon>PapayagramsModel2.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceImplementationTests.cs" />
+    <Compile Include="LoginServiceImplementationTest.cs" />
     <Compile Include="SuddenDeathHistory.cs">
       <DependentUpon>PapayagramsModel2.tt</DependentUpon>
     </Compile>
@@ -147,6 +148,7 @@
     <Compile Include="UserRelationship.cs">
       <DependentUpon>PapayagramsModel2.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserServiceImplementationTest.cs" />
     <Compile Include="UserStatus.cs">
       <DependentUpon>PapayagramsModel2.tt</DependentUpon>
     </Compile>
@@ -163,6 +165,10 @@
     <ProjectReference Include="..\DomainClasses\DomainClasses.csproj">
       <Project>{6e3fb959-fd63-443a-9148-889c4ad1ce2d}</Project>
       <Name>DomainClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MailService\MailService.csproj">
+      <Project>{e7be9eef-8af1-4f09-8087-a1ee971c5fac}</Project>
+      <Name>MailService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

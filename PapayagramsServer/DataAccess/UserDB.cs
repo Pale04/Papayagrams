@@ -27,6 +27,16 @@ namespace DataAccess
             return result;
         }
 
+        public static int LogIn(string username, string password)
+        {
+            int result;
+            using (var context = new papayagramsEntities())
+            {
+                result = context.log_in(username, password);
+            }
+            return result;
+        }
+
         /// <summary>
         /// Search for a user in the database
         /// </summary>
