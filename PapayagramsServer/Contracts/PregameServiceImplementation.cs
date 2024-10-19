@@ -21,12 +21,18 @@ namespace Contracts
             return gameRoom.RoomCode;
         }
 
-        public string JoinGame(string username, string roomCode)
+        public void InviteFriend(string username)
+        {
+            //TODO
+            throw new NotImplementedException();
+        }
+
+        public int JoinGame(string username, string roomCode)
         {
             Player player = PlayerData.GetPlayerByUsername(username);
             GameRoom room = GameData.GetGameRoom(roomCode);
             room.Players.Add(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
-            return roomCode;
+            return 0;
         }
 
         public int LeaveGame(string username, string code)
@@ -46,6 +52,12 @@ namespace Contracts
                 Console.WriteLine("Sending message to " + player.Key);
                 (player.Value as IPregameServiceCallback).ReceiveMessage(message);
             }
+        }
+
+        public void StartGame(string roomCode)
+        {
+            //TODO
+            throw new NotImplementedException();
         }
     }
 }

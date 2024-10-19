@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IGameService.cs" />
     <Compile Include="IMainMenuService.cs" />
     <Compile Include="PregameServiceImplementation.cs" />
     <Compile Include="IPregameService.cs" />

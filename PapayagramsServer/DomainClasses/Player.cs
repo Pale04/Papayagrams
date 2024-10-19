@@ -73,5 +73,10 @@ namespace DomainClasses
 
             return isEqual;
         }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode() ^ Username.GetHashCode() ^ Email.GetHashCode() ^ Password.GetHashCode();
+        }
     }
 }
