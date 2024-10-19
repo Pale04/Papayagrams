@@ -1,6 +1,8 @@
-﻿using System;
+﻿using PapayagramsClient.Login.Popups;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,21 +34,31 @@ namespace PapayagramsClient.Login
             player.Password = PasswordTextbox.Text;
             player.Email = EmailTextbox.Text;
 
-            PapayagramsService.UserServiceClient host = new PapayagramsService.UserServiceClient();
+            PapayagramsService.LoginServiceClient host = new PapayagramsService.LoginServiceClient();
             host.Open();
 
-            int result = host.RegisterUser(player);
+            try 
+            { 
+                int result = host.RegisterUser(player);
+            }
+            catch (PapayagramsClient.ServerException ex)
+            {
+                switch (ex.ErrorCode)
+                {
+                    case 101:
+                        UsernameErrorText.Content = Properties.Resources.registerExistingUsername;
+                        break;
+
+                    case 102:
+                        EmailErrorText.Content = Properties.Resources.registerEmailAlreadyLinked;
+                        break;
+                }
+            }
 
             host.Close();
 
-            if (result == 1)
-            {
-                this.NavigationService.GoBack();
-            }
-            else
-            {
-                Console.WriteLine("error");
-            }
+            new SuccessfullyRegistered().ShowDialog() ;
+            this.NavigationService.GoBack();
         }
         
         private void GoToLogin(object sender, RoutedEventArgs e)

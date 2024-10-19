@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,13 +32,12 @@ namespace PapayagramsClient.Login
 
             if (string.IsNullOrEmpty(UsernameTextbox.Text))
             {
-                // No se como poner los recursos en cs en vez del xaml
-                UsernameErrorText.Content = "El usuario no puede quedarse vacío";
+                UsernameErrorText.Content = Properties.Resources.globalEmptyUsername;
                 return;
             }
             if (string.IsNullOrEmpty(PasswordTextbox.Text))
             {
-                PasswordErrorText.Content = "La contraseña no puede ser vacía";
+                PasswordErrorText.Content = Properties.Resources.signInEmptyPassword;
                 return;
             }
 
@@ -52,18 +52,14 @@ namespace PapayagramsClient.Login
                 PapayagramsService.PlayerDC player = host.Login(Username, Password);
                 CurrentPlayer.Player = player;
             }
-            catch (ArgumentException ex)
+            catch (PapayagramsService.ServerException ex)
             {
-                return;
-            }
-            catch (System.ServiceModel.EndpointNotFoundException ex)
-            {
-                Console.WriteLine("No se pudo conectar al server");
-                return;
-            }
-            catch (Exception ex)
-            {
-                PasswordErrorText.Content += ex.ToString();
+                switch (ex.ErrorCode)
+                {
+                    case 105:
+                        PasswordErrorText.Content = Properties.Resources.signInWrongCredentials;
+                        break;
+                }
                 return;
             }
             finally

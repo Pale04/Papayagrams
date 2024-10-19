@@ -32,7 +32,6 @@ namespace Contracts
         [OperationContract(IsOneWay = true)]
         void StartGame(string roomCode);
 
-        [OperationContract(IsOneWay = true)]
         [FaultContract(typeof(ServerException))]
         void InviteFriend(string username);
     }
@@ -43,8 +42,8 @@ namespace Contracts
         [OperationContract(IsOneWay = true)]
         void ReceiveMessage(Message message);
         [OperationContract(IsOneWay = true)]
-        void StartGameResponse(string roomCode);
+        void StartGameResponse();
         [OperationContract(IsOneWay = true)]
-        void RefreshGameRoom(string roomCode);
+        void RefreshGameRoom();
     }
 }

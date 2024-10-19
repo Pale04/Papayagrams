@@ -20,7 +20,7 @@ namespace PapayagramsClient.Game
     /// <summary>
     /// Lógica de interacción para Lobby.xaml
     /// </summary>
-    public partial class Lobby : Page, PapayagramsService.IPregameServiceCallback
+    public partial class Lobby : Page, IPregameServiceCallback
     {
         private string _gameRoomCode;
 

@@ -127,7 +127,7 @@
     <value>Nombre de usuario</value>
   </data>
   <data name="signInWrongUsername" xml:space="preserve">
-    <value>Wrong username</value>
+    <value>Wrong username or password</value>
   </data>
   <data name="globalPassword" xml:space="preserve">
     <value>Password</value>

@@ -466,11 +466,11 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Wrong username.
+        ///   Busca una cadena traducida similar a Wrong username or password.
         /// </summary>
-        public static string signInWrongUsername {
+        public static string signInWrongCredentials {
             get {
-                return ResourceManager.GetString("signInWrongUsername", resourceCulture);
+                return ResourceManager.GetString("signInWrongCredentials", resourceCulture);
             }
         }
     }

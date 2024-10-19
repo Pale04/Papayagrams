@@ -73,6 +73,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Login\Popups\SuccessfullyRegistered.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login\Register.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -89,6 +93,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ClientData\CurrentGame.cs" />
     <Compile Include="Connected Services\PapayagramsService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -106,6 +111,9 @@
     </Compile>
     <Compile Include="Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Popups\SuccessfullyRegistered.xaml.cs">
+      <DependentUpon>SuccessfullyRegistered.xaml</DependentUpon>
     </Compile>
     <Compile Include="Login\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>

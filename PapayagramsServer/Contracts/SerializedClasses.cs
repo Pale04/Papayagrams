@@ -107,6 +107,15 @@ namespace Contracts
     }
 
     [DataContract]
+    public class GameInvitationDC
+    {
+        [DataMember]
+        public string GameRoomCode;
+        [DataMember]
+        public string PlayerUsername;
+    }
+
+    [DataContract]
     public class ServerException
     {
         [DataMember]

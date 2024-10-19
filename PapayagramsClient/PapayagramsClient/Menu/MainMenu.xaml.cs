@@ -14,17 +14,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PapayagramsClient.PapayagramsService;
 
 namespace PapayagramsClient
 {
     /// <summary>
     /// Lógica de interacción para MainMenu.xaml
     /// </summary>
-    public partial class MainMenu : Page
+    public partial class MainMenu : Page, IMainMenuServiceCallback
     {
         public MainMenu()
         {
             InitializeComponent();
+
+            InstanceContext context = new InstanceContext(this);
+            MainMenuServiceClient host = new MainMenuServiceClient(context);
+            host.Open();
+            host.ReportToServer();
+            host.Close();
         }
 
         private void CreateNewGame(object sender, RoutedEventArgs e)
@@ -35,6 +42,16 @@ namespace PapayagramsClient
         private void JoinGameButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new JoinGame());
+        }
+
+        public void ReceiveFriendRequest(PlayerDC player)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReceiveGameInvitation(GameInvitationDC invitation)
+        {
+            throw new NotImplementedException();
         }
     }
 }

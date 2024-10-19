@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
+using System.Web;
 
 namespace Contracts
 {
@@ -51,14 +52,17 @@ namespace Contracts
         [OperationContract]
         [FaultContract(typeof(ServerException))]
         int GetLeaderboard(PlayerDC player);
+
+        [OperationContract]
+        void ReportToServer(string username);
     }
 
     [ServiceContract]
     public interface IMainMenuServiceCallback
     {
         [OperationContract]
-        void ReceiveFriendRequest(string username);
+        void ReceiveFriendRequest(PlayerDC player);
         [OperationContract]
-        void ReceiveGameInvitation(string username);
+        void ReceiveGameInvitation(GameInvitationDC invitation);
     }
 }
