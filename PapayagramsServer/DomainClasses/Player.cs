@@ -2,6 +2,13 @@ using System;
 
 namespace DomainClasses
 {
+    public enum PlayerStatus
+    {
+        online,
+        offline,
+        in_game
+    }
+
     public class Player
     {
         private string _username;

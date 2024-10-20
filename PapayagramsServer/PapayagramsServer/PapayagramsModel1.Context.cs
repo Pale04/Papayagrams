@@ -37,21 +37,21 @@ namespace PapayagramsServer
         public virtual DbSet<UserRelationship> UserRelationship { get; set; }
         public virtual DbSet<UserStatus> UserStatus { get; set; }
     
-        public virtual int register_user(string parametro1, string parametro2, string parametro3)
+        public virtual int register_user(string username, string email, string password)
         {
-            var parametro1Parameter = parametro1 != null ?
-                new ObjectParameter("Parametro1", parametro1) :
-                new ObjectParameter("Parametro1", typeof(string));
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
     
-            var parametro2Parameter = parametro2 != null ?
-                new ObjectParameter("Parametro2", parametro2) :
-                new ObjectParameter("Parametro2", typeof(string));
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
     
-            var parametro3Parameter = parametro3 != null ?
-                new ObjectParameter("Parametro3", parametro3) :
-                new ObjectParameter("Parametro3", typeof(string));
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("register_user", parametro1Parameter, parametro2Parameter, parametro3Parameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("register_user", usernameParameter, emailParameter, passwordParameter);
         }
     
         public virtual ObjectResult<get_player_Result> get_player(string username)
@@ -92,6 +92,23 @@ namespace PapayagramsServer
                 new ObjectParameter("password", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("log_in", usernameParameter, passwordParameter);
+        }
+    
+        public virtual int update_user_status(string username, string status, Nullable<System.DateTime> date)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var statusParameter = status != null ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(string));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("update_user_status", usernameParameter, statusParameter, dateParameter);
         }
     }
 }

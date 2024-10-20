@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using LanguageExt;
+using System.Data;
+using System;
 
 namespace DataAccess
 {
@@ -12,27 +14,40 @@ namespace DataAccess
         /// Register a new player in the database
         /// </summary>
         /// <param name="player">Player object with his information</param>
-        /// <returns>1 if the registration was successful, 0 otherwise</returns>
+        /// <returns>2 if the registration was successful, EntityCommandExecutionException otherwise </returns>
         public static int RegisterUser(Player player)
         {
             int result = 0;
             using (var context = new papayagramsEntities())
             {
-                //The stored procedure register_user that provide the PapayagramsModel does not return the number of rows affected and the ExecuteSqlCommand method does
-                SqlParameter usernameParameter = new SqlParameter("@param1", player.Username);
-                SqlParameter emailParameter = new SqlParameter("@param2", player.Email);
-                SqlParameter passwordParameter = new SqlParameter("@param3", player.Password);
-                result = context.Database.ExecuteSqlCommand("EXEC register_user @param1, @param2, @param3", usernameParameter, emailParameter, passwordParameter);
+                result = context.register_user(player.Username, player.Email, player.Password);
             }
             return result;
         }
 
+        /// <summary>
+        /// Log in a user in Papayagrams
+        /// </summary>
+        /// <param name="username">Username of the player</param>
+        /// <param name="password">Account password of the user</param>
+        /// <returns>0 if the login was succesful, 1 if the password is incorrect and -1 if the account does not exist</returns>
         public static int LogIn(string username, string password)
         {
             int result;
             using (var context = new papayagramsEntities())
             {
-                result = context.log_in(username, password);
+                //this approach is used because the stored procedure log_in returns three different values
+                SqlParameter returnValue = new SqlParameter
+                {
+                    ParameterName = "@ReturnValue",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+
+                SqlParameter usernameParam = new SqlParameter("@username", username);
+                SqlParameter passwordParam = new SqlParameter("@password", password);
+                context.Database.ExecuteSqlCommand("EXEC @ReturnValue = log_in @username, @password", returnValue, usernameParam, passwordParam);
+                result = (int)returnValue.Value;
             }
             return result;
         }
@@ -88,14 +103,14 @@ namespace DataAccess
             return optionPlayer;
         }
 
-        public static void recordUserLogIn()
+        public static int UpdateUserStatus(string username, PlayerStatus status)
         {
-            //TODO: Implement recordUserLogIn method
-        }
-
-        public static void recordUserLogOut()
-        {
-            //TODO: Implement recordUserLogOut method
+            int result;
+            using (var context = new papayagramsEntities())
+            {
+                result = context.update_user_status(username, PlayerStatus.online.ToString(), DateTime.Now);
+            }
+            return result;
         }
     }
 }
