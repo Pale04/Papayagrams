@@ -207,9 +207,14 @@
           <Parameter Name="password" Type="varchar" Mode="In" />
         </Function>
         <Function Name="register_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Parametro1" Type="varchar" Mode="In" />
-          <Parameter Name="Parametro2" Type="varchar" Mode="In" />
-          <Parameter Name="Parametro3" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="update_user_status" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="status" Type="varchar" Mode="In" />
+          <Parameter Name="date" Type="datetime" Mode="In" />
         </Function>
         <EntityContainer Name="PapayagramsModelStoreContainer">
           <EntitySet Name="Achievement" EntityType="Self.Achievement" Schema="dbo" store:Type="Tables" />
@@ -518,9 +523,9 @@
             <End Role="UserStatus" EntitySet="UserStatus" />
           </AssociationSet>
           <FunctionImport Name="register_user">
-            <Parameter Name="Parametro1" Mode="In" Type="String" />
-            <Parameter Name="Parametro2" Mode="In" Type="String" />
-            <Parameter Name="Parametro3" Mode="In" Type="String" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="get_player" ReturnType="Collection(PapayagramsModel.get_player_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
@@ -534,6 +539,11 @@
           <FunctionImport Name="log_in">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="update_user_status">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="String" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="get_player_Result">
@@ -674,6 +684,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="log_in" FunctionName="PapayagramsModel.Store.log_in" />
+          <FunctionImportMapping FunctionImportName="update_user_status" FunctionName="PapayagramsModel.Store.update_user_status" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
