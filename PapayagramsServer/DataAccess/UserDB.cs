@@ -5,6 +5,7 @@ using System.Linq;
 using LanguageExt;
 using System.Data;
 using System;
+using System.Data.Entity.Core;
 
 namespace DataAccess
 {
@@ -14,7 +15,9 @@ namespace DataAccess
         /// Register a new player in the database
         /// </summary>
         /// <param name="player">Player object with his information</param>
-        /// <returns>2 if the registration was successful, EntityCommandExecutionException otherwise </returns>
+        /// <returns>6 if the registration was successful</returns>
+        /// <exception cref="EntityCommandExecutionException">When the Player has not initialized his attributes</exception>
+        /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
         public static int RegisterUser(Player player)
         {
             int result = 0;
@@ -26,11 +29,12 @@ namespace DataAccess
         }
 
         /// <summary>
-        /// Log in a user in Papayagrams
+        /// Log in a user in Papayagrams and update his status to online
         /// </summary>
         /// <param name="username">Username of the player</param>
         /// <param name="password">Account password of the user</param>
-        /// <returns>0 if the login was succesful, 1 if the password is incorrect and -1 if the account does not exist</returns>
+        /// <returns>0 if the login was succesful, -1 if the account does not exist and -2 if the password is incorrect</returns>
+        /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
         public static int LogIn(string username, string password)
         {
             int result;
@@ -57,6 +61,7 @@ namespace DataAccess
         /// </summary>
         /// <param name="username">Username of the user's account</param>
         /// <returns>Option object with the Player</returns>
+        /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
         public static Option<Player> GetPlayerByUsername(string username)
         {
             Option<Player> optionPlayer;
@@ -80,6 +85,12 @@ namespace DataAccess
             return optionPlayer;
         }
 
+        /// <summary>
+        /// Search for a player in the database by his email
+        /// </summary>
+        /// <param name="email">Email of the user's account</param>
+        /// <returns>Option object with the Player</returns>
+        /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
         public static Option<Player> GetPlayerByEmail(string email)
         {
             Option<Player> optionPlayer;

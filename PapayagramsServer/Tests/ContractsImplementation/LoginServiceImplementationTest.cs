@@ -1,5 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using DataAccess;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.ServiceModel;
 
 namespace Contracts.Tests
 {
@@ -7,99 +9,161 @@ namespace Contracts.Tests
     public class LoginServiceImplementationTest
     {
         private readonly ServiceImplementation _serviceImplementation = new ServiceImplementation();
+        private readonly PlayerDC _registeredPlayer = new PlayerDC()
+        {
+            Id = 1,
+            Username = "Pale04",
+            Email = "epalemolina@hotmail.com",
+            Password = "040704"
+        };
 
-        //TODO: Implement set up
-        //TODO: Implement tear down
+        [TestInitialize()]
+        public void SetUp()
+        {
+            _serviceImplementation.RegisterUser(_registeredPlayer);
+        }
+
+        [TestCleanup()]
+        public void CleanUp()
+        {
+            using (var context = new papayagramsEntities())
+            {
+                context.Database.ExecuteSqlCommand("delete from [TimeAtackHistory]");
+                context.Database.ExecuteSqlCommand("delete from [SuddenDeathHistory]");
+                context.Database.ExecuteSqlCommand("delete from [OriginalGameHistory]");
+                context.Database.ExecuteSqlCommand("delete from [UserConfiguration]");
+                context.Database.ExecuteSqlCommand("delete from [UserStatus]");
+                context.Database.ExecuteSqlCommand("delete from [User]");
+                context.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('User', RESEED, 0)");
+            }
+        }
 
         [TestMethod()]
         public void RegisterUserSuccesfulTest()
         {
-            PlayerDC player = new PlayerDC()
+            PlayerDC newPlayer = new PlayerDC()
             {
-                Username = "Pale04",
-                Email = "epalemolina@hotmail.com",
+                Username = "Pale",
+                Email = "epalemolina@gmail.com",
                 Password = "asdfas´461ds+"
             };
 
-            int expected = 1;
-            int result = _serviceImplementation.RegisterUser(player);
+            int expected = 6;
+            int result = _serviceImplementation.RegisterUser(newPlayer);
             Assert.AreEqual(expected, result, "RegisterUserSuccesfulTest");
+        }
+
+        [TestMethod]
+        public void RegisterUserEmptyTest()
+        {
+            try
+            {
+                _serviceImplementation.RegisterUser(new PlayerDC());
+                Assert.Fail("RegisterUserEmptyTest");
+            }
+            catch (FaultException<ServerException> error)
+            {
+                Assert.AreEqual(1, error.Detail.ErrorCode, "RegisterUserEmptyTest");
+            }
         }
 
         [TestMethod()]
         public void RegisterUserUsernameExistsTest()
         {
-            //TODO: Implement set up method to insert a player in the database
             try
             {
-                PlayerDC newPlayer = new PlayerDC()
-                {
-                    Username = "Pale04",
-                    Email = "epalemolina@hotmail.com",
-                    Password = "asdfas´461ds+"
-                };
-                int result = _serviceImplementation.RegisterUser(newPlayer);
+                _serviceImplementation.RegisterUser(_registeredPlayer);
                 Assert.Fail("RegisterUserUsernameExistsTest");
             }
-            catch (Exception error)
+            catch (FaultException<ServerException> error)
             {
-                Assert.AreEqual(error.Message, "An account with the same username exists", "RegisterUserUsernameExistsTest");
+                Assert.AreEqual(101, error.Detail.ErrorCode, "RegisterUserUsernameExistsTest");
             }
         }
 
         [TestMethod()]
         public void RegisterUserEmailExistsTest()
         {
-            //TODO: Implement set up method to insert a player in the database
+            PlayerDC newPlayer = new PlayerDC()
+            {
+                Username = "David",
+                Email = _registeredPlayer.Email,
+                Password = "asdfas´461ds+"
+            };
+
             try
             {
-                PlayerDC newPlayer = new PlayerDC()
-                {
-                    Username = "Pale",
-                    Email = "epalemolina@hotmail.com",
-                    Password = "asdfas´461ds+"
-                };
-                int result = _serviceImplementation.RegisterUser(newPlayer);
+                _serviceImplementation.RegisterUser(newPlayer);
                 Assert.Fail("RegisterUserEmailExistsTest");
             }
-            catch (Exception error)
+            catch (FaultException<ServerException> error)
             {
-                Assert.AreEqual(error.Message, "An account with the same email exists", "RegisterUserEmailExistsTest");
+                Assert.AreEqual(102, error.Detail.ErrorCode, "RegisterUserEmailExistsTest");
             }
         }
 
         [TestMethod()]
         public void LogInSuccesfulTest()
         {
-            //TODO: Implement set up method to insert a player in the database
-
             int expected = 0;
-            int result = _serviceImplementation.Login("Pale04", "asdfas´461ds+");
+            int result = _serviceImplementation.Login(_registeredPlayer.Username, _registeredPlayer.Password);
             Assert.AreEqual(expected, result, "LogInSuccesfulTest");
         }
 
-        [TestMethod()]
-        public void LogInUserInexistentTest()
+        [TestMethod]
+        public void LogInEmptyUsernameTest()
         {
-            //TODO: Implement set up method to insert a player in the database
             try
             {
-                int result = _serviceImplementation.Login("Pale", "asdfas´461ds+");
-                Assert.Fail("LogInInexistentTest");
+                _serviceImplementation.Login("", "123");
+                Assert.Fail("LogInEmptyTest");
             }
-            catch (Exception error)
+            catch (FaultException<ServerException> error)
             {
-                Assert.AreEqual("Player not found", error.Message, "LogInInexistentTest");
+                Assert.AreEqual(103, error.Detail.ErrorCode, "LogInEmptyTest");
+            }
+        }
+
+        [TestMethod]
+        public void LogInEmptyPasswordTest()
+        {
+            try
+            {
+                _serviceImplementation.Login("Pale04", "");
+                Assert.Fail("LogInEmptyPasswordTest");
+            }
+            catch (FaultException<ServerException> error)
+            {
+                Assert.AreEqual(104, error.Detail.ErrorCode, "LogInEmptyPasswordTest");
+            }
+        }
+
+        [TestMethod()]
+        public void LogInUserNonExistentTest()
+        {
+            try
+            {
+                _serviceImplementation.Login("Pale", "123");
+                Assert.Fail("LogInUserNonExistentTest");
+            }
+            catch (FaultException<ServerException> error)
+            {
+                Assert.AreEqual(105, error.Detail.ErrorCode, "LogInUserNonExistentTest");
             }
         }
 
         [TestMethod()]
         public void LogInIncorrectPasswordTest()
         {
-            //TODO: Implement set up method to insert a player in the database
-            int expected = -1;
-            int result = _serviceImplementation.Login("Pale04", "asdfas´461ds+");
-            Assert.AreEqual(expected, result, "LogInIncorrectPasswordTest");
+            try
+            {
+                _serviceImplementation.Login(_registeredPlayer.Username, "123");
+                Assert.Fail("LogInIncorrectPasswordTest");
+            }
+            catch (FaultException<ServerException> error)
+            {
+                Assert.AreEqual(106, error.Detail.ErrorCode, "LogInIncorrectPasswordTest");
+            }
         }
     }
 }

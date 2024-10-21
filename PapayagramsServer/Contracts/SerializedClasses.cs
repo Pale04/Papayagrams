@@ -120,8 +120,17 @@ namespace Contracts
     {
         [DataMember]
         public int ErrorCode { get; set; }
-
         [DataMember]
-        public string StackTrace { get; set; }
+        public string StackTrace { get;}
+
+        public ServerException(int errorCode)
+        {
+            ErrorCode = errorCode;
+        }
+        public ServerException(int errorCode, string stackTrace)
+        {
+            ErrorCode = errorCode;
+            StackTrace = stackTrace;
+        }
     }
 }

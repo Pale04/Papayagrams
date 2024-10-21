@@ -3,54 +3,89 @@ using DataAccess;
 using DomainClasses;
 using LanguageExt;
 using System;
+using System.ServiceModel;
+using System.Data.Entity.Core;
+using LanguageExt.Common;
 
 namespace Contracts
 {
     public partial class ServiceImplementation : ILoginService
     {
+        /// <summary>
+        /// Create an account for a new user
+        /// </summary>
+        /// <param name="player">PlayerDC object with the user's data</param>
+        /// <returns>6 if the registration was successful</returns>
+        /// <exception cref="FaultException">Thrown when the parameters are invalid, the username or email already exists or happens a database connection failure</exception>
         public int RegisterUser(PlayerDC player)
         {
-            Player newPlayer = new Player()
+            Player newPlayer = new Player();
+            try
             {
-                Username = player.Username,
-                Email = player.Email,
-                Password = player.Password
-            };
-
-            if (UserDB.GetPlayerByUsername(newPlayer.Username).IsSome)
-            {
-                throw new Exception("An account with the same username exists");
+                newPlayer.Username = player.Username;
+                newPlayer.Email = player.Email;
+                newPlayer.Password = player.Password;
             }
-            else if (UserDB.GetPlayerByEmail(newPlayer.Email).IsSome)
+            catch (ArgumentException error)
             {
-                throw new Exception("An account with the same email exists");
+                throw new FaultException<ServerException>(new ServerException(1, error.StackTrace));
             }
 
-            return UserDB.RegisterUser(newPlayer);
+            try
+            {
+                if (UserDB.GetPlayerByUsername(newPlayer.Username).IsSome)
+                {
+                    throw new FaultException<ServerException>(new ServerException(101));
+                }
+                else if (UserDB.GetPlayerByEmail(newPlayer.Email).IsSome)
+                {
+                    throw new FaultException<ServerException>(new ServerException(102));
+                }
+                return UserDB.RegisterUser(newPlayer);
+            }
+            catch (EntityException error)
+            {
+                throw new FaultException<ServerException>(new ServerException(2, error.StackTrace));
+            }
         }
 
+        /// <summary>
+        /// Log in the Papayagrams application
+        /// </summary>
+        /// <param name="username">Username of the account</param>
+        /// <param name="password">Password of the account</param>
+        /// <returns>0 if the log in was succesful, -1 if the account does not exist or -2 if the password is incorrect</returns>
+        /// <exception cref="FaultException">Thrown when the parameters are invalid or happens, the account is not foun, the password is incorrect or happens a database connection failure</exception>
         public int Login(string username, string password)
         {
-            int succesfulLogin;
-
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(username))
             {
-                throw new ArgumentException("Username and password cannot be empty");
+                throw new FaultException<ServerException>(new ServerException(103));
             }
-            else
+            else if (string.IsNullOrEmpty(password))
             {
-                Option<Player> foundPlayer = UserDB.GetPlayerByUsername(username);
-                if (foundPlayer.IsSome)
-                {
-                    succesfulLogin = UserDB.LogIn(username, password);
-                }
-                else
-                {
-                    throw new Exception("Player not found");
-                }
+                throw new FaultException<ServerException>(new ServerException(104));
             }
 
-            return succesfulLogin;
+            int loginResult;
+            try
+            {
+                loginResult = UserDB.LogIn(username, password);
+            }
+            catch (EntityException error)
+            {
+                throw new FaultException<ServerException>(new ServerException(2, error.StackTrace));
+            }
+
+            if (loginResult == -1)
+            {
+                throw new FaultException<ServerException>(new ServerException(105));
+            }
+            else if (loginResult == -2)
+            {
+                throw new FaultException<ServerException>(new ServerException(106));
+            }
+            return loginResult;
         }
 
         public int Logout(string username)

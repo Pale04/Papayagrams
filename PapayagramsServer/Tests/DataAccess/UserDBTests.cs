@@ -2,7 +2,6 @@
 using DomainClasses;
 using LanguageExt;
 using System;
-using System.Data.SqlClient;
 using System.Data.Entity.Core;
 
 namespace DataAccess.Tests
@@ -29,6 +28,10 @@ namespace DataAccess.Tests
         {
             using (var context = new papayagramsEntities())
             {
+                context.Database.ExecuteSqlCommand("delete from [TimeAtackHistory]");
+                context.Database.ExecuteSqlCommand("delete from [SuddenDeathHistory]");
+                context.Database.ExecuteSqlCommand("delete from [OriginalGameHistory]");
+                context.Database.ExecuteSqlCommand("delete from [UserConfiguration]");
                 context.Database.ExecuteSqlCommand("delete from [UserStatus]");
                 context.Database.ExecuteSqlCommand("delete from [User]");
                 context.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('User', RESEED, 0)");
@@ -45,7 +48,7 @@ namespace DataAccess.Tests
                 Password = "asdfl_´.468*-"
             };
 
-            int expected = 2;
+            int expected = 6;
             int result = UserDB.RegisterUser(newPlayer);
 
             Assert.AreEqual(expected, result, "RegisterUserSuccesfulTest");
@@ -73,20 +76,22 @@ namespace DataAccess.Tests
             Assert.AreEqual(expected, result, "LogInSuccessfulTest");
         }
 
-        [TestMethod()]
-        public void LogInPasswordIncorrectTest()
-        {
-            int expected = 1;
-            int result = UserDB.LogIn(_registeredPlayer.Username, "123");
-            Assert.AreEqual(expected, result, "LogInPasswordIncorrectTest");
-        }
-
+        //It is the same case when the username is null
         [TestMethod()]
         public void LogInNonExistentAccountTest()
         {
             int expected = -1;
             int result = UserDB.LogIn("Pale", "1");
             Assert.AreEqual(expected, result, "LogInNonExistentAccountTest");
+        }
+
+        //It is the same case when the password is null
+        [TestMethod()]
+        public void LogInPasswordIncorrectTest()
+        {
+            int expected = -2;
+            int result = UserDB.LogIn(_registeredPlayer.Username, "1");
+            Assert.AreEqual(expected, result, "LogInPasswordIncorrectTest");
         }
 
         [TestMethod()]
@@ -96,6 +101,7 @@ namespace DataAccess.Tests
             Assert.AreEqual(_registeredPlayer, result.Case, "GetPlayerByUsernameSuccessfulTest");
         }
 
+        //It it the same case when the username is null
         [TestMethod()]
         public void GetPlayerByNonExistentTest()
         {
@@ -110,6 +116,7 @@ namespace DataAccess.Tests
             Assert.AreEqual(_registeredPlayer, result.Case, "GetPlayerByEmailSuccessfulTest");
         }
 
+        //It is the same case when the email is null
         [TestMethod()]
         public void GetPlayerByEmailInexistentTest()
         {
@@ -117,20 +124,6 @@ namespace DataAccess.Tests
             Assert.IsTrue(result.IsNone, "GetPlayerByEmailInexistentTest");
         }
 
-        [TestMethod()]
-        public void UpdateUserStatusSuccessfulTest()
-        {
-            int expected = 1;
-            int result = UserDB.UpdateUserStatus(_registeredPlayer.Username, PlayerStatus.online);
-            Assert.AreEqual(expected, result, "UpdateUserStatusSuccessfulTest");
-        }
 
-        [TestMethod()]
-        public void UpdateUserStatusIncorrectUserTest()
-        {
-            int expected = 0;
-            int result = UserDB.UpdateUserStatus("Pale", PlayerStatus.offline);
-            Assert.AreEqual(expected, result, "UpdateUserStatusIncorrectUserTest");
-        }
     }
 }

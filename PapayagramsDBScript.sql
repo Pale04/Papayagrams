@@ -17,7 +17,6 @@ CREATE TABLE [OriginalGameHistory] (
   [userId] int,
   [wonGames] int,
   [lostGames] int,
-  [totalGames] int
 )
 GO
 
@@ -26,7 +25,6 @@ CREATE TABLE [SuddenDeathHistory] (
   [userId] int,
   [wonGames] int,
   [lostGames] int,
-  [totalGames] int
 )
 GO
 
@@ -35,7 +33,6 @@ CREATE TABLE [TimeAtackHistory] (
   [userId] int,
   [wonGames] int,
   [lostGames] int,
-  [totalGames] int
 )
 GO
 
@@ -75,7 +72,7 @@ CREATE TABLE [UserConfiguration] (
   [pieceSize] VARCHAR(20) CHECK (pieceSize IN ('small', 'medium','large')),
   [pieceColor] int,
   [icon] int,
-  [cursor] int
+  [cursorDesign] int
 )
 GO
 
