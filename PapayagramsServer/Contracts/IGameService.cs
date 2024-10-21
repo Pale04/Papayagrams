@@ -10,15 +10,12 @@ namespace Contracts
 
         [OperationContract]
         int LeaveGame();
-
     }
 
     [ServiceContract]
     public interface IGameServiceCallback
     {
-        /*TODO
         [OperationContract]
-        void RefreshGameRoom(GameState roomCode);
-        */
+        void RefreshGameRoom(string roomCode);
     }
 }

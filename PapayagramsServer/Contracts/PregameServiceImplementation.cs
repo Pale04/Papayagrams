@@ -34,7 +34,7 @@ namespace Contracts
             return 0;
         }
 
-        public int LeaveGame(string username, string code)
+        public int LeaveLobby(string username, string code)
         {
             GameData.RemovePlayerFromGameRoom(username, code);
             Console.WriteLine(username + " leaved the game");

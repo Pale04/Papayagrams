@@ -24,7 +24,7 @@ namespace Contracts
         /// <param name="roomCode">The game room code to remove the player from</param>
         /// <returns>0 if the player was removed successfully</returns>
         [OperationContract]
-        int LeaveGame(string username,string roomCode);
+        int LeaveLobby(string username,string roomCode);
 
         [OperationContract(IsOneWay = true)]
         void SendMessage(Message message);
@@ -44,6 +44,6 @@ namespace Contracts
         [OperationContract(IsOneWay = true)]
         void StartGameResponse();
         [OperationContract(IsOneWay = true)]
-        void RefreshGameRoom();
+        void RefreshLobby();
     }
 }
