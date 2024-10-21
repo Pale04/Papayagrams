@@ -32,7 +32,7 @@ namespace Contracts
 
         [OperationContract]
         [FaultContract(typeof(ServerException))]
-        List<PlayerDC> SearchPlayers(string username);
+        PlayerDC SearchPlayer(string username);
 
         [OperationContract]
         [FaultContract(typeof(ServerException))]

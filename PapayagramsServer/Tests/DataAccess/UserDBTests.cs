@@ -103,10 +103,10 @@ namespace DataAccess.Tests
 
         //It it the same case when the username is null
         [TestMethod()]
-        public void GetPlayerByNonExistentTest()
+        public void GetPlayerByUsernameNonExistentTest()
         {
             Option<Player> result = UserDB.GetPlayerByUsername("Pale");
-            Assert.IsTrue(result.IsNone, "GetPlayerByNonExistentTest");
+            Assert.IsTrue(result.IsNone, "GetPlayerByUsernameNonExistentTest");
         }
 
         [TestMethod()]

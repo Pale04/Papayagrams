@@ -11,13 +11,10 @@ namespace Contracts
 
         [OperationContract]
         [FaultContract(typeof(ServerException))]
-        int Login(string username, string password);
+        PlayerDC Login(string username, string password);
 
-        /// <summary>
-        /// Logout the current user
-        /// </summary>
-        /// <returns>0 if logout successfully</returns>
         [OperationContract]
+        [FaultContract(typeof(ServerException))]
         int Logout(string username);
     }
 }

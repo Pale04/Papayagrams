@@ -106,7 +106,6 @@ namespace DataAccess
                         Id = playerResultList.First().id,
                         Username = playerResultList.First().username,
                         Email = playerResultList.First().email,
-                        Password = playerResultList.First().password
                     });
             }
 

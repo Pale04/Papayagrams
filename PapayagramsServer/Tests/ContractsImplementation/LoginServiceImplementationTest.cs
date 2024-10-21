@@ -104,9 +104,8 @@ namespace Contracts.Tests
         [TestMethod()]
         public void LogInSuccesfulTest()
         {
-            int expected = 0;
-            int result = _serviceImplementation.Login(_registeredPlayer.Username, _registeredPlayer.Password);
-            Assert.AreEqual(expected, result, "LogInSuccesfulTest");
+            PlayerDC result = _serviceImplementation.Login(_registeredPlayer.Username, _registeredPlayer.Password);
+            Assert.AreEqual(_registeredPlayer, result, "LogInSuccesfulTest");
         }
 
         [TestMethod]
