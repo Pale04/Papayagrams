@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PapayagramsClient.PapayagramsService;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,13 +21,23 @@ namespace PapayagramsClient
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IMainMenuServiceCallback
     {
         public MainWindow()
         {
             InitializeComponent();
-            Cursor = new Cursor(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\papaya.cur");
+            Cursor = new Cursor(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Cursors\\papaya.cur");
             MainFrame.Navigate(new Login.Login());
+        }
+
+        public void ReceiveFriendRequest(PlayerDC player)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReceiveGameInvitation(GameInvitationDC invitation)
+        {
+            throw new NotImplementedException();
         }
     }
 }

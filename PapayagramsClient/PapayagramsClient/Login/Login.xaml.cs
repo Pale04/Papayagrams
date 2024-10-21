@@ -1,7 +1,9 @@
-﻿using System;
+﻿using PapayagramsClient.Login.Popups;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -50,13 +52,21 @@ namespace PapayagramsClient.Login
             try
             {
                 PapayagramsService.PlayerDC player = host.Login(Username, Password);
+                SigninButton.IsEnabled = false;
                 CurrentPlayer.Player = player;
             }
-            catch (PapayagramsService.ServerException ex)
+            catch (FaultException<PapayagramsService.ServerException> ex)
             {
-                switch (ex.ErrorCode)
+                switch (ex.Detail.ErrorCode)
                 {
-                    case 105:
+                    case 102:
+                        new PopUpWindow(Properties.Resources.errorDatabaseConnectionTitle, Properties.Resources.errorDatabaseConnection, 3)
+                        break;
+                    case 203:
+                        break;
+                    case 204:
+                        break;
+                    case 205:
                         PasswordErrorText.Content = Properties.Resources.signInWrongCredentials;
                         break;
                 }
@@ -64,6 +74,7 @@ namespace PapayagramsClient.Login
             }
             finally
             {
+                SigninButton.IsEnabled = true;
                 host.Close();
             }
 

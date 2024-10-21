@@ -1,16 +1,19 @@
 # Papayagrams error codes
-1. Invalid parameters
-2. No connection with de database server
+
+## Server
+101. Invalid parameters
+102. No connection with de database server
 
 ## Login
-101. An account with the same username exists
-102. An account with the same email exists
-103. Password empty when loging in
-104. Username empty when loging in
-105. Player not found
-106. Incorrect password
+201. An account with the same username exists
+202. An account with the same email exists
+203. Password empty when loging in
+204. Username empty when loging in
+205. Player not found
+206. Incorrect password
 
 ## Main menu
+301. 
 
 ## Pregame
 

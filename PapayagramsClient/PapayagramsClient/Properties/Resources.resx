@@ -255,4 +255,19 @@
   <data name="signInEmptyPassword" xml:space="preserve">
     <value>The password cannot be empty</value>
   </data>
+  <data name="registerSuccessful" xml:space="preserve">
+    <value>Your account was created successfully, you can now log in</value>
+  </data>
+  <data name="registerSuccessfulTitle" xml:space="preserve">
+    <value>User Registered</value>
+  </data>
+  <data name="profileTitle" xml:space="preserve">
+    <value>My profile</value>
+  </data>
+  <data name="errorDatabaseConnection" xml:space="preserve">
+    <value>Could not connect to Papayagrams services, try again later.</value>
+  </data>
+  <data name="errorDatabaseConnectionTitle" xml:space="preserve">
+    <value>Could not connect to Papayagrams</value>
+  </data>
 </root>

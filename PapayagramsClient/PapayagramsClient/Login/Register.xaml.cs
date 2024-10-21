@@ -37,6 +37,7 @@ namespace PapayagramsClient.Login
             PapayagramsService.LoginServiceClient host = new PapayagramsService.LoginServiceClient();
             host.Open();
 
+            /*
             try 
             { 
                 int result = host.RegisterUser(player);
@@ -54,10 +55,11 @@ namespace PapayagramsClient.Login
                         break;
                 }
             }
+            */
 
             host.Close();
 
-            new SuccessfullyRegistered().ShowDialog() ;
+            new PopUpWindow(Properties.Resources.registerSuccessfulTitle, Properties.Resources.registerSuccessful, 0).ShowDialog() ;
             this.NavigationService.GoBack();
         }
         

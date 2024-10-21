@@ -15,99 +15,6 @@ namespace PapayagramsClient.PapayagramsService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Message", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
-    [System.SerializableAttribute()]
-    public partial class Message : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AuthorUsernameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ContentField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string GameRoomCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime TimeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AuthorUsername {
-            get {
-                return this.AuthorUsernameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AuthorUsernameField, value) != true)) {
-                    this.AuthorUsernameField = value;
-                    this.RaisePropertyChanged("AuthorUsername");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Content {
-            get {
-                return this.ContentField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ContentField, value) != true)) {
-                    this.ContentField = value;
-                    this.RaisePropertyChanged("Content");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string GameRoomCode {
-            get {
-                return this.GameRoomCodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.GameRoomCodeField, value) != true)) {
-                    this.GameRoomCodeField = value;
-                    this.RaisePropertyChanged("GameRoomCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime Time {
-            get {
-                return this.TimeField;
-            }
-            set {
-                if ((this.TimeField.Equals(value) != true)) {
-                    this.TimeField = value;
-                    this.RaisePropertyChanged("Time");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="PlayerDC", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
     [System.SerializableAttribute()]
     public partial class PlayerDC : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -199,103 +106,356 @@ namespace PapayagramsClient.PapayagramsService {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.IPregameService", CallbackContract=typeof(PapayagramsClient.PapayagramsService.IPregameServiceCallback))]
-    public interface IPregameService {
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+    [System.SerializableAttribute()]
+    public partial class ServerException : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/CreateGame")]
-        void CreateGame(string username);
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/CreateGame")]
-        System.Threading.Tasks.Task CreateGameAsync(string username);
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ErrorCodeField;
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/JoinGame")]
-        void JoinGame(string username, string roomCode);
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StackTraceField;
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/JoinGame")]
-        System.Threading.Tasks.Task JoinGameAsync(string username, string roomCode);
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/LeaveGame", ReplyAction="http://tempuri.org/IPregameService/LeaveGameResponse")]
-        int LeaveGame(string username, string roomCode);
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ErrorCode {
+            get {
+                return this.ErrorCodeField;
+            }
+            set {
+                if ((this.ErrorCodeField.Equals(value) != true)) {
+                    this.ErrorCodeField = value;
+                    this.RaisePropertyChanged("ErrorCode");
+                }
+            }
+        }
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/LeaveGame", ReplyAction="http://tempuri.org/IPregameService/LeaveGameResponse")]
-        System.Threading.Tasks.Task<int> LeaveGameAsync(string username, string roomCode);
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string StackTrace {
+            get {
+                return this.StackTraceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StackTraceField, value) != true)) {
+                    this.StackTraceField = value;
+                    this.RaisePropertyChanged("StackTrace");
+                }
+            }
+        }
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/SendMessage")]
-        void SendMessage(PapayagramsClient.PapayagramsService.Message message);
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/SendMessage")]
-        System.Threading.Tasks.Task SendMessageAsync(PapayagramsClient.PapayagramsService.Message message);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IPregameServiceCallback {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/JoinGameResponse")]
-        void JoinGameResponse(string roomCode);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/ReceiveMessage")]
-        void ReceiveMessage(PapayagramsClient.PapayagramsService.Message message);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IPregameServiceChannel : PapayagramsClient.PapayagramsService.IPregameService, System.ServiceModel.IClientChannel {
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class PregameServiceClient : System.ServiceModel.DuplexClientBase<PapayagramsClient.PapayagramsService.IPregameService>, PapayagramsClient.PapayagramsService.IPregameService {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FriendDC", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+    [System.SerializableAttribute()]
+    public partial class FriendDC : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        public PregameServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
-                base(callbackInstance) {
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UsernameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
         }
         
-        public PregameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
-                base(callbackInstance, endpointConfigurationName) {
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
         }
         
-        public PregameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Username {
+            get {
+                return this.UsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
+                    this.UsernameField = value;
+                    this.RaisePropertyChanged("Username");
+                }
+            }
         }
         
-        public PregameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AchievementDC", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+    [System.SerializableAttribute()]
+    public partial class AchievementDC : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsAchievedField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
         }
         
-        public PregameServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, binding, remoteAddress) {
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
         }
         
-        public void CreateGame(string username) {
-            base.Channel.CreateGame(username);
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
         }
         
-        public System.Threading.Tasks.Task CreateGameAsync(string username) {
-            return base.Channel.CreateGameAsync(username);
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsAchieved {
+            get {
+                return this.IsAchievedField;
+            }
+            set {
+                if ((this.IsAchievedField.Equals(value) != true)) {
+                    this.IsAchievedField = value;
+                    this.RaisePropertyChanged("IsAchieved");
+                }
+            }
         }
         
-        public void JoinGame(string username, string roomCode) {
-            base.Channel.JoinGame(username, roomCode);
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GameInvitationDC", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+    [System.SerializableAttribute()]
+    public partial class GameInvitationDC : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GameRoomCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PlayerUsernameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
         }
         
-        public System.Threading.Tasks.Task JoinGameAsync(string username, string roomCode) {
-            return base.Channel.JoinGameAsync(username, roomCode);
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GameRoomCode {
+            get {
+                return this.GameRoomCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GameRoomCodeField, value) != true)) {
+                    this.GameRoomCodeField = value;
+                    this.RaisePropertyChanged("GameRoomCode");
+                }
+            }
         }
         
-        public int LeaveGame(string username, string roomCode) {
-            return base.Channel.LeaveGame(username, roomCode);
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PlayerUsername {
+            get {
+                return this.PlayerUsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PlayerUsernameField, value) != true)) {
+                    this.PlayerUsernameField = value;
+                    this.RaisePropertyChanged("PlayerUsername");
+                }
+            }
         }
         
-        public System.Threading.Tasks.Task<int> LeaveGameAsync(string username, string roomCode) {
-            return base.Channel.LeaveGameAsync(username, roomCode);
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Message", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+    [System.SerializableAttribute()]
+    public partial class Message : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AuthorUsernameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ContentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GameRoomCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime TimeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
         }
         
-        public void SendMessage(PapayagramsClient.PapayagramsService.Message message) {
-            base.Channel.SendMessage(message);
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AuthorUsername {
+            get {
+                return this.AuthorUsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AuthorUsernameField, value) != true)) {
+                    this.AuthorUsernameField = value;
+                    this.RaisePropertyChanged("AuthorUsername");
+                }
+            }
         }
         
-        public System.Threading.Tasks.Task SendMessageAsync(PapayagramsClient.PapayagramsService.Message message) {
-            return base.Channel.SendMessageAsync(message);
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Content {
+            get {
+                return this.ContentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ContentField, value) != true)) {
+                    this.ContentField = value;
+                    this.RaisePropertyChanged("Content");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GameRoomCode {
+            get {
+                return this.GameRoomCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GameRoomCodeField, value) != true)) {
+                    this.GameRoomCodeField = value;
+                    this.RaisePropertyChanged("GameRoomCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Time {
+            get {
+                return this.TimeField;
+            }
+            set {
+                if ((this.TimeField.Equals(value) != true)) {
+                    this.TimeField = value;
+                    this.RaisePropertyChanged("Time");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
         }
     }
     
@@ -303,11 +463,19 @@ namespace PapayagramsClient.PapayagramsService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.ILoginService")]
     public interface ILoginService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Login", ReplyAction="http://tempuri.org/ILoginService/LoginResponse")]
-        PapayagramsClient.PapayagramsService.PlayerDC Login(string username, string password);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/RegisterUser", ReplyAction="http://tempuri.org/ILoginService/RegisterUserResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/ILoginService/RegisterUserServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+        int RegisterUser(PapayagramsClient.PapayagramsService.PlayerDC player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/RegisterUser", ReplyAction="http://tempuri.org/ILoginService/RegisterUserResponse")]
+        System.Threading.Tasks.Task<int> RegisterUserAsync(PapayagramsClient.PapayagramsService.PlayerDC player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Login", ReplyAction="http://tempuri.org/ILoginService/LoginResponse")]
-        System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC> LoginAsync(string username, string password);
+        [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/ILoginService/LoginServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+        int Login(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Login", ReplyAction="http://tempuri.org/ILoginService/LoginResponse")]
+        System.Threading.Tasks.Task<int> LoginAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Logout", ReplyAction="http://tempuri.org/ILoginService/LogoutResponse")]
         int Logout(string username);
@@ -343,11 +511,19 @@ namespace PapayagramsClient.PapayagramsService {
                 base(binding, remoteAddress) {
         }
         
-        public PapayagramsClient.PapayagramsService.PlayerDC Login(string username, string password) {
+        public int RegisterUser(PapayagramsClient.PapayagramsService.PlayerDC player) {
+            return base.Channel.RegisterUser(player);
+        }
+        
+        public System.Threading.Tasks.Task<int> RegisterUserAsync(PapayagramsClient.PapayagramsService.PlayerDC player) {
+            return base.Channel.RegisterUserAsync(player);
+        }
+        
+        public int Login(string username, string password) {
             return base.Channel.Login(username, password);
         }
         
-        public System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC> LoginAsync(string username, string password) {
+        public System.Threading.Tasks.Task<int> LoginAsync(string username, string password) {
             return base.Channel.LoginAsync(username, password);
         }
         
@@ -361,49 +537,411 @@ namespace PapayagramsClient.PapayagramsService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.IUserService")]
-    public interface IUserService {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.IMainMenuService", CallbackContract=typeof(PapayagramsClient.PapayagramsService.IMainMenuServiceCallback))]
+    public interface IMainMenuService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/RegisterUser", ReplyAction="http://tempuri.org/IUserService/RegisterUserResponse")]
-        int RegisterUser(PapayagramsClient.PapayagramsService.PlayerDC user);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetFriends", ReplyAction="http://tempuri.org/IMainMenuService/GetFriendsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/IMainMenuService/GetFriendsServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+        PapayagramsClient.PapayagramsService.FriendDC[] GetFriends(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/RegisterUser", ReplyAction="http://tempuri.org/IUserService/RegisterUserResponse")]
-        System.Threading.Tasks.Task<int> RegisterUserAsync(PapayagramsClient.PapayagramsService.PlayerDC user);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetFriends", ReplyAction="http://tempuri.org/IMainMenuService/GetFriendsResponse")]
+        System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.FriendDC[]> GetFriendsAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/RemoveFriend", ReplyAction="http://tempuri.org/IMainMenuService/RemoveFriendResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/IMainMenuService/RemoveFriendServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+        int RemoveFriend(string username, string friendUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/RemoveFriend", ReplyAction="http://tempuri.org/IMainMenuService/RemoveFriendResponse")]
+        System.Threading.Tasks.Task<int> RemoveFriendAsync(string username, string friendUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/BlockFriend", ReplyAction="http://tempuri.org/IMainMenuService/BlockFriendResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/IMainMenuService/BlockFriendServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+        int BlockFriend(string username, string friendUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/BlockFriend", ReplyAction="http://tempuri.org/IMainMenuService/BlockFriendResponse")]
+        System.Threading.Tasks.Task<int> BlockFriendAsync(string username, string friendUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetFriendRequests", ReplyAction="http://tempuri.org/IMainMenuService/GetFriendRequestsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/IMainMenuService/GetFriendRequestsServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+        PapayagramsClient.PapayagramsService.FriendDC[] GetFriendRequests(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetFriendRequests", ReplyAction="http://tempuri.org/IMainMenuService/GetFriendRequestsResponse")]
+        System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.FriendDC[]> GetFriendRequestsAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/AcceptFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/AcceptFriendRequestResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/IMainMenuService/AcceptFriendRequestServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+        int AcceptFriendRequest(string username, string friendUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/AcceptFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/AcceptFriendRequestResponse")]
+        System.Threading.Tasks.Task<int> AcceptFriendRequestAsync(string username, string friendUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/RejectFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/RejectFriendRequestResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/IMainMenuService/RejectFriendRequestServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+        int RejectFriendRequest(string username, string friendUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/RejectFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/RejectFriendRequestResponse")]
+        System.Threading.Tasks.Task<int> RejectFriendRequestAsync(string username, string friendUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SearchPlayers", ReplyAction="http://tempuri.org/IMainMenuService/SearchPlayersResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/IMainMenuService/SearchPlayersServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+        PapayagramsClient.PapayagramsService.PlayerDC[] SearchPlayers(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SearchPlayers", ReplyAction="http://tempuri.org/IMainMenuService/SearchPlayersResponse")]
+        System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC[]> SearchPlayersAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SendFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/SendFriendRequestResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/IMainMenuService/SendFriendRequestServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+        int SendFriendRequest(string username, string friendUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SendFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/SendFriendRequestResponse")]
+        System.Threading.Tasks.Task<int> SendFriendRequestAsync(string username, string friendUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetPlayerProfile", ReplyAction="http://tempuri.org/IMainMenuService/GetPlayerProfileResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/IMainMenuService/GetPlayerProfileServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+        int GetPlayerProfile(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetPlayerProfile", ReplyAction="http://tempuri.org/IMainMenuService/GetPlayerProfileResponse")]
+        System.Threading.Tasks.Task<int> GetPlayerProfileAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetAchievements", ReplyAction="http://tempuri.org/IMainMenuService/GetAchievementsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/IMainMenuService/GetAchievementsServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+        PapayagramsClient.PapayagramsService.AchievementDC[] GetAchievements(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetAchievements", ReplyAction="http://tempuri.org/IMainMenuService/GetAchievementsResponse")]
+        System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.AchievementDC[]> GetAchievementsAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetLeaderboard", ReplyAction="http://tempuri.org/IMainMenuService/GetLeaderboardResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/IMainMenuService/GetLeaderboardServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+        int GetLeaderboard(PapayagramsClient.PapayagramsService.PlayerDC player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetLeaderboard", ReplyAction="http://tempuri.org/IMainMenuService/GetLeaderboardResponse")]
+        System.Threading.Tasks.Task<int> GetLeaderboardAsync(PapayagramsClient.PapayagramsService.PlayerDC player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/ReportToServer", ReplyAction="http://tempuri.org/IMainMenuService/ReportToServerResponse")]
+        void ReportToServer(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/ReportToServer", ReplyAction="http://tempuri.org/IMainMenuService/ReportToServerResponse")]
+        System.Threading.Tasks.Task ReportToServerAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IUserServiceChannel : PapayagramsClient.PapayagramsService.IUserService, System.ServiceModel.IClientChannel {
+    public interface IMainMenuServiceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/ReceiveFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/ReceiveFriendRequestResponse")]
+        void ReceiveFriendRequest(PapayagramsClient.PapayagramsService.PlayerDC player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/ReceiveGameInvitation", ReplyAction="http://tempuri.org/IMainMenuService/ReceiveGameInvitationResponse")]
+        void ReceiveGameInvitation(PapayagramsClient.PapayagramsService.GameInvitationDC invitation);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IMainMenuServiceChannel : PapayagramsClient.PapayagramsService.IMainMenuService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class UserServiceClient : System.ServiceModel.ClientBase<PapayagramsClient.PapayagramsService.IUserService>, PapayagramsClient.PapayagramsService.IUserService {
+    public partial class MainMenuServiceClient : System.ServiceModel.DuplexClientBase<PapayagramsClient.PapayagramsService.IMainMenuService>, PapayagramsClient.PapayagramsService.IMainMenuService {
         
-        public UserServiceClient() {
+        public MainMenuServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
         }
         
-        public UserServiceClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
+        public MainMenuServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
         }
         
-        public UserServiceClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public MainMenuServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public UserServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public MainMenuServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public UserServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
+        public MainMenuServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
         }
         
-        public int RegisterUser(PapayagramsClient.PapayagramsService.PlayerDC user) {
-            return base.Channel.RegisterUser(user);
+        public PapayagramsClient.PapayagramsService.FriendDC[] GetFriends(string username) {
+            return base.Channel.GetFriends(username);
         }
         
-        public System.Threading.Tasks.Task<int> RegisterUserAsync(PapayagramsClient.PapayagramsService.PlayerDC user) {
-            return base.Channel.RegisterUserAsync(user);
+        public System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.FriendDC[]> GetFriendsAsync(string username) {
+            return base.Channel.GetFriendsAsync(username);
+        }
+        
+        public int RemoveFriend(string username, string friendUsername) {
+            return base.Channel.RemoveFriend(username, friendUsername);
+        }
+        
+        public System.Threading.Tasks.Task<int> RemoveFriendAsync(string username, string friendUsername) {
+            return base.Channel.RemoveFriendAsync(username, friendUsername);
+        }
+        
+        public int BlockFriend(string username, string friendUsername) {
+            return base.Channel.BlockFriend(username, friendUsername);
+        }
+        
+        public System.Threading.Tasks.Task<int> BlockFriendAsync(string username, string friendUsername) {
+            return base.Channel.BlockFriendAsync(username, friendUsername);
+        }
+        
+        public PapayagramsClient.PapayagramsService.FriendDC[] GetFriendRequests(string username) {
+            return base.Channel.GetFriendRequests(username);
+        }
+        
+        public System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.FriendDC[]> GetFriendRequestsAsync(string username) {
+            return base.Channel.GetFriendRequestsAsync(username);
+        }
+        
+        public int AcceptFriendRequest(string username, string friendUsername) {
+            return base.Channel.AcceptFriendRequest(username, friendUsername);
+        }
+        
+        public System.Threading.Tasks.Task<int> AcceptFriendRequestAsync(string username, string friendUsername) {
+            return base.Channel.AcceptFriendRequestAsync(username, friendUsername);
+        }
+        
+        public int RejectFriendRequest(string username, string friendUsername) {
+            return base.Channel.RejectFriendRequest(username, friendUsername);
+        }
+        
+        public System.Threading.Tasks.Task<int> RejectFriendRequestAsync(string username, string friendUsername) {
+            return base.Channel.RejectFriendRequestAsync(username, friendUsername);
+        }
+        
+        public PapayagramsClient.PapayagramsService.PlayerDC[] SearchPlayers(string username) {
+            return base.Channel.SearchPlayers(username);
+        }
+        
+        public System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC[]> SearchPlayersAsync(string username) {
+            return base.Channel.SearchPlayersAsync(username);
+        }
+        
+        public int SendFriendRequest(string username, string friendUsername) {
+            return base.Channel.SendFriendRequest(username, friendUsername);
+        }
+        
+        public System.Threading.Tasks.Task<int> SendFriendRequestAsync(string username, string friendUsername) {
+            return base.Channel.SendFriendRequestAsync(username, friendUsername);
+        }
+        
+        public int GetPlayerProfile(string username) {
+            return base.Channel.GetPlayerProfile(username);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetPlayerProfileAsync(string username) {
+            return base.Channel.GetPlayerProfileAsync(username);
+        }
+        
+        public PapayagramsClient.PapayagramsService.AchievementDC[] GetAchievements(string username) {
+            return base.Channel.GetAchievements(username);
+        }
+        
+        public System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.AchievementDC[]> GetAchievementsAsync(string username) {
+            return base.Channel.GetAchievementsAsync(username);
+        }
+        
+        public int GetLeaderboard(PapayagramsClient.PapayagramsService.PlayerDC player) {
+            return base.Channel.GetLeaderboard(player);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetLeaderboardAsync(PapayagramsClient.PapayagramsService.PlayerDC player) {
+            return base.Channel.GetLeaderboardAsync(player);
+        }
+        
+        public void ReportToServer(string username) {
+            base.Channel.ReportToServer(username);
+        }
+        
+        public System.Threading.Tasks.Task ReportToServerAsync(string username) {
+            return base.Channel.ReportToServerAsync(username);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.IPregameService", CallbackContract=typeof(PapayagramsClient.PapayagramsService.IPregameServiceCallback))]
+    public interface IPregameService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/CreateGame", ReplyAction="http://tempuri.org/IPregameService/CreateGameResponse")]
+        string CreateGame(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/CreateGame", ReplyAction="http://tempuri.org/IPregameService/CreateGameResponse")]
+        System.Threading.Tasks.Task<string> CreateGameAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/JoinGame", ReplyAction="http://tempuri.org/IPregameService/JoinGameResponse")]
+        int JoinGame(string username, string roomCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/JoinGame", ReplyAction="http://tempuri.org/IPregameService/JoinGameResponse")]
+        System.Threading.Tasks.Task<int> JoinGameAsync(string username, string roomCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/LeaveLobby", ReplyAction="http://tempuri.org/IPregameService/LeaveLobbyResponse")]
+        int LeaveLobby(string username, string roomCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/LeaveLobby", ReplyAction="http://tempuri.org/IPregameService/LeaveLobbyResponse")]
+        System.Threading.Tasks.Task<int> LeaveLobbyAsync(string username, string roomCode);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/SendMessage")]
+        void SendMessage(PapayagramsClient.PapayagramsService.Message message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/SendMessage")]
+        System.Threading.Tasks.Task SendMessageAsync(PapayagramsClient.PapayagramsService.Message message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/StartGame")]
+        void StartGame(string roomCode);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/StartGame")]
+        System.Threading.Tasks.Task StartGameAsync(string roomCode);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IPregameServiceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/ReceiveMessage")]
+        void ReceiveMessage(PapayagramsClient.PapayagramsService.Message message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/StartGameResponse")]
+        void StartGameResponse();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/RefreshLobby")]
+        void RefreshLobby();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IPregameServiceChannel : PapayagramsClient.PapayagramsService.IPregameService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class PregameServiceClient : System.ServiceModel.DuplexClientBase<PapayagramsClient.PapayagramsService.IPregameService>, PapayagramsClient.PapayagramsService.IPregameService {
+        
+        public PregameServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public PregameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public PregameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public PregameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public PregameServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public string CreateGame(string username) {
+            return base.Channel.CreateGame(username);
+        }
+        
+        public System.Threading.Tasks.Task<string> CreateGameAsync(string username) {
+            return base.Channel.CreateGameAsync(username);
+        }
+        
+        public int JoinGame(string username, string roomCode) {
+            return base.Channel.JoinGame(username, roomCode);
+        }
+        
+        public System.Threading.Tasks.Task<int> JoinGameAsync(string username, string roomCode) {
+            return base.Channel.JoinGameAsync(username, roomCode);
+        }
+        
+        public int LeaveLobby(string username, string roomCode) {
+            return base.Channel.LeaveLobby(username, roomCode);
+        }
+        
+        public System.Threading.Tasks.Task<int> LeaveLobbyAsync(string username, string roomCode) {
+            return base.Channel.LeaveLobbyAsync(username, roomCode);
+        }
+        
+        public void SendMessage(PapayagramsClient.PapayagramsService.Message message) {
+            base.Channel.SendMessage(message);
+        }
+        
+        public System.Threading.Tasks.Task SendMessageAsync(PapayagramsClient.PapayagramsService.Message message) {
+            return base.Channel.SendMessageAsync(message);
+        }
+        
+        public void StartGame(string roomCode) {
+            base.Channel.StartGame(roomCode);
+        }
+        
+        public System.Threading.Tasks.Task StartGameAsync(string roomCode) {
+            return base.Channel.StartGameAsync(roomCode);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.IGameService", CallbackContract=typeof(PapayagramsClient.PapayagramsService.IGameServiceCallback))]
+    public interface IGameService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/ReachServer", ReplyAction="http://tempuri.org/IGameService/ReachServerResponse")]
+        int ReachServer();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/ReachServer", ReplyAction="http://tempuri.org/IGameService/ReachServerResponse")]
+        System.Threading.Tasks.Task<int> ReachServerAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/LeaveGame", ReplyAction="http://tempuri.org/IGameService/LeaveGameResponse")]
+        int LeaveGame();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/LeaveGame", ReplyAction="http://tempuri.org/IGameService/LeaveGameResponse")]
+        System.Threading.Tasks.Task<int> LeaveGameAsync();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IGameServiceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RefreshGameRoom", ReplyAction="http://tempuri.org/IGameService/RefreshGameRoomResponse")]
+        void RefreshGameRoom(string roomCode);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IGameServiceChannel : PapayagramsClient.PapayagramsService.IGameService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GameServiceClient : System.ServiceModel.DuplexClientBase<PapayagramsClient.PapayagramsService.IGameService>, PapayagramsClient.PapayagramsService.IGameService {
+        
+        public GameServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public GameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public GameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public GameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public GameServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public int ReachServer() {
+            return base.Channel.ReachServer();
+        }
+        
+        public System.Threading.Tasks.Task<int> ReachServerAsync() {
+            return base.Channel.ReachServerAsync();
+        }
+        
+        public int LeaveGame() {
+            return base.Channel.LeaveGame();
+        }
+        
+        public System.Threading.Tasks.Task<int> LeaveGameAsync() {
+            return base.Channel.LeaveGameAsync();
         }
     }
 }

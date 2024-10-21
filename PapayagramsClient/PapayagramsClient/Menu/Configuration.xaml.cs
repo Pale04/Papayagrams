@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PapayagramsClient.Login.Popups
+namespace PapayagramsClient.Menu
 {
     /// <summary>
-    /// Lógica de interacción para LoggedInSuccessfully.xaml
+    /// Lógica de interacción para Configuration.xaml
     /// </summary>
-    public partial class SuccessfullyRegistered : Window
+    public partial class Configuration : Page
     {
-        public SuccessfullyRegistered()
+        public Configuration()
         {
             InitializeComponent();
         }

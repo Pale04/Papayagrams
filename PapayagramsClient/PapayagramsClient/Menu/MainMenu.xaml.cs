@@ -21,17 +21,17 @@ namespace PapayagramsClient
     /// <summary>
     /// Lógica de interacción para MainMenu.xaml
     /// </summary>
-    public partial class MainMenu : Page, IMainMenuServiceCallback
+    public partial class MainMenu : Page
     {
         public MainMenu()
         {
             InitializeComponent();
 
             InstanceContext context = new InstanceContext(this);
-            MainMenuServiceClient host = new MainMenuServiceClient(context);
-            host.Open();
-            host.ReportToServer();
-            host.Close();
+            //MainMenuServiceClient host = new MainMenuServiceClient(context);
+            //host.Open();
+            //host.ReportToServer();
+            //host.Close();
         }
 
         private void CreateNewGame(object sender, RoutedEventArgs e)
@@ -49,7 +49,7 @@ namespace PapayagramsClient
             throw new NotImplementedException();
         }
 
-        public void ReceiveGameInvitation(GameInvitationDC invitation)
+        public void ReceiveGameInvitation()
         {
             throw new NotImplementedException();
         }

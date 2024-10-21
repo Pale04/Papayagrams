@@ -126,7 +126,7 @@
   <data name="globalUsername" xml:space="preserve">
     <value>Nombre de usuario</value>
   </data>
-  <data name="signInWrongUsername" xml:space="preserve">
+  <data name="signInWrongCredentials" xml:space="preserve">
     <value>Wrong username or password</value>
   </data>
   <data name="globalPassword" xml:space="preserve">
@@ -254,5 +254,20 @@
   </data>
   <data name="signInEmptyPassword" xml:space="preserve">
     <value>The password cannot be empty</value>
+  </data>
+  <data name="registerSuccessful" xml:space="preserve">
+    <value>Your account was created successfully, you can now log in</value>
+  </data>
+  <data name="registerSuccessfulTitle" xml:space="preserve">
+    <value>User registered</value>
+  </data>
+  <data name="profileTitle" xml:space="preserve">
+    <value>My profile</value>
+  </data>
+  <data name="errorDatabaseConnection" xml:space="preserve">
+    <value>Could not connect to Papayagrams services, try again later.</value>
+  </data>
+  <data name="errorDatabaseConnectionTitle" xml:space="preserve">
+    <value>Error while connecting to Papayagrams</value>
   </data>
 </root>

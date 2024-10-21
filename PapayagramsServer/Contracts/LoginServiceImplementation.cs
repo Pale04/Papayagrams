@@ -34,11 +34,11 @@ namespace Contracts
             {
                 if (UserDB.GetPlayerByUsername(newPlayer.Username).IsSome)
                 {
-                    throw new FaultException<ServerException>(new ServerException(101));
+                    throw new FaultException<ServerException>(new ServerException(201));
                 }
                 else if (UserDB.GetPlayerByEmail(newPlayer.Email).IsSome)
                 {
-                    throw new FaultException<ServerException>(new ServerException(102));
+                    throw new FaultException<ServerException>(new ServerException(202));
                 }
 
                 UserDB.RegisterUser(newPlayer);
@@ -57,15 +57,15 @@ namespace Contracts
         /// <param name="password">Password of the account</param>
         /// <returns>0 if the log in was succesful</returns>
         /// <exception cref="FaultException{ServerException}">Thrown when the parameters are invalid or happens, the account is not foun, the password is incorrect or happens a database connection failure</exception>
-        public int Login(string username, string password)
+        public PlayerDC Login(string username, string password)
         {
             if (string.IsNullOrEmpty(username))
             {
-                throw new FaultException<ServerException>(new ServerException(103));
+                throw new FaultException<ServerException>(new ServerException(203));
             }
             else if (string.IsNullOrEmpty(password))
             {
-                throw new FaultException<ServerException>(new ServerException(104));
+                throw new FaultException<ServerException>(new ServerException(204));
             }
 
             int loginResult;
@@ -75,12 +75,12 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                throw new FaultException<ServerException>(new ServerException(2, error.StackTrace));
+                throw new FaultException<ServerException>(new ServerException(102, error.StackTrace));
             }
 
             if (loginResult == -1)
             {
-                throw new FaultException<ServerException>(new ServerException(105));
+                throw new FaultException<ServerException>(new ServerException(205));
             }
             else if (loginResult == -2)
             {
@@ -90,7 +90,7 @@ namespace Contracts
             Option<Player> playerLogged = UserDB.GetPlayerByUsername(username);
             PlayerData.AddPlayer((Player)playerLogged.Case, username);
             Console.WriteLine("User " + username + " logged in");
-            return 0;
+            return (PlayerDC)playerLogged.Case;
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Contracts
         {
             if (string.IsNullOrEmpty(username))
             {
-                throw new FaultException<ServerException>(new ServerException(1));
+                throw new FaultException<ServerException>(new ServerException(101));
             }
 
             int logoutResult;
@@ -113,12 +113,12 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                throw new FaultException<ServerException>(new ServerException(2, error.StackTrace));
+                throw new FaultException<ServerException>(new ServerException(102, error.StackTrace));
             }
 
             if (logoutResult == 0)
             {
-                throw new FaultException<ServerException>(new ServerException(105));
+                throw new FaultException<ServerException>(new ServerException(205));
             }
 
             PlayerData.RemovePlayer(username);

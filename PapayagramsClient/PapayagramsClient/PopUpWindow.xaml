@@ -1,13 +1,13 @@
-﻿<Window x:Class="PapayagramsClient.Login.Popups.SuccessfullyRegistered"
+﻿<Window x:Class="PapayagramsClient.Login.Popups.PopUpWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PapayagramsClient.Login.Popups"
         mc:Ignorable="d"
-        Title="SuccessfullyRegistered" Height="250" Width="400">
+        Title="PopUpWindow" Height="250" Width="400">
     <Grid>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="172,101,0,0" VerticalAlignment="Top"/>
-
+        <Label Name="MessageLabel" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" MaxWidth="280" Margin="81,38,0,0"/>
+        <Image Name="IconImage" Width="40" Height="40" Margin="28,37,332,157"/>
     </Grid>
 </Window>

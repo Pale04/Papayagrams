@@ -178,6 +178,24 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Could not connect to Papayagrams services, try again later..
+        /// </summary>
+        public static string errorDatabaseConnection {
+            get {
+                return ResourceManager.GetString("errorDatabaseConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Could not connect to Papayagrams.
+        /// </summary>
+        public static string errorDatabaseConnectionTitle {
+            get {
+                return ResourceManager.GetString("errorDatabaseConnectionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Accept.
         /// </summary>
         public static string gameInvitationAccept {
@@ -367,6 +385,15 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a My profile.
+        /// </summary>
+        public static string profileTitle {
+            get {
+                return ResourceManager.GetString("profileTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Already have an account? Sign in.
         /// </summary>
         public static string registerAlreadyRegistered {
@@ -408,6 +435,24 @@ namespace PapayagramsClient.Properties {
         public static string registerSignUp {
             get {
                 return ResourceManager.GetString("registerSignUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your account was created successfully, you can now log in.
+        /// </summary>
+        public static string registerSuccessful {
+            get {
+                return ResourceManager.GetString("registerSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a User Registered.
+        /// </summary>
+        public static string registerSuccessfulTitle {
+            get {
+                return ResourceManager.GetString("registerSuccessfulTitle", resourceCulture);
             }
         }
         

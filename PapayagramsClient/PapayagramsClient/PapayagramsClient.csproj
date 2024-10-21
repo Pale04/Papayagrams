@@ -73,7 +73,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Login\Popups\SuccessfullyRegistered.xaml">
+    <Page Include="Menu\Achievements.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Menu\Configuration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Menu\Leaderboards.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopUpWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,8 +124,17 @@
     <Compile Include="Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Login\Popups\SuccessfullyRegistered.xaml.cs">
-      <DependentUpon>SuccessfullyRegistered.xaml</DependentUpon>
+    <Compile Include="Menu\Achievements.xaml.cs">
+      <DependentUpon>Achievements.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\Configuration.xaml.cs">
+      <DependentUpon>Configuration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\Leaderboards.xaml.cs">
+      <DependentUpon>Leaderboards.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopUpWindow.xaml.cs">
+      <DependentUpon>PopUpWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Login\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
@@ -177,6 +198,12 @@
     <None Include="Connected Services\PapayagramsService\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.AchievementDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.FriendDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.PlayerDC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -211,7 +238,23 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\papaya.cur" />
+    <Resource Include="Resources\Cursors\papaya.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\PopUpIcons\error-svgrepo-com.svg" />
+    <Content Include="Resources\PopUpIcons\info-circle-svgrepo-com.svg" />
+    <Content Include="Resources\PopUpIcons\success-svgrepo-com.svg" />
+    <Content Include="Resources\PopUpIcons\warning-svgrepo-com.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\add-friend-svgrepo-com.svg" />
+    <Resource Include="Resources\Icons\back-svgrepo-com.svg" />
+    <Resource Include="Resources\Icons\cog-setting-gear-svgrepo-com.svg" />
+    <Resource Include="Resources\Icons\done-ring-round-svgrepo-com.svg" />
+    <Resource Include="Resources\Icons\edit-svgrepo-com.svg" />
+    <Resource Include="Resources\Icons\exit-svgrepo-com.svg" />
+    <Resource Include="Resources\Icons\friend-svgrepo-com.svg" />
+    <Resource Include="Resources\Icons\trophy-svgrepo-com.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
