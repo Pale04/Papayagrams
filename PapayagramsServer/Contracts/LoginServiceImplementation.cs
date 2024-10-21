@@ -1,11 +1,9 @@
 ﻿using BussinessLogic;
 using DataAccess;
 using DomainClasses;
-using LanguageExt;
 using System;
 using System.ServiceModel;
 using System.Data.Entity.Core;
-using LanguageExt.Common;
 
 namespace Contracts
 {

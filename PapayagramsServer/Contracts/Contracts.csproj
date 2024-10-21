@@ -84,16 +84,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameServiceImplementation.cs" />
     <Compile Include="IGameService.cs" />
     <Compile Include="IMainMenuService.cs" />
+    <Compile Include="MainMenuServiceImplementation.cs" />
     <Compile Include="PregameServiceImplementation.cs" />
     <Compile Include="IPregameService.cs" />
     <Compile Include="ILoginService.cs" />
     <Compile Include="LoginServiceImplementation.cs" />
-    <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializedClasses.cs" />
-    <Compile Include="UserServiceImplementation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BussinessLogic\BussinessLogic.csproj">

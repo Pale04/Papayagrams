@@ -149,7 +149,6 @@
     <Compile Include="UserRelationship.cs">
       <DependentUpon>PapayagramsModel2.tt</DependentUpon>
     </Compile>
-    <Compile Include="ContractsImplementation\UserServiceImplementationTest.cs" />
     <Compile Include="UserStatus.cs">
       <DependentUpon>PapayagramsModel2.tt</DependentUpon>
     </Compile>
