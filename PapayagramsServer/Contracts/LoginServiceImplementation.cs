@@ -90,7 +90,7 @@ namespace Contracts
             Option<Player> playerLogged = UserDB.GetPlayerByUsername(username);
             PlayerData.AddPlayer((Player)playerLogged.Case, username);
             Console.WriteLine("User " + username + " logged in");
-            return (PlayerDC)playerLogged.Case;
+            return ConvertPlayerToDataContract((Player)playerLogged.Case);
         }
 
         /// <summary>
@@ -133,7 +133,6 @@ namespace Contracts
                 Id = player.Id,
                 Username = player.Username,
                 Email = player.Email,
-                Password = player.Password
             };
         }
     }

@@ -3,6 +3,7 @@
 ## Server
 101. Invalid parameters
 102. No connection with de database server
+103. The consult is empty
 
 ## Login
 201. An account with the same username exists
