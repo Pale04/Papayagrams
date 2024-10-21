@@ -472,10 +472,10 @@ namespace PapayagramsClient.PapayagramsService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Login", ReplyAction="http://tempuri.org/ILoginService/LoginResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/ILoginService/LoginServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
-        int Login(string username, string password);
+        PapayagramsClient.PapayagramsService.PlayerDC Login(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Login", ReplyAction="http://tempuri.org/ILoginService/LoginResponse")]
-        System.Threading.Tasks.Task<int> LoginAsync(string username, string password);
+        System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC> LoginAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Logout", ReplyAction="http://tempuri.org/ILoginService/LogoutResponse")]
         int Logout(string username);
@@ -519,11 +519,11 @@ namespace PapayagramsClient.PapayagramsService {
             return base.Channel.RegisterUserAsync(player);
         }
         
-        public int Login(string username, string password) {
+        public PapayagramsClient.PapayagramsService.PlayerDC Login(string username, string password) {
             return base.Channel.Login(username, password);
         }
         
-        public System.Threading.Tasks.Task<int> LoginAsync(string username, string password) {
+        public System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC> LoginAsync(string username, string password) {
             return base.Channel.LoginAsync(username, password);
         }
         
@@ -792,6 +792,12 @@ namespace PapayagramsClient.PapayagramsService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/StartGame")]
         System.Threading.Tasks.Task StartGameAsync(string roomCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/NotifyServer", ReplyAction="http://tempuri.org/IPregameService/NotifyServerResponse")]
+        int NotifyServer(PapayagramsClient.PapayagramsService.PlayerDC player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/NotifyServer", ReplyAction="http://tempuri.org/IPregameService/NotifyServerResponse")]
+        System.Threading.Tasks.Task<int> NotifyServerAsync(PapayagramsClient.PapayagramsService.PlayerDC player);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -873,6 +879,14 @@ namespace PapayagramsClient.PapayagramsService {
         
         public System.Threading.Tasks.Task StartGameAsync(string roomCode) {
             return base.Channel.StartGameAsync(roomCode);
+        }
+        
+        public int NotifyServer(PapayagramsClient.PapayagramsService.PlayerDC player) {
+            return base.Channel.NotifyServer(player);
+        }
+        
+        public System.Threading.Tasks.Task<int> NotifyServerAsync(PapayagramsClient.PapayagramsService.PlayerDC player) {
+            return base.Channel.NotifyServerAsync(player);
         }
     }
     

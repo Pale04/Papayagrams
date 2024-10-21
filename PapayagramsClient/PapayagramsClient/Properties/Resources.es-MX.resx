@@ -267,7 +267,10 @@
   <data name="errorDatabaseConnection" xml:space="preserve">
     <value>No se pudo conectar con los servicios de Papayagrams, intente de nuevo más tarde.</value>
   </data>
-  <data name="errorDatabaseConnectionTitle" xml:space="preserve">
-    <value>Error al conectar con Papayagrams</value>
+  <data name="errorServerConnection" xml:space="preserve">
+    <value>Un error ocurrió al tratar de conectarse al servidor, podría encontrarse desconectado, intente de nuevo más tarde.</value>
+  </data>
+  <data name="errorConnectionTitle" xml:space="preserve">
+    <value>Error de conexión</value>
   </data>
 </root>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,16 +36,23 @@ namespace PapayagramsClient.Login
             player.Email = EmailTextbox.Text;
 
             PapayagramsService.LoginServiceClient host = new PapayagramsService.LoginServiceClient();
-            host.Open();
+            try
+            {
+                host.Open();
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                return;
+            }
 
-            /*
             try 
             { 
                 int result = host.RegisterUser(player);
             }
-            catch (PapayagramsClient.ServerException ex)
+            catch (FaultException<PapayagramsService.ServerException> ex)
             {
-                switch (ex.ErrorCode)
+                switch (ex.Detail.ErrorCode)
                 {
                     case 101:
                         UsernameErrorText.Content = Properties.Resources.registerExistingUsername;
@@ -53,13 +61,20 @@ namespace PapayagramsClient.Login
                     case 102:
                         EmailErrorText.Content = Properties.Resources.registerEmailAlreadyLinked;
                         break;
+
+                    case 201:
+                        UsernameErrorText.Content = Properties.Resources.registerExistingUsername;
+                        break;
+
+                    case 202:
+                        UsernameErrorText.Content = Properties.Resources.registerExistingUsername;
+                        break;
                 }
             }
-            */
 
             host.Close();
 
-            new PopUpWindow(Properties.Resources.registerSuccessfulTitle, Properties.Resources.registerSuccessful, 0).ShowDialog() ;
+            new PopUpWindow(Properties.Resources.registerSuccessfulTitle, Properties.Resources.registerSuccessful, 0).ShowDialog();
             this.NavigationService.GoBack();
         }
         

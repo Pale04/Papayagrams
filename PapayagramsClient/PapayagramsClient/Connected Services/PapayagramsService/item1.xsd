@@ -26,7 +26,7 @@
   <xs:element name="LoginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="LoginResult" type="xs:int" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="LoginResult" nillable="true" type="q2:PlayerDC" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -54,7 +54,7 @@
   <xs:element name="GetFriendsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="GetFriendsResult" nillable="true" type="q2:ArrayOfFriendDC" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="GetFriendsResult" nillable="true" type="q3:ArrayOfFriendDC" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -98,7 +98,7 @@
   <xs:element name="GetFriendRequestsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="GetFriendRequestsResult" nillable="true" type="q3:ArrayOfFriendDC" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="GetFriendRequestsResult" nillable="true" type="q4:ArrayOfFriendDC" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -142,7 +142,7 @@
   <xs:element name="SearchPlayersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="SearchPlayersResult" nillable="true" type="q4:ArrayOfPlayerDC" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="SearchPlayersResult" nillable="true" type="q5:ArrayOfPlayerDC" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -185,14 +185,14 @@
   <xs:element name="GetAchievementsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="GetAchievementsResult" nillable="true" type="q5:ArrayOfAchievementDC" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="GetAchievementsResult" nillable="true" type="q6:ArrayOfAchievementDC" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetLeaderboard">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="player" nillable="true" type="q6:PlayerDC" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="player" nillable="true" type="q7:PlayerDC" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -218,7 +218,7 @@
   <xs:element name="ReceiveFriendRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="player" nillable="true" type="q7:PlayerDC" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="player" nillable="true" type="q8:PlayerDC" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -230,7 +230,7 @@
   <xs:element name="ReceiveGameInvitation">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="invitation" nillable="true" type="q8:GameInvitationDC" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="invitation" nillable="true" type="q9:GameInvitationDC" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -286,7 +286,7 @@
   <xs:element name="SendMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="message" nillable="true" type="q9:Message" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="message" nillable="true" type="q10:Message" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -297,10 +297,24 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="NotifyServer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="player" nillable="true" type="q11:PlayerDC" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotifyServerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="NotifyServerResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ReceiveMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="message" nillable="true" type="q10:Message" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="message" nillable="true" type="q12:Message" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

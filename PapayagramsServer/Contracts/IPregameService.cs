@@ -34,6 +34,9 @@ namespace Contracts
 
         [FaultContract(typeof(ServerException))]
         void InviteFriend(string username);
+
+        [OperationContract]
+        int NotifyServer(PlayerDC player);
     }
 
     [ServiceContract]

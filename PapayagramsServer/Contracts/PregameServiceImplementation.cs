@@ -58,5 +58,11 @@ namespace Contracts
             //TODO
             throw new NotImplementedException();
         }
+
+        public int NotifyServer(PlayerDC player)
+        {
+            //TODO
+            throw new NotImplementedException();
+        }
     }
 }

@@ -27,7 +27,7 @@ namespace Contracts
             }
             catch (ArgumentException error)
             {
-                throw new FaultException<ServerException>(new ServerException(1, error.StackTrace));
+                throw new FaultException<ServerException>(new ServerException(101, error.StackTrace));
             }
 
             try
@@ -46,7 +46,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                throw new FaultException<ServerException>(new ServerException(2, error.StackTrace));
+                throw new FaultException<ServerException>(new ServerException(102, error.StackTrace));
             }
         }
 

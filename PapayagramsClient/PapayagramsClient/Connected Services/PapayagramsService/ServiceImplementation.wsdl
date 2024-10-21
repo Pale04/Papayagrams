@@ -288,6 +288,12 @@
   <wsdl:message name="IPregameService_StartGame_InputMessage">
     <wsdl:part name="parameters" element="tns:StartGame" />
   </wsdl:message>
+  <wsdl:message name="IPregameService_NotifyServer_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotifyServer" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_NotifyServer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NotifyServerResponse" />
+  </wsdl:message>
   <wsdl:message name="IPregameService_ReceiveMessage_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReceiveMessage" />
   </wsdl:message>
@@ -418,6 +424,10 @@
     </wsdl:operation>
     <wsdl:operation name="StartGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/StartGame" message="tns:IPregameService_StartGame_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyServer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/NotifyServer" message="tns:IPregameService_NotifyServer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/NotifyServerResponse" message="tns:IPregameService_NotifyServer_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ReceiveMessage">
       <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/ReceiveMessage" message="tns:IPregameService_ReceiveMessage_OutputCallbackMessage" />
@@ -684,6 +694,15 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyServer">
+      <soap12:operation soapAction="http://tempuri.org/IPregameService/NotifyServer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ReceiveMessage">
       <soap12:operation soapAction="http://tempuri.org/IPregameService/ReceiveMessage" style="document" />
