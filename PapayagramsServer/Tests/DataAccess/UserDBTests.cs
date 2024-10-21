@@ -124,6 +124,28 @@ namespace DataAccess.Tests
             Assert.IsTrue(result.IsNone, "GetPlayerByEmailInexistentTest");
         }
 
+        [TestMethod()]
+        public void LogOutSuccessfulTest()
+        {
+            int expected = 1;
+            int result = UserDB.LogOut(_registeredPlayer.Username);
+            Assert.AreEqual(expected, result, "LogOutSuccessfulTest");
+        }
 
+        [TestMethod()]
+        public void LogOutNonExistentAccountTest()
+        {
+            int expected = 0;
+            int result = UserDB.LogOut("Pale");
+            Assert.AreEqual(expected, result, "LogOutNonExistentAccountTest");
+        }
+
+        [TestMethod()]
+        public void LogOutNullUsernameTest()
+        {
+            int expected = 0;
+            int result = UserDB.LogOut(null);
+            Assert.AreEqual(expected, result, "LogOutNullUsernameTest");
+        }
     }
 }

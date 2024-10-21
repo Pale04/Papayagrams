@@ -4,6 +4,7 @@ using DomainClasses;
 using System;
 using System.ServiceModel;
 using System.Data.Entity.Core;
+using LanguageExt;
 
 namespace Contracts
 {
@@ -13,8 +14,8 @@ namespace Contracts
         /// Create an account for a new user
         /// </summary>
         /// <param name="player">PlayerDC object with the user's data</param>
-        /// <returns>6 if the registration was successful</returns>
-        /// <exception cref="FaultException">Thrown when the parameters are invalid, the username or email already exists or happens a database connection failure</exception>
+        /// <returns>0 if the registration was successful</returns>
+        /// <exception cref="FaultException{ServerException}">Thrown when the parameters are invalid, the username or email already exists or happens a database connection failure</exception>
         public int RegisterUser(PlayerDC player)
         {
             Player newPlayer = new Player();
@@ -39,7 +40,9 @@ namespace Contracts
                 {
                     throw new FaultException<ServerException>(new ServerException(102));
                 }
-                return UserDB.RegisterUser(newPlayer);
+
+                UserDB.RegisterUser(newPlayer);
+                return 0;
             }
             catch (EntityException error)
             {
@@ -52,8 +55,8 @@ namespace Contracts
         /// </summary>
         /// <param name="username">Username of the account</param>
         /// <param name="password">Password of the account</param>
-        /// <returns>0 if the log in was succesful, -1 if the account does not exist or -2 if the password is incorrect</returns>
-        /// <exception cref="FaultException">Thrown when the parameters are invalid or happens, the account is not foun, the password is incorrect or happens a database connection failure</exception>
+        /// <returns>0 if the log in was succesful</returns>
+        /// <exception cref="FaultException{ServerException}">Thrown when the parameters are invalid or happens, the account is not foun, the password is incorrect or happens a database connection failure</exception>
         public int Login(string username, string password)
         {
             if (string.IsNullOrEmpty(username))
@@ -83,11 +86,41 @@ namespace Contracts
             {
                 throw new FaultException<ServerException>(new ServerException(106));
             }
-            return loginResult;
+
+            Option<Player> playerLogged = UserDB.GetPlayerByUsername(username);
+            PlayerData.AddPlayer((Player)playerLogged.Case, username);
+            Console.WriteLine("User " + username + " logged in");
+            return 0;
         }
 
+        /// <summary>
+        /// Take out the player from the application
+        /// </summary>
+        /// <param name="username">Username of the player</param>
+        /// <returns>0 if the logut was succesfull</returns>
+        /// <exception cref="FaultException{ServerException}">thrown when the parameter is invalid, hapens a database connection failure or the username does not exist</exception>
         public int Logout(string username)
         {
+            if (string.IsNullOrEmpty(username))
+            {
+                throw new FaultException<ServerException>(new ServerException(1));
+            }
+
+            int logoutResult;
+            try
+            {
+                logoutResult = UserDB.LogOut(username);
+            }
+            catch (EntityException error)
+            {
+                throw new FaultException<ServerException>(new ServerException(2, error.StackTrace));
+            }
+
+            if (logoutResult == 0)
+            {
+                throw new FaultException<ServerException>(new ServerException(105));
+            }
+
             PlayerData.RemovePlayer(username);
             Console.WriteLine("User " + username + " logged out");
             return 0;

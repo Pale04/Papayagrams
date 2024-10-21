@@ -123,5 +123,14 @@ namespace DataAccess
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("update_user_status", usernameParameter, statusParameter, dateParameter);
         }
+    
+        public virtual int log_out(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("log_out", usernameParameter);
+        }
     }
 }

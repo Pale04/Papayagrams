@@ -4,7 +4,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using LanguageExt;
 using System.Data;
-using System;
 using System.Data.Entity.Core;
 
 namespace DataAccess
@@ -114,12 +113,18 @@ namespace DataAccess
             return optionPlayer;
         }
 
-        public static int UpdateUserStatus(string username, PlayerStatus status)
+        /// <summary>
+        /// Change the player status to offline
+        /// </summary>
+        /// <param name="username">Username of the player</param>
+        /// <returns>1 if the operation was succesful, 0 otherwise</returns>
+        /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
+        public static int LogOut(string username)
         {
             int result;
             using (var context = new papayagramsEntities())
             {
-                result = context.update_user_status(username, PlayerStatus.online.ToString(), DateTime.Now);
+                result = context.log_out(username);
             }
             return result;
         }

@@ -18,7 +18,6 @@ namespace Tests
         public Nullable<int> userId { get; set; }
         public Nullable<int> wonGames { get; set; }
         public Nullable<int> lostGames { get; set; }
-        public Nullable<int> totalGames { get; set; }
     
         public virtual User User { get; set; }
     }

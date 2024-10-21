@@ -20,7 +20,6 @@
           <Property Name="userId" Type="int" />
           <Property Name="wonGames" Type="int" />
           <Property Name="lostGames" Type="int" />
-          <Property Name="totalGames" Type="int" />
         </EntityType>
         <EntityType Name="SuddenDeathHistory">
           <Key>
@@ -30,7 +29,6 @@
           <Property Name="userId" Type="int" />
           <Property Name="wonGames" Type="int" />
           <Property Name="lostGames" Type="int" />
-          <Property Name="totalGames" Type="int" />
         </EntityType>
         <EntityType Name="TimeAtackHistory">
           <Key>
@@ -40,7 +38,6 @@
           <Property Name="userId" Type="int" />
           <Property Name="wonGames" Type="int" />
           <Property Name="lostGames" Type="int" />
-          <Property Name="totalGames" Type="int" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -69,6 +66,7 @@
           <Property Name="pieceSize" Type="varchar" MaxLength="20" />
           <Property Name="pieceColor" Type="int" />
           <Property Name="icon" Type="int" />
+          <Property Name="cursorDesign" Type="int" />
         </EntityType>
         <EntityType Name="UserRelationship">
           <Key>
@@ -206,15 +204,13 @@
           <Parameter Name="username" Type="varchar" Mode="In" />
           <Parameter Name="password" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="log_out" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="register_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="varchar" Mode="In" />
           <Parameter Name="email" Type="varchar" Mode="In" />
           <Parameter Name="password" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="update_user_status" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="username" Type="varchar" Mode="In" />
-          <Parameter Name="status" Type="varchar" Mode="In" />
-          <Parameter Name="date" Type="datetime" Mode="In" />
         </Function>
         <EntityContainer Name="PapayagramsModelStoreContainer">
           <EntitySet Name="Achievement" EntityType="Self.Achievement" Schema="dbo" store:Type="Tables" />
@@ -283,7 +279,6 @@
           <Property Name="userId" Type="Int32" />
           <Property Name="wonGames" Type="Int32" />
           <Property Name="lostGames" Type="Int32" />
-          <Property Name="totalGames" Type="Int32" />
           <NavigationProperty Name="User" Relationship="Self.FK__OriginalG__userI__4BAC3F29" FromRole="OriginalGameHistory" ToRole="User" />
         </EntityType>
         <EntityType Name="SuddenDeathHistory">
@@ -294,7 +289,6 @@
           <Property Name="userId" Type="Int32" />
           <Property Name="wonGames" Type="Int32" />
           <Property Name="lostGames" Type="Int32" />
-          <Property Name="totalGames" Type="Int32" />
           <NavigationProperty Name="User" Relationship="Self.FK__SuddenDea__userI__4CA06362" FromRole="SuddenDeathHistory" ToRole="User" />
         </EntityType>
         <EntityType Name="TimeAtackHistory">
@@ -305,7 +299,6 @@
           <Property Name="userId" Type="Int32" />
           <Property Name="wonGames" Type="Int32" />
           <Property Name="lostGames" Type="Int32" />
-          <Property Name="totalGames" Type="Int32" />
           <NavigationProperty Name="User" Relationship="Self.FK__TimeAtack__userI__4D94879B" FromRole="TimeAtackHistory" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
@@ -346,6 +339,7 @@
           <Property Name="pieceColor" Type="Int32" />
           <Property Name="icon" Type="Int32" />
           <NavigationProperty Name="User" Relationship="Self.FK__UserConfi__userI__534D60F1" FromRole="UserConfiguration" ToRole="User" />
+          <Property Name="cursorDesign" Type="Int32" />
         </EntityType>
         <EntityType Name="UserRelationship">
           <Key>
@@ -549,6 +543,9 @@
             <Parameter Name="status" Mode="In" Type="String" />
             <Parameter Name="date" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="log_out">
+            <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="login_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -595,7 +592,6 @@
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="wonGames" ColumnName="wonGames" />
                 <ScalarProperty Name="lostGames" ColumnName="lostGames" />
-                <ScalarProperty Name="totalGames" ColumnName="totalGames" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -606,7 +602,6 @@
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="wonGames" ColumnName="wonGames" />
                 <ScalarProperty Name="lostGames" ColumnName="lostGames" />
-                <ScalarProperty Name="totalGames" ColumnName="totalGames" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -617,7 +612,6 @@
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="wonGames" ColumnName="wonGames" />
                 <ScalarProperty Name="lostGames" ColumnName="lostGames" />
-                <ScalarProperty Name="totalGames" ColumnName="totalGames" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -643,6 +637,7 @@
           <EntitySetMapping Name="UserConfiguration">
             <EntityTypeMapping TypeName="PapayagramsModel.UserConfiguration">
               <MappingFragment StoreEntitySet="UserConfiguration">
+                <ScalarProperty Name="cursorDesign" ColumnName="cursorDesign" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="selectedLanguage" ColumnName="selectedLanguage" />
                 <ScalarProperty Name="typography" ColumnName="typography" />
@@ -694,7 +689,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="log_in" FunctionName="PapayagramsModel.Store.log_in" />
-          <FunctionImportMapping FunctionImportName="update_user_status" FunctionName="PapayagramsModel.Store.update_user_status" />
+          <FunctionImportMapping FunctionImportName="log_out" FunctionName="PapayagramsModel.Store.log_out" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

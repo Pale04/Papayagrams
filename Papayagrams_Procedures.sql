@@ -43,6 +43,13 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE log_out
+	@username VARCHAR(50)
+AS
+BEGIN
+	UPDATE [UserStatus] SET status = 'offline', since = GETDATE() WHERE userId = (SELECT id FROM [User] WHERE username = @username);
+END;
+GO
 
 CREATE PROCEDURE get_player_by_username
 	@username VARCHAR(50)
@@ -61,17 +68,5 @@ BEGIN
 	SELECT id, username, email, CAST(DecryptByAsymKey (AsymKey_ID('asy_triggerdb'),password,N'RD_afAmGsRMYi29') AS VARCHAR(100)) password 
 	FROM [User] 
 	WHERE email = @email;
-END;
-GO
-
-CREATE PROCEDURE update_user_status
-	@username VARCHAR(50),
-	@status VARCHAR(20),
-	@date DATETIME
-AS
-BEGIN
-	DECLARE @userId int
-	SELECT @userId = id FROM [User] WHERE username = @username;
-	UPDATE [UserStatus] SET status = @status, since = @date WHERE userId = @userId;
 END;
 GO

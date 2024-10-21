@@ -1,6 +1,5 @@
 ﻿using DataAccess;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.ServiceModel;
 
 namespace Contracts.Tests
@@ -48,7 +47,7 @@ namespace Contracts.Tests
                 Password = "asdfas´461ds+"
             };
 
-            int expected = 6;
+            int expected = 0;
             int result = _serviceImplementation.RegisterUser(newPlayer);
             Assert.AreEqual(expected, result, "RegisterUserSuccesfulTest");
         }
@@ -163,6 +162,42 @@ namespace Contracts.Tests
             catch (FaultException<ServerException> error)
             {
                 Assert.AreEqual(106, error.Detail.ErrorCode, "LogInIncorrectPasswordTest");
+            }
+        }
+
+        [TestMethod]
+        public void LogOutSuccesfulTest()
+        {
+            int expected = 0;
+            int result = _serviceImplementation.Logout(_registeredPlayer.Username);
+            Assert.AreEqual(expected, result, "LogOutSuccesfulTest");
+        }
+
+        [TestMethod]
+        public void LogOutEmptyUsernameTest()
+        {
+            try
+            {
+                _serviceImplementation.Logout("");
+                Assert.Fail("LogOutEmptyUsernameTest");
+            }
+            catch (FaultException<ServerException> error)
+            {
+                Assert.AreEqual(1, error.Detail.ErrorCode, "LogOutEmptyUsernameTest");
+            }
+        }
+
+        [TestMethod()]
+        public void LogOutNonExistUsernameTest()
+        {
+            try
+            {
+                _serviceImplementation.Logout("Pale");
+                Assert.Fail("LogOutNonExistUsernameTest");
+            }
+            catch (FaultException<ServerException> error)
+            {
+                Assert.AreEqual(105, error.Detail.ErrorCode, "LogOutNonExistUsernameTest");
             }
         }
     }
