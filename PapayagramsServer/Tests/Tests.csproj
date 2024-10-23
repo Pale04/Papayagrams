@@ -97,6 +97,7 @@
     <Compile Include="Achievement.cs">
       <DependentUpon>PapayagramsModel2.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataBaseOperation.cs" />
     <Compile Include="get_player_by_email_Result.cs">
       <DependentUpon>PapayagramsModel2.tt</DependentUpon>
     </Compile>

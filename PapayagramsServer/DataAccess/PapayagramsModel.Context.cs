@@ -132,5 +132,18 @@ namespace DataAccess
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("log_out", usernameParameter);
         }
+    
+        public virtual int send_friend_request(string senderUsername, string receiverUsername)
+        {
+            var senderUsernameParameter = senderUsername != null ?
+                new ObjectParameter("senderUsername", senderUsername) :
+                new ObjectParameter("senderUsername", typeof(string));
+    
+            var receiverUsernameParameter = receiverUsername != null ?
+                new ObjectParameter("receiverUsername", receiverUsername) :
+                new ObjectParameter("receiverUsername", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("send_friend_request", senderUsernameParameter, receiverUsernameParameter);
+        }
     }
 }

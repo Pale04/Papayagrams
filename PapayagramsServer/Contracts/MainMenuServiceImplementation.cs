@@ -1,4 +1,5 @@
-﻿using DataAccess;
+﻿using BussinessLogic;
+using DataAccess;
 using DomainClasses;
 using LanguageExt;
 using System;
@@ -55,30 +56,28 @@ namespace Contracts
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Add the callback channel of the player to the callbacks pool
+        /// </summary>
+        /// <param name="username">Username of the player</param>
         public void ReportToServer(string username)
         {
-            throw new NotImplementedException();
+            CallbacksPool.PlayerArrivedToMainMenu(username,OperationContext.Current.GetCallbackChannel<IMainMenuServiceCallback>());
         }
 
         /// <summary>
         /// Search a player by username
         /// </summary>
-        /// <param name="username">PlayerDC object with its id, username and email.</param>
-        /// <returns></returns>
+        /// <param name="searcherUsername">Username ot the player who is searching</param>
+        /// <param name="searchedUsername">Username of the player who needs to be found</param>
+        /// <returns>PlayerDC object with its id, username and email.</returns>
         /// <exception cref="FaultException{ServerException}">When the consult is empty or happens a database error</exception>
-        public PlayerDC SearchPlayer(string username)
+        public PlayerDC SearchNoFriendPlayer(string searcherUsername, string searchedUsername)
         {
             PlayerDC player = new PlayerDC();
-            Option<Player> playerOption;
+            Option<Player> playerOption =Option<Player>.None;
 
-            try
-            {
-                playerOption = UserDB.GetPlayerByUsername(username);
-            }
-            catch (EntityException error)
-            {
-                throw new FaultException<ServerException>(new ServerException(2, error.StackTrace));
-            }
+            //TODO: mostrar todos los jugadores menos amigos.
 
             if (playerOption.IsNone)
             {
@@ -88,9 +87,32 @@ namespace Contracts
             return ConvertPlayerToDataContract((Player)playerOption.Case);
         }
 
-        public int SendFriendRequest(string username, string friendUsername)
+        public int SendFriendRequest(string senderUsername, string receiverUsername)
         {
-            throw new NotImplementedException();
+            int result;
+            try
+            {
+                result = UserDB.SendFriendRequest(senderUsername, receiverUsername);
+            }
+            catch (EntityException error)
+            {
+                throw new FaultException<ServerException>(new ServerException(102,error.StackTrace));
+            }
+
+            if (result == -1)
+            {
+                throw new FaultException<ServerException>(new ServerException(301));
+            }
+            else if(result == -2)
+            {
+                throw new FaultException<ServerException>(new ServerException(302));
+            }
+            else if (result == -3)
+            {
+                throw new FaultException<ServerException>(new ServerException(303));
+            }
+
+            return result;
         }
     }
 }

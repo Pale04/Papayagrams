@@ -16,7 +16,7 @@ CREATE TABLE [OriginalGameHistory] (
   [id] int PRIMARY KEY IDENTITY(1, 1),
   [userId] int,
   [wonGames] int,
-  [lostGames] int,
+  [lostGames] int
 )
 GO
 
@@ -24,7 +24,7 @@ CREATE TABLE [SuddenDeathHistory] (
   [id] int PRIMARY KEY IDENTITY(1, 1),
   [userId] int,
   [wonGames] int,
-  [lostGames] int,
+  [lostGames] int
 )
 GO
 
@@ -32,7 +32,7 @@ CREATE TABLE [TimeAtackHistory] (
   [id] int PRIMARY KEY IDENTITY(1, 1),
   [userId] int,
   [wonGames] int,
-  [lostGames] int,
+  [lostGames] int
 )
 GO
 
@@ -40,8 +40,7 @@ CREATE TABLE [UserRelationship] (
   [id] int PRIMARY KEY IDENTITY(1, 1),
   [senderId] int,
   [receiverId] int,
-  [requestState] VARCHAR(20) CHECK (requestState IN ('accepted', 'rejected', 'pending')),
-  [relationType] VARCHAR(20) CHECK (relationType IN ('friend', 'blocked'))
+  [relationState] VARCHAR(20) CHECK (relationState IN ('request_pending', 'friend', 'blocked'))
 )
 GO
 

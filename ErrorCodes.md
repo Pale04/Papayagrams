@@ -14,7 +14,9 @@
 206. Incorrect password
 
 ## Main menu
-301. 
+301. Cannot send a friend request. You have sent a friend request before and is pending
+302. Cannot send a friend request. You have a pending friend request from that player.
+303. Cannot send a friend request. You are already friends.
 
 ## Pregame
 

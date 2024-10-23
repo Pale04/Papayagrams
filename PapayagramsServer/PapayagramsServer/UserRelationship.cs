@@ -17,8 +17,7 @@ namespace PapayagramsServer
         public int id { get; set; }
         public Nullable<int> senderId { get; set; }
         public Nullable<int> receiverId { get; set; }
-        public string requestState { get; set; }
-        public string relationType { get; set; }
+        public string relationState { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

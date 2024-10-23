@@ -32,11 +32,11 @@ namespace Contracts
 
         [OperationContract]
         [FaultContract(typeof(ServerException))]
-        PlayerDC SearchPlayer(string username);
+        PlayerDC SearchNoFriendPlayer(string searcherUsername, string searchedUsername);
 
         [OperationContract]
         [FaultContract(typeof(ServerException))]
-        int SendFriendRequest(string username, string friendUsername);
+        int SendFriendRequest(string senderUsername, string receiverUsername);
 
         //TODO: implementar un objeto serializado para recuperar el perfil completo del usuario
         [OperationContract]

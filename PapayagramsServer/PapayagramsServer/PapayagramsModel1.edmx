@@ -75,8 +75,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="senderId" Type="int" />
           <Property Name="receiverId" Type="int" />
-          <Property Name="requestState" Type="varchar" MaxLength="20" />
-          <Property Name="relationType" Type="varchar" MaxLength="20" />
+          <Property Name="relationState" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="UserStatus">
           <Key>
@@ -211,6 +210,10 @@
           <Parameter Name="username" Type="varchar" Mode="In" />
           <Parameter Name="email" Type="varchar" Mode="In" />
           <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="send_friend_request" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="senderUsername" Type="varchar" Mode="In" />
+          <Parameter Name="receiverUsername" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="PapayagramsModelStoreContainer">
           <EntitySet Name="Achievement" EntityType="Self.Achievement" Schema="dbo" store:Type="Tables" />
@@ -348,10 +351,9 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="senderId" Type="Int32" />
           <Property Name="receiverId" Type="Int32" />
-          <Property Name="requestState" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="relationType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User" Relationship="Self.FK__UserRelat__recei__4F7CD00D" FromRole="UserRelationship" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Self.FK__UserRelat__sende__4E88ABD4" FromRole="UserRelationship" ToRole="User" />
+          <Property Name="relationState" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="UserStatus">
           <Key>
@@ -540,7 +542,11 @@
             <Parameter Name="date" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="log_out">
-            <Parameter Name="username" Mode="In" Type="String" />
+          <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="send_friend_request">
+            <Parameter Name="senderUsername" Mode="In" Type="String" />
+            <Parameter Name="receiverUsername" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="get_player_Result">
@@ -640,12 +646,11 @@
           <EntitySetMapping Name="UserRelationship">
             <EntityTypeMapping TypeName="PapayagramsModel.UserRelationship">
               <MappingFragment StoreEntitySet="UserRelationship">
+                <ScalarProperty Name="relationState" ColumnName="relationState" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="senderId" ColumnName="senderId" />
                 <ScalarProperty Name="receiverId" ColumnName="receiverId" />
-                <ScalarProperty Name="requestState" ColumnName="requestState" />
-                <ScalarProperty Name="relationType" ColumnName="relationType" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserStatus">
@@ -680,6 +685,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="log_in" FunctionName="PapayagramsModel.Store.log_in" />
           <FunctionImportMapping FunctionImportName="log_out" FunctionName="PapayagramsModel.Store.log_out" />
+          <FunctionImportMapping FunctionImportName="send_friend_request" FunctionName="PapayagramsModel.Store.send_friend_request" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
