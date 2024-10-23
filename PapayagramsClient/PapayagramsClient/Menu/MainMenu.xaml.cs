@@ -28,10 +28,19 @@ namespace PapayagramsClient
             InitializeComponent();
 
             InstanceContext context = new InstanceContext(this);
-            //MainMenuServiceClient host = new MainMenuServiceClient(context);
-            //host.Open();
-            //host.ReportToServer();
-            //host.Close();
+            MainMenuServiceClient host = new MainMenuServiceClient(context);
+            try
+            {
+                host.Open();
+            }
+            catch (EndpointNotFoundException)
+            {
+                new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                return;
+            }
+
+            host.ReportToServer(CurrentPlayer.Player.Username);
+            host.Close();
         }
 
         private void CreateNewGame(object sender, RoutedEventArgs e)

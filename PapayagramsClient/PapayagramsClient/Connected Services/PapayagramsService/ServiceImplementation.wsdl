@@ -147,6 +147,9 @@
   <wsdl:message name="ILoginService_Logout_OutputMessage">
     <wsdl:part name="parameters" element="tns:LogoutResponse" />
   </wsdl:message>
+  <wsdl:message name="ILoginService_Logout_ServerExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q3:ServerException" />
+  </wsdl:message>
   <wsdl:message name="IMainMenuService_GetFriends_InputMessage">
     <wsdl:part name="parameters" element="tns:GetFriends" />
   </wsdl:message>
@@ -154,7 +157,7 @@
     <wsdl:part name="parameters" element="tns:GetFriendsResponse" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_GetFriends_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q3:ServerException" />
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q4:ServerException" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_RemoveFriend_InputMessage">
     <wsdl:part name="parameters" element="tns:RemoveFriend" />
@@ -163,7 +166,7 @@
     <wsdl:part name="parameters" element="tns:RemoveFriendResponse" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_RemoveFriend_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q4:ServerException" />
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q5:ServerException" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_BlockFriend_InputMessage">
     <wsdl:part name="parameters" element="tns:BlockFriend" />
@@ -172,7 +175,7 @@
     <wsdl:part name="parameters" element="tns:BlockFriendResponse" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_BlockFriend_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q5:ServerException" />
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q6:ServerException" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_GetFriendRequests_InputMessage">
     <wsdl:part name="parameters" element="tns:GetFriendRequests" />
@@ -181,7 +184,7 @@
     <wsdl:part name="parameters" element="tns:GetFriendRequestsResponse" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_GetFriendRequests_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q6:ServerException" />
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q7:ServerException" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_AcceptFriendRequest_InputMessage">
     <wsdl:part name="parameters" element="tns:AcceptFriendRequest" />
@@ -190,7 +193,7 @@
     <wsdl:part name="parameters" element="tns:AcceptFriendRequestResponse" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_AcceptFriendRequest_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q7:ServerException" />
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q8:ServerException" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_RejectFriendRequest_InputMessage">
     <wsdl:part name="parameters" element="tns:RejectFriendRequest" />
@@ -199,16 +202,16 @@
     <wsdl:part name="parameters" element="tns:RejectFriendRequestResponse" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_RejectFriendRequest_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q8:ServerException" />
-  </wsdl:message>
-  <wsdl:message name="IMainMenuService_SearchPlayers_InputMessage">
-    <wsdl:part name="parameters" element="tns:SearchPlayers" />
-  </wsdl:message>
-  <wsdl:message name="IMainMenuService_SearchPlayers_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SearchPlayersResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMainMenuService_SearchPlayers_ServerExceptionFault_FaultMessage">
     <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q9:ServerException" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_SearchPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_SearchPlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchPlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_SearchPlayer_ServerExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q10:ServerException" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_SendFriendRequest_InputMessage">
     <wsdl:part name="parameters" element="tns:SendFriendRequest" />
@@ -217,7 +220,7 @@
     <wsdl:part name="parameters" element="tns:SendFriendRequestResponse" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_SendFriendRequest_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q10:ServerException" />
+    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q11:ServerException" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_GetPlayerProfile_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPlayerProfile" />
@@ -226,7 +229,7 @@
     <wsdl:part name="parameters" element="tns:GetPlayerProfileResponse" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_GetPlayerProfile_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q11:ServerException" />
+    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q12:ServerException" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_GetAchievements_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAchievements" />
@@ -235,7 +238,7 @@
     <wsdl:part name="parameters" element="tns:GetAchievementsResponse" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_GetAchievements_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q12:ServerException" />
+    <wsdl:part xmlns:q13="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q13:ServerException" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_GetLeaderboard_InputMessage">
     <wsdl:part name="parameters" element="tns:GetLeaderboard" />
@@ -244,7 +247,7 @@
     <wsdl:part name="parameters" element="tns:GetLeaderboardResponse" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_GetLeaderboard_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q13="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q13:ServerException" />
+    <wsdl:part xmlns:q14="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q14:ServerException" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_ReportToServer_InputMessage">
     <wsdl:part name="parameters" element="tns:ReportToServer" />
@@ -335,6 +338,7 @@
     <wsdl:operation name="Logout">
       <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/Logout" message="tns:ILoginService_Logout_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/LogoutResponse" message="tns:ILoginService_Logout_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILoginService/LogoutServerExceptionFault" name="ServerExceptionFault" message="tns:ILoginService_Logout_ServerExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMainMenuService">
@@ -368,10 +372,10 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/RejectFriendRequestResponse" message="tns:IMainMenuService_RejectFriendRequest_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IMainMenuService/RejectFriendRequestServerExceptionFault" name="ServerExceptionFault" message="tns:IMainMenuService_RejectFriendRequest_ServerExceptionFault_FaultMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SearchPlayers">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/SearchPlayers" message="tns:IMainMenuService_SearchPlayers_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/SearchPlayersResponse" message="tns:IMainMenuService_SearchPlayers_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IMainMenuService/SearchPlayersServerExceptionFault" name="ServerExceptionFault" message="tns:IMainMenuService_SearchPlayers_ServerExceptionFault_FaultMessage" />
+    <wsdl:operation name="SearchPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/SearchPlayer" message="tns:IMainMenuService_SearchPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/SearchPlayerResponse" message="tns:IMainMenuService_SearchPlayer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IMainMenuService/SearchPlayerServerExceptionFault" name="ServerExceptionFault" message="tns:IMainMenuService_SearchPlayer_ServerExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendFriendRequest">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/SendFriendRequest" message="tns:IMainMenuService_SendFriendRequest_InputMessage" />
@@ -488,6 +492,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServerExceptionFault">
+        <soap12:fault use="literal" name="ServerExceptionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IMainMenuService" type="tns:IMainMenuService">
@@ -565,8 +572,8 @@
         <soap12:fault use="literal" name="ServerExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="SearchPlayers">
-      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/SearchPlayers" style="document" />
+    <wsdl:operation name="SearchPlayer">
+      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/SearchPlayer" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

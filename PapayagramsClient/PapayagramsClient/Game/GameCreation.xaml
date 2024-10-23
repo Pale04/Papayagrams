@@ -6,14 +6,54 @@
       xmlns:local="clr-namespace:PapayagramsClient.Game"
       mc:Ignorable="d" 
       xmlns:p="clr-namespace:PapayagramsClient.Properties"
+      xmlns:svg="clr-namespace:SVGImage.SVG;assembly=SVGImage"
       d:DesignHeight="720" d:DesignWidth="1080"
       Background="#D9D9D9"
       Title="GameCreation">
 
     <Grid>
-        <Button HorizontalAlignment="Left" Margin="46,43,0,0" VerticalAlignment="Top">
-            <Image Source="../Resources/Icons/back-svgrepo-com.svg"/>
+        <Button Style="{StaticResource PrimaryButton}" Name="BackButton" HorizontalAlignment="Left" Margin="46,43,0,0" VerticalAlignment="Top" Height="60" Width="61">
+            <svg:SVGImage Name="BackImage"/>
         </Button>
+
+        <StackPanel Width="900" Margin="90,30,90,30">
+            <Label Content="{x:Static p:Resources.createGameTitle}" HorizontalAlignment="Center" FontSize="64" FontWeight="Bold"/>
+
+            <Grid Margin="0, 30, 0, 30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Margin="0, 0 ,25, 0">
+                    <Label Content="{x:Static p:Resources.createGameGameMode}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="32" Height="50"/>
+                    <Separator Height="25" Opacity="0"/>
+                    <Label Content="{x:Static p:Resources.createGamePieces}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="32" Height="50"/>
+                    <Separator Height="25" Opacity="0"/>
+                    <Label Content="{x:Static p:Resources.createGameMaxPlayers}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="32" Height="50"/>
+                    <Separator Height="25" Opacity="0"/>
+                    <Label Content="{x:Static p:Resources.createGameLanguage}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="32" Height="50"/>
+                    <Separator Height="25" Opacity="0"/>
+                    <Label Content="{x:Static p:Resources.createGameTimeLimit}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="32" Height="50"/>
+                    <Separator Height="25" Opacity="0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <ComboBox Name="GameModeComboBox" FontSize="32" VerticalAlignment="Center" Height="50"/>
+                    <Separator Height="25" Opacity="0"/>
+                    <ComboBox Name="InitialPiecesComboBox" FontSize="32" VerticalAlignment="Center" Height="50"/>
+                    <Separator Height="25" Opacity="0"/>
+                    <ComboBox Name="MaxPlayersComboBox" FontSize="32" VerticalAlignment="Center" Height="50"/>
+                    <Separator Height="25" Opacity="0"/>
+                    <ComboBox Name="WordsLanguageComboBox" FontSize="32" VerticalAlignment="Center" Height="50"/>
+                    <Separator Height="25" Opacity="0"/>
+                    <ComboBox Name="TimeLimitComboBox" FontSize="32" VerticalAlignment="Center" Height="50"/>
+                    <Separator Height="25" Opacity="0"/>
+                </StackPanel>
+            </Grid>
+
+            <Button Content="{x:Static p:Resources.createGameCreate}" HorizontalAlignment="Center" Width="320" Style="{StaticResource PrimaryButton}"/>
+        </StackPanel>
 
     </Grid>
 </Page>

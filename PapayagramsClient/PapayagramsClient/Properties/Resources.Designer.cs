@@ -268,6 +268,15 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The email cannot be left empty.
+        /// </summary>
+        public static string globalEmptyEmail {
+            get {
+                return ResourceManager.GetString("globalEmptyEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Username cannot be empty.
         /// </summary>
         public static string globalEmptyUsername {

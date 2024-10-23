@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PapayagramsClient.Login"
       xmlns:p="clr-namespace:PapayagramsClient.Properties"
+      xmlns:svg="clr-namespace:SVGImage.SVG;assembly=SVGImage"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1080"
       Title="Login"

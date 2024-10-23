@@ -1,5 +1,4 @@
-﻿using PapayagramsClient.Login.Popups;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting;
@@ -30,6 +29,19 @@ namespace PapayagramsClient.Login
 
         private void RegisterUser(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrEmpty(UsernameTextbox.Text))
+            {
+                UsernameErrorText.Content = Properties.Resources.globalEmptyUsername;
+            }
+            if (string.IsNullOrEmpty(PasswordTextbox.Text))
+            {
+                PasswordErrorText.Content = Properties.Resources.globalEmptyUsername;
+            }
+            if (string.IsNullOrEmpty(EmailTextbox.Text))
+            {
+                EmailErrorText.Content = Properties.Resources.globalEmptyEmail;
+            }
+
             PapayagramsService.PlayerDC player = new PapayagramsService.PlayerDC();
             player.Username = UsernameTextbox.Text;
             player.Password = PasswordTextbox.Text;
@@ -40,7 +52,7 @@ namespace PapayagramsClient.Login
             {
                 host.Open();
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                 return;
@@ -55,20 +67,19 @@ namespace PapayagramsClient.Login
                 switch (ex.Detail.ErrorCode)
                 {
                     case 101:
-                        UsernameErrorText.Content = Properties.Resources.registerExistingUsername;
-                        break;
+                        return;
 
                     case 102:
-                        EmailErrorText.Content = Properties.Resources.registerEmailAlreadyLinked;
-                        break;
+                        EmailErrorText.Content = Properties.Resources.errorDatabaseConnection;
+                        return;
 
                     case 201:
                         UsernameErrorText.Content = Properties.Resources.registerExistingUsername;
-                        break;
+                        return;
 
                     case 202:
-                        UsernameErrorText.Content = Properties.Resources.registerExistingUsername;
-                        break;
+                        EmailErrorText.Content = Properties.Resources.registerEmailAlreadyLinked;
+                        return;
                 }
             }
 
@@ -81,6 +92,13 @@ namespace PapayagramsClient.Login
         private void GoToLogin(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
+        }
+
+        private void ClearErrorLabels()
+        {
+            UsernameErrorText.Content = "";
+            EmailErrorText.Content = "";
+            PasswordErrorText.Content = "";
         }
     }
 }

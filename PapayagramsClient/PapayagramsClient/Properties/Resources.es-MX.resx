@@ -273,4 +273,7 @@
   <data name="errorConnectionTitle" xml:space="preserve">
     <value>Error de conexión</value>
   </data>
+  <data name="globalEmptyEmail" xml:space="preserve">
+    <value>El correo no puede dejarse vacío</value>
+  </data>
 </root>

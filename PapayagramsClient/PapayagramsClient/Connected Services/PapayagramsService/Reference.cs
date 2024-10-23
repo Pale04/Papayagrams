@@ -478,6 +478,7 @@ namespace PapayagramsClient.PapayagramsService {
         System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC> LoginAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Logout", ReplyAction="http://tempuri.org/ILoginService/LogoutResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/ILoginService/LogoutServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
         int Logout(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Logout", ReplyAction="http://tempuri.org/ILoginService/LogoutResponse")]
@@ -582,12 +583,12 @@ namespace PapayagramsClient.PapayagramsService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/RejectFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/RejectFriendRequestResponse")]
         System.Threading.Tasks.Task<int> RejectFriendRequestAsync(string username, string friendUsername);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SearchPlayers", ReplyAction="http://tempuri.org/IMainMenuService/SearchPlayersResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/IMainMenuService/SearchPlayersServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
-        PapayagramsClient.PapayagramsService.PlayerDC[] SearchPlayers(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SearchPlayer", ReplyAction="http://tempuri.org/IMainMenuService/SearchPlayerResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/IMainMenuService/SearchPlayerServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+        PapayagramsClient.PapayagramsService.PlayerDC SearchPlayer(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SearchPlayers", ReplyAction="http://tempuri.org/IMainMenuService/SearchPlayersResponse")]
-        System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC[]> SearchPlayersAsync(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SearchPlayer", ReplyAction="http://tempuri.org/IMainMenuService/SearchPlayerResponse")]
+        System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC> SearchPlayerAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SendFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/SendFriendRequestResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(PapayagramsClient.PapayagramsService.ServerException), Action="http://tempuri.org/IMainMenuService/SendFriendRequestServerExceptionFault", Name="ServerException", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
@@ -710,12 +711,12 @@ namespace PapayagramsClient.PapayagramsService {
             return base.Channel.RejectFriendRequestAsync(username, friendUsername);
         }
         
-        public PapayagramsClient.PapayagramsService.PlayerDC[] SearchPlayers(string username) {
-            return base.Channel.SearchPlayers(username);
+        public PapayagramsClient.PapayagramsService.PlayerDC SearchPlayer(string username) {
+            return base.Channel.SearchPlayer(username);
         }
         
-        public System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC[]> SearchPlayersAsync(string username) {
-            return base.Channel.SearchPlayersAsync(username);
+        public System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC> SearchPlayerAsync(string username) {
+            return base.Channel.SearchPlayerAsync(username);
         }
         
         public int SendFriendRequest(string username, string friendUsername) {
