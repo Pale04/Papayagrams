@@ -145,5 +145,18 @@ namespace Tests
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("send_friend_request", senderUsernameParameter, receiverUsernameParameter);
         }
+    
+        public virtual ObjectResult<search_no_friend_player_Result> search_no_friend_player(string searcherUsername, string searchedUsername)
+        {
+            var searcherUsernameParameter = searcherUsername != null ?
+                new ObjectParameter("searcherUsername", searcherUsername) :
+                new ObjectParameter("searcherUsername", typeof(string));
+    
+            var searchedUsernameParameter = searchedUsername != null ?
+                new ObjectParameter("searchedUsername", searchedUsername) :
+                new ObjectParameter("searchedUsername", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<search_no_friend_player_Result>("search_no_friend_player", searcherUsernameParameter, searchedUsernameParameter);
+        }
     }
 }

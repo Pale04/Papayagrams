@@ -148,6 +148,21 @@ namespace DataAccess.Tests
             Assert.AreEqual(expected, result, "LogOutNullUsernameTest");
         }
 
+        [TestMethod()]
+        public void SearchNoFriendPlayerSuccessfulTest()
+        {
+            Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(_registeredPlayer2, result.Case, "SearchNoFriendPlayerSuccessfulTest");
+        }
+
+        [TestMethod]
+        public void SearchNoFriendPlayerNonExistentTest()
+        {
+            Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, "Pale");
+            Assert.IsTrue(result.IsNone, "SearchNoFriendPlayerNonExistentTest");
+        }
+
+        [TestMethod()]
 
 
         [TestMethod()]

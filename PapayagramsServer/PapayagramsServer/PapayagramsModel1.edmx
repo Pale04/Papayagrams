@@ -211,6 +211,10 @@
           <Parameter Name="email" Type="varchar" Mode="In" />
           <Parameter Name="password" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="search_no_friend_player" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searcherUsername" Type="varchar" Mode="In" />
+          <Parameter Name="searchedUsername" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="send_friend_request" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="senderUsername" Type="varchar" Mode="In" />
           <Parameter Name="receiverUsername" Type="varchar" Mode="In" />
@@ -548,6 +552,10 @@
             <Parameter Name="senderUsername" Mode="In" Type="String" />
             <Parameter Name="receiverUsername" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="search_no_friend_player" ReturnType="Collection(PapayagramsModel.search_no_friend_player_Result)">
+            <Parameter Name="searcherUsername" Mode="In" Type="String" />
+            <Parameter Name="searchedUsername" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="get_player_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -566,6 +574,12 @@
           <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="password" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="search_no_friend_player_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="Binary" Name="password" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -686,6 +700,16 @@
           <FunctionImportMapping FunctionImportName="log_in" FunctionName="PapayagramsModel.Store.log_in" />
           <FunctionImportMapping FunctionImportName="log_out" FunctionName="PapayagramsModel.Store.log_out" />
           <FunctionImportMapping FunctionImportName="send_friend_request" FunctionName="PapayagramsModel.Store.send_friend_request" />
+          <FunctionImportMapping FunctionImportName="search_no_friend_player" FunctionName="PapayagramsModel.Store.search_no_friend_player">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PapayagramsModel.search_no_friend_player_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

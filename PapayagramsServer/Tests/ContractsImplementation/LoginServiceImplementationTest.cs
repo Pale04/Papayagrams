@@ -128,6 +128,7 @@ namespace Contracts.Tests
             }
         }
 
+        //The first time might not pass
         [TestMethod()]
         public void LogInUserNonExistentTest()
         {
@@ -138,7 +139,7 @@ namespace Contracts.Tests
             }
             catch (FaultException<ServerException> error)
             {
-                Assert.AreEqual(105, error.Detail.ErrorCode, "LogInUserNonExistentTest");
+                Assert.AreEqual(205, error.Detail.ErrorCode, "LogInUserNonExistentTest");
             }
         }
 

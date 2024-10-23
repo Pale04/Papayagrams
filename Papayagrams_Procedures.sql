@@ -80,14 +80,12 @@ BEGIN
 	DECLARE @searchedId int
 	SELECT @searcherId = id FROM [User] WHERE username = @searcherUsername;
 	SELECT @searchedId = id FROM [User] WHERE username = @searchedUsername;
-	IF EXISTS (SELECT * FROM [UserRelationship] WHERE senderId = @searcherId AND receiverId = @searchedId)
-	BEGIN
-		
-	END
-	ELSE
-	BEGIN
-		SELECT id, username, email FROM [User] WHERE username = @searchedUsername;
-	END
+	SELECT * FROM [User] 
+	WHERE username = @searchedUsername 
+	AND NOT username = @searcherUsername
+	AND NOT EXISTS (SELECT * FROM [UserRelationship] 
+					WHERE ((senderId = @searcherId AND receiverId = @searchedId) OR (senderId = @searchedId AND receiverId = @searcherId))
+					AND relationState = 'friend');
 END;
 GO
 
