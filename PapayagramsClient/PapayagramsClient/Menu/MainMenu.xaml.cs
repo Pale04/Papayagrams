@@ -1,26 +1,14 @@
 ﻿using PapayagramsClient.Game;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using PapayagramsClient.PapayagramsService;
+using PapayagramsClient.Menu;
 
 namespace PapayagramsClient
 {
-    /// <summary>
-    /// Lógica de interacción para MainMenu.xaml
-    /// </summary>
     public partial class MainMenu : Page
     {
         public MainMenu()
@@ -36,6 +24,7 @@ namespace PapayagramsClient
             catch (EndpointNotFoundException)
             {
                 new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                NavigationService.GoBack();
                 return;
             }
 
@@ -48,9 +37,14 @@ namespace PapayagramsClient
             NavigationService.Navigate(new GameCreation());
         }
 
-        private void JoinGameButton_Click(object sender, RoutedEventArgs e)
+        private void JoinGame(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new JoinGame());
+        }
+
+        private void GoToProfile(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Profile());
         }
 
         public void ReceiveFriendRequest(PlayerDC player)
@@ -61,6 +55,11 @@ namespace PapayagramsClient
         public void ReceiveGameInvitation()
         {
             throw new NotImplementedException();
+        }
+
+        public void AddIcons()
+        {
+            FriendImage.SetImage("../Resources/Icons/friend-svgrepo-com.svg");
         }
     }
 }

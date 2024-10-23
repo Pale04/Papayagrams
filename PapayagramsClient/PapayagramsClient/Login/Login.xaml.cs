@@ -7,9 +7,6 @@ using System.Windows.Navigation;
 
 namespace PapayagramsClient.Login
 {
-    /// <summary>
-    /// Lógica de interacción para Login.xaml
-    /// </summary>
     public partial class Login : Page
     {
         public Login()
@@ -46,15 +43,14 @@ namespace PapayagramsClient.Login
                 return;
             }
 
-            try
+            (int err, PapayagramsService.PlayerDC player) = host.Login(Username, Password);
+            SigninButton.IsEnabled = false;
+            CurrentPlayer.Player = player;
+            host.Close();
+
+            if (err != 0)
             {
-                PapayagramsService.PlayerDC player = host.Login(Username, Password);
-                SigninButton.IsEnabled = false;
-                CurrentPlayer.Player = player;
-            }
-            catch (FaultException<PapayagramsService.ServerException> ex)
-            {
-                switch (ex.Detail.ErrorCode)
+                switch (err)
                 {
                     case 102:
                         new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
@@ -72,13 +68,12 @@ namespace PapayagramsClient.Login
                         PasswordErrorText.Content = Properties.Resources.signInWrongCredentials;
                         break;
                 }
+
+                SigninButton.IsEnabled = true;
                 return;
             }
-            finally
-            {
-                SigninButton.IsEnabled = true;
-                host.Close();
-            }
+
+            SigninButton.IsEnabled = true;
 
             this.NavigationService.Navigate(new MainMenu());
         }

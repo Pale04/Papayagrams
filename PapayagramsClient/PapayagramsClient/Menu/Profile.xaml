@@ -5,13 +5,24 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PapayagramsClient.Menu"
       mc:Ignorable="d" 
-      xmlns:p="clr-namespace:PapayagramsClient.Properties"
+      xmlns:p="clr-namespace:PapayagramsClient.Properties" 
+      xmlns:svg="clr-namespace:SVGImage.SVG;assembly=SVGImage"
       d:DesignHeight="720" d:DesignWidth="1080"
       Background="#D9D9D9"
       Title="My profile">
 
     <Grid>
-        <Label Content="{x:Static p:Resources.profileTitle}" HorizontalAlignment="Left" Margin="107,64,0,0" VerticalAlignment="Top"/>
+        <Button Style="{StaticResource PrimaryButton}" HorizontalAlignment="Left" Margin="46,53,0,0" VerticalAlignment="Top" Height="60" Width="61" Click="ReturnToMainMenu">
+            <svg:SVGImage Name="BackImage"/>
+        </Button>
 
+        <Label Content="{x:Static p:Resources.profileTitle}" HorizontalAlignment="Left" Margin="104,32,0,0" VerticalAlignment="Top" FontSize="64" FontWeight="Bold"/>
+
+        <Rectangle HorizontalAlignment="Left" Height="230" Margin="46,159,0,0" VerticalAlignment="Top" Width="650" Fill="#F8E2C1"/>
+        <Rectangle HorizontalAlignment="Left" Height="250" Margin="46,414,0,0" VerticalAlignment="Top" Width="950" Fill="#F8E2C1"/>
+
+        <Image Name="ProfilePictureImage" Width="175" Height="175" Margin="78,186,828,358"/>
+        <Label Name="UsernameLabel" Content="adios" Margin="272,188,610,483" FontSize="32"/>
+        <Label Name="EmailLabel" Content="hola" Margin="272,250,610,423" FontSize="20"/>
     </Grid>
 </Page>

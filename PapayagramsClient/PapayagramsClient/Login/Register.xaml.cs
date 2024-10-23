@@ -1,25 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PapayagramsClient.Login
 {
-    /// <summary>
-    /// Lógica de interacción para Signin.xaml
-    /// </summary>
     public partial class Register : Page
     {
         public Register()
@@ -29,17 +13,22 @@ namespace PapayagramsClient.Login
 
         private void RegisterUser(object sender, RoutedEventArgs e)
         {
+            ClearErrorLabels();
+
             if (string.IsNullOrEmpty(UsernameTextbox.Text))
             {
                 UsernameErrorText.Content = Properties.Resources.globalEmptyUsername;
+                return;
             }
             if (string.IsNullOrEmpty(PasswordTextbox.Text))
             {
                 PasswordErrorText.Content = Properties.Resources.globalEmptyUsername;
+                return;
             }
             if (string.IsNullOrEmpty(EmailTextbox.Text))
             {
                 EmailErrorText.Content = Properties.Resources.globalEmptyEmail;
+                return;
             }
 
             PapayagramsService.PlayerDC player = new PapayagramsService.PlayerDC();
@@ -58,13 +47,11 @@ namespace PapayagramsClient.Login
                 return;
             }
 
-            try 
-            { 
-                int result = host.RegisterUser(player);
-            }
-            catch (FaultException<PapayagramsService.ServerException> ex)
+            (int err, int result) = host.RegisterUser(player);
+
+            if (err != 0)
             {
-                switch (ex.Detail.ErrorCode)
+                switch (err)
                 {
                     case 101:
                         return;

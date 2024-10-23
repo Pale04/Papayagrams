@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PapayagramsClient"
       xmlns:p="clr-namespace:PapayagramsClient.Properties"
+      xmlns:svg="clr-namespace:SVGImage.SVG;assembly=SVGImage"
       mc:Ignorable="d" 
       Title="MainMenu"
       d:DesignHeight="720" d:DesignWidth="1080"
@@ -14,16 +15,24 @@
         <Label Content="Papayagrams" HorizontalAlignment="Left" Margin="95,54,0,0" VerticalAlignment="Top" FontSize="64" Width="467" HorizontalContentAlignment="Center" FontWeight="Bold"/>
 
         <Button Style="{StaticResource PrimaryButton}" Name="CreateGameButton" Content="{x:Static p:Resources.mainMenuCreateGame}" HorizontalAlignment="Left" Margin="125,185,0,0" VerticalAlignment="Top" Width="400" Click="CreateNewGame"/>
-        <Button Style="{StaticResource SecondaryButton}" Name="JoinGameButton" Content="{x:Static p:Resources.mainMenuJoinGame}" HorizontalAlignment="Left" Margin="125,285,0,0" VerticalAlignment="Top" Width="400" Click="JoinGameButton_Click"/>
-        <Button Style="{StaticResource SecondaryButton}" Name="ProfileButton" Content="{x:Static p:Resources.mainMenuProfile}" HorizontalAlignment="Left" Margin="125,385,0,0" VerticalAlignment="Top" Width="400"/>
+        <Button Style="{StaticResource SecondaryButton}" Name="JoinGameButton" Content="{x:Static p:Resources.mainMenuJoinGame}" HorizontalAlignment="Left" Margin="125,285,0,0" VerticalAlignment="Top" Width="400" Click="JoinGame"/>
+        <Button Style="{StaticResource SecondaryButton}" Name="ProfileButton" Content="{x:Static p:Resources.mainMenuProfile}" HorizontalAlignment="Left" Margin="125,385,0,0" VerticalAlignment="Top" Width="400" Click="GoToProfile"/>
         <Button Style="{StaticResource SecondaryButton}" Name="LeaderboardButton" Content="{x:Static p:Resources.globalLeaderboard}" HorizontalAlignment="Left" Margin="125,485,0,0" VerticalAlignment="Top" Width="400"/>
 
-        <Button Content="Friends" HorizontalAlignment="Left" Margin="968,639,0,0" VerticalAlignment="Top"/>
+        <Button HorizontalAlignment="Left" Margin="968,611,0,0" VerticalAlignment="Top" Height="50" Width="50">
+            <svg:SVGImage Name="FriendImage"/>
+        </Button>
 
-        <Button Content="Logout" HorizontalAlignment="Left" Margin="968,71,0,0" VerticalAlignment="Top"/>
+        <Button HorizontalAlignment="Left" Margin="968,71,0,0" VerticalAlignment="Top" Height="50" Width="50">
+            <svg:SVGImage Name="LogoutImage"/>
+        </Button>
 
-        <Button Content="Config" HorizontalAlignment="Left" Margin="95,659,0,0" VerticalAlignment="Top"/>
-        <Button Content="Achievements" HorizontalAlignment="Left" Margin="177,669,0,0" VerticalAlignment="Top"/>
+        <Button HorizontalAlignment="Left" Margin="139,611,0,0" VerticalAlignment="Top" Height="50" Width="50">
+            <svg:SVGImage Name="ConfigImage"/>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="220,611,0,0" VerticalAlignment="Top" Height="50" Width="50">
+            <svg:SVGImage Name="AchievementImage"/>
+        </Button>
 
     </Grid>
 </Page>
