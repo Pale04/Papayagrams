@@ -1,5 +1,4 @@
-﻿using BussinessLogic;
-using DataAccess;
+﻿using DataAccess;
 using DomainClasses;
 using System;
 using System.ServiceModel;
@@ -88,7 +87,6 @@ namespace Contracts
             }
 
             Option<Player> playerLogged = UserDB.GetPlayerByUsername(username);
-            PlayerData.AddPlayer((Player)playerLogged.Case, username);
             Console.WriteLine("User " + username + " logged in");
             return ConvertPlayerToDataContract((Player)playerLogged.Case);
         }
@@ -121,7 +119,7 @@ namespace Contracts
                 throw new FaultException<ServerException>(new ServerException(205));
             }
 
-            PlayerData.RemovePlayer(username);
+            //TODO: Remover al jugador y todos sus contextos del hashtable
             Console.WriteLine("User " + username + " logged out");
             return 0;
         }

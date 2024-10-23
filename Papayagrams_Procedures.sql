@@ -70,3 +70,54 @@ BEGIN
 	WHERE email = @email;
 END;
 GO
+
+CREATE PROCEDURE search_no_friend_player
+	@searcherUsername VARCHAR(50),
+	@searchedUsername VARCHAR(50)
+AS
+BEGIN
+	DECLARE @searcherId int
+	DECLARE @searchedId int
+	SELECT @searcherId = id FROM [User] WHERE username = @searcherUsername;
+	SELECT @searchedId = id FROM [User] WHERE username = @searchedUsername;
+	IF EXISTS (SELECT * FROM [UserRelationship] WHERE senderId = @searcherId AND receiverId = @searchedId)
+	BEGIN
+		
+	END
+	ELSE
+	BEGIN
+		SELECT id, username, email FROM [User] WHERE username = @searchedUsername;
+	END
+END;
+GO
+
+--The case when the relationState is blocked was omitted because the blocked players cannot be searched for send a friend request (in both directions)
+CREATE PROCEDURE send_friend_request
+	@senderUsername VARCHAR(50),
+	@receiverUsername VARCHAR(50)
+AS
+BEGIN
+	DECLARE @senderId int
+	DECLARE @receiverId int
+	SELECT @senderId = id FROM [User] WHERE username = @senderUsername;
+	SELECT @receiverId = id FROM [User] WHERE username = @receiverUsername;
+	IF EXISTS (SELECT * FROM [UserRelationship] WHERE senderId = @senderId AND receiverId = @receiverId AND relationState = 'request_pending')
+	BEGIN
+		 RETURN -1
+	END
+	ELSE IF EXISTS (SELECT * FROM [UserRelationship] WHERE senderId = @receiverId AND receiverId = @senderId  AND relationState = 'request_pending')
+	BEGIN
+		RETURN -2
+	END
+	ELSE IF EXISTS (SELECT * FROM [UserRelationship] WHERE (senderId = @senderId AND receiverId = @receiverId) OR (senderId = @receiverId AND receiverId = @senderId) AND relationState = 'friend')
+	BEGIN
+		RETURN -3
+	END
+	ELSE
+	BEGIN
+		INSERT INTO [UserRelationship] (senderId, receiverId, relationState) VALUES (@senderId, @receiverId, 'request_pending');
+		RETURN 0
+	END
+END;
+GO
+

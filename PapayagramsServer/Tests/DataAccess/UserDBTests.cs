@@ -3,39 +3,39 @@ using DomainClasses;
 using LanguageExt;
 using System;
 using System.Data.Entity.Core;
+using Tests;
 
 namespace DataAccess.Tests
 {
     [TestClass()]
     public class UserDBTests
     {
-        private readonly Player _registeredPlayer = new Player()
+        private readonly Player _registeredPlayer1 = new Player()
         {
             Id = 1,
             Username = "Pale04",
             Email = "epalemolina@hotmail.com",
             Password = "040704"
         };
+        private readonly Player _registeredPlayer2 = new Player()
+        {
+            Id = 2,
+            Username = "David04",
+            Email = "david@gmail.com",
+            Password = "040704"
+        };
 
         [TestInitialize()]
         public void SetUp()
         {
-            UserDB.RegisterUser(_registeredPlayer);
+            UserDB.RegisterUser(_registeredPlayer1);
+            UserDB.RegisterUser(_registeredPlayer2);
         }
 
         [TestCleanup()]
         public void CleanUp()
         {
-            using (var context = new papayagramsEntities())
-            {
-                context.Database.ExecuteSqlCommand("delete from [TimeAtackHistory]");
-                context.Database.ExecuteSqlCommand("delete from [SuddenDeathHistory]");
-                context.Database.ExecuteSqlCommand("delete from [OriginalGameHistory]");
-                context.Database.ExecuteSqlCommand("delete from [UserConfiguration]");
-                context.Database.ExecuteSqlCommand("delete from [UserStatus]");
-                context.Database.ExecuteSqlCommand("delete from [User]");
-                context.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('User', RESEED, 0)");
-            }
+            DataBaseOperation.RebootDataBase();
         }
 
         [TestMethod()]
@@ -72,7 +72,7 @@ namespace DataAccess.Tests
         public void LogInSuccessfulTest()
         {
             int expected = 0;
-            int result = UserDB.LogIn(_registeredPlayer.Username, _registeredPlayer.Password);
+            int result = UserDB.LogIn(_registeredPlayer1.Username, _registeredPlayer1.Password);
             Assert.AreEqual(expected, result, "LogInSuccessfulTest");
         }
 
@@ -90,15 +90,15 @@ namespace DataAccess.Tests
         public void LogInPasswordIncorrectTest()
         {
             int expected = -2;
-            int result = UserDB.LogIn(_registeredPlayer.Username, "1");
+            int result = UserDB.LogIn(_registeredPlayer1.Username, "1");
             Assert.AreEqual(expected, result, "LogInPasswordIncorrectTest");
         }
 
         [TestMethod()]
         public void GetPlayerByUsernameSuccessfulTest()
         {
-            Option<Player> result = UserDB.GetPlayerByUsername(_registeredPlayer.Username);
-            Assert.AreEqual(_registeredPlayer, result.Case, "GetPlayerByUsernameSuccessfulTest");
+            Option<Player> result = UserDB.GetPlayerByUsername(_registeredPlayer1.Username);
+            Assert.AreEqual(_registeredPlayer1, result.Case, "GetPlayerByUsernameSuccessfulTest");
         }
 
         //It it the same case when the username is null
@@ -112,8 +112,8 @@ namespace DataAccess.Tests
         [TestMethod()]
         public void GetPlayerByEmailSuccessfulTest()
         {
-            Option<Player> result = UserDB.GetPlayerByEmail(_registeredPlayer.Email);
-            Assert.AreEqual(_registeredPlayer, result.Case, "GetPlayerByEmailSuccessfulTest");
+            Option<Player> result = UserDB.GetPlayerByEmail(_registeredPlayer1.Email);
+            Assert.AreEqual(_registeredPlayer1, result.Case, "GetPlayerByEmailSuccessfulTest");
         }
 
         //It is the same case when the email is null
@@ -128,7 +128,7 @@ namespace DataAccess.Tests
         public void LogOutSuccessfulTest()
         {
             int expected = 1;
-            int result = UserDB.LogOut(_registeredPlayer.Username);
+            int result = UserDB.LogOut(_registeredPlayer1.Username);
             Assert.AreEqual(expected, result, "LogOutSuccessfulTest");
         }
 
@@ -146,6 +146,46 @@ namespace DataAccess.Tests
             int expected = 0;
             int result = UserDB.LogOut(null);
             Assert.AreEqual(expected, result, "LogOutNullUsernameTest");
+        }
+
+
+
+        [TestMethod()]
+        public void SendFriendRequestSuccessfulTest()
+        {
+            int expected = 0;
+            int result = UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "SendFriendRequestSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void SendFriendRequestSenderRequestedBefore()
+        {
+            int expected = -1;
+            UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            int result = UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "SendFriendRequestSenderRequestedBefore");
+        }
+
+        [TestMethod()]
+        public void SendFriendRequestReceiverRequestedBefore()
+        {
+            int expected = -2;
+            UserDB.SendFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username);
+            int result = UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "SendFriendRequestReceiverRequestedBefore");
+        }
+
+        [TestMethod()]
+        public void SendFriendRequestAlreadyFriendsTest()
+        {
+            int expected = -3;
+            UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+
+            //TODO Add the method to accept the friend request
+
+            int result = UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "SendFriendRequestAlreadyFriendsTest");
         }
     }
 }

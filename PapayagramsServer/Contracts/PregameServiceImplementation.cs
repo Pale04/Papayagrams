@@ -28,10 +28,11 @@ namespace Contracts
 
         public int JoinGame(string username, string roomCode)
         {
-            Player player = PlayerData.GetPlayerByUsername(username);
-            GameRoom room = GameData.GetGameRoom(roomCode);
-            room.Players.Add(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
-            return 0;
+            //Player player = ServerPool.GetPlayerByUsername(username);
+            //GameRoom room = GameData.GetGameRoom(roomCode);
+            //room.Players.Add(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
+            //return 0;
+            throw new NotImplementedException();
         }
 
         public int LeaveLobby(string username, string code)

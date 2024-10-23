@@ -16,9 +16,10 @@ namespace BussinessLogic
         /// <param name="gameRoomCode">The game room code of the player</param>
         public static void RemovePlayerFromGameRoom(string username, string gameRoomCode)
         {
-            Player player = PlayerData.GetPlayerByUsername(username);
-            GameRoom gameRoom = (GameRoom)GameRooms[gameRoomCode];
-            gameRoom.Players.Remove(player);
+            //Player player = ServerPool.GetPlayerByUsername(username);
+            //GameRoom gameRoom = (GameRoom)GameRooms[gameRoomCode];
+            //gameRoom.Players.Remove(player);
+            throw new NotImplementedException();
         }
 
         /// <summary>
