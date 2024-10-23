@@ -81,7 +81,7 @@ namespace Contracts
 
             if (playerOption.IsNone)
             {
-                throw new FaultException<ServerException>(new ServerException(205));
+                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 205 });
             }
 
             return ConvertPlayerToDataContract((Player)playerOption.Case);
@@ -96,20 +96,20 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                throw new FaultException<ServerException>(new ServerException(102,error.StackTrace));
+                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 102, StackTrace = error.StackTrace });
             }
 
             if (result == -1)
             {
-                throw new FaultException<ServerException>(new ServerException(301));
+                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 301 });
             }
             else if(result == -2)
             {
-                throw new FaultException<ServerException>(new ServerException(302));
+                throw new FaultException<ServerException>(new ServerException { ErrorCode = 302 });
             }
             else if (result == -3)
             {
-                throw new FaultException<ServerException>(new ServerException(303));
+                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 303 });
             }
 
             return result;
