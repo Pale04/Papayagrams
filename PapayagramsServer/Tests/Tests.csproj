@@ -132,6 +132,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ContractsImplementation\LoginServiceImplementationTest.cs" />
     <Compile Include="ContractsImplementation\MainMenuServiceImplementationTests.cs" />
+    <Compile Include="search_no_friend_player_Result.cs">
+      <DependentUpon>PapayagramsModel2.tt</DependentUpon>
+    </Compile>
     <Compile Include="SuddenDeathHistory.cs">
       <DependentUpon>PapayagramsModel2.tt</DependentUpon>
     </Compile>

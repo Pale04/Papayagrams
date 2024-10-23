@@ -96,9 +96,8 @@ namespace Contracts.Tests
         [TestMethod()]
         public void LogInSuccesfulTest()
         {
-            PlayerDC result = _serviceImplementation.Login(_registeredPlayer.Username, _registeredPlayer.Password);
-            Assert.AreEqual(_registeredPlayer.Username, result.Username, "LogInSuccesfulTest");
-            Assert.AreEqual(_registeredPlayer.Email, result.Email, "LogInSuccesfulTest");
+            (int code,PlayerDC result) = _serviceImplementation.Login(_registeredPlayer.Username, _registeredPlayer.Password);
+            Assert.AreEqual(_registeredPlayer, result, "LogInSuccesfulTest");
         }
 
         [TestMethod]

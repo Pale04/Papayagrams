@@ -155,7 +155,7 @@ namespace DataAccess.Tests
             Assert.AreEqual(_registeredPlayer2, result.Case, "SearchNoFriendPlayerSuccessfulTest");
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void SearchNoFriendPlayerNonExistentTest()
         {
             Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, "Pale");
@@ -163,6 +163,10 @@ namespace DataAccess.Tests
         }
 
         [TestMethod()]
+        public void SearchNoFriendPlayerPendingRequestTest()
+        {
+            
+        }
 
 
         [TestMethod()]

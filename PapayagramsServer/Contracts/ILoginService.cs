@@ -10,8 +10,7 @@ namespace Contracts
         int RegisterUser(PlayerDC player);
 
         [OperationContract]
-        [FaultContract(typeof(ServerException))]
-        PlayerDC Login(string username, string password);
+        (int, PlayerDC) Login(string username, string password);
 
         [OperationContract]
         [FaultContract(typeof(ServerException))]

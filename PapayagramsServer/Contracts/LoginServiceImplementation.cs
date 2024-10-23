@@ -57,15 +57,15 @@ namespace Contracts
         /// <param name="password">Password of the account</param>
         /// <returns>0 if the log in was succesful</returns>
         /// <exception cref="FaultException{ServerException}">Thrown when the parameters are invalid or happens, the account is not foun, the password is incorrect or happens a database connection failure</exception>
-        public PlayerDC Login(string username, string password)
+        public (int, PlayerDC) Login(string username, string password)
         {
             if (string.IsNullOrEmpty(username))
             {
-                throw new FaultException<ServerException>(new ServerException { ErrorCode = 203 });
+                return (203, null);
             }
             else if (string.IsNullOrEmpty(password))
             {
-                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 204 });
+                return (204, null);
             }
 
             int loginResult;
@@ -75,21 +75,22 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 102, StackTrace = error.StackTrace });
+                //TODO: Log the error
+                return (102, null);
             }
 
             if (loginResult == -1)
             {
-                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 205 },new FaultReason("Player not found"));
+                return (205, null);
             }
             else if (loginResult == -2)
             {
-                throw new FaultException<ServerException>(new ServerException { ErrorCode = 206 });
+                return (206, null);
             }
 
             Option<Player> playerLogged = UserDB.GetPlayerByUsername(username);
             Console.WriteLine("User " + username + " logged in");
-            return ConvertPlayerToDataContract((Player)playerLogged.Case);
+            return (0,ConvertPlayerToDataContract((Player)playerLogged.Case));
         }
 
         /// <summary>

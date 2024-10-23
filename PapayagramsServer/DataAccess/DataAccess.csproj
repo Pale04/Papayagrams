@@ -114,6 +114,9 @@
       <DependentUpon>PapayagramsModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="search_no_friend_player_Result.cs">
+      <DependentUpon>PapayagramsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SuddenDeathHistory.cs">
       <DependentUpon>PapayagramsModel.tt</DependentUpon>
     </Compile>
