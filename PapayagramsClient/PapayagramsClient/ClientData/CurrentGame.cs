@@ -16,7 +16,7 @@ namespace PapayagramsClient.ClientData
         public int PiecesInPile { get; set; }
     }
 
-    public class CurrentGame
+    public static class CurrentGame
     {
         public enum GameState
         {
@@ -31,7 +31,7 @@ namespace PapayagramsClient.ClientData
             Disconected
         }
 
-
+        public static string RoomCode { get; set; }
         public static GameState State { get; set; }
         public static Hashtable PlayersInRoom { get; set; }
         public static GameProgressData GameData { get; set; }

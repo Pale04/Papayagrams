@@ -35,10 +35,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExCSS, Version=4.2.3.0, Culture=neutral, PublicKeyToken=bdbe16be9b936b9a, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExCSS.4.2.3\lib\net48\ExCSS.dll</HintPath>
+    </Reference>
+    <Reference Include="SVGImage, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SVGImage.3.0.0\lib\net48\SVGImage.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -208,6 +229,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\PapayagramsService\ServiceImplementation.wsdl" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -241,10 +263,10 @@
     <Resource Include="Resources\Cursors\papaya.cur" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\PopUpIcons\error-svgrepo-com.svg" />
-    <Content Include="Resources\PopUpIcons\info-circle-svgrepo-com.svg" />
-    <Content Include="Resources\PopUpIcons\success-svgrepo-com.svg" />
-    <Content Include="Resources\PopUpIcons\warning-svgrepo-com.svg" />
+    <Resource Include="Resources\PopUpIcons\error-svgrepo-com.svg" />
+    <Resource Include="Resources\PopUpIcons\info-circle-svgrepo-com.svg" />
+    <Resource Include="Resources\PopUpIcons\success-svgrepo-com.svg" />
+    <Resource Include="Resources\PopUpIcons\warning-svgrepo-com.svg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\add-friend-svgrepo-com.svg" />

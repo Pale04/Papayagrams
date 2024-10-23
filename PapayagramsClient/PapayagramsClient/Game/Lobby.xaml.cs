@@ -1,19 +1,9 @@
-﻿using PapayagramsClient.PapayagramsService;
+﻿using PapayagramsClient.ClientData;
+using PapayagramsClient.PapayagramsService;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PapayagramsClient.Game
 {
@@ -33,13 +23,22 @@ namespace PapayagramsClient.Game
             PregameServiceClient host = new PregameServiceClient(context);
             host.Open();
 
-            //host.NotifyServer(CurrentPlayer.Player);
+            int connectionResult = host.NotifyServer(CurrentPlayer.Player);
 
             host.Close();
+
+            if (connectionResult != 0)
+            {
+                // TODO
+                // add message when connecting to server returns an error code
+                new PopUpWindow("","",1).ShowDialog();
+                NavigationService.GoBack();
+            }
         }
 
         public void JoinGameResponse(string roomCode)
         {
+            // TODO
             throw new NotImplementedException();
         }
 
@@ -50,12 +49,24 @@ namespace PapayagramsClient.Game
             ChatPanel.Children.Add(formattedMessage);
         }
 
+        public void RefreshLobby()
+        {
+            // TODO
+            throw new NotImplementedException();
+        }
+
+        public void StartGameResponse()
+        {
+            // TODO
+            throw new NotImplementedException();
+        }
+
         private void ReturnToMainMenu()
         {
             InstanceContext context = new InstanceContext(this);
             PregameServiceClient host = new PregameServiceClient(context);
 
-            int result = host.LeaveGame(CurrentPlayer.Player.Username, _gameRoomCode);
+            int result = host.LeaveLobby(CurrentPlayer.Player.Username, CurrentGame.RoomCode);
 
             if (result == 0)
             {

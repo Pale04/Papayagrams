@@ -29,12 +29,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="FriendDC" nillable="true" type="tns:FriendDC" />
-  <xs:complexType name="ArrayOfPlayerDC">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="PlayerDC" nillable="true" type="tns:PlayerDC" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfPlayerDC" nillable="true" type="tns:ArrayOfPlayerDC" />
   <xs:complexType name="ArrayOfAchievementDC">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="AchievementDC" nillable="true" type="tns:AchievementDC" />

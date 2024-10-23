@@ -178,6 +178,15 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error while connecting.
+        /// </summary>
+        public static string errorConnectionTitle {
+            get {
+                return ResourceManager.GetString("errorConnectionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Could not connect to Papayagrams services, try again later..
         /// </summary>
         public static string errorDatabaseConnection {
@@ -187,11 +196,11 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Could not connect to Papayagrams.
+        ///   Busca una cadena traducida similar a Could not connect to server.
         /// </summary>
-        public static string errorDatabaseConnectionTitle {
+        public static string errorServerConnection {
             get {
-                return ResourceManager.GetString("errorDatabaseConnectionTitle", resourceCulture);
+                return ResourceManager.GetString("errorServerConnection", resourceCulture);
             }
         }
         
@@ -255,6 +264,15 @@ namespace PapayagramsClient.Properties {
         public static string globalEmail {
             get {
                 return ResourceManager.GetString("globalEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The email cannot be left empty.
+        /// </summary>
+        public static string globalEmptyEmail {
+            get {
+                return ResourceManager.GetString("globalEmptyEmail", resourceCulture);
             }
         }
         

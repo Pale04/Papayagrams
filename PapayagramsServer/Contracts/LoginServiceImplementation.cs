@@ -4,6 +4,7 @@ using System;
 using System.ServiceModel;
 using System.Data.Entity.Core;
 using LanguageExt;
+using LanguageExt.Common;
 
 namespace Contracts
 {
@@ -26,18 +27,18 @@ namespace Contracts
             }
             catch (ArgumentException error)
             {
-                throw new FaultException<ServerException>(new ServerException(1, error.StackTrace));
+                throw new FaultException<ServerException>(new ServerException { ErrorCode = 101, StackTrace = error.StackTrace });
             }
 
             try
             {
                 if (UserDB.GetPlayerByUsername(newPlayer.Username).IsSome)
                 {
-                    throw new FaultException<ServerException>(new ServerException(201));
+                    throw new FaultException<ServerException>(new ServerException { ErrorCode = 201});
                 }
                 else if (UserDB.GetPlayerByEmail(newPlayer.Email).IsSome)
                 {
-                    throw new FaultException<ServerException>(new ServerException(202));
+                    throw new FaultException<ServerException>(new ServerException { ErrorCode = 202 });
                 }
 
                 UserDB.RegisterUser(newPlayer);
@@ -45,7 +46,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                throw new FaultException<ServerException>(new ServerException(2, error.StackTrace));
+                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 102, StackTrace = error.StackTrace });
             }
         }
 
@@ -60,11 +61,11 @@ namespace Contracts
         {
             if (string.IsNullOrEmpty(username))
             {
-                throw new FaultException<ServerException>(new ServerException(203));
+                throw new FaultException<ServerException>(new ServerException { ErrorCode = 203 });
             }
             else if (string.IsNullOrEmpty(password))
             {
-                throw new FaultException<ServerException>(new ServerException(204));
+                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 204 });
             }
 
             int loginResult;
@@ -74,16 +75,16 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                throw new FaultException<ServerException>(new ServerException(102, error.StackTrace));
+                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 102, StackTrace = error.StackTrace });
             }
 
             if (loginResult == -1)
             {
-                throw new FaultException<ServerException>(new ServerException(205));
+                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 205 },new FaultReason("Player not found"));
             }
             else if (loginResult == -2)
             {
-                throw new FaultException<ServerException>(new ServerException(106));
+                throw new FaultException<ServerException>(new ServerException { ErrorCode = 206 });
             }
 
             Option<Player> playerLogged = UserDB.GetPlayerByUsername(username);
@@ -101,7 +102,7 @@ namespace Contracts
         {
             if (string.IsNullOrEmpty(username))
             {
-                throw new FaultException<ServerException>(new ServerException(101));
+                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 101 });
             }
 
             int logoutResult;
@@ -111,12 +112,12 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                throw new FaultException<ServerException>(new ServerException(102, error.StackTrace));
+                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 102, StackTrace = error.StackTrace });
             }
 
             if (logoutResult == 0)
             {
-                throw new FaultException<ServerException>(new ServerException(205));
+                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 205 });
             }
 
             //TODO: Remover al jugador y todos sus contextos del hashtable
