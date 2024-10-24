@@ -8,7 +8,7 @@ namespace Contracts
 {
     public partial class ServiceImplementation : IPregameService
     {
-        public string CreateGame(string username)
+        public (int, string) CreateGame(string username)
         {
             GameRoom gameRoom = new GameRoom();
             gameRoom.state = GameRoomState.Waiting;
@@ -17,7 +17,7 @@ namespace Contracts
 
             Console.WriteLine("sala de juego creada: " + gameRoom.RoomCode);
 
-            return gameRoom.RoomCode;
+            return (0, gameRoom.RoomCode);
         }
 
         public void InviteFriend(string username)

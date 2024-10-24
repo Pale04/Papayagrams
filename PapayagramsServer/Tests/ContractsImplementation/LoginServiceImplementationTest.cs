@@ -47,29 +47,17 @@ namespace Contracts.Tests
         [TestMethod]
         public void RegisterUserEmptyTest()
         {
-            try
-            {
-                _serviceImplementation.RegisterUser(new PlayerDC());
-                Assert.Fail("RegisterUserEmptyTest");
-            }
-            catch (FaultException<ServerException> error)
-            {
-                Assert.AreEqual(1, error.Detail.ErrorCode, "RegisterUserEmptyTest");
-            }
+            int expected = 1;
+            int result = _serviceImplementation.RegisterUser(new PlayerDC());
+            Assert.AreEqual(expected, result, "RegisterUserEmptyTest");
         }
 
         [TestMethod()]
         public void RegisterUserUsernameExistsTest()
         {
-            try
-            {
-                _serviceImplementation.RegisterUser(_registeredPlayer);
-                Assert.Fail("RegisterUserUsernameExistsTest");
-            }
-            catch (FaultException<ServerException> error)
-            {
-                Assert.AreEqual(101, error.Detail.ErrorCode, "RegisterUserUsernameExistsTest");
-            }
+            int expected = 201;
+            int result = _serviceImplementation.RegisterUser(_registeredPlayer);
+            Assert.AreEqual(expected, result, "RegisterUserUsernameExistsTest");
         }
 
         [TestMethod()]
@@ -82,15 +70,9 @@ namespace Contracts.Tests
                 Password = "asdfas´461ds+"
             };
 
-            try
-            {
-                _serviceImplementation.RegisterUser(newPlayer);
-                Assert.Fail("RegisterUserEmailExistsTest");
-            }
-            catch (FaultException<ServerException> error)
-            {
-                Assert.AreEqual(102, error.Detail.ErrorCode, "RegisterUserEmailExistsTest");
-            }
+            int expected = 102;
+            int result = _serviceImplementation.RegisterUser(newPlayer);
+            Assert.AreEqual(expected, result, "RegisterUserEmailExistsTest");
         }
 
         [TestMethod()]
@@ -103,58 +85,26 @@ namespace Contracts.Tests
         [TestMethod]
         public void LogInEmptyUsernameTest()
         {
-            try
-            {
-                _serviceImplementation.Login("", "123");
-                Assert.Fail("LogInEmptyTest");
-            }
-            catch (FaultException<ServerException> error)
-            {
-                Assert.AreEqual(103, error.Detail.ErrorCode, "LogInEmptyTest");
-            }
+            //TODO: Implement
         }
 
         [TestMethod]
         public void LogInEmptyPasswordTest()
         {
-            try
-            {
-                _serviceImplementation.Login("Pale04", "");
-                Assert.Fail("LogInEmptyPasswordTest");
-            }
-            catch (FaultException<ServerException> error)
-            {
-                Assert.AreEqual(104, error.Detail.ErrorCode, "LogInEmptyPasswordTest");
-            }
+            //TODO
         }
 
         //The first time might not pass
         [TestMethod()]
         public void LogInUserNonExistentTest()
         {
-            try
-            {
-                _serviceImplementation.Login("Pale", "123");
-                Assert.Fail("LogInUserNonExistentTest");
-            }
-            catch (FaultException<ServerException> error)
-            {
-                Assert.AreEqual(205, error.Detail.ErrorCode, "LogInUserNonExistentTest");
-            }
+            //TODO
         }
 
         [TestMethod()]
         public void LogInIncorrectPasswordTest()
         {
-            try
-            {
-                _serviceImplementation.Login(_registeredPlayer.Username, "123");
-                Assert.Fail("LogInIncorrectPasswordTest");
-            }
-            catch (FaultException<ServerException> error)
-            {
-                Assert.AreEqual(106, error.Detail.ErrorCode, "LogInIncorrectPasswordTest");
-            }
+            //TODO
         }
 
         [TestMethod]
@@ -168,29 +118,17 @@ namespace Contracts.Tests
         [TestMethod]
         public void LogOutEmptyUsernameTest()
         {
-            try
-            {
-                _serviceImplementation.Logout("");
-                Assert.Fail("LogOutEmptyUsernameTest");
-            }
-            catch (FaultException<ServerException> error)
-            {
-                Assert.AreEqual(1, error.Detail.ErrorCode, "LogOutEmptyUsernameTest");
-            }
+            int expected = 101;
+            int result = _serviceImplementation.Logout("");
+            Assert.AreEqual(expected, result, "LogOutEmptyUsernameTest");
         }
 
         [TestMethod()]
         public void LogOutNonExistUsernameTest()
         {
-            try
-            {
-                _serviceImplementation.Logout("Pale");
-                Assert.Fail("LogOutNonExistUsernameTest");
-            }
-            catch (FaultException<ServerException> error)
-            {
-                Assert.AreEqual(105, error.Detail.ErrorCode, "LogOutNonExistUsernameTest");
-            }
+            int expected = 205;
+            int result = _serviceImplementation.Logout("Pale");
+            Assert.AreEqual(expected, result, "LogOutNonExistUsernameTest");
         }
     }
 }

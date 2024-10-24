@@ -9,7 +9,7 @@ namespace Contracts
         /// Create a game room and add the player to it
         /// </summary>
         [OperationContract]
-        string CreateGame(string username);
+        (int, string) CreateGame(string username);
 
         /// <summary>
         /// Add a player to the game room of the specified code
@@ -32,7 +32,7 @@ namespace Contracts
         [OperationContract(IsOneWay = true)]
         void StartGame(string roomCode);
 
-        [FaultContract(typeof(ServerException))]
+        [OperationContract(IsOneWay = true)]
         void InviteFriend(string username);
 
         [OperationContract]
@@ -44,8 +44,10 @@ namespace Contracts
     {
         [OperationContract(IsOneWay = true)]
         void ReceiveMessage(Message message);
+
         [OperationContract(IsOneWay = true)]
         void StartGameResponse();
+
         [OperationContract(IsOneWay = true)]
         void RefreshLobby();
     }

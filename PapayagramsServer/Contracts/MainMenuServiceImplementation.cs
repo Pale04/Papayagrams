@@ -21,17 +21,17 @@ namespace Contracts
             throw new NotImplementedException();
         }
 
-        public List<AchievementDC> GetAchievements(string username)
+        public (int, List<AchievementDC>) GetAchievements(string username)
         {
             throw new NotImplementedException();
         }
 
-        public List<FriendDC> GetFriendRequests(string username)
+        public (int, List<FriendDC>) GetFriendRequests(string username)
         {
             throw new NotImplementedException();
         }
 
-        public List<FriendDC> GetFriends(string username)
+        public (int, List<FriendDC>) GetFriends(string username)
         {
             throw new NotImplementedException();
         }
@@ -72,7 +72,7 @@ namespace Contracts
         /// <param name="searchedUsername">Username of the player who needs to be found</param>
         /// <returns>PlayerDC object with its id, username and email.</returns>
         /// <exception cref="FaultException{ServerException}">When the consult is empty or happens a database error</exception>
-        public PlayerDC SearchNoFriendPlayer(string searcherUsername, string searchedUsername)
+        public (int, PlayerDC) SearchNoFriendPlayer(string searcherUsername, string searchedUsername)
         {
             PlayerDC player = new PlayerDC();
             Option<Player> playerOption =Option<Player>.None;
@@ -81,10 +81,10 @@ namespace Contracts
 
             if (playerOption.IsNone)
             {
-                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 205 });
+                return (205, null);
             }
 
-            return ConvertPlayerToDataContract((Player)playerOption.Case);
+            return (0, null);
         }
 
         public int SendFriendRequest(string senderUsername, string receiverUsername)
@@ -96,20 +96,20 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 102, StackTrace = error.StackTrace });
+                return 102;
             }
 
             if (result == -1)
             {
-                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 301 });
+                return 301;
             }
             else if(result == -2)
             {
-                throw new FaultException<ServerException>(new ServerException { ErrorCode = 302 });
+                return 302;
             }
             else if (result == -3)
             {
-                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 303 });
+                return 303;
             }
 
             return result;
