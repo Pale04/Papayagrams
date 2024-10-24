@@ -13,27 +13,31 @@ namespace PapayagramsClient.Game
     public partial class Lobby : Page, IPregameServiceCallback
     {
         private string _gameRoomCode;
+        private PregameServiceClient _host;
 
-        public Lobby(string gameRoomCode)
+        public Lobby()
         {
             InitializeComponent();
-            GameRoomCodeText.Content = gameRoomCode;
-
             InstanceContext context = new InstanceContext(this);
-            PregameServiceClient host = new PregameServiceClient(context);
-            host.Open();
+            _host = new PregameServiceClient(context);
 
-            int connectionResult = host.NotifyServer(CurrentPlayer.Player);
+            _host.Open();
+            (int code, string gameRoomCode) = _host.CreateGame(CurrentPlayer.Player.Username);
+            GameRoomCodeText.Content = gameRoomCode;
+            _gameRoomCode = gameRoomCode;
 
-            host.Close();
 
-            if (connectionResult != 0)
+            //int connectionResult = host.NotifyServer(CurrentPlayer.Player);
+
+     
+
+            /*if (connectionResult != 0)
             {
                 // TODO
                 // add message when connecting to server returns an error code
                 new PopUpWindow("","",1).ShowDialog();
                 NavigationService.GoBack();
-            }
+            }*/
         }
 
         public void JoinGameResponse(string roomCode)
@@ -72,6 +76,20 @@ namespace PapayagramsClient.Game
             {
                 this.NavigationService.GoBack();
             }
+        }
+
+        private void SendMessage(object sender, System.Windows.RoutedEventArgs e)
+        {
+            InstanceContext context = new InstanceContext(this);
+            PregameServiceClient host = new PregameServiceClient(context);
+            Message message = new Message
+            {
+                AuthorUsername = CurrentPlayer.Player.Username,
+                Content = MessageTextbox.Text,
+                GameRoomCode = _gameRoomCode
+            };
+            host.SendMessage(message);
+            
         }
     }
 }

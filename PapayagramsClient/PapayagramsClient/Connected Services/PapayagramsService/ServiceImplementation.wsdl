@@ -119,8 +119,8 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Contracts" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Contracts" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
@@ -129,9 +129,6 @@
   </wsdl:message>
   <wsdl:message name="ILoginService_RegisterUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterUserResponse" />
-  </wsdl:message>
-  <wsdl:message name="ILoginService_RegisterUser_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q1:ServerException" />
   </wsdl:message>
   <wsdl:message name="ILoginService_Login_InputMessage">
     <wsdl:part name="parameters" element="tns:Login" />
@@ -145,17 +142,11 @@
   <wsdl:message name="ILoginService_Logout_OutputMessage">
     <wsdl:part name="parameters" element="tns:LogoutResponse" />
   </wsdl:message>
-  <wsdl:message name="ILoginService_Logout_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q2:ServerException" />
-  </wsdl:message>
   <wsdl:message name="IMainMenuService_GetFriends_InputMessage">
     <wsdl:part name="parameters" element="tns:GetFriends" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_GetFriends_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetFriendsResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMainMenuService_GetFriends_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q3:ServerException" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_RemoveFriend_InputMessage">
     <wsdl:part name="parameters" element="tns:RemoveFriend" />
@@ -163,17 +154,11 @@
   <wsdl:message name="IMainMenuService_RemoveFriend_OutputMessage">
     <wsdl:part name="parameters" element="tns:RemoveFriendResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainMenuService_RemoveFriend_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q4:ServerException" />
-  </wsdl:message>
   <wsdl:message name="IMainMenuService_BlockFriend_InputMessage">
     <wsdl:part name="parameters" element="tns:BlockFriend" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_BlockFriend_OutputMessage">
     <wsdl:part name="parameters" element="tns:BlockFriendResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMainMenuService_BlockFriend_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q5:ServerException" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_GetFriendRequests_InputMessage">
     <wsdl:part name="parameters" element="tns:GetFriendRequests" />
@@ -181,17 +166,11 @@
   <wsdl:message name="IMainMenuService_GetFriendRequests_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetFriendRequestsResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainMenuService_GetFriendRequests_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q6:ServerException" />
-  </wsdl:message>
   <wsdl:message name="IMainMenuService_AcceptFriendRequest_InputMessage">
     <wsdl:part name="parameters" element="tns:AcceptFriendRequest" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_AcceptFriendRequest_OutputMessage">
     <wsdl:part name="parameters" element="tns:AcceptFriendRequestResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMainMenuService_AcceptFriendRequest_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q7:ServerException" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_RejectFriendRequest_InputMessage">
     <wsdl:part name="parameters" element="tns:RejectFriendRequest" />
@@ -199,17 +178,11 @@
   <wsdl:message name="IMainMenuService_RejectFriendRequest_OutputMessage">
     <wsdl:part name="parameters" element="tns:RejectFriendRequestResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainMenuService_RejectFriendRequest_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q8:ServerException" />
-  </wsdl:message>
   <wsdl:message name="IMainMenuService_SearchNoFriendPlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:SearchNoFriendPlayer" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_SearchNoFriendPlayer_OutputMessage">
     <wsdl:part name="parameters" element="tns:SearchNoFriendPlayerResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMainMenuService_SearchNoFriendPlayer_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q9:ServerException" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_SendFriendRequest_InputMessage">
     <wsdl:part name="parameters" element="tns:SendFriendRequest" />
@@ -217,17 +190,11 @@
   <wsdl:message name="IMainMenuService_SendFriendRequest_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendFriendRequestResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainMenuService_SendFriendRequest_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q10:ServerException" />
-  </wsdl:message>
   <wsdl:message name="IMainMenuService_GetPlayerProfile_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPlayerProfile" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_GetPlayerProfile_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPlayerProfileResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMainMenuService_GetPlayerProfile_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q11:ServerException" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_GetAchievements_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAchievements" />
@@ -235,17 +202,11 @@
   <wsdl:message name="IMainMenuService_GetAchievements_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAchievementsResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainMenuService_GetAchievements_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q12:ServerException" />
-  </wsdl:message>
   <wsdl:message name="IMainMenuService_GetLeaderboard_InputMessage">
     <wsdl:part name="parameters" element="tns:GetLeaderboard" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_GetLeaderboard_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetLeaderboardResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMainMenuService_GetLeaderboard_ServerExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q13="http://schemas.datacontract.org/2004/07/Contracts" name="detail" element="q13:ServerException" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_ReportToServer_InputMessage">
     <wsdl:part name="parameters" element="tns:ReportToServer" />
@@ -289,6 +250,9 @@
   <wsdl:message name="IPregameService_StartGame_InputMessage">
     <wsdl:part name="parameters" element="tns:StartGame" />
   </wsdl:message>
+  <wsdl:message name="IPregameService_InviteFriend_InputMessage">
+    <wsdl:part name="parameters" element="tns:InviteFriend" />
+  </wsdl:message>
   <wsdl:message name="IPregameService_NotifyServer_InputMessage">
     <wsdl:part name="parameters" element="tns:NotifyServer" />
   </wsdl:message>
@@ -326,7 +290,6 @@
     <wsdl:operation name="RegisterUser">
       <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/RegisterUser" message="tns:ILoginService_RegisterUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/RegisterUserResponse" message="tns:ILoginService_RegisterUser_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/ILoginService/RegisterUserServerExceptionFault" name="ServerExceptionFault" message="tns:ILoginService_RegisterUser_ServerExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/Login" message="tns:ILoginService_Login_InputMessage" />
@@ -335,64 +298,52 @@
     <wsdl:operation name="Logout">
       <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/Logout" message="tns:ILoginService_Logout_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/LogoutResponse" message="tns:ILoginService_Logout_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/ILoginService/LogoutServerExceptionFault" name="ServerExceptionFault" message="tns:ILoginService_Logout_ServerExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMainMenuService">
     <wsdl:operation name="GetFriends">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/GetFriends" message="tns:IMainMenuService_GetFriends_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/GetFriendsResponse" message="tns:IMainMenuService_GetFriends_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IMainMenuService/GetFriendsServerExceptionFault" name="ServerExceptionFault" message="tns:IMainMenuService_GetFriends_ServerExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="RemoveFriend">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/RemoveFriend" message="tns:IMainMenuService_RemoveFriend_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/RemoveFriendResponse" message="tns:IMainMenuService_RemoveFriend_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IMainMenuService/RemoveFriendServerExceptionFault" name="ServerExceptionFault" message="tns:IMainMenuService_RemoveFriend_ServerExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="BlockFriend">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/BlockFriend" message="tns:IMainMenuService_BlockFriend_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/BlockFriendResponse" message="tns:IMainMenuService_BlockFriend_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IMainMenuService/BlockFriendServerExceptionFault" name="ServerExceptionFault" message="tns:IMainMenuService_BlockFriend_ServerExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetFriendRequests">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/GetFriendRequests" message="tns:IMainMenuService_GetFriendRequests_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/GetFriendRequestsResponse" message="tns:IMainMenuService_GetFriendRequests_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IMainMenuService/GetFriendRequestsServerExceptionFault" name="ServerExceptionFault" message="tns:IMainMenuService_GetFriendRequests_ServerExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="AcceptFriendRequest">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/AcceptFriendRequest" message="tns:IMainMenuService_AcceptFriendRequest_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/AcceptFriendRequestResponse" message="tns:IMainMenuService_AcceptFriendRequest_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IMainMenuService/AcceptFriendRequestServerExceptionFault" name="ServerExceptionFault" message="tns:IMainMenuService_AcceptFriendRequest_ServerExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="RejectFriendRequest">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/RejectFriendRequest" message="tns:IMainMenuService_RejectFriendRequest_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/RejectFriendRequestResponse" message="tns:IMainMenuService_RejectFriendRequest_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IMainMenuService/RejectFriendRequestServerExceptionFault" name="ServerExceptionFault" message="tns:IMainMenuService_RejectFriendRequest_ServerExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SearchNoFriendPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/SearchNoFriendPlayer" message="tns:IMainMenuService_SearchNoFriendPlayer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/SearchNoFriendPlayerResponse" message="tns:IMainMenuService_SearchNoFriendPlayer_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IMainMenuService/SearchNoFriendPlayerServerExceptionFault" name="ServerExceptionFault" message="tns:IMainMenuService_SearchNoFriendPlayer_ServerExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendFriendRequest">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/SendFriendRequest" message="tns:IMainMenuService_SendFriendRequest_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/SendFriendRequestResponse" message="tns:IMainMenuService_SendFriendRequest_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IMainMenuService/SendFriendRequestServerExceptionFault" name="ServerExceptionFault" message="tns:IMainMenuService_SendFriendRequest_ServerExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetPlayerProfile">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/GetPlayerProfile" message="tns:IMainMenuService_GetPlayerProfile_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/GetPlayerProfileResponse" message="tns:IMainMenuService_GetPlayerProfile_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IMainMenuService/GetPlayerProfileServerExceptionFault" name="ServerExceptionFault" message="tns:IMainMenuService_GetPlayerProfile_ServerExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAchievements">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/GetAchievements" message="tns:IMainMenuService_GetAchievements_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/GetAchievementsResponse" message="tns:IMainMenuService_GetAchievements_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IMainMenuService/GetAchievementsServerExceptionFault" name="ServerExceptionFault" message="tns:IMainMenuService_GetAchievements_ServerExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetLeaderboard">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/GetLeaderboard" message="tns:IMainMenuService_GetLeaderboard_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/GetLeaderboardResponse" message="tns:IMainMenuService_GetLeaderboard_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IMainMenuService/GetLeaderboardServerExceptionFault" name="ServerExceptionFault" message="tns:IMainMenuService_GetLeaderboard_ServerExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="ReportToServer">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/ReportToServer" message="tns:IMainMenuService_ReportToServer_InputMessage" />
@@ -425,6 +376,9 @@
     </wsdl:operation>
     <wsdl:operation name="StartGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/StartGame" message="tns:IPregameService_StartGame_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InviteFriend">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/InviteFriend" message="tns:IPregameService_InviteFriend_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotifyServer">
       <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/NotifyServer" message="tns:IPregameService_NotifyServer_InputMessage" />
@@ -465,9 +419,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ServerExceptionFault">
-        <soap12:fault use="literal" name="ServerExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="Login">
       <soap12:operation soapAction="http://tempuri.org/ILoginService/Login" style="document" />
@@ -486,9 +437,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ServerExceptionFault">
-        <soap12:fault use="literal" name="ServerExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IMainMenuService" type="tns:IMainMenuService">
@@ -502,9 +450,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ServerExceptionFault">
-        <soap12:fault use="literal" name="ServerExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="RemoveFriend">
       <soap12:operation soapAction="http://tempuri.org/IMainMenuService/RemoveFriend" style="document" />
@@ -514,9 +459,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ServerExceptionFault">
-        <soap12:fault use="literal" name="ServerExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="BlockFriend">
       <soap12:operation soapAction="http://tempuri.org/IMainMenuService/BlockFriend" style="document" />
@@ -526,9 +468,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ServerExceptionFault">
-        <soap12:fault use="literal" name="ServerExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetFriendRequests">
       <soap12:operation soapAction="http://tempuri.org/IMainMenuService/GetFriendRequests" style="document" />
@@ -538,9 +477,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ServerExceptionFault">
-        <soap12:fault use="literal" name="ServerExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="AcceptFriendRequest">
       <soap12:operation soapAction="http://tempuri.org/IMainMenuService/AcceptFriendRequest" style="document" />
@@ -550,9 +486,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ServerExceptionFault">
-        <soap12:fault use="literal" name="ServerExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="RejectFriendRequest">
       <soap12:operation soapAction="http://tempuri.org/IMainMenuService/RejectFriendRequest" style="document" />
@@ -562,9 +495,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ServerExceptionFault">
-        <soap12:fault use="literal" name="ServerExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="SearchNoFriendPlayer">
       <soap12:operation soapAction="http://tempuri.org/IMainMenuService/SearchNoFriendPlayer" style="document" />
@@ -574,9 +504,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ServerExceptionFault">
-        <soap12:fault use="literal" name="ServerExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="SendFriendRequest">
       <soap12:operation soapAction="http://tempuri.org/IMainMenuService/SendFriendRequest" style="document" />
@@ -586,9 +513,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ServerExceptionFault">
-        <soap12:fault use="literal" name="ServerExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetPlayerProfile">
       <soap12:operation soapAction="http://tempuri.org/IMainMenuService/GetPlayerProfile" style="document" />
@@ -598,9 +522,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ServerExceptionFault">
-        <soap12:fault use="literal" name="ServerExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetAchievements">
       <soap12:operation soapAction="http://tempuri.org/IMainMenuService/GetAchievements" style="document" />
@@ -610,9 +531,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ServerExceptionFault">
-        <soap12:fault use="literal" name="ServerExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetLeaderboard">
       <soap12:operation soapAction="http://tempuri.org/IMainMenuService/GetLeaderboard" style="document" />
@@ -622,9 +540,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ServerExceptionFault">
-        <soap12:fault use="literal" name="ServerExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ReportToServer">
       <soap12:operation soapAction="http://tempuri.org/IMainMenuService/ReportToServer" style="document" />
@@ -696,6 +611,12 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="InviteFriend">
+      <soap12:operation soapAction="http://tempuri.org/IPregameService/InviteFriend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="NotifyServer">
       <soap12:operation soapAction="http://tempuri.org/IPregameService/NotifyServer" style="document" />
       <wsdl:input>
@@ -761,7 +682,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PGEUD8U\david</Upn>
+          <Upn>PALE\epale</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -770,7 +691,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PGEUD8U\david</Upn>
+          <Upn>PALE\epale</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -779,7 +700,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PGEUD8U\david</Upn>
+          <Upn>PALE\epale</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -788,7 +709,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PGEUD8U\david</Upn>
+          <Upn>PALE\epale</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

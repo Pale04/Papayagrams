@@ -9,13 +9,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlayerDC" nillable="true" type="tns:PlayerDC" />
-  <xs:complexType name="ServerException">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ErrorCode" type="xs:int" />
-      <xs:element minOccurs="0" name="StackTrace" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ServerException" nillable="true" type="tns:ServerException" />
   <xs:complexType name="ArrayOfFriendDC">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="FriendDC" nillable="true" type="tns:FriendDC" />

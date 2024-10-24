@@ -18,4 +18,52 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ValueTupleOfintPlayerDClSN2Ry_Ss" nillable="true" type="tns:ValueTupleOfintPlayerDClSN2Ry_Ss" />
+  <xs:complexType name="ValueTupleOfintArrayOfFriendDClSN2Ry_Ss">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="int" Namespace="http://www.w3.org/2001/XMLSchema" />
+          <GenericParameter Name="ArrayOfFriendDC" Namespace="http://schemas.datacontract.org/2004/07/Contracts" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Item1" type="xs:int" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Contracts" name="Item2" nillable="true" type="q2:ArrayOfFriendDC" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ValueTupleOfintArrayOfFriendDClSN2Ry_Ss" nillable="true" type="tns:ValueTupleOfintArrayOfFriendDClSN2Ry_Ss" />
+  <xs:complexType name="ValueTupleOfintArrayOfAchievementDClSN2Ry_Ss">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="int" Namespace="http://www.w3.org/2001/XMLSchema" />
+          <GenericParameter Name="ArrayOfAchievementDC" Namespace="http://schemas.datacontract.org/2004/07/Contracts" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Item1" type="xs:int" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Contracts" name="Item2" nillable="true" type="q3:ArrayOfAchievementDC" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ValueTupleOfintArrayOfAchievementDClSN2Ry_Ss" nillable="true" type="tns:ValueTupleOfintArrayOfAchievementDClSN2Ry_Ss" />
+  <xs:complexType name="ValueTupleOfintstring">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="int" Namespace="http://www.w3.org/2001/XMLSchema" />
+          <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Item1" type="xs:int" />
+      <xs:element name="Item2" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ValueTupleOfintstring" nillable="true" type="tns:ValueTupleOfintstring" />
 </xs:schema>

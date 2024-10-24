@@ -34,7 +34,7 @@ namespace PapayagramsClient
 
         private void CreateNewGame(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new GameCreation());
+            NavigationService.Navigate(new Lobby());
         }
 
         private void JoinGame(object sender, RoutedEventArgs e)
