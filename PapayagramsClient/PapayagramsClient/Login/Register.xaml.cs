@@ -47,11 +47,11 @@ namespace PapayagramsClient.Login
                 return;
             }
 
-            (int err, int result) = host.RegisterUser(player);
+            int result = host.RegisterUser(player);
 
-            if (err != 0)
+            if (result != 0)
             {
-                switch (err)
+                switch (result)
                 {
                     case 101:
                         return;
