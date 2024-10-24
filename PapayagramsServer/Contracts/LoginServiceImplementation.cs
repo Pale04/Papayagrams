@@ -25,20 +25,20 @@ namespace Contracts
                 newPlayer.Email = player.Email;
                 newPlayer.Password = player.Password;
             }
-            catch (ArgumentException error)
+            catch (ArgumentException)
             {
-                throw new FaultException<ServerException>(new ServerException { ErrorCode = 101, StackTrace = error.StackTrace });
+                return 101;
             }
 
             try
             {
                 if (UserDB.GetPlayerByUsername(newPlayer.Username).IsSome)
                 {
-                    throw new FaultException<ServerException>(new ServerException { ErrorCode = 201});
+                    return 201;
                 }
                 else if (UserDB.GetPlayerByEmail(newPlayer.Email).IsSome)
                 {
-                    throw new FaultException<ServerException>(new ServerException { ErrorCode = 202 });
+                    return 202;
                 }
 
                 UserDB.RegisterUser(newPlayer);
@@ -46,7 +46,8 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 102, StackTrace = error.StackTrace });
+                //TODO: Log the error
+                return 102;
             }
         }
 
@@ -103,7 +104,7 @@ namespace Contracts
         {
             if (string.IsNullOrEmpty(username))
             {
-                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 101 });
+                return 101;
             }
 
             int logoutResult;
@@ -113,15 +114,15 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 102, StackTrace = error.StackTrace });
+                return 102;
             }
 
             if (logoutResult == 0)
             {
-                throw new FaultException<ServerException>(new ServerException{ ErrorCode = 205 });
+                return 205;
             }
 
-            //TODO: Remover al jugador y todos sus contextos del hashtable
+            //TODO: Remover al jugador y todos sus callback channels del hashtable
             Console.WriteLine("User " + username + " logged out");
             return 0;
         }

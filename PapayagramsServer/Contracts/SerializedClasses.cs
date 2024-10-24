@@ -114,13 +114,4 @@ namespace Contracts
         [DataMember]
         public string PlayerUsername;
     }
-
-    [DataContract]
-    public class ServerException
-    {
-        [DataMember]
-        public int ErrorCode { get; set; }
-        [DataMember]
-        public string StackTrace { get; set; }
-    }
 }

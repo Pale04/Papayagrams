@@ -7,49 +7,38 @@ namespace Contracts
     public interface IMainMenuService
     {
         [OperationContract]
-        [FaultContract(typeof(ServerException))]
-        List<FriendDC> GetFriends(string username);
+        (int, List<FriendDC>) GetFriends(string username);
 
         [OperationContract]
-        [FaultContract(typeof(ServerException))]
         int RemoveFriend(string username, string friendUsername);
 
         [OperationContract]
-        [FaultContract(typeof(ServerException))]
         int BlockFriend(string username, string friendUsername);
 
         [OperationContract]
-        [FaultContract(typeof(ServerException))]
-        List<FriendDC> GetFriendRequests(string username);
+        (int, List<FriendDC>) GetFriendRequests(string username);
 
         [OperationContract]
-        [FaultContract(typeof(ServerException))]
         int AcceptFriendRequest(string username, string friendUsername);
 
         [OperationContract]
-        [FaultContract(typeof(ServerException))]
         int RejectFriendRequest(string username, string friendUsername);
 
         [OperationContract]
-        [FaultContract(typeof(ServerException))]
-        PlayerDC SearchNoFriendPlayer(string searcherUsername, string searchedUsername);
+        (int, PlayerDC) SearchNoFriendPlayer(string searcherUsername, string searchedUsername);
 
         [OperationContract]
-        [FaultContract(typeof(ServerException))]
         int SendFriendRequest(string senderUsername, string receiverUsername);
 
         //TODO: implementar un objeto serializado para recuperar el perfil completo del usuario
         [OperationContract]
-        [FaultContract(typeof(ServerException))]
         int GetPlayerProfile(string username);
 
         [OperationContract]
-        [FaultContract(typeof(ServerException))]
-        List<AchievementDC> GetAchievements(string username);
+        (int, List<AchievementDC>) GetAchievements(string username);
 
         //TODO: implementar un objeto serializado para recuperar el leaderboard
         [OperationContract]
-        [FaultContract(typeof(ServerException))]
         int GetLeaderboard(PlayerDC player);
 
         [OperationContract]
