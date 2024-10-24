@@ -18,13 +18,25 @@
 
         <Label Content="{x:Static p:Resources.profileTitle}" HorizontalAlignment="Left" Margin="138,32,0,0" VerticalAlignment="Top" FontSize="64" FontWeight="Bold"/>
 
-        <Rectangle HorizontalAlignment="Left" Height="230" Margin="46,159,0,0" VerticalAlignment="Top" Width="650" Fill="#F8E2C1"/>
-        <Rectangle HorizontalAlignment="Left" Height="250" Margin="46,414,0,0" VerticalAlignment="Top" Width="950" Fill="#F8E2C1"/>
+        <Rectangle HorizontalAlignment="Left" Height="230" Margin="46,159,0,0" VerticalAlignment="Top" Width="650" Fill="#F3ECCD"/>
+        <Rectangle HorizontalAlignment="Left" Height="250" Margin="46,414,0,0" VerticalAlignment="Top" Width="950" Fill="#F3ECCD"/>
 
         <Image Name="ProfilePictureImage" Width="175" Height="175" Margin="78,186,828,358"/>
         <Label Name="UsernameLabel" Content="adios" Margin="272,188,610,483" FontSize="32"/>
         <Label Name="EmailLabel" Content="hola" Margin="272,250,610,423" FontSize="20"/>
 
-        <Label Content="{x:Static p:Resources.profileStatsTitle}" HorizontalAlignment="Left" Margin="125,481,0,0" VerticalAlignment="Top"/>
+        <Label Content="{x:Static p:Resources.profileStatsTitle}" HorizontalAlignment="Left" Margin="86,417,0,0" VerticalAlignment="Top" FontSize="30" FontWeight="Bold"/>
+
+        <Label Name="PlayedGamesLabel" Content="Label" HorizontalAlignment="Left" Margin="86,480,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="PlayedOriginalLabel" Content="Label" HorizontalAlignment="Left" Margin="86,521,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Name="PlayedTimeAttackLabel" Content="Label" HorizontalAlignment="Left" Margin="86,557,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Name="PlayedSudenDeathLabel" Content="Label" HorizontalAlignment="Left" Margin="86,593,0,0" VerticalAlignment="Top" FontSize="16"/>
+
+        <Label Name="WonGamesLabel" Content="Label" HorizontalAlignment="Left" Margin="423,480,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="WonOriginalLabel" Content="Label" HorizontalAlignment="Left" Margin="423,521,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Name="WonTimeAttackLabel" Content="Label" HorizontalAlignment="Left" Margin="423,557,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Name="WonSudenDeathLabel" Content="Label" HorizontalAlignment="Left" Margin="423,593,0,0" VerticalAlignment="Top" FontSize="16"/>
+
+        <Label Name="NuberFriendsLabel" Content="Label" HorizontalAlignment="Left" Margin="716,480,0,0" VerticalAlignment="Top" FontSize="20"/>
     </Grid>
 </Page>

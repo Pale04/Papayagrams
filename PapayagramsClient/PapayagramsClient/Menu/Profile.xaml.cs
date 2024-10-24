@@ -20,6 +20,8 @@ namespace PapayagramsClient.Menu
         private void SetPlayerData()
         {
             throw new NotImplementedException();
+            // TODO: get player stats from server
+            PlayedGamesLabel.Content = Properties.Resources.profilePlayedGames + "";
         }
 
         private void ReturnToMainMenu(object sender, RoutedEventArgs e)
