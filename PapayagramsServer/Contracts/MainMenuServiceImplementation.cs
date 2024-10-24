@@ -77,6 +77,15 @@ namespace Contracts
             PlayerDC player = new PlayerDC();
             Option<Player> playerOption =Option<Player>.None;
 
+            try
+            {
+                playerOption = UserDB.SearchNoFriendPlayer(searcherUsername, searchedUsername);
+            }
+            catch (EntityException error)
+            {
+                
+
+            }
             //TODO: mostrar todos los jugadores menos amigos.
 
             if (playerOption.IsNone)

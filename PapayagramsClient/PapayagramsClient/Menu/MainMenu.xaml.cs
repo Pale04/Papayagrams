@@ -9,7 +9,7 @@ using PapayagramsClient.Menu;
 
 namespace PapayagramsClient
 {
-    public partial class MainMenu : Page
+    public partial class MainMenu : Page, IMainMenuServiceCallback
     {
         public MainMenu()
         {
@@ -60,6 +60,11 @@ namespace PapayagramsClient
         public void AddIcons()
         {
             FriendImage.SetImage("../Resources/Icons/friend-svgrepo-com.svg");
+        }
+
+        public void ReceiveGameInvitation(GameInvitationDC invitation)
+        {
+            throw new NotImplementedException();
         }
     }
 }

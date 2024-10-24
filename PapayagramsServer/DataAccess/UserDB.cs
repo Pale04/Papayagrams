@@ -129,11 +129,11 @@ namespace DataAccess
         }
 
         /// <summary>
-        /// Retrieve the player searched if exists an they are not friends
+        /// Retrieve the player searched if exists and they are not friends
         /// </summary>
         /// <param name="searcherUsername">Username of the player who is searching</param>
         /// <param name="searchedUsername">Username of the player who needs to be found</param>
-        /// <returns>Option object with the player found or nothing if not exist or they are friends</returns>
+        /// <returns>Option object with the player found or None if not exist, they are friends or is himself</returns>
         /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
         public static Option<Player> SearchNoFriendPlayer(string searcherUsername, string searchedUsername)
         {

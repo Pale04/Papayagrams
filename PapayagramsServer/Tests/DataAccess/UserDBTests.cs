@@ -156,18 +156,48 @@ namespace DataAccess.Tests
         }
 
         [TestMethod()]
+        public void SearchNoFriendPlayerPendingRequestTest()
+        {
+            UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(_registeredPlayer2, result.Case, "SearchNoFriendPlayerPendingRequestTest");
+        }
+
+        [TestMethod()]
+        public void SearchNoFriendPlayerBlockedTest()
+        {
+            UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+
+            //TODO: hacer método para bloquear a un jugador
+
+            Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(_registeredPlayer2, result.Case, "SearchNoFriendPlayerBlockedTest");
+        }
+
+        [TestMethod()]
+        public void SearchNoFriendPlayerHimSelfTest()
+        {
+            Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer1.Username);
+            Assert.IsTrue(result.IsNone, "SearchNoFriendPlayerHimSelfTest");
+        }
+
+        [TestMethod()]
+        public void SearchNoFriendPlayerAlreadyFriendsTest()
+        {
+            UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            
+            //TODO Add the method to accept the friend request
+
+            Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.IsTrue(result.IsNone, "SearchNo FriendPlayerAlreadyFriendsTest");
+        }
+
+        [TestMethod()]
         public void SearchNoFriendPlayerNonExistentTest()
         {
             Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, "Pale");
             Assert.IsTrue(result.IsNone, "SearchNoFriendPlayerNonExistentTest");
         }
-
-        [TestMethod()]
-        public void SearchNoFriendPlayerPendingRequestTest()
-        {
-            
-        }
-
 
         [TestMethod()]
         public void SendFriendRequestSuccessfulTest()

@@ -47,7 +47,7 @@ namespace Contracts.Tests
         [TestMethod]
         public void RegisterUserEmptyTest()
         {
-            int expected = 1;
+            int expected = 101;
             int result = _serviceImplementation.RegisterUser(new PlayerDC());
             Assert.AreEqual(expected, result, "RegisterUserEmptyTest");
         }
@@ -70,7 +70,7 @@ namespace Contracts.Tests
                 Password = "asdfas´461ds+"
             };
 
-            int expected = 102;
+            int expected = 202;
             int result = _serviceImplementation.RegisterUser(newPlayer);
             Assert.AreEqual(expected, result, "RegisterUserEmailExistsTest");
         }
