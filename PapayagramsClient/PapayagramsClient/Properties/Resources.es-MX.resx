@@ -276,4 +276,34 @@
   <data name="globalEmptyEmail" xml:space="preserve">
     <value>El correo no puede dejarse vacío</value>
   </data>
+  <data name="profileStatsTitle" xml:space="preserve">
+    <value>Estadisticas</value>
+  </data>
+  <data name="profilePlayedGames" xml:space="preserve">
+    <value>Juegos totales</value>
+  </data>
+  <data name="profileOriginalGames" xml:space="preserve">
+    <value>Juegos originales jugados</value>
+  </data>
+  <data name="profileTimeAttackGames" xml:space="preserve">
+    <value>Juegos contra-reloj jugados</value>
+  </data>
+  <data name="profileSuddenDeathGames" xml:space="preserve">
+    <value>Juegos muerte subita jugados</value>
+  </data>
+  <data name="profileGamesWon" xml:space="preserve">
+    <value>Juegos ganados</value>
+  </data>
+  <data name="profileOriginalGamesWon" xml:space="preserve">
+    <value>Juegos originales ganados</value>
+  </data>
+  <data name="profileTimeAttackGamesWon" xml:space="preserve">
+    <value>Juegos contra-reloj ganados</value>
+  </data>
+  <data name="profileSuddenDeathGamesWon" xml:space="preserve">
+    <value>Juegos muerte subita ganados</value>
+  </data>
+  <data name="profileNumberFriends" xml:space="preserve">
+    <value>Numero de amigos</value>
+  </data>
 </root>

@@ -175,6 +175,11 @@
     <Compile Include="Menu\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Achievements.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Achievements.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -198,6 +203,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Achievements.en.resx" />
+    <EmbeddedResource Include="Properties\Achievements.es-MX.resx" />
+    <EmbeddedResource Include="Properties\Achievements.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Achievements.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.en.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.en.Designer.cs</LastGenOutput>
@@ -280,6 +291,9 @@
     <Resource Include="Resources\Icons\exit-svgrepo-com.svg" />
     <Resource Include="Resources\Icons\friend-svgrepo-com.svg" />
     <Resource Include="Resources\Icons\trophy-svgrepo-com.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\PlayerImages\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

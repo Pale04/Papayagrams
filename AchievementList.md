@@ -1,0 +1,16 @@
+- Cambiar avatar
+- Agregar un amigo
+- Agregar 10 amigos
+- Completar 1 partida
+- Completar 5 partidas
+- Completar 10 partidas
+- Completar 20 partidas
+- Completar 100 partidas
+- Ganar 1 partida
+- Ganar 10 partidas
+- Ganar 1 partida en modo original
+- Ganar 5 partidas en modo original
+- Ganar 1 partida en modo contra-reloj
+- Ganar 5 partidas en modo contra-reloj
+- Ganar 1 partida en modo muerte subita
+- Ganar 5 partidas en modo muerte subita

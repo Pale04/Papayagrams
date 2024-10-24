@@ -16,7 +16,7 @@
             <svg:SVGImage Name="BackImage"/>
         </Button>
 
-        <Label Content="{x:Static p:Resources.profileTitle}" HorizontalAlignment="Left" Margin="104,32,0,0" VerticalAlignment="Top" FontSize="64" FontWeight="Bold"/>
+        <Label Content="{x:Static p:Resources.profileTitle}" HorizontalAlignment="Left" Margin="138,32,0,0" VerticalAlignment="Top" FontSize="64" FontWeight="Bold"/>
 
         <Rectangle HorizontalAlignment="Left" Height="230" Margin="46,159,0,0" VerticalAlignment="Top" Width="650" Fill="#F8E2C1"/>
         <Rectangle HorizontalAlignment="Left" Height="250" Margin="46,414,0,0" VerticalAlignment="Top" Width="950" Fill="#F8E2C1"/>
@@ -24,5 +24,7 @@
         <Image Name="ProfilePictureImage" Width="175" Height="175" Margin="78,186,828,358"/>
         <Label Name="UsernameLabel" Content="adios" Margin="272,188,610,483" FontSize="32"/>
         <Label Name="EmailLabel" Content="hola" Margin="272,250,610,423" FontSize="20"/>
+
+        <Label Content="{x:Static p:Resources.profileStatsTitle}" HorizontalAlignment="Left" Margin="125,481,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>

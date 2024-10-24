@@ -403,6 +403,96 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Games won.
+        /// </summary>
+        public static string profileGamesWon {
+            get {
+                return ResourceManager.GetString("profileGamesWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Number of friends.
+        /// </summary>
+        public static string profileNumberFriends {
+            get {
+                return ResourceManager.GetString("profileNumberFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Original games played.
+        /// </summary>
+        public static string profileOriginalGames {
+            get {
+                return ResourceManager.GetString("profileOriginalGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Original games won.
+        /// </summary>
+        public static string profileOriginalGamesWon {
+            get {
+                return ResourceManager.GetString("profileOriginalGamesWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Played games.
+        /// </summary>
+        public static string profilePlayedGames {
+            get {
+                return ResourceManager.GetString("profilePlayedGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Stats.
+        /// </summary>
+        public static string profileStatsTitle {
+            get {
+                return ResourceManager.GetString("profileStatsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sudden death games played.
+        /// </summary>
+        public static string profileSuddenDeathGames {
+            get {
+                return ResourceManager.GetString("profileSuddenDeathGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sudden death games won.
+        /// </summary>
+        public static string profileSuddenDeathGamesWon {
+            get {
+                return ResourceManager.GetString("profileSuddenDeathGamesWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Time attack games played.
+        /// </summary>
+        public static string profileTimeAttackGames {
+            get {
+                return ResourceManager.GetString("profileTimeAttackGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Time attack games won.
+        /// </summary>
+        public static string profileTimeAttackGamesWon {
+            get {
+                return ResourceManager.GetString("profileTimeAttackGamesWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a My profile.
         /// </summary>
         public static string profileTitle {
