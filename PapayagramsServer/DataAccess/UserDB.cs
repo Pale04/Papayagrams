@@ -96,16 +96,15 @@ namespace DataAccess
 
             using (var context = new papayagramsEntities())
             {
-                var playerResult = context.get_player_by_email(email);
-                List<get_player_by_email_Result> playerResultList = playerResult.ToList();
-
-                optionPlayer = playerResultList.Count == 0 ?
+                var playerResult = context.User.Where(p => p.email == email).Include(p => p.UserConfiguration).ToList();
+                optionPlayer = playerResult.Count == 0 ?
                     Option<Player>.None :
                     Option<Player>.Some(new Player
                     {
-                        Id = playerResultList.First().id,
-                        Username = playerResultList.First().username,
-                        Email = playerResultList.First().email,
+                        Id = playerResult.First().id,
+                        Username = playerResult.First().username,
+                        Email = playerResult.First().email,
+                        ProfileIcon = playerResult.First().UserConfiguration.icon,
                     });
             }
 

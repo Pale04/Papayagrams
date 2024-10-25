@@ -105,6 +105,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
+                //TOOD: handle
                 return 102;
             }
 

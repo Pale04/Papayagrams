@@ -1,6 +1,5 @@
 ﻿using MailKit.Net.Smtp;
 using MimeKit;
-using System;
 using System.Configuration;
 using System.Threading.Tasks;
 
@@ -21,7 +20,6 @@ namespace MailService
 
         public Task SendMail(string receiverEmail, string subject, string body)
         {
-
             var mail = new MimeMessage();
             
             mail.From.Add(MailboxAddress.Parse(_papayagramsAccount));
@@ -33,12 +31,12 @@ namespace MailService
                 Text = body
             };
 
-            using (var smtpCliet = new SmtpClient())
+            using (var smtpClient = new SmtpClient())
             {
-                smtpCliet.Connect(_smtpServer, _smtpPort, MailKit.Security.SecureSocketOptions.StartTls);
-                smtpCliet.Authenticate(_papayagramsAccount, _papayagramsPassword);
-                smtpCliet.Send(mail);
-                smtpCliet.Disconnect(true);
+                smtpClient.Connect(_smtpServer, _smtpPort, MailKit.Security.SecureSocketOptions.StartTls);
+                smtpClient.Authenticate(_papayagramsAccount, _papayagramsPassword);
+                smtpClient.Send(mail);
+                smtpClient.Disconnect(true);
             }
 
             return Task.CompletedTask;
