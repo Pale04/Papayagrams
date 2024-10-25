@@ -19,5 +19,7 @@
 303. Cannot send a friend request. You are already friends.
 
 ## Pregame
+401. Game room not found or doesn't exist.
+ 
 
 ## Game

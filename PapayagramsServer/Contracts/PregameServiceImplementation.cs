@@ -1,8 +1,10 @@
 ﻿using BussinessLogic;
+using DataAccess;
 using DomainClasses;
+using LanguageExt;
 using System;
-using System.Collections;
 using System.ServiceModel;
+using System.Data.Entity.Core;
 
 namespace Contracts
 {
@@ -10,14 +12,32 @@ namespace Contracts
     {
         public (int, string) CreateGame(string username)
         {
-            GameRoom gameRoom = new GameRoom();
-            gameRoom.state = GameRoomState.Waiting;
-            gameRoom.Players.Add(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
-            gameRoom.RoomCode = GameData.AddGameRoom(gameRoom);
+            int resultCode = 0;
+            string roomCode = null;
+            Option<Player> player = Option<Player>.None;
 
-            Console.WriteLine("sala de juego creada: " + gameRoom.RoomCode);
+            try
+            {
+                player = UserDB.GetPlayerByUsername(username);
+            }
+            catch (EntityException error)
+            {
+                //TODO: handle
+                resultCode = 102;
+            }
 
-            return (0, gameRoom.RoomCode);
+            if (player.IsSome)
+            {
+                GameRoom gameRoom = new GameRoom();
+                gameRoom.State = GameRoomState.Waiting;
+                gameRoom.Players.Add((Player)player.Case);
+                roomCode = GameRoomsPool.AddGameRoom(gameRoom);
+
+                CallbacksPool.PlayerArrivedToPregame(username,OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
+            }
+
+            Console.WriteLine("sala de juego creada: " + roomCode);
+            return (resultCode, roomCode);
         }
 
         public void InviteFriend(string username)
@@ -28,16 +48,40 @@ namespace Contracts
 
         public int JoinGame(string username, string roomCode)
         {
-            //Player player = ServerPool.GetPlayerByUsername(username);
-            //GameRoom room = GameData.GetGameRoom(roomCode);
-            //room.Players.Add(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
-            //return 0;
-            throw new NotImplementedException();
+            int resultCode = 0;
+            GameRoom room = GameRoomsPool.GetGameRoom(roomCode);
+
+            if (room != null && room.State.Equals(GameRoomState.Waiting))
+            {
+                Option<Player> player = Option<Player>.None;
+                try
+                {
+                    player = UserDB.GetPlayerByUsername(username);
+                }
+                catch (EntityException error)
+                {
+                    //TODO: handle
+                    resultCode = 102;
+                }
+
+                if (player.IsSome)
+                {
+                    room.Players.Add((Player)player.Case);
+                    var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(username);
+                    callbackChannel.RefreshLobby(GameRoomDC.ConvertToGameRoomDC(room));
+                }
+            }
+            else
+            {
+                resultCode = 401;
+            }
+
+            return resultCode;
         }
 
         public int LeaveLobby(string username, string code)
         {
-            GameData.RemovePlayerFromGameRoom(username, code);
+            GameRoomsPool.RemovePlayerFromGameRoom(username, code);
             Console.WriteLine(username + " leaved the game");
             return 0;
         }
@@ -45,13 +89,8 @@ namespace Contracts
         public void SendMessage(Message message)
         {
             Console.Write("sending: " + message.Content + " from: " + message.AuthorUsername);
-            GameRoom room = GameData.GetGameRoom(message.GameRoomCode);
-
-            foreach (DictionaryEntry player in room.Players)
-            {
-                Console.WriteLine("Sending message to " + player.Key);
-                (player.Value as IPregameServiceCallback).ReceiveMessage(message);
-            }
+            var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(message.AuthorUsername);
+            callbackChannel.ReceiveMessage(message);
         }
 
         public void StartGame(string roomCode)

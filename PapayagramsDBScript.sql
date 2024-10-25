@@ -70,7 +70,7 @@ CREATE TABLE [UserConfiguration] (
   [typography] int,
   [pieceSize] VARCHAR(20) CHECK (pieceSize IN ('small', 'medium','large')),
   [pieceColor] int,
-  [icon] int,
+  [icon] int NOT NULL,
   [cursorDesign] int
 )
 GO

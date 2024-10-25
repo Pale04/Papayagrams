@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CallbacksPool.cs" />
-    <Compile Include="GameData.cs" />
+    <Compile Include="GameRoomsPool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

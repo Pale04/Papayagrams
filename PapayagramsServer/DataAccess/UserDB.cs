@@ -5,6 +5,7 @@ using System.Linq;
 using LanguageExt;
 using System.Data;
 using System.Data.Entity.Core;
+using System.Data.Entity;
 
 namespace DataAccess
 {
@@ -67,17 +68,16 @@ namespace DataAccess
 
             using (var context = new papayagramsEntities())
             {
-                var playerResult = context.get_player_by_username(username);
-                List<get_player_by_username_Result> playerResultList = playerResult.ToList();
+                var playerResult = context.User.Where(p => p.username == username).Include(p => p.UserConfiguration).ToList();
 
-                optionPlayer = playerResultList.Count == 0 ?
+                optionPlayer = playerResult.Count == 0 ?
                     Option<Player>.None :
                     Option<Player>.Some(new Player
                     {
-                        Id = playerResultList.First().id,
-                        Username = playerResultList.First().username,
-                        Email = playerResultList.First().email,
-                        Password = playerResultList.First().password
+                        Id = playerResult.First().id,
+                        Username = playerResult.First().username,
+                        Email = playerResult.First().email,
+                        ProfileIcon = playerResult.First().UserConfiguration.icon,
                     });
             }
 

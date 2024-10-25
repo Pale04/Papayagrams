@@ -19,7 +19,7 @@ namespace DataAccess
         public Nullable<int> typography { get; set; }
         public string pieceSize { get; set; }
         public Nullable<int> pieceColor { get; set; }
-        public Nullable<int> icon { get; set; }
+        public int icon { get; set; }
         public Nullable<int> cursorDesign { get; set; }
     
         public virtual User User { get; set; }
