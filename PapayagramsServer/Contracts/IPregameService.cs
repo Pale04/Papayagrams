@@ -49,6 +49,6 @@ namespace Contracts
         void StartGameResponse();
 
         [OperationContract(IsOneWay = true)]
-        void RefreshLobby();
+        void RefreshLobby(GameRoomDC gameRoom);
     }
 }

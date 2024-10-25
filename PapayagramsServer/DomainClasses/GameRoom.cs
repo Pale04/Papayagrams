@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 
 namespace DomainClasses
 {
@@ -12,7 +12,7 @@ namespace DomainClasses
     public class GameRoom
     {
         public string RoomCode { get; set; }
-        public Hashtable Players = new Hashtable();
-        public GameRoomState state { get; set; }
+        public List<Player> Players = new List<Player>();
+        public GameRoomState State { get; set; }
     }
 }

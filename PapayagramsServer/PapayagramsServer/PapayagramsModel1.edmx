@@ -65,7 +65,7 @@
           <Property Name="typography" Type="int" />
           <Property Name="pieceSize" Type="varchar" MaxLength="20" />
           <Property Name="pieceColor" Type="int" />
-          <Property Name="icon" Type="int" />
+          <Property Name="icon" Type="int" Nullable="false" />
           <Property Name="cursorDesign" Type="int" />
         </EntityType>
         <EntityType Name="UserRelationship">
@@ -344,7 +344,7 @@
           <Property Name="typography" Type="Int32" />
           <Property Name="pieceSize" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="pieceColor" Type="Int32" />
-          <Property Name="icon" Type="Int32" />
+          <Property Name="icon" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK__UserConfi__userI__534D60F1" FromRole="UserConfiguration" ToRole="User" />
           <Property Name="cursorDesign" Type="Int32" />
         </EntityType>

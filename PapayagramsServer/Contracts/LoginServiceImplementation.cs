@@ -91,7 +91,7 @@ namespace Contracts
 
             Option<Player> playerLogged = UserDB.GetPlayerByUsername(username);
             Console.WriteLine("User " + username + " logged in");
-            return (0,ConvertPlayerToDataContract((Player)playerLogged.Case));
+            return (0,PlayerDC.ConvertToPlayerDC((Player)playerLogged.Case));
         }
 
         /// <summary>
@@ -125,16 +125,6 @@ namespace Contracts
             //TODO: Remover al jugador y todos sus callback channels del hashtable
             Console.WriteLine("User " + username + " logged out");
             return 0;
-        }
-
-        private PlayerDC ConvertPlayerToDataContract(Player player)
-        {
-            return new PlayerDC()
-            {
-                Id = player.Id,
-                Username = player.Username,
-                Email = player.Email,
-            };
         }
     }
 }

@@ -5,9 +5,9 @@ using System.ServiceModel;
 
 namespace BussinessLogic
 {
-    public class GameData
+    public class GameRoomsPool
     {
-        private static Hashtable GameRooms = new Hashtable();
+        private static Hashtable _gameRooms = new Hashtable();
 
         /// <summary>
         /// Remove the player of the specified operation context from the game room of the specified code
@@ -23,13 +23,13 @@ namespace BussinessLogic
         }
 
         /// <summary>
-        /// Get an instance of a game room based on its game room code
+        /// Get the instance of a game room based on its game room code
         /// </summary>
         /// <param name="code">The game room code to search for</param>
-        /// <returns>The instance of the game room with the code specified</returns>
+        /// <returns>The instance of the game room with the code specified or null if the game room with that code does not exist</returns>
         public static GameRoom GetGameRoom(string code)
         {
-            return (GameRoom)GameRooms[code];
+            return (GameRoom)_gameRooms[code];
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace BussinessLogic
         {
             string gameRoomCode = GenerateGameRoomCode();
             gameRoom.RoomCode = gameRoomCode;
-            GameRooms.Add(gameRoomCode, gameRoom);
+            _gameRooms.Add(gameRoomCode, gameRoom);
             return gameRoomCode;
         }
 
@@ -60,7 +60,7 @@ namespace BussinessLogic
                 {
                     code += (char)random.Next(65, 91);
                 }
-            } while (GameRooms[code] != null);
+            } while (_gameRooms[code] != null);
 
             return code;
         }

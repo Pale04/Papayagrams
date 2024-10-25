@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DomainClasses;
+using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Contracts
@@ -14,7 +16,9 @@ namespace Contracts
         public string Email { get; set; }
         [DataMember]
         public string Password { get; set; }
-        
+        [DataMember]
+        public int ProfileIcon { get; set; }
+
         public override bool Equals(object obj)
         {
             bool isEqual = false;
@@ -22,7 +26,7 @@ namespace Contracts
             if (obj != null && GetType() == obj.GetType())
             {
                 PlayerDC player = (PlayerDC)obj;
-                isEqual = Id == player.Id && Username == player.Username && Email == player.Email;
+                isEqual = Id == player.Id && Username == player.Username && Email == player.Email && ProfileIcon == player.ProfileIcon;
             }
 
             return isEqual;
@@ -30,7 +34,19 @@ namespace Contracts
 
         public override int GetHashCode()
         {
-            return Id.GetHashCode() ^ Username.GetHashCode() ^ Email.GetHashCode() ^ Password.GetHashCode();
+            return Id.GetHashCode() ^ Username.GetHashCode() ^ Email.GetHashCode() ^ Password.GetHashCode() ^ ProfileIcon.GetHashCode();
+        }
+
+        public static PlayerDC ConvertToPlayerDC(Player player)
+        {
+            return new PlayerDC
+            {
+                Id = player.Id,
+                Username = player.Username,
+                Email = player.Email,
+                Password = player.Password,
+                ProfileIcon = player.ProfileIcon
+            };
         }
     }
 
@@ -113,5 +129,30 @@ namespace Contracts
         public string GameRoomCode;
         [DataMember]
         public string PlayerUsername;
+    }
+
+    [DataContract]
+    public class GameRoomDC
+    {
+        [DataMember]
+        public string RoomCode { get; set; }
+
+        [DataMember]
+        public List<PlayerDC> Players;
+
+        public static GameRoomDC ConvertToGameRoomDC(GameRoom room)
+        {
+            List<PlayerDC> players = new List<PlayerDC>();
+            foreach (Player player in room.Players)
+            {
+                players.Add(PlayerDC.ConvertToPlayerDC(player));
+            }
+
+            return new GameRoomDC
+            {
+                RoomCode = room.RoomCode,
+                Players = players
+            };
+        }
     }
 }

@@ -15,14 +15,16 @@ namespace DataAccess.Tests
             Id = 1,
             Username = "Pale04",
             Email = "epalemolina@hotmail.com",
-            Password = "040704"
+            Password = "040704",
+            ProfileIcon = 1
         };
         private readonly Player _registeredPlayer2 = new Player()
         {
             Id = 2,
             Username = "David04",
             Email = "david@gmail.com",
-            Password = "040704"
+            Password = "040704",
+            ProfileIcon = 1
         };
 
         [TestInitialize()]
@@ -98,7 +100,9 @@ namespace DataAccess.Tests
         public void GetPlayerByUsernameSuccessfulTest()
         {
             Option<Player> result = UserDB.GetPlayerByUsername(_registeredPlayer1.Username);
-            Assert.AreEqual(_registeredPlayer1, result.Case, "GetPlayerByUsernameSuccessfulTest");
+            Player Player = (Player)result.Case;
+            Console.WriteLine(Player.ProfileIcon);
+            Assert.AreEqual(_registeredPlayer1, (Player)result.Case, "GetPlayerByUsernameSuccessfulTest");
         }
 
         //It it the same case when the username is null

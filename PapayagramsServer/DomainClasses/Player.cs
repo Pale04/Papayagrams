@@ -68,6 +68,8 @@ namespace DomainClasses
             }
         }
 
+        public int ProfileIcon { get; set; }
+
         public override bool Equals(object other)
         {
             bool isEqual = false;
@@ -75,7 +77,7 @@ namespace DomainClasses
             if (other != null && GetType() == other.GetType())
             {
                 Player player = (Player)other;
-                isEqual = Id == player.Id && Username == player.Username && Email == player.Email;
+                isEqual = Id == player.Id && Username.Equals(player.Username) && Email.Equals(player.Email) && ProfileIcon == player.ProfileIcon;
             }
 
             return isEqual;
@@ -83,7 +85,7 @@ namespace DomainClasses
 
         public override int GetHashCode()
         {
-            return Id.GetHashCode() ^ Username.GetHashCode() ^ Email.GetHashCode() ^ Password.GetHashCode();
+            return Id.GetHashCode() ^ Username.GetHashCode() ^ Email.GetHashCode() ^ ProfileIcon.GetHashCode();
         }
     }
 }
