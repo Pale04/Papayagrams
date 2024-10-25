@@ -5,6 +5,7 @@ using System.ServiceModel;
 using System.Data.Entity.Core;
 using LanguageExt;
 using LanguageExt.Common;
+using BussinessLogic;
 
 namespace Contracts
 {
@@ -122,8 +123,8 @@ namespace Contracts
                 return 205;
             }
 
-            //TODO: Remover al jugador y todos sus callback channels del hashtable
-            Console.WriteLine("User " + username + " logged out");
+            CallbacksPool.RemoveAllCallbacksChannels(username);
+            Console.WriteLine("User " + username + " logged out. His callbacks channels have been removed");
             return 0;
         }
     }

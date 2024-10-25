@@ -57,10 +57,16 @@ namespace BussinessLogic
         /// Remove a player from all the callbacks pools. Use it when the player logs out
         /// </summary>
         /// <param name="username">Useranme of the player</param>
-        public static void PlayerLogOutOfServer(string username)
+        public static void RemoveAllCallbacksChannels(string username)
         {
-            _mainMenuPlayers.Remove(username);
-            _pregamePlayers.Remove(username);
+            if (_mainMenuPlayers.ContainsKey(username))
+            {
+                _mainMenuPlayers.Remove(username);
+            }
+            if (_pregamePlayers.ContainsKey(username))
+            {
+                _pregamePlayers.Remove(username);
+            }
         }
     }
 }
