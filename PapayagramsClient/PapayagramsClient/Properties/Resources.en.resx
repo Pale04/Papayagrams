@@ -306,4 +306,10 @@
   <data name="profileNumberFriends" xml:space="preserve">
     <value>Number of friends</value>
   </data>
+  <data name="lobbyRoomNotFound" xml:space="preserve">
+    <value>There's no room with that code</value>
+  </data>
+  <data name="lobbyRoomNotFoundTitle" xml:space="preserve">
+    <value>Room not found</value>
+  </data>
 </root>

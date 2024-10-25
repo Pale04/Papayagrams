@@ -1,10 +1,6 @@
 ﻿using PapayagramsClient.PapayagramsService;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PapayagramsClient.ClientData
 {
@@ -33,7 +29,7 @@ namespace PapayagramsClient.ClientData
 
         public static string RoomCode { get; set; }
         public static GameState State { get; set; }
-        public static Hashtable PlayersInRoom { get; set; }
+        public static List<PlayerDC> PlayersInRoom { get; set; }
         public static GameProgressData GameData { get; set; }
     }
 }

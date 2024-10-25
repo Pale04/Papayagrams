@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:PapayagramsClient.Game"
+      xmlns:local="clr-namespace:PapayagramsClient.Game" xmlns:svg="clr-namespace:SVGImage.SVG;assembly=SVGImage"
       mc:Ignorable="d" 
       Title="Lobby"
       d:DesignHeight="720" d:DesignWidth="1080"
@@ -24,7 +24,10 @@
             <Button FontSize="26" HorizontalAlignment="Center" Content="Send" Margin="20" Click="SendMessage"/>
         </StackPanel>
 
-        <Button Content="Button" HorizontalAlignment="Left" Margin="57,51,0,0" VerticalAlignment="Top"/>
+        <Button HorizontalAlignment="Left" Margin="57,51,0,0" VerticalAlignment="Top">
+            <svg:SVGImage Name="BackImage"/>
+        </Button>
         <Label Name="GameRoomCodeText" Content="Label" HorizontalAlignment="Center" Margin="0,51,0,0" VerticalAlignment="Top"/>
+        <StackPanel Name="PlayersStackPanel" Margin="10,454,260,36"/>
     </Grid>
 </Page>
