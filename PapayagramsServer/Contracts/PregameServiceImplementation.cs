@@ -5,6 +5,7 @@ using LanguageExt;
 using System;
 using System.ServiceModel;
 using System.Data.Entity.Core;
+using System.Collections.Generic;
 
 namespace Contracts
 {
@@ -34,6 +35,7 @@ namespace Contracts
                 roomCode = GameRoomsPool.AddGameRoom(gameRoom);
 
                 CallbacksPool.PlayerArrivedToPregame(username,OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
+                Console.WriteLine($"The pregame callback of {username} is there");
             }
 
             Console.WriteLine("sala de juego creada: " + roomCode);
@@ -66,9 +68,8 @@ namespace Contracts
 
                 if (player.IsSome)
                 {
+                    CallbacksPool.PlayerArrivedToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
                     room.Players.Add((Player)player.Case);
-                    var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(username);
-                    callbackChannel.RefreshLobby(GameRoomDC.ConvertToGameRoomDC(room));
                 }
             }
             else
@@ -89,8 +90,18 @@ namespace Contracts
         public void SendMessage(Message message)
         {
             Console.Write("sending: " + message.Content + " from: " + message.AuthorUsername);
-            var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(message.AuthorUsername);
-            callbackChannel.ReceiveMessage(message);
+            GameRoom room = GameRoomsPool.GetGameRoom(message.GameRoomCode);
+            List<Player> players = room.Players;
+
+            foreach (Player p in players)
+            {
+                var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(p.Username);
+                if (callbackChannel != null)
+                {
+                    Console.WriteLine($"Turn from {p.Username}");
+                    callbackChannel.ReceiveMessage(message);
+                }    
+            }
         }
 
         public void StartGame(string roomCode)
@@ -101,8 +112,23 @@ namespace Contracts
 
         public int NotifyServer(PlayerDC player)
         {
-            //TODO
-            throw new NotImplementedException();
+            //CallbacksPool.PlayerArrivedToPregame(player.Username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
+            //BroadcastRefreshLobby(GameRoomDC.ConvertToGameRoomDC(room));
+            return 0;
+        }
+
+        private static void BroadcastRefreshLobby(GameRoomDC room)
+        {
+            List<PlayerDC> players = room.Players;
+            foreach (PlayerDC p in players)
+            {
+                var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(p.Username);
+                if (callbackChannel != null)
+                {
+                    callbackChannel.RefreshLobby(room);
+                    Console.WriteLine("Refresh lobby sent to: " + p.Username);
+                }
+            }
         }
     }
 }
