@@ -18,32 +18,67 @@ namespace PapayagramsClient.Game
         public Lobby()
         {
             InitializeComponent();
+
             InstanceContext context = new InstanceContext(this);
             _host = new PregameServiceClient(context);
 
-            _host.Open();
-            (int code, string gameRoomCode) = _host.CreateGame(CurrentPlayer.Player.Username);
+            try
+            {
+                _host.Open();
+            }
+            catch (EndpointNotFoundException)
+            {
+                new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                NavigationService.GoBack();
+                return;
+            }
+
+            (int err, string gameRoomCode) = _host.CreateGame(CurrentPlayer.Player.Username);
+
+            if (err != 0)
+            {
+                NavigationService.GoBack();
+                return;
+            }
+
             GameRoomCodeText.Content = gameRoomCode;
             _gameRoomCode = gameRoomCode;
-
-
-            //int connectionResult = host.NotifyServer(CurrentPlayer.Player);
-
-     
-
-            /*if (connectionResult != 0)
-            {
-                // TODO
-                // add message when connecting to server returns an error code
-                new PopUpWindow("","",1).ShowDialog();
-                NavigationService.GoBack();
-            }*/
         }
 
-        public void JoinGameResponse(string roomCode)
+        public Lobby(string gameRoomCode)
         {
-            // TODO
-            throw new NotImplementedException();
+            InitializeComponent();
+
+            InstanceContext context = new InstanceContext(this);
+            _host = new PregameServiceClient(context);
+
+            try
+            {
+                _host.Open();
+            }
+            catch (EndpointNotFoundException)
+            {
+                new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                NavigationService.GoBack();
+                return;
+            }
+
+            int result = _host.JoinGame(CurrentPlayer.Player.Username, gameRoomCode);
+
+            switch (result)
+            {
+                case 0:
+                    GameRoomCodeText.Content = gameRoomCode;
+                    _gameRoomCode = gameRoomCode;
+                    return;
+            }
+
+            NavigationService.GoBack();
+        }
+
+        ~Lobby()
+        {
+            _host.Close();
         }
 
         public void ReceiveMessage(Message message)
