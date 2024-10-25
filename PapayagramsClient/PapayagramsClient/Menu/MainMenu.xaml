@@ -23,7 +23,7 @@
             <svg:SVGImage Name="FriendImage"/>
         </Button>
 
-        <Button HorizontalAlignment="Left" Margin="968,71,0,0" VerticalAlignment="Top" Height="50" Width="50">
+        <Button HorizontalAlignment="Left" Margin="968,71,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Logout">
             <svg:SVGImage Name="LogoutImage"/>
         </Button>
 

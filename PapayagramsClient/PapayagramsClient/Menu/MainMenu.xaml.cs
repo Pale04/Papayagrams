@@ -6,20 +6,26 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using PapayagramsClient.PapayagramsService;
 using PapayagramsClient.Menu;
+using System.IO;
 
 namespace PapayagramsClient
 {
     public partial class MainMenu : Page, IMainMenuServiceCallback
     {
+        private MainMenuServiceClient _host;
+
         public MainMenu()
         {
             InitializeComponent();
+            AddIcons();
 
             InstanceContext context = new InstanceContext(this);
-            MainMenuServiceClient host = new MainMenuServiceClient(context);
+
+            _host = new MainMenuServiceClient(context);
+
             try
             {
-                host.Open();
+                _host.Open();
             }
             catch (EndpointNotFoundException)
             {
@@ -28,8 +34,12 @@ namespace PapayagramsClient
                 return;
             }
 
-            host.ReportToServer(CurrentPlayer.Player.Username);
-            host.Close();
+            _host.ReportToServer(CurrentPlayer.Player.Username);
+        }
+
+        ~MainMenu()
+        {
+            _host.Close();
         }
 
         private void CreateNewGame(object sender, RoutedEventArgs e)
@@ -59,12 +69,48 @@ namespace PapayagramsClient
 
         public void AddIcons()
         {
-            FriendImage.SetImage("../Resources/Icons/friend-svgrepo-com.svg");
+            FriendImage.SetImage(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Icons\\friend-svgrepo-com.svg");
+            LogoutImage.SetImage(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Icons\\exit-svgrepo-com.svg");
+            ConfigImage.SetImage(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Icons\\cog-setting-gear-svgrepo-com.svg");
+            AchievementImage.SetImage(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Icons\\trophy-svgrepo-com.svg");
         }
 
         public void ReceiveGameInvitation(GameInvitationDC invitation)
         {
             throw new NotImplementedException();
+        }
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            LoginServiceClient host = new LoginServiceClient();
+
+            try
+            {
+                host.Open();
+            }
+            catch (EndpointNotFoundException)
+            {
+                new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                NavigationService.GoBack();
+                return;
+            }
+
+            int result = host.Logout(CurrentPlayer.Player.Username);
+
+            switch (result)
+            {
+                case 0:
+                    CurrentPlayer.Player = null;
+                    NavigationService.Navigate(new Login.Login());
+                    break;
+
+                case 102:
+                    new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    break;
+
+                case 205:
+                    break;
+            }
         }
     }
 }
