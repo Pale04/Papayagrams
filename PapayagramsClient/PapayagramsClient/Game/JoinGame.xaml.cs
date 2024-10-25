@@ -24,5 +24,17 @@ namespace PapayagramsClient.Game
         {
             InitializeComponent();
         }
+
+        private void JoinGameRoom(object sender, RoutedEventArgs e)
+        {
+            string gameRoomCode = CodeTextbox.Text.Trim();
+            NavigationService.Navigate(new Lobby(gameRoomCode));
+        }
+
+        private void ReturnToMainMenu(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+
     }
 }

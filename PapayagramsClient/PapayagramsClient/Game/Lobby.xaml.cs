@@ -47,6 +47,12 @@ namespace PapayagramsClient.Game
 
         public Lobby(string gameRoomCode)
         {
+            if (string.IsNullOrEmpty(gameRoomCode))
+            {
+                NavigationService.GoBack();
+                return;
+            }
+
             InitializeComponent();
 
             InstanceContext context = new InstanceContext(this);
