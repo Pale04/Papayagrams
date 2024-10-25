@@ -19,7 +19,9 @@ namespace Contracts
         /// <exception cref="FaultException{ServerException}">Thrown when the parameters are invalid, the username or email already exists or happens a database connection failure</exception>
         public int RegisterUser(PlayerDC player)
         {
+            int codeResult = 0;
             Player newPlayer = new Player();
+
             try
             {
                 newPlayer.Username = player.Username;
@@ -28,28 +30,34 @@ namespace Contracts
             }
             catch (ArgumentException)
             {
-                return 101;
+                codeResult = 101;
             }
 
-            try
+            if (codeResult == 0)
             {
-                if (UserDB.GetPlayerByUsername(newPlayer.Username).IsSome)
+                try
                 {
-                    return 201;
+                    if (UserDB.GetPlayerByUsername(newPlayer.Username).IsSome)
+                    {
+                        codeResult = 201;
+                    }
+                    else if (UserDB.GetPlayerByEmail(newPlayer.Email).IsSome)
+                    {
+                        codeResult = 202;
+                    }
+                    else
+                    {
+                        UserDB.RegisterUser(newPlayer);
+                    }
                 }
-                else if (UserDB.GetPlayerByEmail(newPlayer.Email).IsSome)
+                catch (EntityException error)
                 {
-                    return 202;
+                    //TODO: Log the error
+                    return 102;
                 }
-
-                UserDB.RegisterUser(newPlayer);
-                return 0;
             }
-            catch (EntityException error)
-            {
-                //TODO: Log the error
-                return 102;
-            }
+            
+            return codeResult;
         }
 
         /// <summary>

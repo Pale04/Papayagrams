@@ -1,7 +1,6 @@
 ﻿using DomainClasses;
 using System;
 using System.Collections;
-using System.ServiceModel;
 
 namespace BussinessLogic
 {

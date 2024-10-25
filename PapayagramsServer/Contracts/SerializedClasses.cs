@@ -142,11 +142,7 @@ namespace Contracts
 
         public static GameRoomDC ConvertToGameRoomDC(GameRoom room)
         {
-            List<PlayerDC> players = new List<PlayerDC>();
-            foreach (Player player in room.Players)
-            {
-                players.Add(PlayerDC.ConvertToPlayerDC(player));
-            }
+            List<PlayerDC> players = room.Players.ConvertAll(PlayerDC.ConvertToPlayerDC);
 
             return new GameRoomDC
             {
