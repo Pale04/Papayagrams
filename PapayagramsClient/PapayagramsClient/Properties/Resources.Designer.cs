@@ -358,6 +358,24 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No game room with that code exists.
+        /// </summary>
+        public static string lobbyRoomNotFound {
+            get {
+                return ResourceManager.GetString("lobbyRoomNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Room not found.
+        /// </summary>
+        public static string lobbyRoomNotFoundTitle {
+            get {
+                return ResourceManager.GetString("lobbyRoomNotFoundTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Achievements.
         /// </summary>
         public static string mainMenuAchievements {

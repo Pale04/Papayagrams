@@ -253,11 +253,11 @@
   <wsdl:message name="IPregameService_InviteFriend_InputMessage">
     <wsdl:part name="parameters" element="tns:InviteFriend" />
   </wsdl:message>
+  <wsdl:message name="IPregameService_InviteFriend_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InviteFriendResponse" />
+  </wsdl:message>
   <wsdl:message name="IPregameService_NotifyServer_InputMessage">
     <wsdl:part name="parameters" element="tns:NotifyServer" />
-  </wsdl:message>
-  <wsdl:message name="IPregameService_NotifyServer_OutputMessage">
-    <wsdl:part name="parameters" element="tns:NotifyServerResponse" />
   </wsdl:message>
   <wsdl:message name="IPregameService_ReceiveMessage_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReceiveMessage" />
@@ -379,10 +379,10 @@
     </wsdl:operation>
     <wsdl:operation name="InviteFriend">
       <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/InviteFriend" message="tns:IPregameService_InviteFriend_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/InviteFriendResponse" message="tns:IPregameService_InviteFriend_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotifyServer">
       <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/NotifyServer" message="tns:IPregameService_NotifyServer_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/NotifyServerResponse" message="tns:IPregameService_NotifyServer_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ReceiveMessage">
       <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/ReceiveMessage" message="tns:IPregameService_ReceiveMessage_OutputCallbackMessage" />
@@ -616,15 +616,15 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="NotifyServer">
       <soap12:operation soapAction="http://tempuri.org/IPregameService/NotifyServer" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ReceiveMessage">
       <soap12:operation soapAction="http://tempuri.org/IPregameService/ReceiveMessage" style="document" />
@@ -682,7 +682,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>PALE\epale</Upn>
+          <Upn>DESKTOP-PGEUD8U\david</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -691,7 +691,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>PALE\epale</Upn>
+          <Upn>DESKTOP-PGEUD8U\david</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -700,7 +700,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>PALE\epale</Upn>
+          <Upn>DESKTOP-PGEUD8U\david</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -709,7 +709,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>PALE\epale</Upn>
+          <Upn>DESKTOP-PGEUD8U\david</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

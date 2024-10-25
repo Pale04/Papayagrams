@@ -144,4 +144,10 @@
   <data name="finishGame" xml:space="preserve">
     <value>Finish your first game</value>
   </data>
+  <data name="lobbyRoomNotFound" xml:space="preserve">
+    <value>There's no room with that code</value>
+  </data>
+  <data name="lobbyRoomNotFoundTitle" xml:space="preserve">
+    <value>Room not found</value>
+  </data>
 </root>

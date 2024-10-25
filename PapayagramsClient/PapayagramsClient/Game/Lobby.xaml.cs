@@ -1,7 +1,9 @@
 ﻿using PapayagramsClient.ClientData;
 using PapayagramsClient.PapayagramsService;
 using System;
+using System.Linq;
 using System.ServiceModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
@@ -12,7 +14,6 @@ namespace PapayagramsClient.Game
     /// </summary>
     public partial class Lobby : Page, IPregameServiceCallback
     {
-        private string _gameRoomCode;
         private PregameServiceClient _host;
 
         public Lobby()
@@ -33,7 +34,7 @@ namespace PapayagramsClient.Game
                 return;
             }
 
-            (int err, string gameRoomCode) = _host.CreateGame(CurrentPlayer.Player.Username);
+            (int err, GameRoomDC gameRoom) = _host.CreateGame(CurrentPlayer.Player.Username);
 
             if (err != 0)
             {
@@ -41,8 +42,10 @@ namespace PapayagramsClient.Game
                 return;
             }
 
-            GameRoomCodeText.Content = gameRoomCode;
-            _gameRoomCode = gameRoomCode;
+            GameRoomCodeText.Content = gameRoom.RoomCode ;
+            CurrentGame.RoomCode = gameRoom.RoomCode;
+            CurrentGame.State = CurrentGame.GameState.InLobby;
+            CurrentGame.PlayersInRoom = gameRoom.Players.ToList();
         }
 
         public Lobby(string gameRoomCode)
@@ -69,14 +72,24 @@ namespace PapayagramsClient.Game
                 return;
             }
 
-            int result = _host.JoinGame(CurrentPlayer.Player.Username, gameRoomCode);
+            (int err, GameRoomDC gameRoom) = _host.JoinGame(CurrentPlayer.Player.Username, gameRoomCode);
 
-            switch (result)
+            switch (err)
             {
                 case 0:
                     GameRoomCodeText.Content = gameRoomCode;
-                    _gameRoomCode = gameRoomCode;
+                    CurrentGame.RoomCode = gameRoom.RoomCode;
+                    CurrentGame.State = CurrentGame.GameState.InLobby;
+                    CurrentGame.PlayersInRoom = gameRoom.Players.ToList();
                     return;
+
+                case 102:
+                    new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    break;
+
+                case 401:
+                    new PopUpWindow(Properties.Resources.lobbyRoomNotFoundTitle, Properties.Resources.lobbyRoomNotFound, 2).ShowDialog();
+                    break;
             }
 
             NavigationService.GoBack();
@@ -94,10 +107,42 @@ namespace PapayagramsClient.Game
             ChatPanel.Children.Add(formattedMessage);
         }
 
-        public void RefreshLobby()
+        public void RefreshLobby(GameRoomDC gameRoom)
         {
-            // TODO
-            throw new NotImplementedException();
+            CurrentGame.PlayersInRoom = gameRoom.Players.ToList();
+
+            PlayersStackPanel.Children.Clear();
+
+            foreach (PlayerDC player in CurrentGame.PlayersInRoom)
+            {
+                Grid playerGrid = new Grid
+                {
+                    RowDefinitions =
+                    {
+                        new RowDefinition(),
+                        new RowDefinition(),
+                    },
+                    ColumnDefinitions =
+                    {
+                        new ColumnDefinition(),
+                    }
+                };
+
+                Label usernameLabel = new Label
+                {
+                    Content = player.Username
+                };
+                playerGrid.Children.Add(usernameLabel);
+                Grid.SetColumn(usernameLabel, 0);
+                Grid.SetRow(usernameLabel, 1);
+
+                Image playerImage = new Image();
+                playerGrid.Children.Add(playerImage);
+                Grid.SetColumn(playerImage, 0);
+                Grid.SetRow(playerImage, 0);
+
+                PlayersStackPanel.Children.Add(playerGrid);
+            }
         }
 
         public void StartGameResponse()
@@ -127,7 +172,7 @@ namespace PapayagramsClient.Game
             {
                 AuthorUsername = CurrentPlayer.Player.Username,
                 Content = MessageTextbox.Text,
-                GameRoomCode = _gameRoomCode
+                GameRoomCode = CurrentGame.RoomCode
             };
             host.SendMessage(message);
             

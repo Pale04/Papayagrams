@@ -9,7 +9,7 @@ namespace PapayagramsClient.Game
     /// <summary>
     /// Lógica de interacción para GameCreation.xaml
     /// </summary>
-    public partial class GameCreation : Page, PapayagramsService.IPregameServiceCallback
+    public partial class GameCreation : Page, IPregameServiceCallback
     {
         public GameCreation()
         {
@@ -24,6 +24,11 @@ namespace PapayagramsClient.Game
         }
 
         public void RefreshLobby()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RefreshLobby(GameRoomDC gameRoom)
         {
             throw new NotImplementedException();
         }

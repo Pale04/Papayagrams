@@ -251,7 +251,7 @@
   <xs:element name="CreateGameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="CreateGameResult" type="q10:ValueTupleOfintstring" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="CreateGameResult" type="q10:ValueTupleOfintGameRoomDClSN2Ry_Ss" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -266,7 +266,7 @@
   <xs:element name="JoinGameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="JoinGameResult" type="xs:int" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="JoinGameResult" type="q11:ValueTupleOfintGameRoomDClSN2Ry_Ss" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -288,7 +288,7 @@
   <xs:element name="SendMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="message" nillable="true" type="q11:Message" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="message" nillable="true" type="q12:Message" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -306,17 +306,15 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="InviteFriendResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="NotifyServer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="player" nillable="true" type="q12:PlayerDC" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="NotifyServerResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="NotifyServerResult" type="xs:int" />
+        <xs:element minOccurs="0" name="roomCode" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -334,7 +332,9 @@
   </xs:element>
   <xs:element name="RefreshLobby">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Contracts" minOccurs="0" name="gameRoom" nillable="true" type="q14:GameRoomDC" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ReachServer">

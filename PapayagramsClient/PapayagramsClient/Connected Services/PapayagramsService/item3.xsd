@@ -50,20 +50,20 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ValueTupleOfintArrayOfAchievementDClSN2Ry_Ss" nillable="true" type="tns:ValueTupleOfintArrayOfAchievementDClSN2Ry_Ss" />
-  <xs:complexType name="ValueTupleOfintstring">
+  <xs:complexType name="ValueTupleOfintGameRoomDClSN2Ry_Ss">
     <xs:annotation>
       <xs:appinfo>
         <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
           <GenericParameter Name="int" Namespace="http://www.w3.org/2001/XMLSchema" />
-          <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
+          <GenericParameter Name="GameRoomDC" Namespace="http://schemas.datacontract.org/2004/07/Contracts" />
         </GenericType>
         <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
       </xs:appinfo>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="Item1" type="xs:int" />
-      <xs:element name="Item2" nillable="true" type="xs:string" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Contracts" name="Item2" nillable="true" type="q4:GameRoomDC" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ValueTupleOfintstring" nillable="true" type="tns:ValueTupleOfintstring" />
+  <xs:element name="ValueTupleOfintGameRoomDClSN2Ry_Ss" nillable="true" type="tns:ValueTupleOfintGameRoomDClSN2Ry_Ss" />
 </xs:schema>

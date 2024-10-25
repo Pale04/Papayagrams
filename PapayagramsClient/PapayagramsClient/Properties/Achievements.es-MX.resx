@@ -144,4 +144,10 @@
   <data name="finishGame" xml:space="preserve">
     <value>Completa tu primera partida</value>
   </data>
+  <data name="lobbyRoomNotFound" xml:space="preserve">
+    <value>No existe ninguna sala con ese código</value>
+  </data>
+  <data name="lobbyRoomNotFoundTitle" xml:space="preserve">
+    <value>No se encontró la sala</value>
+  </data>
 </root>

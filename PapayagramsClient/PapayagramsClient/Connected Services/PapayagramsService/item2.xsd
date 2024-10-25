@@ -5,6 +5,7 @@
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProfileIcon" type="xs:int" />
       <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -43,6 +44,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GameInvitationDC" nillable="true" type="tns:GameInvitationDC" />
+  <xs:complexType name="GameRoomDC">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Players" nillable="true" type="tns:ArrayOfPlayerDC" />
+      <xs:element minOccurs="0" name="RoomCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GameRoomDC" nillable="true" type="tns:GameRoomDC" />
+  <xs:complexType name="ArrayOfPlayerDC">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PlayerDC" nillable="true" type="tns:PlayerDC" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPlayerDC" nillable="true" type="tns:ArrayOfPlayerDC" />
   <xs:complexType name="Message">
     <xs:sequence>
       <xs:element minOccurs="0" name="AuthorUsername" nillable="true" type="xs:string" />

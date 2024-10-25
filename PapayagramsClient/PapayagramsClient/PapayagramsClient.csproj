@@ -239,6 +239,9 @@
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.FriendDC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.GameRoomDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.PlayerDC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
