@@ -34,9 +34,6 @@ namespace Contracts
 
         [OperationContract]
         void InviteFriend(string username);
-
-        [OperationContract(IsOneWay = true)]
-        void NotifyServer(string roomCode);
     }
 
     [ServiceContract]

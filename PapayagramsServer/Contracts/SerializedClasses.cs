@@ -26,7 +26,7 @@ namespace Contracts
             if (obj != null && GetType() == obj.GetType())
             {
                 PlayerDC player = (PlayerDC)obj;
-                isEqual = Id == player.Id && Username == player.Username && Email == player.Email && ProfileIcon == player.ProfileIcon;
+                isEqual = Id == player.Id && Username == player.Username && Email == player.Email;
             }
 
             return isEqual;

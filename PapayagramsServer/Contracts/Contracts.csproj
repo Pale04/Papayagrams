@@ -108,6 +108,10 @@
       <Project>{6e3fb959-fd63-443a-9148-889c4ad1ce2d}</Project>
       <Name>DomainClasses</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MailService\MailService.csproj">
+      <Project>{e7be9eef-8af1-4f09-8087-a1ee971c5fac}</Project>
+      <Name>MailService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

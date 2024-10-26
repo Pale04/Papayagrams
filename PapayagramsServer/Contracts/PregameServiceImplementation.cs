@@ -78,6 +78,7 @@ namespace Contracts
                 {
                     CallbacksPool.PlayerArrivedToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
                     room.Players.Add((Player)player.Case);
+                    BroadcastRefreshLobby(roomCode);
                     serializedGameRoom = new GameRoomDC
                     {
                         RoomCode = roomCode,
@@ -123,7 +124,7 @@ namespace Contracts
             throw new NotImplementedException();
         }
 
-        public void NotifyServer(string roomCode)
+        public void BroadcastRefreshLobby (string roomCode)
         {
             GameRoom room = GameRoomsPool.GetGameRoom(roomCode);
 

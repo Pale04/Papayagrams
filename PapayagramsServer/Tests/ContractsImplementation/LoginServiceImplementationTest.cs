@@ -1,7 +1,6 @@
 ﻿using DataAccess;
 using Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.ServiceModel;
 
 namespace Contracts.Tests
 {
@@ -21,6 +20,7 @@ namespace Contracts.Tests
         public void SetUp()
         {
             _serviceImplementation.RegisterUser(_registeredPlayer);
+
         }
 
         [TestCleanup()]
@@ -78,6 +78,7 @@ namespace Contracts.Tests
         [TestMethod()]
         public void LogInSuccesfulTest()
         {
+            UserDB.VerifyAccount(_registeredPlayer.Username);
             (int code,PlayerDC result) = _serviceImplementation.Login(_registeredPlayer.Username, _registeredPlayer.Password);
             Assert.AreEqual(_registeredPlayer, result, "LogInSuccesfulTest");
         }
@@ -85,26 +86,37 @@ namespace Contracts.Tests
         [TestMethod]
         public void LogInEmptyUsernameTest()
         {
-            //TODO: Implement
+            (int code, PlayerDC player) = _serviceImplementation.Login("", _registeredPlayer.Password);
+            Assert.AreEqual(203, code, "LogInEmptyUsernameTest");
         }
 
         [TestMethod]
         public void LogInEmptyPasswordTest()
         {
-            //TODO
+            (int code, PlayerDC player) = _serviceImplementation.Login(_registeredPlayer.Username, "");
+            Assert.AreEqual(204, code, "LogInEmptyPasswordTest");
         }
 
         //The first time might not pass
         [TestMethod()]
         public void LogInUserNonExistentTest()
         {
-            //TODO
+            (int code, PlayerDC player) = _serviceImplementation.Login("Pale", "1");
+            Assert.AreEqual(205, code, "LogInUserNonExistentTest");
         }
 
         [TestMethod()]
         public void LogInIncorrectPasswordTest()
         {
-            //TODO
+            (int code, PlayerDC player) = _serviceImplementation.Login(_registeredPlayer.Username, "1");
+            Assert.AreEqual(206, code, "LogInIncorrectPasswordTest");
+        }
+
+        [TestMethod()]
+        public void LogInPendingAccountTest()
+        {
+            (int code, PlayerDC player) = _serviceImplementation.Login(_registeredPlayer.Username, _registeredPlayer.Password);
+            Assert.AreEqual(207, code, "LogInPendingAccountTest");
         }
 
         [TestMethod]
@@ -129,6 +141,47 @@ namespace Contracts.Tests
             int expected = 205;
             int result = _serviceImplementation.Logout("Pale");
             Assert.AreEqual(expected, result, "LogOutNonExistUsernameTest");
+        }
+
+        [TestMethod()]
+        public void VerifyAccountIncorrectCodeTest()
+        {
+            int expected = 208;
+            int result = _serviceImplementation.VerifyAccount(_registeredPlayer.Username, "123");
+            Assert.AreEqual(expected, result, "VerifyAccountIncorrectCodeTest");
+        }
+
+        [TestMethod()]
+        public void VerifyAccountEmptyParametersTest()
+        {
+            int expected = 101;
+            int result = _serviceImplementation.VerifyAccount("", "");
+            Assert.AreEqual(expected, result, "VerifyAccountEmptyParametersTest");
+        }
+
+        [TestMethod()]
+        public void VerifyAccountNonExistentUsernameTest()
+        {
+            int expected = 208;
+            int result = _serviceImplementation.VerifyAccount("Pale", "123");
+            Assert.AreEqual(expected, result, "VerifyAccountNonExistentUsernameTest");
+        }
+
+        [TestMethod()]
+        public void SendAccountVerificationCodeSuccessfulTest()
+        {
+            int expected = 0;
+            int result = _serviceImplementation.SendAccountVerificationCode(_registeredPlayer.Username);
+            Assert.AreEqual(expected, result, "SendAccountVerificationCodeSuccessfulTest");
+        }
+
+        //It is the same case when the parameter is null
+        [TestMethod()]
+        public void SendAccountVerificationCodeEmptyUsernameTest()
+        {
+            int expected = 205;
+            int result = _serviceImplementation.SendAccountVerificationCode("");
+            Assert.AreEqual(expected, result, "SendAccountVerificationCodeEmptyUsernameTest");
         }
     }
 }

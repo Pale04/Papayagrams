@@ -12,6 +12,9 @@
 204. Username empty when logging in
 205. Player not found
 206. Incorrect password
+207. Unverified account
+208. Incorrect verification code.
+209. Error while trying to verify account.
 
 ## Main menu
 301. Cannot send a friend request. You have sent a friend request before and is pending
