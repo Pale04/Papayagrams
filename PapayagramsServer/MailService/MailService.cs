@@ -1,24 +1,17 @@
 ﻿using MailKit.Net.Smtp;
 using MimeKit;
 using System.Configuration;
-using System.Threading.Tasks;
 
 namespace MailService
 {
     public class MailService
     {
-        private string _papayagramsAccount;
-        private string _papayagramsPassword;
-        private const string _smtpServer = "smtp.gmail.com";
-        private const int _smtpPort = 587;
+        private static string _papayagramsAccount = ConfigurationManager.AppSettings["papayagramsEmail"];
+        private static string _papayagramsPassword = ConfigurationManager.AppSettings["papayagramsPassword"];
+        private static string _smtpServer = "smtp.gmail.com";
+        private static int _smtpPort = 587;
 
-        public MailService()
-        {
-            _papayagramsAccount = ConfigurationManager.AppSettings["papayagramsEmail"];
-            _papayagramsPassword = ConfigurationManager.AppSettings["papayagramsPassword"];
-        }
-
-        public Task SendMail(string receiverEmail, string subject, string body)
+        public static int SendMail(string receiverEmail, string subject, string body)
         {
             var mail = new MimeMessage();
             
@@ -39,7 +32,7 @@ namespace MailService
                 smtpClient.Disconnect(true);
             }
 
-            return Task.CompletedTask;
+            return 0;
         }
     }
 }

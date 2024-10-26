@@ -13,5 +13,11 @@ namespace Contracts
 
         [OperationContract]
         int Logout(string username);
+
+        [OperationContract]
+        int VerifyAccount(string username, string code);
+
+        [OperationContract]
+        int SendAccountVerificationCode(string username);
     }
 }

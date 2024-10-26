@@ -4,7 +4,6 @@ using System;
 using System.ServiceModel;
 using System.Data.Entity.Core;
 using LanguageExt;
-using LanguageExt.Common;
 using BussinessLogic;
 
 namespace Contracts
@@ -12,11 +11,10 @@ namespace Contracts
     public partial class ServiceImplementation : ILoginService
     {
         /// <summary>
-        /// Create an account for a new user
+        /// Create an account for a new user and send an email with the verification code
         /// </summary>
         /// <param name="player">PlayerDC object with the user's data</param>
-        /// <returns>0 if the registration was successful</returns>
-        /// <exception cref="FaultException{ServerException}">Thrown when the parameters are invalid, the username or email already exists or happens a database connection failure</exception>
+        /// <returns>0 if the registration was successful, a error code otherwise</returns>
         public int RegisterUser(PlayerDC player)
         {
             int codeResult = 0;
@@ -48,6 +46,7 @@ namespace Contracts
                     else
                     {
                         UserDB.RegisterUser(newPlayer);
+                        SendAccountVerificationCode(newPlayer.Username);
                     }
                 }
                 catch (EntityException error)
@@ -56,7 +55,7 @@ namespace Contracts
                     return 102;
                 }
             }
-            
+
             return codeResult;
         }
 
@@ -65,8 +64,7 @@ namespace Contracts
         /// </summary>
         /// <param name="username">Username of the account</param>
         /// <param name="password">Password of the account</param>
-        /// <returns>0 if the log in was succesful</returns>
-        /// <exception cref="FaultException{ServerException}">Thrown when the parameters are invalid or happens, the account is not foun, the password is incorrect or happens a database connection failure</exception>
+        /// <returns>(0,Player) if the log in was succesful, (errorCode, null) otherwise</returns>
         public (int, PlayerDC) Login(string username, string password)
         {
             if (string.IsNullOrEmpty(username))
@@ -97,10 +95,16 @@ namespace Contracts
             {
                 return (206, null);
             }
+            else if (loginResult == 1)
+            {
+                return (207, null);
+            }
 
             Option<Player> playerLogged = UserDB.GetPlayerByUsername(username);
+            PlayersPool.AddPlayer((Player)playerLogged.Case);
             Console.WriteLine("User " + username + " logged in");
-            return (0,PlayerDC.ConvertToPlayerDC((Player)playerLogged.Case));
+
+            return (0, PlayerDC.ConvertToPlayerDC((Player)playerLogged.Case));
         }
 
         /// <summary>
@@ -123,6 +127,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
+                //TODO: Log the error
                 return 102;
             }
 
@@ -132,7 +137,68 @@ namespace Contracts
             }
 
             CallbacksPool.RemoveAllCallbacksChannels(username);
+            PlayersPool.RemovePlayer(username);
             Console.WriteLine("User " + username + " logged out. His callbacks channels have been removed");
+
+            return 0;
+        }
+
+        public int VerifyAccount(string code, string username)
+        {
+            if (string.IsNullOrEmpty(code) || string.IsNullOrEmpty(username))
+            {
+                return 101;
+            }
+
+            if (!PlayersPool.AccountVerificationCodeCorrect(username, code))
+            {
+                return 208;
+            }
+
+            int codeResult;
+            try
+            {
+                codeResult = UserDB.VerifyAccount(username);
+            }
+            catch (EntityException error)
+            {
+                //TODO: Log the error
+                return 102;
+            }
+
+            if (codeResult == 1)
+            {
+                PlayersPool.RemoveAccountVerificationCode(username);
+                return 0;
+            }
+            else
+            {
+                return 209;
+            }
+        }
+
+        public int SendAccountVerificationCode(string username)
+        {
+            Option<Player> player;
+
+            try
+            {
+                player = UserDB.GetPlayerByUsername(username);
+            }
+            catch (EntityException error)
+            {
+                //TODO: Log the error
+                return 102;
+            }
+
+            if (player.IsNone)
+            {
+                return 205;
+            }
+            
+            Player playerChecking = (Player)player.Case;
+            string code = PlayersPool.GenerateAccountVerificationCode(username);
+            MailService.MailService.SendMail(playerChecking.Email, "Account verification code", $"Your account verification code is: {code}");
             return 0;
         }
     }
