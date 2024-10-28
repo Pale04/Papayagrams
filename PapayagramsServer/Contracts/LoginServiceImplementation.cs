@@ -5,11 +5,16 @@ using System.ServiceModel;
 using System.Data.Entity.Core;
 using LanguageExt;
 using BussinessLogic;
+using log4net;
+using MailKit.Net.Smtp;
 
 namespace Contracts
 {
     public partial class ServiceImplementation : ILoginService
     {
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(ServiceImplementation));
+        private static readonly MailService.MailService _mailService = new MailService.MailService();
+
         /// <summary>
         /// Create an account for a new user and send an email with the verification code
         /// </summary>
@@ -51,7 +56,7 @@ namespace Contracts
                 }
                 catch (EntityException error)
                 {
-                    //TODO: Log the error
+                    _logger.Error("Error while trying to register a new user", error);
                     return 102;
                 }
             }
@@ -195,11 +200,19 @@ namespace Contracts
             {
                 return 205;
             }
-            
+
             Player playerChecking = (Player)player.Case;
             string code = PlayersPool.GenerateAccountVerificationCode(username);
-            MailService.MailService.SendMail(playerChecking.Email, "Account verification code", $"Your account verification code is: {code}");
-            return 0;
+
+            try
+            {
+                return _mailService.SendMail(playerChecking.Email, "Account verification code", $"Your account verification code is: {code}");
+            }
+            catch (SmtpCommandException error)
+            {
+                _logger.Error("Error while trying to send the account verification code", error);
+                return 104;
+            }
         }
     }
 }

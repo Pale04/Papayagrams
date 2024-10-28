@@ -4,6 +4,7 @@
 101. Invalid parameters
 102. No connection with de database server
 103. The consult is empty
+104. The mail could not be sent.
 
 ## Login
 201. An account with the same username exists

@@ -12,7 +12,7 @@ namespace Contracts.Tests
         {
             Id = 1,
             Username = "Pale04",
-            Email = "epalemolina@hotmail.com",
+            Email = "epalemolina@gmail.com",
             Password = "040704"
         };
 
@@ -20,7 +20,6 @@ namespace Contracts.Tests
         public void SetUp()
         {
             _serviceImplementation.RegisterUser(_registeredPlayer);
-
         }
 
         [TestCleanup()]
@@ -35,7 +34,7 @@ namespace Contracts.Tests
             PlayerDC newPlayer = new PlayerDC()
             {
                 Username = "Pale",
-                Email = "epalemolina@gmail.com",
+                Email = "epalemolina@hotmail.com",
                 Password = "asdfas´461ds+"
             };
 
