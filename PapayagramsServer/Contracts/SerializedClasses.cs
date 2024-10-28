@@ -132,6 +132,45 @@ namespace Contracts
     }
 
     [DataContract]
+    public enum GameMode
+    {
+        [EnumMember]
+        Oiginal,
+        [EnumMember]
+        SuddenDeath,
+        [EnumMember]
+        TimeAttack
+    }
+
+    [DataContract]
+    public enum Language
+    {
+        [EnumMember]
+        English,
+        [EnumMember]
+        Spanish
+    }
+
+    [DataContract]
+    public class GameConfigurationDC
+    {
+        [DataMember]
+        public GameMode GameMode { get; set; }
+
+        [DataMember]
+        public int InitialPieces { get; set; }
+
+        [DataMember]
+        public int MaxPlayers { get; set; }
+
+        [DataMember]
+        public Language WordsLanguage { get; set; }
+
+        [DataMember]
+        public int TimeLimitMinutes { get; set; }
+    }
+    
+    [DataContract]
     public class GameRoomDC
     {
         [DataMember]

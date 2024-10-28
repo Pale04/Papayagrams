@@ -97,7 +97,8 @@ namespace Contracts
         public int LeaveLobby(string username, string code)
         {
             GameRoomsPool.RemovePlayerFromGameRoom(username, code);
-            Console.WriteLine(username + " leaved the game");
+            //TODO: remove player from callbacks pool
+            Console.WriteLine($"{username} leaved the game room {code}");
             return 0;
         }
 
