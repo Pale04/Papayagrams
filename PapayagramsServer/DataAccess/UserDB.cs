@@ -160,7 +160,7 @@ namespace DataAccess
             using (var context = new papayagramsEntities())
             {
                 var result = context.search_no_friend_player(searcherUsername, searchedUsername);
-                List<search_no_friend_player_Result> resultList = result.ToList();
+                var resultList = result.ToList();
 
                 foundPlayer = resultList.Count == 0 ?
                     Option<Player>.None :

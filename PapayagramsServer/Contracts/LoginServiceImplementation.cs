@@ -51,7 +51,7 @@ namespace Contracts
                     else
                     {
                         UserDB.RegisterUser(newPlayer);
-                        SendAccountVerificationCode(newPlayer.Username);
+                        //SendAccountVerificationCode(newPlayer.Username);
                     }
                 }
                 catch (EntityException error)
