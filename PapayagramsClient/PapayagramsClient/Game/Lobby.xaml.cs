@@ -9,9 +9,6 @@ using System.Windows.Navigation;
 
 namespace PapayagramsClient.Game
 {
-    /// <summary>
-    /// Lógica de interacción para Lobby.xaml
-    /// </summary>
     public partial class Lobby : Page, IPregameServiceCallback
     {
         private PregameServiceClient _host;
@@ -52,11 +49,8 @@ namespace PapayagramsClient.Game
         {
             if (string.IsNullOrEmpty(gameRoomCode))
             {
-                NavigationService.GoBack();
                 return;
             }
-
-            InitializeComponent();
 
             InstanceContext context = new InstanceContext(this);
             _host = new PregameServiceClient(context);
@@ -68,7 +62,6 @@ namespace PapayagramsClient.Game
             catch (EndpointNotFoundException)
             {
                 new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
-                NavigationService.GoBack();
                 return;
             }
 
@@ -81,18 +74,18 @@ namespace PapayagramsClient.Game
                     CurrentGame.RoomCode = gameRoom.RoomCode;
                     CurrentGame.State = CurrentGame.GameState.InLobby;
                     CurrentGame.PlayersInRoom = gameRoom.Players.ToList();
-                    return;
+                    InitializeComponent();
+
+                    break;
 
                 case 102:
                     new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
-                    break;
+                    return;
 
                 case 401:
                     new PopUpWindow(Properties.Resources.lobbyRoomNotFoundTitle, Properties.Resources.lobbyRoomNotFound, 2).ShowDialog();
-                    break;
+                    return;
             }
-
-            NavigationService.GoBack();
         }
 
         ~Lobby()
