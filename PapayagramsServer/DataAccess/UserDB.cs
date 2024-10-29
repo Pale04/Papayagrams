@@ -33,14 +33,14 @@ namespace DataAccess
         /// </summary>
         /// <param name="username">Username of the player</param>
         /// <param name="password">Account password of the user</param>
-        /// <returns>0 if the login was succesful, -1 if the account does not exist and -2 if the password is incorrect</returns>
+        /// <returns>0 if the login was succesful, 1 if the account is pending to verify, -1 if the account does not exist and -2 if the password is incorrect</returns>
         /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
         public static int LogIn(string username, string password)
         {
             int result;
             using (var context = new papayagramsEntities())
             {
-                //this approach is used because the stored procedure log_in returns three different values
+                //this approach is used because the stored procedure log_in returns four different values
                 SqlParameter returnValue = new SqlParameter
                 {
                     ParameterName = "@ReturnValue",
@@ -52,6 +52,26 @@ namespace DataAccess
                 SqlParameter passwordParam = new SqlParameter("@password", password);
                 context.Database.ExecuteSqlCommand("EXEC @ReturnValue = log_in @username, @password", returnValue, usernameParam, passwordParam);
                 result = (int)returnValue.Value;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Change the account status of the player to verified
+        /// </summary>
+        /// <param name="username">Username of the player</param>
+        /// <returns>1 if the change was succesful, 0 otherwise</returns>
+        public static int VerifyAccount(string username)
+        {
+            int result = 0;
+            using (var context = new papayagramsEntities())
+            {
+                var player = context.User.FirstOrDefault(p => p.username == username);
+                if (player != null)
+                {
+                    player.accountStatus = "verified";
+                    result = context.SaveChanges();
+                }
             }
             return result;
         }

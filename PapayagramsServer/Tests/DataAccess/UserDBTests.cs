@@ -74,8 +74,17 @@ namespace DataAccess.Tests
         public void LogInSuccessfulTest()
         {
             int expected = 0;
+            UserDB.VerifyAccount(_registeredPlayer1.Username);
             int result = UserDB.LogIn(_registeredPlayer1.Username, _registeredPlayer1.Password);
             Assert.AreEqual(expected, result, "LogInSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void LogInPendingAccountTest()
+        {
+            int expected = 1;
+            int result = UserDB.LogIn(_registeredPlayer1.Username, _registeredPlayer1.Password);
+            Assert.AreEqual(expected, result, "LogInPendingAccountTest");
         }
 
         //It is the same case when the username is null
@@ -96,12 +105,26 @@ namespace DataAccess.Tests
             Assert.AreEqual(expected, result, "LogInPasswordIncorrectTest");
         }
 
+        [TestMethod]
+        public void VerifyAccountSuccessfulTest()
+        {
+            int expected = 1;
+            int result = UserDB.VerifyAccount(_registeredPlayer1.Username);
+            Assert.AreEqual(expected, result, "VerifyAccountSuccessfulTest");
+        }
+
+        [TestMethod]
+        public void VerifyAccountNonExistentTest()
+        {
+            int expected = 0;
+            int result = UserDB.VerifyAccount("Pale");
+            Assert.AreEqual(expected, result, "VerifyAccountNonExistentTest");
+        }
+
         [TestMethod()]
         public void GetPlayerByUsernameSuccessfulTest()
         {
             Option<Player> result = UserDB.GetPlayerByUsername(_registeredPlayer1.Username);
-            Player Player = (Player)result.Case;
-            Console.WriteLine(Player.ProfileIcon);
             Assert.AreEqual(_registeredPlayer1, (Player)result.Case, "GetPlayerByUsernameSuccessfulTest");
         }
 
@@ -117,7 +140,7 @@ namespace DataAccess.Tests
         public void GetPlayerByEmailSuccessfulTest()
         {
             Option<Player> result = UserDB.GetPlayerByEmail(_registeredPlayer1.Email);
-            Assert.AreEqual(_registeredPlayer1, result.Case, "GetPlayerByEmailSuccessfulTest");
+            Assert.AreEqual(_registeredPlayer1, (Player)result.Case, "GetPlayerByEmailSuccessfulTest");
         }
 
         //It is the same case when the email is null
@@ -156,7 +179,7 @@ namespace DataAccess.Tests
         public void SearchNoFriendPlayerSuccessfulTest()
         {
             Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.AreEqual(_registeredPlayer2, result.Case, "SearchNoFriendPlayerSuccessfulTest");
+            Assert.AreEqual(_registeredPlayer2, (Player)result.Case, "SearchNoFriendPlayerSuccessfulTest");
         }
 
         [TestMethod()]
@@ -164,7 +187,7 @@ namespace DataAccess.Tests
         {
             UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.AreEqual(_registeredPlayer2, result.Case, "SearchNoFriendPlayerPendingRequestTest");
+            Assert.AreEqual(_registeredPlayer2, (Player)result.Case, "SearchNoFriendPlayerPendingRequestTest");
         }
 
         [TestMethod()]
@@ -175,7 +198,7 @@ namespace DataAccess.Tests
             //TODO: hacer método para bloquear a un jugador
 
             Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.AreEqual(_registeredPlayer2, result.Case, "SearchNoFriendPlayerBlockedTest");
+            Assert.AreEqual(_registeredPlayer2, (Player)result.Case, "SearchNoFriendPlayerBlockedTest");
         }
 
         [TestMethod()]

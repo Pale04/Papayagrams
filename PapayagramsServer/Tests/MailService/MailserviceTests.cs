@@ -1,18 +1,17 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
 
 namespace MailService.Tests
 {
     [TestClass()]
     public class MailserviceTests
     {
-        MailService mailService = new MailService();
+        private static readonly MailService _mailService = new MailService();
 
         [TestMethod()]
         public void SendMailSuccesfulTest()
         {
-            Task result = mailService.SendMail("epalemolina@gmail.com", "Welcome to Papayagrams", "Hello papayita");
-            Assert.AreEqual(Task.CompletedTask, result, "SendMailSuccesfulTest");
+            int result = _mailService.SendMail("epalemolina@gmail.com", "Welcome to Papayagrams", "Hello papayita");
+            Assert.AreEqual(0, result, "SendMailSuccesfulTest");
         }
     }
 }

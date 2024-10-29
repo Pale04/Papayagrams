@@ -47,6 +47,7 @@
           <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="varbinary(max)" Nullable="false" />
+          <Property Name="accountStatus" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="UserAchieved">
           <Key>
@@ -324,6 +325,7 @@
           <NavigationProperty Name="UserRelationship" Relationship="Self.FK__UserRelat__recei__4F7CD00D" FromRole="User" ToRole="UserRelationship" />
           <NavigationProperty Name="UserRelationship1" Relationship="Self.FK__UserRelat__sende__4E88ABD4" FromRole="User" ToRole="UserRelationship" />
           <NavigationProperty Name="UserStatus" Relationship="Self.FK__UserStatu__userI__52593CB8" FromRole="User" ToRole="UserStatus" />
+          <Property Name="accountStatus" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="UserAchieved">
           <Key>
@@ -638,6 +640,7 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="PapayagramsModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="accountStatus" ColumnName="accountStatus" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="email" ColumnName="email" />

@@ -8,7 +8,8 @@ CREATE TABLE [User] (
   [id] int PRIMARY KEY IDENTITY(1, 1),
   [username] varchar(50) NOT NULL,
   [email] varchar(50) NOT NULL,
-  [password] varbinary(MAX) NOT NULL
+  [password] varbinary(MAX) NOT NULL,
+  [accountStatus] VARCHAR(20) NOT NULL CHECK (accountStatus IN ('verified', 'pending'))
 )
 GO
 

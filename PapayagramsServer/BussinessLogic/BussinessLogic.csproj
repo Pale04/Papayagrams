@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="CallbacksPool.cs" />
     <Compile Include="GameRoomsPool.cs" />
+    <Compile Include="PlayersPool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

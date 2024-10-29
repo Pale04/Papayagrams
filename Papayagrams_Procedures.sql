@@ -4,7 +4,7 @@ CREATE PROCEDURE register_user
 	@password VARCHAR(100)
 AS
 BEGIN
-    INSERT INTO [User] (username, email, password) VALUES (@username, @email, ENCRYPTBYASYMKEY(ASYMKEY_ID('asy_TRIGGERDB'), @password));
+    INSERT INTO [User] (username, email, password, accountStatus) VALUES (@username, @email, ENCRYPTBYASYMKEY(ASYMKEY_ID('asy_TRIGGERDB'), @password), 'pending');
 	DECLARE @id int
 	SELECT @id = SCOPE_IDENTITY();
 	INSERT INTO [UserStatus] (userId) VALUES (@id);
@@ -26,10 +26,19 @@ BEGIN
 		SELECT @correctPassword = CAST(DecryptByAsymKey (AsymKey_ID('asy_triggerdb'),password,N'RD_afAmGsRMYi29') AS VARCHAR(100)) FROM [User] WHERE username = @username;
 		IF @password = @correctPassword
 		BEGIN
-			DECLARE @id int
-			SELECT @id = id FROM [User] WHERE username = @username;
-			UPDATE [UserStatus] SET status='online', since=GETDATE() WHERE userId = @id;
-			RETURN 0
+			DECLARE @accountStatus VARCHAR(MAX)
+			SELECT @accountStatus = accountStatus FROM [User] WHERE username = @username
+			IF @accountStatus = 'pending'
+			BEGIN
+				RETURN 1
+			END
+			ELSE
+			BEGIN
+				DECLARE @id int
+				SELECT @id = id FROM [User] WHERE username = @username;
+				UPDATE [UserStatus] SET status='online', since=GETDATE() WHERE userId = @id;
+				RETURN 0
+			END
 		END
 		ELSE
 		BEGIN

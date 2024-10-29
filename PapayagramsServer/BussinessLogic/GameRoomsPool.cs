@@ -50,16 +50,28 @@ namespace BussinessLogic
         /// <returns>A random 4 character, not in use game room code</returns>
         private static string GenerateGameRoomCode()
         {
-            string code = string.Empty;
-            Random random = new Random();
+            string code;
 
             do
             {
-                for (int i = 0; i < 4; i++)
-                {
-                    code += (char)random.Next(65, 91);
-                }
+                code = CodeGenerator.GenerateCode();
             } while (_gameRooms[code] != null);
+
+            return code;
+        }
+    }
+
+    internal class CodeGenerator
+    {
+        public static string GenerateCode()
+        {
+            string code = string.Empty;
+            Random random = new Random();
+
+            for (int i = 0; i < 4; i++)
+            {
+                code += (char)random.Next(65, 91);
+            }
 
             return code;
         }

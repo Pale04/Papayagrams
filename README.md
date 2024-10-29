@@ -224,7 +224,7 @@ while  (true)
 
 ---
 
-## Manejo de excepciones
+## Manejo de errores y excepciones
 - Las excepciones se manejarán con bloques *try-catch,* y se usará *using* cuando sea posible y más legible que un bloque try-catch.
 - No se usará en bloques try-catch el tipo de excepción más alto (Exception), sino errores especificos.
 - Se usarán filtros de excepciones en vez de bloques _if_ cuando sean necesarios.
@@ -236,14 +236,20 @@ Se usará la librería _log4net_ para la bitácora.
 Se regitrarán mensajes de información varia (**Info**):
 - Guardado de datos de usuario
 
-Los errores se registrarán a la bitacora en ...(que capa o clase) , y si es necesario, serán propagados a las capas superiores para informar al usuario del error.
+Los errores se registrarán dentro de la clase correspondiente a la implementación de los contratos ofrecidos por el servidor, y si es necesario.
 
 **Fatal**:
+- EntityException
+- SmtpCommandException
 - FileNotFoundException
-- SqlException
 
 **Warning**:
 - (excepción de falta de conexión)
+
+### Códigos de error
+Para manejar los diferentes resultados o flujos que puede generar la ejecución de un método en la parte del servidor, estos devolverán un código de acuerdo al resultado obtenido.
+
+Todos los códigos manejados se encuntran en el archivo ==ErrorCodes.md==
 
 ### Errores personalizados
 Para facilitar el registro de errores en bitacora y mensajes de error para el usuario, se manejará la clase _(nombre de clase)_ para propagar los errores y mensajes para el usuario y bitacora.
@@ -260,8 +266,7 @@ Para facilitar el registro de errores en bitacora y mensajes de error para el us
 6. **Validación de las entradas de datos del usuario por medio de campos.** Para asegurarse que el usuario introduzca datos válidos para la aplicación y evitar errores en el procesamiento y consistencia de estos.
 7. **Respetar el principio de encapsulación.** Utilice siempre campos privados y propiedades públicas si se necesita acceder al campo desde fuera de la clase o struct. Asegúrese de ubicar en el mismo lugar el campo privado y la propiedad pública.
 8. **Limitar la cantidad de información crítica al usuario.** No mostrar el error especifico al usuario para evitar revelar información sensible sobre la aplicación, en su lugar, notificarle con un mensaje breve y descriptivo de lo que sucedió.
-9. **Encriptación de información de contraseñas de usuario en la base de datos.**
-
+9. **Encriptación de contraseñas que se registran en la base de datos.**
 ---
 
 ## Referencias
