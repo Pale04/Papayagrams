@@ -19,7 +19,12 @@ namespace Contracts.Tests
         [TestInitialize()]
         public void SetUp()
         {
-            _serviceImplementation.RegisterUser(_registeredPlayer);
+            UserDB.RegisterUser(new DomainClasses.Player
+            {
+                Username = _registeredPlayer.Username,
+                Email = _registeredPlayer.Email,
+                Password = _registeredPlayer.Password
+            });
         }
 
         [TestCleanup()]
