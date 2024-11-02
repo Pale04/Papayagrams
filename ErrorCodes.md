@@ -21,6 +21,7 @@
 301. Cannot send a friend request. You have sent a friend request before and is pending
 302. Cannot send a friend request. You have a pending friend request from that player.
 303. Cannot send a friend request. You are already friends.
+304. Cannot send a friend request. Your relationship is blocked
 
 ## Pregame
 401. Game room not found or doesn't exist.
