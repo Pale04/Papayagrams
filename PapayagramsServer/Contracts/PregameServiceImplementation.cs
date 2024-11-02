@@ -1,17 +1,14 @@
 ﻿using BussinessLogic;
-using DataAccess;
 using DomainClasses;
-using LanguageExt;
 using System;
 using System.ServiceModel;
-using System.Data.Entity.Core;
 using System.Collections.Generic;
 
 namespace Contracts
 {
     public partial class ServiceImplementation : IPregameService
     {
-        public (int, GameRoomDC) CreateGame(string username)
+        public (int, GameRoomDC) CreateGame(string username, GameConfigurationDC gameConfiguration)
         {
             int resultCode = 0;
 
@@ -21,7 +18,7 @@ namespace Contracts
             };
             gameRoom.Players.Add(PlayersPool.GetPlayer(username));
             GameRoomsPool.AddGameRoom(gameRoom);
-            CallbacksPool.PlayerArrivedToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
+            CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
             Console.WriteLine($"sala de juego creada: {gameRoom.RoomCode}");
 
             return (resultCode, GameRoomDC.ConvertToGameRoomDC(gameRoom));
@@ -41,7 +38,7 @@ namespace Contracts
 
             if (room != null && room.State.Equals(GameRoomState.Waiting))
             {
-                CallbacksPool.PlayerArrivedToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
+                CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
                 room.Players.Add(PlayersPool.GetPlayer(username));
                 BroadcastRefreshLobby(roomCode);
                 serializedGameRoom = GameRoomDC.ConvertToGameRoomDC(room);
@@ -54,19 +51,14 @@ namespace Contracts
             return (resultCode, serializedGameRoom);
         }
 
-        public int LeaveLobby(string username, string code)
+        public void LeaveLobby(string username, string code)
         {
             GameRoomsPool.RemovePlayerFromGameRoom(username, code);
-
-            //TODO: remove player from callbacks pool
-
-            Console.WriteLine($"{username} leaved the game room {code}");
-            return 0;
+            CallbacksPool.RemovePregameCallbackChannel(username);
         }
 
         public void SendMessage(Message message)
         {
-            Console.Write("sending: " + message.Content + " from: " + message.AuthorUsername);
             GameRoom room = GameRoomsPool.GetGameRoom(message.GameRoomCode);
             List<Player> players = room.Players;
 
@@ -75,7 +67,6 @@ namespace Contracts
                 var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(p.Username);
                 if (callbackChannel != null)
                 {
-                    Console.WriteLine($"Turn from {p.Username}");
                     callbackChannel.ReceiveMessage(message);
                 }    
             }
@@ -100,6 +91,12 @@ namespace Contracts
                     callbackChannel?.RefreshLobby(GameRoomDC.ConvertToGameRoomDC(room));
                 }
             }
+        }
+
+        public void ReturnToLobby(string username)
+        {
+            CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
+            CallbacksPool.RemoveMainMenuCallbackChannel(username);
         }
     }
 }

@@ -6,10 +6,10 @@ namespace Contracts
     public interface IGameService
     {
         [OperationContract]
-        int ReachServer();
+        void ReachServer(string username);
 
         [OperationContract]
-        int LeaveGame();
+        void LeaveGame(string username);
     }
 
     [ServiceContract]
