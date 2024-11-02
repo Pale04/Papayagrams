@@ -1,7 +1,6 @@
 ﻿using DataAccess;
 using DomainClasses;
 using System;
-using System.ServiceModel;
 using System.Data.Entity.Core;
 using LanguageExt;
 using BussinessLogic;
@@ -51,7 +50,7 @@ namespace Contracts
                     else
                     {
                         UserDB.RegisterUser(newPlayer);
-                        //SendAccountVerificationCode(newPlayer.Username);
+                        SendAccountVerificationCode(newPlayer.Username);
                     }
                 }
                 catch (EntityException error)
@@ -88,7 +87,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                //TODO: Log the error
+                _logger.Error($"Error while trying to log in: {username}", error);
                 return (102, null);
             }
 
@@ -117,7 +116,6 @@ namespace Contracts
         /// </summary>
         /// <param name="username">Username of the player</param>
         /// <returns>0 if the logut was succesfull</returns>
-        /// <exception cref="FaultException{ServerException}">thrown when the parameter is invalid, hapens a database connection failure or the username does not exist</exception>
         public int Logout(string username)
         {
             if (string.IsNullOrEmpty(username))
@@ -132,7 +130,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                //TODO: Log the error
+                _logger.Error($"Error while trying to log out: {username}", error);
                 return 102;
             }
 
@@ -167,7 +165,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                //TODO: Log the error
+                _logger.Error($"Error while trying to verify the account: {username}", error);
                 return 102;
             }
 
@@ -192,7 +190,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                //TODO: Log the error
+                _logger.Error($"Error while trying obtain user: {username}",error);
                 return 102;
             }
 

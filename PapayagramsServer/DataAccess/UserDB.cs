@@ -1,5 +1,4 @@
 ﻿using DomainClasses;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using LanguageExt;
@@ -80,7 +79,7 @@ namespace DataAccess
         /// Search for a user in the database
         /// </summary>
         /// <param name="username">Username of the user's account</param>
-        /// <returns>Option object with the Player</returns>
+        /// <returns>Option object with the Player and his id, username, email and profile icon</returns>
         /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
         public static Option<Player> GetPlayerByUsername(string username)
         {
@@ -179,14 +178,14 @@ namespace DataAccess
         /// </summary>
         /// <param name="senderUsername">Username of the player who sends the friend request</param>
         /// <param name="receiverUsername">Username of the player who receives the friend request</param>
-        /// <returns>0 if the sending was successful, -1 if the sender has already sent a request before, -2 if the receiver has already sent a request to sender before or -3 if they are friends</returns>
+        /// <returns>0 if the sending was successful, -1 if the sender has already sent a request before, -2 if the receiver has already sent a request to sender before, -3 if they are friends and -4 if the relationship is blocked</returns>
         /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
         public static int SendFriendRequest(string senderUsername, string receiverUsername)
         {
             int result;
             using (var context = new papayagramsEntities())
             {
-                //this approach is used because the stored procedure send_friend_request returns four different values
+                //this approach is used because the stored procedure send_friend_request returns five different values
                 SqlParameter returnValue = new SqlParameter
                 {
                     ParameterName = "@ReturnValue",

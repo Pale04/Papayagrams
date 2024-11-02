@@ -32,16 +32,15 @@ namespace BussinessLogic
         }
 
         /// <summary>
-        /// Add game room to the hashtable of game rooms and generate its game room code
+        /// Generate the room code, assign it to the game room and add it to the game rooms pool
         /// </summary>
         /// <param name="gameRoom">The game room to add</param>
         /// <returns>The new game room code assigned</returns>
-        public static string AddGameRoom(GameRoom gameRoom)
+        public static void AddGameRoom(GameRoom gameRoom)
         {
             string gameRoomCode = GenerateGameRoomCode();
             gameRoom.RoomCode = gameRoomCode;
             _gameRooms.Add(gameRoomCode, gameRoom);
-            return gameRoomCode;
         }
 
         /// <summary>

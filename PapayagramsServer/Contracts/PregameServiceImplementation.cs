@@ -14,39 +14,17 @@ namespace Contracts
         public (int, GameRoomDC) CreateGame(string username)
         {
             int resultCode = 0;
-            GameRoomDC serializedGameRoom = null;
-            Option<Player> player = Option<Player>.None;
 
-            try
+            GameRoom gameRoom = new GameRoom
             {
-                player = UserDB.GetPlayerByUsername(username);
-            }
-            catch (EntityException error)
-            {
-                //TODO: handle
-                resultCode = 102;
-            }
+                State = GameRoomState.Waiting
+            };
+            gameRoom.Players.Add(PlayersPool.GetPlayer(username));
+            GameRoomsPool.AddGameRoom(gameRoom);
+            CallbacksPool.PlayerArrivedToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
+            Console.WriteLine($"sala de juego creada: {gameRoom.RoomCode}");
 
-            if (player.IsSome)
-            {
-                GameRoom gameRoom = new GameRoom
-                {
-                    State = GameRoomState.Waiting
-                };
-                gameRoom.Players.Add((Player)player.Case);
-                string roomCode = GameRoomsPool.AddGameRoom(gameRoom);
-
-                serializedGameRoom = new GameRoomDC
-                {
-                    RoomCode = roomCode,
-                    Players = gameRoom.Players.ConvertAll(PlayerDC.ConvertToPlayerDC)
-                };
-
-                CallbacksPool.PlayerArrivedToPregame(username,OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
-                Console.WriteLine("sala de juego creada: " + serializedGameRoom.RoomCode);
-            }
-
-            return (resultCode, serializedGameRoom);
+            return (resultCode, GameRoomDC.ConvertToGameRoomDC(gameRoom));
         }
 
         public void InviteFriend(string username)
@@ -63,28 +41,10 @@ namespace Contracts
 
             if (room != null && room.State.Equals(GameRoomState.Waiting))
             {
-                Option<Player> player = Option<Player>.None;
-                try
-                {
-                    player = UserDB.GetPlayerByUsername(username);
-                }
-                catch (EntityException error)
-                {
-                    //TODO: handle
-                    resultCode = 102;
-                }
-
-                if (player.IsSome)
-                {
-                    CallbacksPool.PlayerArrivedToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
-                    room.Players.Add((Player)player.Case);
-                    BroadcastRefreshLobby(roomCode);
-                    serializedGameRoom = new GameRoomDC
-                    {
-                        RoomCode = roomCode,
-                        Players = room.Players.ConvertAll(PlayerDC.ConvertToPlayerDC)
-                    };
-                }
+                CallbacksPool.PlayerArrivedToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
+                room.Players.Add(PlayersPool.GetPlayer(username));
+                BroadcastRefreshLobby(roomCode);
+                serializedGameRoom = GameRoomDC.ConvertToGameRoomDC(room);
             }
             else
             {
@@ -97,7 +57,9 @@ namespace Contracts
         public int LeaveLobby(string username, string code)
         {
             GameRoomsPool.RemovePlayerFromGameRoom(username, code);
+
             //TODO: remove player from callbacks pool
+
             Console.WriteLine($"{username} leaved the game room {code}");
             return 0;
         }
@@ -135,10 +97,7 @@ namespace Contracts
                 foreach (Player p in players)
                 {
                     var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(p.Username);
-                    if (callbackChannel != null)
-                    {
-                        callbackChannel.RefreshLobby(GameRoomDC.ConvertToGameRoomDC(room));
-                    }
+                    callbackChannel?.RefreshLobby(GameRoomDC.ConvertToGameRoomDC(room));
                 }
             }
         }

@@ -66,16 +66,14 @@ namespace Contracts
         }
 
         /// <summary>
-        /// Search a player by username
+        /// Search a player who is'nt at your friend list.
         /// </summary>
         /// <param name="searcherUsername">Username ot the player who is searching</param>
         /// <param name="searchedUsername">Username of the player who needs to be found</param>
         /// <returns>PlayerDC object with its id, username and email.</returns>
-        /// <exception cref="FaultException{ServerException}">When the consult is empty or happens a database error</exception>
         public (int, PlayerDC) SearchNoFriendPlayer(string searcherUsername, string searchedUsername)
         {
-            PlayerDC player = new PlayerDC();
-            Option<Player> playerOption =Option<Player>.None;
+            Option<Player> playerOption;
 
             try
             {
@@ -83,21 +81,20 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                
-
-            }
-            //TODO: mostrar todos los jugadores menos amigos.
-
-            if (playerOption.IsNone)
-            {
-                return (205, null);
+                _logger.Error($"Error while trying to search: {searchedUsername} by: {searcherUsername}", error);
+                return (102, null);
             }
 
-            return (0, null);
+            return playerOption.IsSome ? (0, PlayerDC.ConvertToPlayerDC((Player)playerOption.Case)) : (103, null);
         }
 
         public int SendFriendRequest(string senderUsername, string receiverUsername)
         {
+            if (string.IsNullOrEmpty(senderUsername))
+            {
+                return 101;
+            }
+
             int result;
             try
             {
@@ -105,7 +102,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                //TOOD: handle
+                _logger.Error($"Error while trying to send a friend request from {senderUsername} to {receiverUsername}", error);
                 return 102;
             }
 
@@ -120,6 +117,10 @@ namespace Contracts
             else if (result == -3)
             {
                 return 303;
+            }
+            else if (result == -4)
+            {
+                return 304;
             }
 
             return result;

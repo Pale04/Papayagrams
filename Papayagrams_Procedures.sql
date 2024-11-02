@@ -98,7 +98,6 @@ BEGIN
 END;
 GO
 
---The case when the relationState is blocked was omitted because the blocked players cannot be searched for send a friend request (in both directions)
 CREATE PROCEDURE send_friend_request
 	@senderUsername VARCHAR(50),
 	@receiverUsername VARCHAR(50)
@@ -119,6 +118,10 @@ BEGIN
 	ELSE IF EXISTS (SELECT * FROM [UserRelationship] WHERE (senderId = @senderId AND receiverId = @receiverId) OR (senderId = @receiverId AND receiverId = @senderId) AND relationState = 'friend')
 	BEGIN
 		RETURN -3
+	END
+	ELSE IF EXISTS (SELECT * FROM [UserRelationship] WHERE (senderId = @senderId AND receiverId = @receiverId) OR (senderId = @receiverId AND receiverId = @senderId)  AND relationState = 'blocked')
+	BEGIN
+		RETURN -4
 	END
 	ELSE
 	BEGIN

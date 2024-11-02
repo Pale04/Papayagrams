@@ -212,7 +212,8 @@ namespace DataAccess.Tests
         public void SearchNoFriendPlayerAlreadyFriendsTest()
         {
             UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            
+
+            Assert.Fail("Incomplet test");
             //TODO Add the method to accept the friend request
 
             Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
@@ -258,10 +259,23 @@ namespace DataAccess.Tests
             int expected = -3;
             UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
 
+            Assert.Fail("Incomplete test");
             //TODO Add the method to accept the friend request
 
             int result = UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(expected, result, "SendFriendRequestAlreadyFriendsTest");
+        }
+
+        [TestMethod()]
+        public void SendFriendRequestBlockedRelationTest()
+        {
+            int expected = -4;
+
+            Assert.Fail("Incomplete test");
+            //TODO Add the method to block a player. No matter if they are friends or not
+
+            int result = UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "SendFriendRequestBlockedRelationTest");
         }
     }
 }
