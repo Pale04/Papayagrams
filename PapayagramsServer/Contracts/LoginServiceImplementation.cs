@@ -141,8 +141,6 @@ namespace Contracts
 
             CallbacksPool.RemoveAllCallbacksChannels(username);
             PlayersPool.RemovePlayer(username);
-            Console.WriteLine("User " + username + " logged out. His callbacks channels have been removed");
-
             return 0;
         }
 

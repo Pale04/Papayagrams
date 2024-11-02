@@ -9,7 +9,7 @@ namespace Contracts
         /// Create a game room and add the player to it
         /// </summary>
         [OperationContract]
-        (int, GameRoomDC) CreateGame(string username);
+        (int, GameRoomDC) CreateGame(string username, GameConfigurationDC gameConfiguration);
 
         /// <summary>
         /// Add a player to the game room of the specified code
@@ -24,7 +24,7 @@ namespace Contracts
         /// <param name="roomCode">The game room code to remove the player from</param>
         /// <returns>0 if the player was removed successfully</returns>
         [OperationContract]
-        int LeaveLobby(string username,string roomCode);
+        void LeaveLobby(string username,string roomCode);
 
         [OperationContract(IsOneWay = true)]
         void SendMessage(Message message);
@@ -34,6 +34,9 @@ namespace Contracts
 
         [OperationContract]
         void InviteFriend(string username);
+
+        [OperationContract]
+        void ReturnToLobby(string username);
     }
 
     [ServiceContract]

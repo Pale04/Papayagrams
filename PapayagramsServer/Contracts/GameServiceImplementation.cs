@@ -1,17 +1,20 @@
-﻿using System;
+﻿using BussinessLogic;
+using System;
+using System.ServiceModel;
 
 namespace Contracts
 {
     public partial class ServiceImplementation : IGameService
     {
-        public int LeaveGame()
+        public void LeaveGame(string username)
         {
-            throw new NotImplementedException();
+            CallbacksPool.RemoveGameCallbackChannel(username);
         }
 
-        public int ReachServer()
+        public void ReachServer(string username)
         {
-            throw new NotImplementedException();
+            CallbacksPool.PlayerArrivesToGame(username, OperationContext.Current.GetCallbackChannel<IGameServiceCallback>());
+            CallbacksPool.RemovePregameCallbackChannel(username);
         }
     }
 }

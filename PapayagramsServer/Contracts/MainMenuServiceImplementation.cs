@@ -62,7 +62,7 @@ namespace Contracts
         /// <param name="username">Username of the player</param>
         public void ReportToServer(string username)
         {
-            CallbacksPool.PlayerArrivedToMainMenu(username,OperationContext.Current.GetCallbackChannel<IMainMenuServiceCallback>());
+            CallbacksPool.PlayerArrivesToMainMenu(username,OperationContext.Current.GetCallbackChannel<IMainMenuServiceCallback>());
         }
 
         /// <summary>
