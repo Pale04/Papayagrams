@@ -17,7 +17,6 @@ namespace PapayagramsClient
         public MainMenu()
         {
             InitializeComponent();
-            AddIcons();
 
             InstanceContext context = new InstanceContext(this);
 
@@ -67,14 +66,6 @@ namespace PapayagramsClient
             throw new NotImplementedException();
         }
 
-        public void AddIcons()
-        {
-            FriendImage.SetImage(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Icons\\friend-svgrepo-com.svg");
-            LogoutImage.SetImage(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Icons\\exit-svgrepo-com.svg");
-            ConfigImage.SetImage(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Icons\\cog-setting-gear-svgrepo-com.svg");
-            AchievementImage.SetImage(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Icons\\trophy-svgrepo-com.svg");
-        }
-
         public void ReceiveGameInvitation(GameInvitationDC invitation)
         {
             throw new NotImplementedException();
@@ -96,6 +87,7 @@ namespace PapayagramsClient
             }
 
             int result = host.Logout(CurrentPlayer.Player.Username);
+            host.Close();
 
             switch (result)
             {

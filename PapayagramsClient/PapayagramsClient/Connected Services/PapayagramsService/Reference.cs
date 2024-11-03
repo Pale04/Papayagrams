@@ -496,6 +496,18 @@ namespace PapayagramsClient.PapayagramsService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Logout", ReplyAction="http://tempuri.org/ILoginService/LogoutResponse")]
         System.Threading.Tasks.Task<int> LogoutAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/VerifyAccount", ReplyAction="http://tempuri.org/ILoginService/VerifyAccountResponse")]
+        int VerifyAccount(string username, string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/VerifyAccount", ReplyAction="http://tempuri.org/ILoginService/VerifyAccountResponse")]
+        System.Threading.Tasks.Task<int> VerifyAccountAsync(string username, string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/SendAccountVerificationCode", ReplyAction="http://tempuri.org/ILoginService/SendAccountVerificationCodeResponse")]
+        int SendAccountVerificationCode(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/SendAccountVerificationCode", ReplyAction="http://tempuri.org/ILoginService/SendAccountVerificationCodeResponse")]
+        System.Threading.Tasks.Task<int> SendAccountVerificationCodeAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -547,6 +559,22 @@ namespace PapayagramsClient.PapayagramsService {
         
         public System.Threading.Tasks.Task<int> LogoutAsync(string username) {
             return base.Channel.LogoutAsync(username);
+        }
+        
+        public int VerifyAccount(string username, string code) {
+            return base.Channel.VerifyAccount(username, code);
+        }
+        
+        public System.Threading.Tasks.Task<int> VerifyAccountAsync(string username, string code) {
+            return base.Channel.VerifyAccountAsync(username, code);
+        }
+        
+        public int SendAccountVerificationCode(string username) {
+            return base.Channel.SendAccountVerificationCode(username);
+        }
+        
+        public System.Threading.Tasks.Task<int> SendAccountVerificationCodeAsync(string username) {
+            return base.Channel.SendAccountVerificationCodeAsync(username);
         }
     }
     
@@ -801,12 +829,6 @@ namespace PapayagramsClient.PapayagramsService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/InviteFriend", ReplyAction="http://tempuri.org/IPregameService/InviteFriendResponse")]
         System.Threading.Tasks.Task InviteFriendAsync(string username);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/NotifyServer")]
-        void NotifyServer(string roomCode);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/NotifyServer")]
-        System.Threading.Tasks.Task NotifyServerAsync(string roomCode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -896,14 +918,6 @@ namespace PapayagramsClient.PapayagramsService {
         
         public System.Threading.Tasks.Task InviteFriendAsync(string username) {
             return base.Channel.InviteFriendAsync(username);
-        }
-        
-        public void NotifyServer(string roomCode) {
-            base.Channel.NotifyServer(roomCode);
-        }
-        
-        public System.Threading.Tasks.Task NotifyServerAsync(string roomCode) {
-            return base.Channel.NotifyServerAsync(roomCode);
         }
     }
     

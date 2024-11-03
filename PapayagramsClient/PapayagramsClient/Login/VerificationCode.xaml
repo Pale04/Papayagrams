@@ -1,0 +1,25 @@
+﻿<Page x:Class="PapayagramsClient.Login.VerificationCode"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PapayagramsClient.Login"
+      xmlns:p="clr-namespace:PapayagramsClient.Properties"
+      xmlns:svg="clr-namespace:SVGImage.SVG;assembly=SVGImage"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1080"
+      Title="Login"
+      Background="#D9D9D9">
+
+    <Grid>
+        <Button Style="{StaticResource PrimaryButton}" Name="ReturnButton" Margin="34,40,982,614" Click="ReturnToLogin">
+            <Image Source="../Resources/Icons/back-svgrepo-com.jpg" Width="40" Height="40"/>
+        </Button>
+
+        <Label Content="{x:Static p:Resources.verificationCode}" Margin="292,250,292,397" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="26"/>
+        <TextBox Name="CodeTextbox" Style="{StaticResource CustomTextBox}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="215" Height="64" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" Padding="0"/>
+        <Button Content="{x:Static p:Resources.globalSignIn}" Style="{StaticResource PrimaryButton}" VerticalAlignment="Top" Margin="382,430,382,0" Click="VerifyCode"/>
+        <Label Name="ErrorText" Content="Label" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,535,0,0" VerticalAlignment="Top" Foreground="Red" FontSize="20"/>
+        <Button Style="{StaticResource LinkButton}" Content="{x:Static p:Resources.verificationResendMessage}" Margin="256,615,256,32"/>
+    </Grid>
+</Page>

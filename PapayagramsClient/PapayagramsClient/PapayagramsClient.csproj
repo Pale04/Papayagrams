@@ -94,6 +94,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Login\VerificationCode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Menu\Achievements.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -144,6 +148,9 @@
     </Compile>
     <Compile Include="Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Login\VerificationCode.xaml.cs">
+      <DependentUpon>VerificationCode.xaml</DependentUpon>
     </Compile>
     <Compile Include="Menu\Achievements.xaml.cs">
       <DependentUpon>Achievements.xaml</DependentUpon>
@@ -286,17 +293,17 @@
     <Resource Include="Resources\PopUpIcons\warning-svgrepo-com.svg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\add-friend-svgrepo-com.svg" />
-    <Resource Include="Resources\Icons\back-svgrepo-com.svg" />
-    <Resource Include="Resources\Icons\cog-setting-gear-svgrepo-com.svg" />
-    <Resource Include="Resources\Icons\done-ring-round-svgrepo-com.svg" />
-    <Resource Include="Resources\Icons\edit-svgrepo-com.svg" />
-    <Resource Include="Resources\Icons\exit-svgrepo-com.svg" />
-    <Resource Include="Resources\Icons\friend-svgrepo-com.svg" />
-    <Resource Include="Resources\Icons\trophy-svgrepo-com.svg" />
+    <Folder Include="Resources\PlayerImages\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\PlayerImages\" />
+    <Resource Include="Resources\Icons\add-friend-svgrepo-com.jpg" />
+    <Resource Include="Resources\Icons\back-svgrepo-com.jpg" />
+    <Resource Include="Resources\Icons\cog-setting-gear-svgrepo-com.jpg" />
+    <Resource Include="Resources\Icons\done-ring-round-svgrepo-com.jpg" />
+    <Resource Include="Resources\Icons\edit-svgrepo-com.jpg" />
+    <Resource Include="Resources\Icons\exit-svgrepo-com.jpg" />
+    <Resource Include="Resources\Icons\friend-svgrepo-com.jpg" />
+    <Resource Include="Resources\Icons\trophy-svgrepo-com.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

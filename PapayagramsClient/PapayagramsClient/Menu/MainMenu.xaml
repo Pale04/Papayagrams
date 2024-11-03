@@ -19,19 +19,19 @@
         <Button Style="{StaticResource SecondaryButton}" Name="ProfileButton" Content="{x:Static p:Resources.mainMenuProfile}" HorizontalAlignment="Left" Margin="125,385,0,0" VerticalAlignment="Top" Width="400" Click="GoToProfile"/>
         <Button Style="{StaticResource SecondaryButton}" Name="LeaderboardButton" Content="{x:Static p:Resources.globalLeaderboard}" HorizontalAlignment="Left" Margin="125,485,0,0" VerticalAlignment="Top" Width="400"/>
 
-        <Button HorizontalAlignment="Left" Margin="968,611,0,0" VerticalAlignment="Top" Height="50" Width="50">
-            <svg:SVGImage Name="FriendImage"/>
+        <Button HorizontalAlignment="Left" Margin="968,611,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Logout">
+            <Image Source="../Resources/Icons/friend-svgrepo-com.jpg"/>
         </Button>
 
         <Button HorizontalAlignment="Left" Margin="968,71,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Logout">
-            <svg:SVGImage Name="LogoutImage"/>
+            <Image Source="../Resources/Icons/exit-svgrepo-com.jpg"/>
         </Button>
 
         <Button HorizontalAlignment="Left" Margin="139,611,0,0" VerticalAlignment="Top" Height="50" Width="50">
-            <svg:SVGImage Name="ConfigImage"/>
+            <Image Source="../Resources/Icons/cog-setting-gear-svgrepo-com.jpg"/>
         </Button>
         <Button HorizontalAlignment="Left" Margin="220,611,0,0" VerticalAlignment="Top" Height="50" Width="50">
-            <svg:SVGImage Name="AchievementImage"/>
+            <Image Source="../Resources/Icons/trophy-svgrepo-com.jpg"/>
         </Button>
 
     </Grid>
