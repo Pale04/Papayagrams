@@ -312,4 +312,25 @@
   <data name="lobbyRoomNotFoundTitle" xml:space="preserve">
     <value>No se encontró la sala</value>
   </data>
+  <data name="verificationCode" xml:space="preserve">
+    <value>Ingresa el código que enviamos a tu correo</value>
+  </data>
+  <data name="verificationEmptyCode" xml:space="preserve">
+    <value>El campo no puede dejarse vacío</value>
+  </data>
+  <data name="loginVerificationCode" xml:space="preserve">
+    <value>Ingresa el código que enviamos a tu correo</value>
+  </data>
+  <data name="verificationWrongCode" xml:space="preserve">
+    <value>Código incorrecto, intente de nuevo</value>
+  </data>
+  <data name="gameCreationNoTimeLimit" xml:space="preserve">
+    <value>Sin limite</value>
+  </data>
+  <data name="gameCreationMinutes" xml:space="preserve">
+    <value>minutos</value>
+  </data>
+  <data name="verificationResendMessage" xml:space="preserve">
+    <value>Enivar de nuevo el código</value>
+  </data>
 </root>

@@ -1,5 +1,4 @@
 ﻿using PapayagramsClient.PapayagramsService;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace PapayagramsClient.ClientData
