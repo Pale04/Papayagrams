@@ -29,8 +29,8 @@ namespace PapayagramsClient.Login
                 return;
             }
 
-            string Username = UsernameTextbox.Text;
-            string Password = PasswordTextbox.Text;
+            string username = UsernameTextbox.Text;
+            string password = PasswordTextbox.Text;
 
             PapayagramsService.LoginServiceClient host = new PapayagramsService.LoginServiceClient();
             try
@@ -43,10 +43,9 @@ namespace PapayagramsClient.Login
                 return;
             }
 
-            (int err, PapayagramsService.PlayerDC player) = host.Login(Username, Password);
-            SigninButton.IsEnabled = false;
-            CurrentPlayer.Player = player;
+            (int err, PapayagramsService.PlayerDC player) = host.Login(username, password);
             host.Close();
+            SigninButton.IsEnabled = false;
 
             if (err != 0)
             {
@@ -67,15 +66,17 @@ namespace PapayagramsClient.Login
                     case 206:
                         PasswordErrorText.Content = Properties.Resources.signInWrongCredentials;
                         break;
+                    case 207:
+                        NavigationService.Navigate(new VerificationCode(player));
+                        return;
                 }
 
                 SigninButton.IsEnabled = true;
                 return;
             }
 
-            SigninButton.IsEnabled = true;
-
-            this.NavigationService.Navigate(new MainMenu());
+            CurrentPlayer.Player = player;
+            NavigationService.Navigate(new MainMenu());
         }
 
         private void RegisterNewUser(object sender, RoutedEventArgs e)

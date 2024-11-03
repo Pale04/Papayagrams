@@ -142,6 +142,18 @@
   <wsdl:message name="ILoginService_Logout_OutputMessage">
     <wsdl:part name="parameters" element="tns:LogoutResponse" />
   </wsdl:message>
+  <wsdl:message name="ILoginService_VerifyAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyAccount" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_VerifyAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_SendAccountVerificationCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendAccountVerificationCode" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_SendAccountVerificationCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendAccountVerificationCodeResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainMenuService_GetFriends_InputMessage">
     <wsdl:part name="parameters" element="tns:GetFriends" />
   </wsdl:message>
@@ -256,9 +268,6 @@
   <wsdl:message name="IPregameService_InviteFriend_OutputMessage">
     <wsdl:part name="parameters" element="tns:InviteFriendResponse" />
   </wsdl:message>
-  <wsdl:message name="IPregameService_NotifyServer_InputMessage">
-    <wsdl:part name="parameters" element="tns:NotifyServer" />
-  </wsdl:message>
   <wsdl:message name="IPregameService_ReceiveMessage_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReceiveMessage" />
   </wsdl:message>
@@ -298,6 +307,14 @@
     <wsdl:operation name="Logout">
       <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/Logout" message="tns:ILoginService_Logout_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/LogoutResponse" message="tns:ILoginService_Logout_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/VerifyAccount" message="tns:ILoginService_VerifyAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/VerifyAccountResponse" message="tns:ILoginService_VerifyAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendAccountVerificationCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/SendAccountVerificationCode" message="tns:ILoginService_SendAccountVerificationCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/SendAccountVerificationCodeResponse" message="tns:ILoginService_SendAccountVerificationCode_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMainMenuService">
@@ -381,9 +398,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/InviteFriend" message="tns:IPregameService_InviteFriend_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/InviteFriendResponse" message="tns:IPregameService_InviteFriend_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyServer">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/NotifyServer" message="tns:IPregameService_NotifyServer_InputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="ReceiveMessage">
       <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/ReceiveMessage" message="tns:IPregameService_ReceiveMessage_OutputCallbackMessage" />
     </wsdl:operation>
@@ -431,6 +445,24 @@
     </wsdl:operation>
     <wsdl:operation name="Logout">
       <soap12:operation soapAction="http://tempuri.org/ILoginService/Logout" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAccount">
+      <soap12:operation soapAction="http://tempuri.org/ILoginService/VerifyAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendAccountVerificationCode">
+      <soap12:operation soapAction="http://tempuri.org/ILoginService/SendAccountVerificationCode" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -619,12 +651,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="NotifyServer">
-      <soap12:operation soapAction="http://tempuri.org/IPregameService/NotifyServer" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
     </wsdl:operation>
     <wsdl:operation name="ReceiveMessage">
       <soap12:operation soapAction="http://tempuri.org/IPregameService/ReceiveMessage" style="document" />

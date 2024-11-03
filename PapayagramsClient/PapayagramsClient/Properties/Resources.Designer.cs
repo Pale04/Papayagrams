@@ -205,6 +205,24 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a minutes.
+        /// </summary>
+        public static string gameCreationMinutes {
+            get {
+                return ResourceManager.GetString("gameCreationMinutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No limit.
+        /// </summary>
+        public static string gameCreationNoTimeLimit {
+            get {
+                return ResourceManager.GetString("gameCreationNoTimeLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Accept.
         /// </summary>
         public static string gameInvitationAccept {
@@ -372,6 +390,15 @@ namespace PapayagramsClient.Properties {
         public static string lobbyRoomNotFoundTitle {
             get {
                 return ResourceManager.GetString("lobbyRoomNotFoundTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a .
+        /// </summary>
+        public static string loginVerificationCode {
+            get {
+                return ResourceManager.GetString("loginVerificationCode", resourceCulture);
             }
         }
         
@@ -642,6 +669,42 @@ namespace PapayagramsClient.Properties {
         public static string signInWrongCredentials {
             get {
                 return ResourceManager.GetString("signInWrongCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We sent a code to your email.
+        /// </summary>
+        public static string verificationCode {
+            get {
+                return ResourceManager.GetString("verificationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The field cannot be empty.
+        /// </summary>
+        public static string verificationEmptyCode {
+            get {
+                return ResourceManager.GetString("verificationEmptyCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Send code again.
+        /// </summary>
+        public static string verificationResendMessage {
+            get {
+                return ResourceManager.GetString("verificationResendMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Wrong code, try again.
+        /// </summary>
+        public static string verificationWrongCode {
+            get {
+                return ResourceManager.GetString("verificationWrongCode", resourceCulture);
             }
         }
     }

@@ -48,6 +48,7 @@ namespace PapayagramsClient.Login
             }
 
             int result = host.RegisterUser(player);
+            host.Close();
 
             if (result != 0)
             {
@@ -69,8 +70,6 @@ namespace PapayagramsClient.Login
                         return;
                 }
             }
-
-            host.Close();
 
             new PopUpWindow(Properties.Resources.registerSuccessfulTitle, Properties.Resources.registerSuccessful, 0).ShowDialog();
             this.NavigationService.GoBack();

@@ -9,33 +9,21 @@ namespace PapayagramsClient.Game
     /// <summary>
     /// Lógica de interacción para GameCreation.xaml
     /// </summary>
-    public partial class GameCreation : Page, IPregameServiceCallback
+    public partial class GameCreation
     {
         public GameCreation()
         {
             InitializeComponent();
-
-            NavigationService.Navigate(new Lobby());
         }
 
-        public void ReceiveMessage(Message message)
+        private void ReturnToMainMenu(object sender, System.Windows.RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            NavigationService.GoBack();
         }
 
-        public void RefreshLobby()
+        private void CreateGame(object sender, System.Windows.RoutedEventArgs e)
         {
-            throw new NotImplementedException();
-        }
-
-        public void RefreshLobby(GameRoomDC gameRoom)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void StartGameResponse()
-        {
-            throw new NotImplementedException();
+            //PapayagramsService.GameConfigurationDC gameConfig = new PapayagramsService.GameConfigurationDC();
         }
     }
 }
