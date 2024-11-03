@@ -42,7 +42,7 @@ namespace Contracts
         int GetLeaderboard(PlayerDC player);
 
         [OperationContract]
-        void ReportToServer(string username);
+        int ReportToServer(string username);
     }
 
     [ServiceContract]

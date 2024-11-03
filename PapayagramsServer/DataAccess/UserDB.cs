@@ -5,6 +5,7 @@ using LanguageExt;
 using System.Data;
 using System.Data.Entity.Core;
 using System.Data.Entity;
+using System;
 
 namespace DataAccess
 {
@@ -197,6 +198,28 @@ namespace DataAccess
                 SqlParameter receiverParameter = new SqlParameter("@receiverUsername", receiverUsername);
                 context.Database.ExecuteSqlCommand("EXEC @ReturnValue = send_friend_request @senderUsername, @receiverUsername", returnValue, senderParameter, receiverParameter);
                 result = (int)returnValue.Value;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Update the connection status of the player
+        /// </summary>
+        /// <param name="username">Username of the player</param>
+        /// <param name="status">Status of the player</param>
+        /// <returns>1 if the update was successful, 0 otherwise </returns>
+        public static int UpdateUserStatus (string username, PlayerStatus status)
+        {
+            int result = 0;
+            using (var context = new papayagramsEntities())
+            {
+                var player = context.User.Where(p => p.username == username).Include(p => p.UserStatus);
+                if (player.Any()) 
+                {
+                    player.First().UserStatus.status = status.ToString();
+                    player.First().UserStatus.since = DateTime.Now;
+                    result = context.SaveChanges();
+                }
             }
             return result;
         }

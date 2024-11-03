@@ -99,16 +99,18 @@ namespace Contracts
             {
                 return (206, null);
             }
-            else if (loginResult == 1)
-            {
-                return (207, null);
-            }
 
             Option<Player> playerLogged = UserDB.GetPlayerByUsername(username);
+            int code = 0;
+            if (loginResult == 1)
+            {
+                code = 207;
+            }
+
             PlayersPool.AddPlayer((Player)playerLogged.Case);
             Console.WriteLine("User " + username + " logged in");
 
-            return (0, PlayerDC.ConvertToPlayerDC((Player)playerLogged.Case));
+            return (code, PlayerDC.ConvertToPlayerDC((Player)playerLogged.Case));
         }
 
         /// <summary>
@@ -144,7 +146,7 @@ namespace Contracts
             return 0;
         }
 
-        public int VerifyAccount(string code, string username)
+        public int VerifyAccount(string username, string code)
         {
             if (string.IsNullOrEmpty(code) || string.IsNullOrEmpty(username))
             {
