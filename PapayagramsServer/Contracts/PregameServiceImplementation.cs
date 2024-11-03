@@ -3,6 +3,8 @@ using DomainClasses;
 using System;
 using System.ServiceModel;
 using System.Collections.Generic;
+using DataAccess;
+using System.Data;
 
 namespace Contracts
 {
@@ -11,6 +13,16 @@ namespace Contracts
         public (int, GameRoomDC) CreateGame(string username, GameConfigurationDC gameConfiguration)
         {
             int resultCode = 0;
+
+            try
+            {
+                UserDB.UpdateUserStatus(username, PlayerStatus.in_game);
+            }
+            catch (EntityException error)
+            {
+                _logger.Error("Error while trying to update user status", error);
+                return (102, null);
+            }
 
             GameRoom gameRoom = new GameRoom
             {
@@ -38,6 +50,16 @@ namespace Contracts
 
             if (room != null && room.State.Equals(GameRoomState.Waiting))
             {
+                try
+                {
+                    UserDB.UpdateUserStatus(username, PlayerStatus.in_game);
+                }
+                catch (EntityException error)
+                {
+                    _logger.Error("Error while trying to update user status", error);
+                    return (102, null);
+                }
+
                 CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
                 room.Players.Add(PlayersPool.GetPlayer(username));
                 BroadcastRefreshLobby(roomCode);

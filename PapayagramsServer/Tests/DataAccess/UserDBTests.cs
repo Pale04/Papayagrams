@@ -277,5 +277,23 @@ namespace DataAccess.Tests
             int result = UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(expected, result, "SendFriendRequestBlockedRelationTest");
         }
+
+        [TestMethod()]
+        public void UpdateUserStatusSuccessfulTest()
+        {
+            int expected = 1;
+            int result = UserDB.UpdateUserStatus(_registeredPlayer1.Username, PlayerStatus.in_game);
+            Assert.AreEqual(expected, result, "UpdateUserStatusSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void UpdateUserStatusNonExistentTest()
+        {
+            int expected = 0;
+            int result = UserDB.UpdateUserStatus("Pale", PlayerStatus.in_game);
+            Assert.AreEqual(expected, result, "UpdateUserStatusNonExistentTest");
+        }
+
+
     }
 }

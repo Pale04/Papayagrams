@@ -60,9 +60,20 @@ namespace Contracts
         /// Add the callback channel of the player to the callbacks pool
         /// </summary>
         /// <param name="username">Username of the player</param>
-        public void ReportToServer(string username)
+        public int ReportToServer(string username)
         {
+            try
+            {
+                UserDB.UpdateUserStatus(username, PlayerStatus.online);
+            }
+            catch (EntityException error)
+            {
+                _logger.Error("Error while trying to update user status", error);
+                return 102;
+            }
+
             CallbacksPool.PlayerArrivesToMainMenu(username,OperationContext.Current.GetCallbackChannel<IMainMenuServiceCallback>());
+            return 0;
         }
 
         /// <summary>

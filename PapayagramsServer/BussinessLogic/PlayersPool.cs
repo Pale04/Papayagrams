@@ -10,6 +10,7 @@ namespace BussinessLogic
 
         public static void AddPlayer(Player player)
         {
+            _players.Remove(player.Username);
             _players.Add(player.Username, player);
         }
 
@@ -47,16 +48,13 @@ namespace BussinessLogic
 
         public static bool AccountVerificationCodeCorrect(string username, string code)
         {
-            string codeStored;
-            try
+            bool codeCorrect = false;
+            if (_accountVerificationCodes.ContainsKey(username))
             {
-                codeStored = _accountVerificationCodes[username];
+                string codeStored = _accountVerificationCodes[username];
+                codeCorrect = codeStored != null && codeStored.Equals(code);
             }
-            catch (KeyNotFoundException)
-            {
-                return false;
-            }
-            return codeStored == code;
+            return codeCorrect;
         }
 
         public static void RemoveAccountVerificationCode(string code)
