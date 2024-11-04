@@ -44,6 +44,31 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GameInvitationDC" nillable="true" type="tns:GameInvitationDC" />
+  <xs:complexType name="GameConfigurationDC">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GameMode" type="tns:GameMode" />
+      <xs:element minOccurs="0" name="InitialPieces" type="xs:int" />
+      <xs:element minOccurs="0" name="MaxPlayers" type="xs:int" />
+      <xs:element minOccurs="0" name="TimeLimitMinutes" type="xs:int" />
+      <xs:element minOccurs="0" name="WordsLanguage" type="tns:Language" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GameConfigurationDC" nillable="true" type="tns:GameConfigurationDC" />
+  <xs:simpleType name="GameMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Oiginal" />
+      <xs:enumeration value="SuddenDeath" />
+      <xs:enumeration value="TimeAttack" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="GameMode" nillable="true" type="tns:GameMode" />
+  <xs:simpleType name="Language">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="English" />
+      <xs:enumeration value="Spanish" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Language" nillable="true" type="tns:Language" />
   <xs:complexType name="GameRoomDC">
     <xs:sequence>
       <xs:element minOccurs="0" name="Players" nillable="true" type="tns:ArrayOfPlayerDC" />

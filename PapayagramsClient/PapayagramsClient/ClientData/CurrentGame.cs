@@ -30,5 +30,6 @@ namespace PapayagramsClient.ClientData
         public static GameState State { get; set; }
         public static List<PlayerDC> PlayersInRoom { get; set; }
         public static GameProgressData GameData { get; set; }
+        public static GameConfigurationDC GameConfig { get; set; }
     }
 }
