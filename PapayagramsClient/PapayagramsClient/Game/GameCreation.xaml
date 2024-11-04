@@ -61,7 +61,7 @@
                     </ComboBox>
                     <Separator Height="25" Opacity="0"/>
                     <ComboBox Name="TimeLimitComboBox" FontSize="32" VerticalAlignment="Center" Height="50">
-                        <ComboBoxItem Content="{x:Reference p:Resources.gameCreationNoTimeLimit}"/>
+                        <ComboBoxItem Content="{x:Static p:Resources.gameCreationNoTimeLimit}"/>
                     </ComboBox>
                     <Separator Height="25" Opacity="0"/>
                 </StackPanel>
