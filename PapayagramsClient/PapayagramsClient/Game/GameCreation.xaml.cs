@@ -52,9 +52,17 @@ namespace PapayagramsClient.Game
             }
             config.GameMode = gameMode;
 
+            int gameTime = 0;
+            if (!TimeLimitComboBox.Text.Equals("No limit"))
+            {
+                gameTime = int.Parse(TimeLimitComboBox.Text);
+            }
+            config.TimeLimitMinutes = gameTime;
+
             config.MaxPlayers = int.Parse(MaxPlayersComboBox.Text);
             config.InitialPieces = int.Parse(InitialPiecesComboBox.Text);
-            config.TimeLimitMinutes = int.Parse(TimeLimitComboBox.Text);
+
+            NavigationService.Navigate(new Lobby(config));
         }
     }
 }
