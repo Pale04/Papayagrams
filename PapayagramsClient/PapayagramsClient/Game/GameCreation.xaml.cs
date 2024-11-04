@@ -1,8 +1,4 @@
 ﻿using PapayagramsClient.PapayagramsService;
-using System;
-using System.IO;
-using System.ServiceModel;
-using System.Windows.Controls;
 
 namespace PapayagramsClient.Game
 {
@@ -23,7 +19,42 @@ namespace PapayagramsClient.Game
 
         private void CreateGame(object sender, System.Windows.RoutedEventArgs e)
         {
-            //PapayagramsService.GameConfigurationDC gameConfig = new PapayagramsService.GameConfigurationDC();
+            GameConfigurationDC config = new GameConfigurationDC();
+
+            Language wordsLanguage;
+            switch (WordsLanguageComboBox.Text)
+            {
+                case "English":
+                    wordsLanguage = PapayagramsService.Language.English;
+                    break;
+                case "Español":
+                    wordsLanguage = PapayagramsService.Language.Spanish;
+                    break;
+                default:
+                    return;
+            }
+            config.WordsLanguage = wordsLanguage;
+
+            GameMode gameMode;
+            switch (GameModeComboBox.Text)
+            {
+                case "Classic":
+                    gameMode = GameMode.Oiginal;
+                    break;
+                case "Sudden death":
+                    gameMode = GameMode.SuddenDeath;
+                    break;
+                case "Time attack":
+                    gameMode = GameMode.TimeAttack;
+                    break;
+                default:
+                    return;
+            }
+            config.GameMode = gameMode;
+
+            config.MaxPlayers = int.Parse(MaxPlayersComboBox.Text);
+            config.InitialPieces = int.Parse(InitialPiecesComboBox.Text);
+            config.TimeLimitMinutes = int.Parse(TimeLimitComboBox.Text);
         }
     }
 }

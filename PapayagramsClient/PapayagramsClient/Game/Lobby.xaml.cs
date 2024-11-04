@@ -13,7 +13,8 @@ namespace PapayagramsClient.Game
     {
         private PregameServiceClient _host;
 
-        public Lobby()
+        // Create game room with configuration x
+        public Lobby(GameConfigurationDC gameConfig)
         {
             InitializeComponent();
 
@@ -31,10 +32,11 @@ namespace PapayagramsClient.Game
                 return;
             }
 
-            (int err, GameRoomDC gameRoom) = _host.CreateGame(CurrentPlayer.Player.Username);
+            (int err, GameRoomDC gameRoom) = _host.CreateGame(CurrentPlayer.Player.Username, gameConfig);
 
             if (err != 0)
             {
+                // TODO: Add error message "an error ocurred, try again"
                 NavigationService.GoBack();
                 return;
             }
@@ -43,8 +45,10 @@ namespace PapayagramsClient.Game
             CurrentGame.RoomCode = gameRoom.RoomCode;
             CurrentGame.State = CurrentGame.GameState.InLobby;
             CurrentGame.PlayersInRoom = gameRoom.Players.ToList();
+            CurrentGame.GameConfig = gameConfig;
         }
 
+        // Join to game room with code x
         public Lobby(string gameRoomCode)
         {
             if (string.IsNullOrEmpty(gameRoomCode))
@@ -140,35 +144,41 @@ namespace PapayagramsClient.Game
 
         public void StartGameResponse()
         {
-            // TODO
-            throw new NotImplementedException();
+            NavigationService.Navigate(new Game());
         }
 
-        private void ReturnToMainMenu()
+        private void ReturnToMainMenu(object sender, RoutedEventArgs e)
         {
-            InstanceContext context = new InstanceContext(this);
-            PregameServiceClient host = new PregameServiceClient(context);
+            _host.LeaveLobby(CurrentPlayer.Player.Username, CurrentGame.RoomCode);
+            NavigationService.GoBack();
+        }
 
-            int result = host.LeaveLobby(CurrentPlayer.Player.Username, CurrentGame.RoomCode);
-
-            if (result == 0)
+        private void SendMessage(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(MessageTextbox.Text))
             {
-                this.NavigationService.GoBack();
+                return;
             }
-        }
 
-        private void SendMessage(object sender, System.Windows.RoutedEventArgs e)
-        {
-            InstanceContext context = new InstanceContext(this);
-            PregameServiceClient host = new PregameServiceClient(context);
             Message message = new Message
             {
                 AuthorUsername = CurrentPlayer.Player.Username,
-                Content = MessageTextbox.Text,
+                Content = MessageTextbox.Text.Trim(),
                 GameRoomCode = CurrentGame.RoomCode
             };
-            host.SendMessage(message);
+
+            _host.SendMessage(message);
             
+        }
+
+        private void CreateGame(object sender, RoutedEventArgs e)
+        {
+            if (CurrentGame.PlayersInRoom.Count < 2)
+            {
+                return;
+            }
+
+            _host.StartGame(CurrentGame.RoomCode);
         }
     }
 }
