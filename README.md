@@ -26,15 +26,20 @@ El proyecto se trata de un juego multijugador en linea ...
 
 ## Reglas de nombrado
 
-**Generales**
-- Utilice nombres descriptivos para variables, constantes, métodos, clases, propiedades y espacios de nombre (namespaces).
-- Utilice la notación PascalCase para los nombres de *propiedades, métodos, clases, proyectos y namespaces*. Esta consiste en comenzar cada palabra en mayúsculas, sin espacios ni guiones.
-- Utilice la notación camelCase para los parámetros de métodos y las variables. Esta consiste en comenzar la primera palabra con minúscula y las siguiente con mayúscula, sin espacios ni guiones.
+### Generales
+- Utilice **nombres descriptivos** para variables, constantes, métodos, clases, propiedades y espacios de nombre (namespaces).
+- Utilice la notación **PascalCase** para los nombres de *propiedades, métodos, clases, proyectos y namespaces*. Esta consiste en comenzar cada palabra en mayúsculas, sin espacios ni guiones.
+- Utilice la notación **camelCase** para los parámetros de métodos y las variables. Esta consiste en comenzar la primera palabra con minúscula y las siguiente con mayúscula, sin espacios ni guiones.
     - Las variables internas y privadas deberán tener el prefijo "\_" y se usará _readonly_ siempre que sea posible.
-- Los nombres de las interfaces deben llevar el prefijo "I".
-- Utilizar un sufijo en los nombres de los enums que haga alusión a su naturaleza, por ejemplo "Type" o "State".
 
-***Ejemplo:***
+### Prefijos y sufijos
+- Los nombres de las interfaces deben llevar el prefijo "I".
+- Las clases serializadas por el servicio deben contener el sufijo "DC", haciendo alusión a "Data contract".
+- Las clases que se encarguen de la persistencia de datos deben contener el sufijo "DB".
+- Para las clases que contengan las pruebas unitarias de una clase en especifico deben nombrarse con el nombre de la clase que prueban seguido del sufijo "Test".
+- Los métodos de pruebas unitarias deben tener un nombre descriptivo alusivo a la prueba seguido del sufijo "Test".
+
+***Ejemplo general:***
 ```C#
 namespace GameApplication.Accounts
 {

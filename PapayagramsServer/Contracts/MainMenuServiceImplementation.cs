@@ -41,8 +41,9 @@ namespace Contracts
             throw new NotImplementedException();
         }
 
-        public int GetPlayerProfile(string username)
+        public (int returnCode, PlayerStatsDC playerStats) GetPlayerProfile(string username)
         {
+            //TODO: next milestone
             throw new NotImplementedException();
         }
 

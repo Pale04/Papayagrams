@@ -9,14 +9,14 @@ namespace Contracts
         /// Create a game room and add the player to it
         /// </summary>
         [OperationContract]
-        (int, GameRoomDC) CreateGame(string username, GameConfigurationDC gameConfiguration);
+        (int returnCode, GameRoomDC createdGameRoom) CreateGame(string username, GameConfigurationDC gameConfiguration);
 
         /// <summary>
         /// Add a player to the game room of the specified code
         /// </summary>
         /// <param name="roomCode">The game room code to add the player to</param>
         [OperationContract]
-        (int, GameRoomDC) JoinGame(string username, string roomCode);
+        (int returnCode, GameRoomDC joinedGameRoom) JoinGame(string username, string roomCode);
 
         /// <summary>
         /// Remove a player from the game room of the specified code
@@ -24,7 +24,7 @@ namespace Contracts
         /// <param name="roomCode">The game room code to remove the player from</param>
         /// <returns>0 if the player was removed successfully</returns>
         [OperationContract]
-        void LeaveLobby(string username,string roomCode);
+        int LeaveLobby(string username,string roomCode);
 
         [OperationContract(IsOneWay = true)]
         void SendMessage(Message message);
@@ -50,5 +50,12 @@ namespace Contracts
 
         [OperationContract(IsOneWay = true)]
         void RefreshLobby(GameRoomDC gameRoom);
+    }
+
+    [ServiceContract]
+    public interface IGameCodeVerificationService
+    {
+        [OperationContract]
+        bool VerifyGameRoom(string gameCode);
     }
 }

@@ -8,7 +8,7 @@ using System.Data;
 
 namespace Contracts
 {
-    public partial class ServiceImplementation : IPregameService
+    public partial class ServiceImplementation : IPregameService, IGameCodeVerificationService
     {
         public (int, GameRoomDC) CreateGame(string username, GameConfigurationDC gameConfiguration)
         {
@@ -27,6 +27,7 @@ namespace Contracts
             GameRoom gameRoom = new GameRoom
             {
                 State = GameRoomState.Waiting
+                //TODO: set the configuration
             };
             gameRoom.Players.Add(PlayersPool.GetPlayer(username));
             GameRoomsPool.AddGameRoom(gameRoom);
@@ -73,10 +74,22 @@ namespace Contracts
             return (resultCode, serializedGameRoom);
         }
 
-        public void LeaveLobby(string username, string code)
+        public int LeaveLobby(string username, string code)
         {
             GameRoomsPool.RemovePlayerFromGameRoom(username, code);
             CallbacksPool.RemovePregameCallbackChannel(username);
+
+            try
+            {
+                UserDB.UpdateUserStatus(username, PlayerStatus.online);
+            }
+            catch (EntityException error)
+            {
+                _logger.Error("Error while trying to update user status", error);
+                return 102;
+            }
+
+            return 0;
         }
 
         public void SendMessage(Message message)
@@ -119,6 +132,20 @@ namespace Contracts
         {
             CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
             CallbacksPool.RemoveMainMenuCallbackChannel(username);
+        }
+
+        public bool VerifyGameRoom(string gameCode)
+        {
+            GameRoomDC serializedGameRoom = null;
+            GameRoom room = GameRoomsPool.GetGameRoom(gameCode);
+            
+            if (room != null)
+            {
+                //todo
+                return true;
+            }
+
+            return false;
         }
     }
 }

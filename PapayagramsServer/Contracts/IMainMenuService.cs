@@ -7,7 +7,7 @@ namespace Contracts
     public interface IMainMenuService
     {
         [OperationContract]
-        (int, List<FriendDC>) GetFriends(string username);
+        (int returnCode, List<FriendDC> friendsList) GetFriends(string username);
 
         [OperationContract]
         int RemoveFriend(string username, string friendUsername);
@@ -16,7 +16,7 @@ namespace Contracts
         int BlockFriend(string username, string friendUsername);
 
         [OperationContract]
-        (int, List<FriendDC>) GetFriendRequests(string username);
+        (int returnCode, List<FriendDC> friendRequestsList) GetFriendRequests(string username);
 
         [OperationContract]
         int AcceptFriendRequest(string username, string friendUsername);
@@ -25,19 +25,18 @@ namespace Contracts
         int RejectFriendRequest(string username, string friendUsername);
 
         [OperationContract]
-        (int, PlayerDC) SearchNoFriendPlayer(string searcherUsername, string searchedUsername);
+        (int returnCode, PlayerDC playersList) SearchNoFriendPlayer(string searcherUsername, string searchedUsername);
 
         [OperationContract]
         int SendFriendRequest(string senderUsername, string receiverUsername);
 
-        //TODO: implementar un objeto serializado para recuperar el perfil completo del usuario
         [OperationContract]
-        int GetPlayerProfile(string username);
+        (int returnCode, PlayerStatsDC playerStats) GetPlayerProfile(string username);
 
         [OperationContract]
-        (int, List<AchievementDC>) GetAchievements(string username);
+        (int returnCode, List<AchievementDC> achievementsList) GetAchievements(string username);
 
-        //TODO: implementar un objeto serializado para recuperar el leaderboard
+        //TODO: crear una clase serializada para recuperar el leaderboard
         [OperationContract]
         int GetLeaderboard(PlayerDC player);
 

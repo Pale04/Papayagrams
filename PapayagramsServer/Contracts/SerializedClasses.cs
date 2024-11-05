@@ -51,6 +51,25 @@ namespace Contracts
     }
 
     [DataContract]
+    public class PlayerStatsDC
+    {
+        [DataMember]
+        int OriginalGamesPlayed { get; set; }
+        [DataMember]
+        int TimeAttackGamesPlayed { get; set; }
+        [DataMember]
+        int SuddenDeathGamesPlayed { get; set; }
+        [DataMember]
+        int OriginalGamesWon { get; set; }
+        [DataMember]
+        int TimeAttackGamesWon { get; set; }
+        [DataMember]
+        int SuddenDeathGamesWon { get; set; }
+        [DataMember]
+        int FriendsAmount { get; set; }
+    }
+
+    [DataContract]
     public class AchievementDC
     {
         [DataMember]
@@ -132,10 +151,10 @@ namespace Contracts
     }
 
     [DataContract]
-    public enum GameMode
+    public enum GameModeDC
     {
         [EnumMember]
-        Oiginal,
+        Original,
         [EnumMember]
         SuddenDeath,
         [EnumMember]
@@ -143,7 +162,7 @@ namespace Contracts
     }
 
     [DataContract]
-    public enum Language
+    public enum LanguageDC
     {
         [EnumMember]
         English,
@@ -155,7 +174,7 @@ namespace Contracts
     public class GameConfigurationDC
     {
         [DataMember]
-        public GameMode GameMode { get; set; }
+        public GameModeDC GameMode { get; set; }
 
         [DataMember]
         public int InitialPieces { get; set; }
@@ -164,7 +183,7 @@ namespace Contracts
         public int MaxPlayers { get; set; }
 
         [DataMember]
-        public Language WordsLanguage { get; set; }
+        public LanguageDC WordsLanguage { get; set; }
 
         [DataMember]
         public int TimeLimitMinutes { get; set; }

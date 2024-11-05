@@ -223,5 +223,11 @@ namespace DataAccess
             }
             return result;
         }
+
+        public static PlayerStats GetPlayerStats (string username)
+        {
+
+            throw new NotImplementedException();
+        }
     }
 }
