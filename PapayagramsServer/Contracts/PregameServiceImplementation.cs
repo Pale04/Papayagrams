@@ -61,8 +61,8 @@ namespace Contracts
                 }
 
                 CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
-                room.Players.Add(PlayersPool.GetPlayer(username));
                 BroadcastRefreshLobby(roomCode);
+                room.Players.Add(PlayersPool.GetPlayer(username));
                 serializedGameRoom = GameRoomDC.ConvertToGameRoomDC(room);
             }
             else

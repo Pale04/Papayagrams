@@ -35,6 +35,7 @@ namespace PapayagramsClient.Game
             }
             config.WordsLanguage = wordsLanguage;
 
+            // TODO: Comparar con los recursos de internacionalización
             GameMode gameMode;
             switch (GameModeComboBox.Text)
             {
@@ -53,7 +54,7 @@ namespace PapayagramsClient.Game
             config.GameMode = gameMode;
 
             int gameTime = 0;
-            if (!TimeLimitComboBox.Text.Equals("No limit"))
+            if (!TimeLimitComboBox.Text.Equals(Properties.Resources.gameCreationNoTimeLimit))
             {
                 gameTime = int.Parse(TimeLimitComboBox.Text);
             }

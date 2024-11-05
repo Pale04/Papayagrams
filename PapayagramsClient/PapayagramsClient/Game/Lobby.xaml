@@ -19,7 +19,9 @@
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" Margin="0, 30, 0, 10">
             <Label Content="Chat" FontSize="30" HorizontalAlignment="Center"/>
 
-            <StackPanel Name="ChatPanel" Height="480" Width="500"  Margin="0, 20, 0, 10"/>
+            <ScrollViewer Height="480" Width="500" >
+                <StackPanel Name="ChatPanel" Margin="0, 20, 0, 10"/>
+            </ScrollViewer>
 
             <TextBox Name="MessageTextbox" FontSize="20" TextWrapping="Wrap" Height="35"/>
             <Button Style="{StaticResource PrimaryButton}" FontSize="26" HorizontalAlignment="Center" Content="Send" Margin="10" Click="SendMessage" Width="240" Height="59"/>

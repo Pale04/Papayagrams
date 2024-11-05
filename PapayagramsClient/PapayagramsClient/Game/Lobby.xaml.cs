@@ -1,6 +1,7 @@
 ﻿using PapayagramsClient.ClientData;
 using PapayagramsClient.PapayagramsService;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Windows;
@@ -74,21 +75,24 @@ namespace PapayagramsClient.Game
             switch (err)
             {
                 case 0:
+                    InitializeComponent();
                     GameRoomCodeText.Content = gameRoomCode;
                     CurrentGame.RoomCode = gameRoom.RoomCode;
                     CurrentGame.State = CurrentGame.GameState.InLobby;
                     CurrentGame.PlayersInRoom = gameRoom.Players.ToList();
-                    InitializeComponent();
-
-                    break;
+                    RefreshLobby(new GameRoomDC
+                    {
+                        Players = CurrentGame.PlayersInRoom.ToArray()
+                    });
+                    return;
 
                 case 102:
                     new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
-                    return;
+                    break;
 
                 case 401:
                     new PopUpWindow(Properties.Resources.lobbyRoomNotFoundTitle, Properties.Resources.lobbyRoomNotFound, 2).ShowDialog();
-                    return;
+                    break;
             }
         }
 
