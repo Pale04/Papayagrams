@@ -78,6 +78,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Game\Game.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Game\GameCreation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,6 +141,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="ClientData\CurrentPlayer.cs" />
+    <Compile Include="Game\Game.xaml.cs">
+      <DependentUpon>Game.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Game\GameCreation.xaml.cs">
       <DependentUpon>GameCreation.xaml</DependentUpon>
     </Compile>
@@ -228,16 +235,16 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\PapayagramsService\item.xsd">
+    <None Include="Connected Services\PapayagramsService\item4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item1.xsd">
+    <None Include="Connected Services\PapayagramsService\item41.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item2.xsd">
+    <None Include="Connected Services\PapayagramsService\item42.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item3.xsd">
+    <None Include="Connected Services\PapayagramsService\item43.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.AchievementDC.datasource">
@@ -252,7 +259,7 @@
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.PlayerDC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\PapayagramsService\ServiceImplementation.wsdl" />
+    <None Include="Connected Services\PapayagramsService\ServiceImplementation1.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -267,9 +274,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\PapayagramsService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\PapayagramsService\item.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\PapayagramsService\configuration91.svcinfo" />
@@ -304,6 +308,9 @@
     <Resource Include="Resources\Icons\exit-svgrepo-com.jpg" />
     <Resource Include="Resources\Icons\friend-svgrepo-com.jpg" />
     <Resource Include="Resources\Icons\trophy-svgrepo-com.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PapayagramsService\item1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

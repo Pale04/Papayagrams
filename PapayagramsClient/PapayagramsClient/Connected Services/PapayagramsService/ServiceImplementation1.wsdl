@@ -4,27 +4,6 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <wsp:Policy>
-            <sp:TransportToken>
-              <wsp:Policy>
-                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
-                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
-                </msf:WindowsTransportSecurity>
-              </wsp:Policy>
-            </sp:TransportToken>
-            <sp:AlgorithmSuite>
-              <wsp:Policy>
-                <sp:Basic256 />
-              </wsp:Policy>
-            </sp:AlgorithmSuite>
-            <sp:Layout>
-              <wsp:Policy>
-                <sp:Strict />
-              </wsp:Policy>
-            </sp:Layout>
-          </wsp:Policy>
-        </sp:TransportBinding>
         <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>
@@ -33,27 +12,6 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <wsp:Policy>
-            <sp:TransportToken>
-              <wsp:Policy>
-                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
-                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
-                </msf:WindowsTransportSecurity>
-              </wsp:Policy>
-            </sp:TransportToken>
-            <sp:AlgorithmSuite>
-              <wsp:Policy>
-                <sp:Basic256 />
-              </wsp:Policy>
-            </sp:AlgorithmSuite>
-            <sp:Layout>
-              <wsp:Policy>
-                <sp:Strict />
-              </wsp:Policy>
-            </sp:Layout>
-          </wsp:Policy>
-        </sp:TransportBinding>
         <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>
@@ -62,27 +20,6 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <wsp:Policy>
-            <sp:TransportToken>
-              <wsp:Policy>
-                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
-                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
-                </msf:WindowsTransportSecurity>
-              </wsp:Policy>
-            </sp:TransportToken>
-            <sp:AlgorithmSuite>
-              <wsp:Policy>
-                <sp:Basic256 />
-              </wsp:Policy>
-            </sp:AlgorithmSuite>
-            <sp:Layout>
-              <wsp:Policy>
-                <sp:Strict />
-              </wsp:Policy>
-            </sp:Layout>
-          </wsp:Policy>
-        </sp:TransportBinding>
         <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>
@@ -91,37 +28,16 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <wsp:Policy>
-            <sp:TransportToken>
-              <wsp:Policy>
-                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
-                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
-                </msf:WindowsTransportSecurity>
-              </wsp:Policy>
-            </sp:TransportToken>
-            <sp:AlgorithmSuite>
-              <wsp:Policy>
-                <sp:Basic256 />
-              </wsp:Policy>
-            </sp:AlgorithmSuite>
-            <sp:Layout>
-              <wsp:Policy>
-                <sp:Strict />
-              </wsp:Policy>
-            </sp:Layout>
-          </wsp:Policy>
-        </sp:TransportBinding>
         <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Contracts" />
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import schemaLocation="http://192.168.56.30:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.56.30:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.56.30:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Contracts" />
+      <xsd:import schemaLocation="http://192.168.56.30:8080/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ILoginService_RegisterUser_InputMessage">
@@ -268,6 +184,12 @@
   <wsdl:message name="IPregameService_InviteFriend_OutputMessage">
     <wsdl:part name="parameters" element="tns:InviteFriendResponse" />
   </wsdl:message>
+  <wsdl:message name="IPregameService_ReturnToLobby_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReturnToLobby" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_ReturnToLobby_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReturnToLobbyResponse" />
+  </wsdl:message>
   <wsdl:message name="IPregameService_ReceiveMessage_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReceiveMessage" />
   </wsdl:message>
@@ -397,6 +319,10 @@
     <wsdl:operation name="InviteFriend">
       <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/InviteFriend" message="tns:IPregameService_InviteFriend_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/InviteFriendResponse" message="tns:IPregameService_InviteFriend_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReturnToLobby">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/ReturnToLobby" message="tns:IPregameService_ReturnToLobby_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/ReturnToLobbyResponse" message="tns:IPregameService_ReturnToLobby_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ReceiveMessage">
       <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/ReceiveMessage" message="tns:IPregameService_ReceiveMessage_OutputCallbackMessage" />
@@ -652,6 +578,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ReturnToLobby">
+      <soap12:operation soapAction="http://tempuri.org/IPregameService/ReturnToLobby" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ReceiveMessage">
       <soap12:operation soapAction="http://tempuri.org/IPregameService/ReceiveMessage" style="document" />
       <wsdl:output>
@@ -704,39 +639,27 @@
   </wsdl:binding>
   <wsdl:service name="ServiceImplementation">
     <wsdl:port name="NetTcpBinding_ILoginService" binding="tns:NetTcpBinding_ILoginService">
-      <soap12:address location="net.tcp://localhost:8090/Contracts" />
+      <soap12:address location="net.tcp://192.168.56.30:8090/Contracts" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PGEUD8U\david</Upn>
-        </Identity>
+        <wsa10:Address>net.tcp://192.168.56.30:8090/Contracts</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IMainMenuService" binding="tns:NetTcpBinding_IMainMenuService">
-      <soap12:address location="net.tcp://localhost:8090/Contracts" />
+      <soap12:address location="net.tcp://192.168.56.30:8090/Contracts" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PGEUD8U\david</Upn>
-        </Identity>
+        <wsa10:Address>net.tcp://192.168.56.30:8090/Contracts</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IPregameService" binding="tns:NetTcpBinding_IPregameService">
-      <soap12:address location="net.tcp://localhost:8090/Contracts" />
+      <soap12:address location="net.tcp://192.168.56.30:8090/Contracts" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PGEUD8U\david</Upn>
-        </Identity>
+        <wsa10:Address>net.tcp://192.168.56.30:8090/Contracts</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGameService" binding="tns:NetTcpBinding_IGameService">
-      <soap12:address location="net.tcp://localhost:8090/Contracts" />
+      <soap12:address location="net.tcp://192.168.56.30:8090/Contracts" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PGEUD8U\david</Upn>
-        </Identity>
+        <wsa10:Address>net.tcp://192.168.56.30:8090/Contracts</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

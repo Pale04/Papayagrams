@@ -16,10 +16,10 @@
             <Image Source="../Resources/Icons/back-svgrepo-com.jpg" Width="40" Height="40"/>
         </Button>
 
-        <Label Content="{x:Static p:Resources.verificationCode}" Margin="292,250,292,397" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="26"/>
+        <Label Content="{x:Static p:Resources.verificationCode}" Margin="292,189,292,397" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="26"/>
         <TextBox Name="CodeTextbox" Style="{StaticResource CustomTextBox}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="215" Height="64" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" Padding="0"/>
         <Button Content="{x:Static p:Resources.globalSignIn}" Style="{StaticResource PrimaryButton}" VerticalAlignment="Top" Margin="382,430,382,0" Click="VerifyCode"/>
-        <Label Name="ErrorText" Content="Label" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,535,0,0" VerticalAlignment="Top" Foreground="Red" FontSize="20"/>
-        <Button Style="{StaticResource LinkButton}" Content="{x:Static p:Resources.verificationResendMessage}" Margin="256,615,256,32"/>
+        <Label Name="ErrorText" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,535,0,0" VerticalAlignment="Top" Foreground="Red" FontSize="20"/>
+        <Button Style="{StaticResource LinkButton}" Content="{x:Static p:Resources.verificationResendMessage}" Margin="256,615,256,32" Click="ResendCode"/>
     </Grid>
 </Page>

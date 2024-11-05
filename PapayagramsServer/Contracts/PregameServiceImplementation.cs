@@ -62,8 +62,8 @@ namespace Contracts
                 }
 
                 CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
-                room.Players.Add(PlayersPool.GetPlayer(username));
                 BroadcastRefreshLobby(roomCode);
+                room.Players.Add(PlayersPool.GetPlayer(username));
                 serializedGameRoom = GameRoomDC.ConvertToGameRoomDC(room);
             }
             else
@@ -74,7 +74,7 @@ namespace Contracts
             return (resultCode, serializedGameRoom);
         }
 
-        public int LeaveLobby(string username, string code)
+        public void LeaveLobby(string username, string code)
         {
             GameRoomsPool.RemovePlayerFromGameRoom(username, code);
             CallbacksPool.RemovePregameCallbackChannel(username);

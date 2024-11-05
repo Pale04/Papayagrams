@@ -16,7 +16,7 @@ namespace PapayagramsClient.Login
 
         private void VerifyCode(object sender, RoutedEventArgs e)
         {
-            PapayagramsService.LoginServiceClient host = new PapayagramsService.LoginServiceClient();
+            LoginServiceClient host = new LoginServiceClient();
             try
             {
                 host.Open();
@@ -58,6 +58,34 @@ namespace PapayagramsClient.Login
         private void ReturnToLogin(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        private void ResendCode(object sender, RoutedEventArgs e)
+        {
+            LoginServiceClient host = new LoginServiceClient();
+            try
+            {
+                host.Open();
+            }
+            catch (EndpointNotFoundException)
+            {
+                new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                return;
+            }
+
+            int result = host.SendAccountVerificationCode(_player.Username);
+
+            switch (result)
+            {
+                case 102:
+                    new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    return;
+                case 104:
+                    new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                    return;
+                default:
+                    break;
+            }
         }
     }
 }

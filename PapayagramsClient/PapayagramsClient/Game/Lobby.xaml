@@ -3,7 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:PapayagramsClient.Game" xmlns:svg="clr-namespace:SVGImage.SVG;assembly=SVGImage"
+      xmlns:local="clr-namespace:PapayagramsClient.Game"
+      xmlns:p="clr-namespace:PapayagramsClient.Properties"
       mc:Ignorable="d" 
       Title="Lobby"
       d:DesignHeight="720" d:DesignWidth="1080"
@@ -15,19 +16,22 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Margin="0, 30, 0, 0">
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Margin="0, 30, 0, 10">
             <Label Content="Chat" FontSize="30" HorizontalAlignment="Center"/>
 
-            <StackPanel Name="ChatPanel" Height="500" Width="500"  Margin="0, 20, 0, 10"/>
+            <ScrollViewer Height="480" Width="500" >
+                <StackPanel Name="ChatPanel" Margin="0, 20, 0, 10"/>
+            </ScrollViewer>
 
-            <TextBox Name="MessageTextbox" FontSize="20" TextWrapping="Wrap"/>
-            <Button FontSize="26" HorizontalAlignment="Center" Content="Send" Margin="20" Click="SendMessage"/>
+            <TextBox Name="MessageTextbox" FontSize="20" TextWrapping="Wrap" Height="35"/>
+            <Button Style="{StaticResource PrimaryButton}" FontSize="26" HorizontalAlignment="Center" Content="Send" Margin="10" Click="SendMessage" Width="240" Height="59"/>
         </StackPanel>
 
-        <Button HorizontalAlignment="Left" Margin="57,51,0,0" VerticalAlignment="Top">
-            <svg:SVGImage Name="BackImage"/>
+        <Button Style="{StaticResource PrimaryButton}" HorizontalAlignment="Left" Margin="36,36,0,0" VerticalAlignment="Top" Height="47" Width="46" Click="ReturnToMainMenu">
+            <Image Source="../Resources/Icons/back-svgrepo-com.jpg"/>
         </Button>
-        <Label Name="GameRoomCodeText" Content="Label" HorizontalAlignment="Center" Margin="0,51,0,0" VerticalAlignment="Top"/>
-        <StackPanel Name="PlayersStackPanel" Margin="10,454,260,36"/>
+        <Label Name="GameRoomCodeText" Content="Label" HorizontalAlignment="Center" Margin="0,44,0,0" VerticalAlignment="Top"/>
+        <StackPanel Name="PlayersStackPanel" Margin="10,370,260,120"/>
+        <Button Style="{StaticResource PrimaryButton}" Content="{x:Static p:Resources.createGameCreate}" HorizontalAlignment="Center" Margin="0,625,0,0" VerticalAlignment="Top" Width="300" Click="CreateGame"/>
     </Grid>
 </Page>
