@@ -224,10 +224,37 @@ namespace DataAccess
             return result;
         }
 
-        public static PlayerStats GetPlayerStats (string username)
+        public static Option<PlayerStats> GetPlayerStats (string username)
         {
+            Option <PlayerStats> playerStatsResult;
+            using (var context = new papayagramsEntities())
+            {
+                var result = context.User.Where(p => p.username == username)
+                    .Include(p => p.OriginalGameHistory)
+                    .Include(p => p.SuddenDeathHistory)
+                    .Include(p => p.TimeAtackHistory)
+                    .Include(p => p.UserRelationship);
 
-            throw new NotImplementedException();
+                if (result.Any())
+                {
+                    PlayerStats playerStats = new PlayerStats();
+                    playerStats.OriginalGamesPlayed = result.First().OriginalGameHistory.First().wonGames;
+
+                    var resultList = result.ToList();
+                    playerStats.Or = username;
+                    if (resultList.Count > 0)
+                    {
+                        playerStats.OriginalGamesPlayed = resultList.First().original_games_played;
+                        playerStats.TimeAttackGamesPlayed = resultList.First().time_attack_games_played;
+                        playerStats.SuddenDeathGamesPlayed = resultList.First().sudden_death_games_played;
+                        playerStats.OriginalGamesWon = resultList.First().original_games_won;
+                        playerStats.TimeAttackGamesWon = resultList.First().time_attack_games_won;
+                        playerStats.SuddenDeathGamesWon = resultList.First().sudden_death_games_won;
+                        playerStats.FriendsAmount = resultList.First().friends_amount;
+                    }
+                }
+            }
+            return playerStatsResult;
         }
     }
 }

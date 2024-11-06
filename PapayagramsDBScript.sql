@@ -15,25 +15,25 @@ GO
 
 CREATE TABLE [OriginalGameHistory] (
   [id] int PRIMARY KEY IDENTITY(1, 1),
-  [userId] int,
-  [wonGames] int,
-  [lostGames] int
+  [userId] int NOT NULL,
+  [wonGames] int NOT NULL,
+  [lostGames] int NOT NULL
 )
 GO
 
 CREATE TABLE [SuddenDeathHistory] (
   [id] int PRIMARY KEY IDENTITY(1, 1),
-  [userId] int,
-  [wonGames] int,
-  [lostGames] int
+  [userId] int NOT NULL,
+  [wonGames] int NOT NULL,
+  [lostGames] int NOT NULL
 )
 GO
 
 CREATE TABLE [TimeAtackHistory] (
   [id] int PRIMARY KEY IDENTITY(1, 1),
-  [userId] int,
-  [wonGames] int,
-  [lostGames] int
+  [userId] int NOT NULL,
+  [wonGames] int NOT NULL,
+  [lostGames] int NOT NULL
 )
 GO
 

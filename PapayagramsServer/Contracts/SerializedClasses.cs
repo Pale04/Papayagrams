@@ -54,19 +54,19 @@ namespace Contracts
     public class PlayerStatsDC
     {
         [DataMember]
-        int OriginalGamesPlayed { get; set; }
+        public int OriginalGamesPlayed { get; set; }
         [DataMember]
-        int TimeAttackGamesPlayed { get; set; }
+        public int TimeAttackGamesPlayed { get; set; }
         [DataMember]
-        int SuddenDeathGamesPlayed { get; set; }
+        public int SuddenDeathGamesPlayed { get; set; }
         [DataMember]
-        int OriginalGamesWon { get; set; }
+        public int OriginalGamesWon { get; set; }
         [DataMember]
-        int TimeAttackGamesWon { get; set; }
+        public int TimeAttackGamesWon { get; set; }
         [DataMember]
-        int SuddenDeathGamesWon { get; set; }
+        public int SuddenDeathGamesWon { get; set; }
         [DataMember]
-        int FriendsAmount { get; set; }
+        public int FriendsAmount { get; set; }
     }
 
     [DataContract]
