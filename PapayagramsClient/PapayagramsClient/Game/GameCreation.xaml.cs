@@ -1,10 +1,8 @@
 ﻿using PapayagramsClient.PapayagramsService;
+using System.Diagnostics.Eventing.Reader;
 
 namespace PapayagramsClient.Game
 {
-    /// <summary>
-    /// Lógica de interacción para GameCreation.xaml
-    /// </summary>
     public partial class GameCreation
     {
         public GameCreation()
@@ -21,40 +19,42 @@ namespace PapayagramsClient.Game
         {
             GameConfigurationDC config = new GameConfigurationDC();
 
-            Language wordsLanguage;
-            switch (WordsLanguageComboBox.Text)
+            LanguageDC wordsLanguage;
+            if (WordsLanguageComboBox.Text.Equals(Properties.Resources.createGameEnglishLanguage))
             {
-                case "English":
-                    wordsLanguage = PapayagramsService.Language.English;
-                    break;
-                case "Español":
-                    wordsLanguage = PapayagramsService.Language.Spanish;
-                    break;
-                default:
-                    return;
+                wordsLanguage = LanguageDC.English;
+            }
+            else if (WordsLanguageComboBox.Text.Equals(Properties.Resources.createGameSpanishLanguage))
+            {
+                wordsLanguage = LanguageDC.Spanish;
+            }
+            else
+            {
+                return;
             }
             config.WordsLanguage = wordsLanguage;
 
-            // TODO: Comparar con los recursos de internacionalización
-            GameMode gameMode;
-            switch (GameModeComboBox.Text)
+            GameModeDC gameMode;
+            if (GameModeComboBox.Text.Equals(Properties.Resources.createGameClassicMode))
             {
-                case "Classic":
-                    gameMode = GameMode.Oiginal;
-                    break;
-                case "Sudden death":
-                    gameMode = GameMode.SuddenDeath;
-                    break;
-                case "Time attack":
-                    gameMode = GameMode.TimeAttack;
-                    break;
-                default:
-                    return;
+                gameMode = GameModeDC.Original;
+            }
+            else if (GameModeComboBox.Text.Equals(Properties.Resources.createGameSuddenDeathMode))
+            {
+                gameMode = GameModeDC.SuddenDeath;
+            }
+            else if (GameModeComboBox.Text.Equals(Properties.Resources.createGameTimeAttackMode))
+            {
+                gameMode = GameModeDC.TimeAttack;
+            }
+            else
+            {
+                return;
             }
             config.GameMode = gameMode;
 
             int gameTime = 0;
-            if (!TimeLimitComboBox.Text.Equals(Properties.Resources.gameCreationNoTimeLimit))
+            if (!TimeLimitComboBox.Text.Equals(Properties.Resources.createGameNoTimeLimit))
             {
                 gameTime = int.Parse(TimeLimitComboBox.Text);
             }

@@ -4,9 +4,6 @@ using System.Windows.Navigation;
 
 namespace PapayagramsClient.Game
 {
-    /// <summary>
-    /// Lógica de interacción para JoinGame.xaml
-    /// </summary>
     public partial class JoinGame : Page
     {
         public JoinGame()
@@ -17,11 +14,21 @@ namespace PapayagramsClient.Game
         private void JoinGameRoom(object sender, RoutedEventArgs e)
         {
             string gameRoomCode = CodeTextbox.Text.Trim();
-            Lobby lobby = new Lobby(gameRoomCode);
-
-            if (lobby != null)
+            if (string.IsNullOrEmpty(gameRoomCode))
             {
-                NavigationService.Navigate(lobby);
+                return;
+            }
+
+            bool roomAvailable = new PapayagramsService.GameCodeVerificationServiceClient().VerifyGameRoom(gameRoomCode);
+
+            if (roomAvailable)
+            {
+                NavigationService.Navigate(new Lobby(gameRoomCode));
+            }
+            else
+            {
+                new PopUpWindow(Properties.Resources.joinGameCantJoinTitle, Properties.Resources.joinGameCantJoin, 2).ShowDialog();
+                return;
             }
         }
 

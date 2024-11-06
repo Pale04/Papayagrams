@@ -43,13 +43,13 @@ namespace PapayagramsClient.Login
                 return;
             }
 
-            (int err, PapayagramsService.PlayerDC player) = host.Login(username, password);
+            (int returnCode, PapayagramsService.PlayerDC player) = host.Login(username, password);
             host.Close();
             SigninButton.IsEnabled = false;
 
-            if (err != 0)
+            if (returnCode != 0)
             {
-                switch (err)
+                switch (returnCode)
                 {
                     case 102:
                         new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();

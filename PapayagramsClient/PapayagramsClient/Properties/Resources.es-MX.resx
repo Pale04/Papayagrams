@@ -280,31 +280,31 @@
     <value>Estadisticas</value>
   </data>
   <data name="profilePlayedGames" xml:space="preserve">
-    <value>Juegos totales</value>
+    <value>Juegos totales: </value>
   </data>
   <data name="profileOriginalGames" xml:space="preserve">
-    <value>Juegos originales jugados</value>
+    <value>Juegos originales jugados: </value>
   </data>
   <data name="profileTimeAttackGames" xml:space="preserve">
-    <value>Juegos contra-reloj jugados</value>
+    <value>Juegos contra-reloj jugados: </value>
   </data>
   <data name="profileSuddenDeathGames" xml:space="preserve">
-    <value>Juegos muerte subita jugados</value>
+    <value>Juegos muerte subita jugados: </value>
   </data>
   <data name="profileGamesWon" xml:space="preserve">
-    <value>Juegos ganados</value>
+    <value>Juegos ganados: </value>
   </data>
   <data name="profileOriginalGamesWon" xml:space="preserve">
-    <value>Juegos originales ganados</value>
+    <value>Juegos originales ganados: </value>
   </data>
   <data name="profileTimeAttackGamesWon" xml:space="preserve">
-    <value>Juegos contra-reloj ganados</value>
+    <value>Juegos contra-reloj ganados: </value>
   </data>
   <data name="profileSuddenDeathGamesWon" xml:space="preserve">
-    <value>Juegos muerte subita ganados</value>
+    <value>Juegos muerte subita ganados: </value>
   </data>
   <data name="profileNumberFriends" xml:space="preserve">
-    <value>Numero de amigos</value>
+    <value>Numero de amigos: </value>
   </data>
   <data name="lobbyRoomNotFound" xml:space="preserve">
     <value>No existe ninguna sala con ese código</value>
@@ -324,13 +324,40 @@
   <data name="verificationWrongCode" xml:space="preserve">
     <value>Código incorrecto, intente de nuevo</value>
   </data>
-  <data name="gameCreationNoTimeLimit" xml:space="preserve">
+  <data name="createGameNoTimeLimit" xml:space="preserve">
     <value>Sin limite</value>
   </data>
-  <data name="gameCreationMinutes" xml:space="preserve">
+  <data name="createGameMinutes" xml:space="preserve">
     <value>minutos</value>
   </data>
   <data name="verificationResendMessage" xml:space="preserve">
     <value>Enivar de nuevo el código</value>
+  </data>
+  <data name="errorUnexpectedError" xml:space="preserve">
+    <value>Ocurrió un error inesperado, intenta nuevamente y si eso no funciona reinicia el juego</value>
+  </data>
+  <data name="errorOccurredTitle" xml:space="preserve">
+    <value>Ocurrió un error</value>
+  </data>
+  <data name="createGameClassicMode" xml:space="preserve">
+    <value>Clasico</value>
+  </data>
+  <data name="createGameSuddenDeathMode" xml:space="preserve">
+    <value>Muerte subita</value>
+  </data>
+  <data name="createGameTimeAttackMode" xml:space="preserve">
+    <value>Contra-reloj</value>
+  </data>
+  <data name="createGameSpanishLanguage" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="createGameEnglishLanguage" xml:space="preserve">
+    <value>Inglés</value>
+  </data>
+  <data name="joinGameCantJoinTitle" xml:space="preserve">
+    <value>No se pudo unir al lobby</value>
+  </data>
+  <data name="joinGameCantJoin" xml:space="preserve">
+    <value>El código es incorrecto o el lobby está lleno</value>
   </data>
 </root>

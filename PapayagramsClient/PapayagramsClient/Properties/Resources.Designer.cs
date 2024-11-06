@@ -115,11 +115,29 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Classic.
+        /// </summary>
+        public static string createGameClassicMode {
+            get {
+                return ResourceManager.GetString("createGameClassicMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Create papaya.
         /// </summary>
         public static string createGameCreate {
             get {
                 return ResourceManager.GetString("createGameCreate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a English.
+        /// </summary>
+        public static string createGameEnglishLanguage {
+            get {
+                return ResourceManager.GetString("createGameEnglishLanguage", resourceCulture);
             }
         }
         
@@ -151,11 +169,56 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a minutes.
+        /// </summary>
+        public static string createGameMinutes {
+            get {
+                return ResourceManager.GetString("createGameMinutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No limit.
+        /// </summary>
+        public static string createGameNoTimeLimit {
+            get {
+                return ResourceManager.GetString("createGameNoTimeLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Initial pieces.
         /// </summary>
         public static string createGamePieces {
             get {
                 return ResourceManager.GetString("createGamePieces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Spanish.
+        /// </summary>
+        public static string createGameSpanishLanguage {
+            get {
+                return ResourceManager.GetString("createGameSpanishLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sudden death.
+        /// </summary>
+        public static string createGameSuddenDeathMode {
+            get {
+                return ResourceManager.GetString("createGameSuddenDeathMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Time attack.
+        /// </summary>
+        public static string createGameTimeAttackMode {
+            get {
+                return ResourceManager.GetString("createGameTimeAttackMode", resourceCulture);
             }
         }
         
@@ -196,6 +259,15 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred.
+        /// </summary>
+        public static string errorOccurredTitle {
+            get {
+                return ResourceManager.GetString("errorOccurredTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Could not connect to server.
         /// </summary>
         public static string errorServerConnection {
@@ -205,20 +277,11 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a minutes.
+        ///   Busca una cadena traducida similar a An unexpected error occurred, try again and if the problem persiste, restart the game.
         /// </summary>
-        public static string gameCreationMinutes {
+        public static string errorUnexpectedError {
             get {
-                return ResourceManager.GetString("gameCreationMinutes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a No limit.
-        /// </summary>
-        public static string gameCreationNoTimeLimit {
-            get {
-                return ResourceManager.GetString("gameCreationNoTimeLimit", resourceCulture);
+                return ResourceManager.GetString("errorUnexpectedError", resourceCulture);
             }
         }
         
@@ -340,6 +403,24 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The game code is wrong or the lobby is full.
+        /// </summary>
+        public static string joinGameCantJoin {
+            get {
+                return ResourceManager.GetString("joinGameCantJoin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Couldn´t connect to lobby.
+        /// </summary>
+        public static string joinGameCantJoinTitle {
+            get {
+                return ResourceManager.GetString("joinGameCantJoinTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Game code.
         /// </summary>
         public static string joinGameCode {
@@ -394,7 +475,7 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a .
+        ///   Busca una cadena traducida similar a Enter the code we sent to your email.
         /// </summary>
         public static string loginVerificationCode {
             get {
