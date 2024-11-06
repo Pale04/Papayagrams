@@ -74,7 +74,7 @@ namespace Contracts
             return (resultCode, serializedGameRoom);
         }
 
-        public void LeaveLobby(string username, string code)
+        public int LeaveLobby(string username, string code)
         {
             GameRoomsPool.RemovePlayerFromGameRoom(username, code);
             CallbacksPool.RemovePregameCallbackChannel(username);

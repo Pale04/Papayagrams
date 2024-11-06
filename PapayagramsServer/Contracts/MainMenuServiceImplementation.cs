@@ -43,8 +43,19 @@ namespace Contracts
 
         public (int returnCode, PlayerStatsDC playerStats) GetPlayerProfile(string username)
         {
-            //TODO: next milestone
-            throw new NotImplementedException();
+            Option<PlayerStats> playerStats;
+
+            try
+            {
+                playerStats = UserDB.GetPlayerStats(username); 
+            }
+            catch (EntityException error)
+            {
+                _logger.Error($"Error while trying to get player stats of: {username}", error);
+                return (102, null);
+            }
+
+            return playerStats.IsSome? (0, PlayerStatsDC.ConvertToPlayerStatsDC((PlayerStats)playerStats.Case)) : (205, null);
         }
 
         public int RejectFriendRequest(string username, string friendUsername)

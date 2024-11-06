@@ -67,6 +67,39 @@ namespace Contracts
         public int SuddenDeathGamesWon { get; set; }
         [DataMember]
         public int FriendsAmount { get; set; }
+
+        public override bool Equals(object other)
+        {
+            bool isEqual = false;
+
+            if (other != null && GetType() == other.GetType())
+            {
+                PlayerStatsDC playerStats = (PlayerStatsDC)other;
+                isEqual = OriginalGamesPlayed == playerStats.OriginalGamesPlayed &&
+                          TimeAttackGamesPlayed == playerStats.TimeAttackGamesPlayed &&
+                          SuddenDeathGamesPlayed == playerStats.SuddenDeathGamesPlayed &&
+                          OriginalGamesWon == playerStats.OriginalGamesWon &&
+                          TimeAttackGamesWon == playerStats.TimeAttackGamesWon &&
+                          SuddenDeathGamesWon == playerStats.SuddenDeathGamesWon &&
+                          FriendsAmount == playerStats.FriendsAmount;
+            }
+
+            return isEqual;
+        }
+
+        public static PlayerStatsDC ConvertToPlayerStatsDC(PlayerStats playerStats)
+        {
+            return new PlayerStatsDC
+            {
+                OriginalGamesPlayed = playerStats.OriginalGamesPlayed,
+                TimeAttackGamesPlayed = playerStats.TimeAttackGamesPlayed,
+                SuddenDeathGamesPlayed = playerStats.SuddenDeathGamesPlayed,
+                OriginalGamesWon = playerStats.OriginalGamesWon,
+                TimeAttackGamesWon = playerStats.TimeAttackGamesWon,
+                SuddenDeathGamesWon = playerStats.SuddenDeathGamesWon,
+                FriendsAmount = playerStats.FriendsAmount
+            };
+        }
     }
 
     [DataContract]

@@ -9,5 +9,24 @@
         public int TimeAttackGamesWon { get; set; }
         public int SuddenDeathGamesWon { get; set; }
         public int FriendsAmount { get; set; }
+
+        public override bool Equals(object other)
+        {
+            bool isEqual = false;
+
+            if (other != null && GetType() == other.GetType())
+            {
+                PlayerStats player = (PlayerStats)other;
+                isEqual = OriginalGamesPlayed == player.OriginalGamesPlayed &&
+                          TimeAttackGamesPlayed == player.TimeAttackGamesPlayed &&
+                          SuddenDeathGamesPlayed == player.SuddenDeathGamesPlayed &&
+                          OriginalGamesWon == player.OriginalGamesWon &&
+                          TimeAttackGamesWon == player.TimeAttackGamesWon &&
+                          SuddenDeathGamesWon == player.SuddenDeathGamesWon &&
+                          FriendsAmount == player.FriendsAmount;
+            }
+
+            return isEqual;
+        }
     }
 }

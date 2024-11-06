@@ -208,6 +208,8 @@ namespace DataAccess
         /// <param name="username">Username of the player</param>
         /// <param name="status">Status of the player</param>
         /// <returns>1 if the update was successful, 0 otherwise </returns>
+        /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
+
         public static int UpdateUserStatus (string username, PlayerStatus status)
         {
             int result = 0;
@@ -224,6 +226,12 @@ namespace DataAccess
             return result;
         }
 
+        /// <summary>
+        /// Retrieves the statistics of a player like the amount of won and played games and amount of friends
+        /// </summary>
+        /// <param name="username">Username of the player</param>
+        /// <returns>An Option object with the statistics if the operation was succesful, an empty Option object if the user does not exist</returns>
+        /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
         public static Option<PlayerStats> GetPlayerStats (string username)
         {
             Option <PlayerStats> playerStatsResult;
@@ -237,21 +245,21 @@ namespace DataAccess
 
                 if (result.Any())
                 {
-                    PlayerStats playerStats = new PlayerStats();
-                    playerStats.OriginalGamesPlayed = result.First().OriginalGameHistory.First().wonGames;
-
-                    var resultList = result.ToList();
-                    playerStats.Or = username;
-                    if (resultList.Count > 0)
+                    PlayerStats playerStats = new PlayerStats
                     {
-                        playerStats.OriginalGamesPlayed = resultList.First().original_games_played;
-                        playerStats.TimeAttackGamesPlayed = resultList.First().time_attack_games_played;
-                        playerStats.SuddenDeathGamesPlayed = resultList.First().sudden_death_games_played;
-                        playerStats.OriginalGamesWon = resultList.First().original_games_won;
-                        playerStats.TimeAttackGamesWon = resultList.First().time_attack_games_won;
-                        playerStats.SuddenDeathGamesWon = resultList.First().sudden_death_games_won;
-                        playerStats.FriendsAmount = resultList.First().friends_amount;
-                    }
+                        OriginalGamesPlayed = (int)result.First().OriginalGameHistory.First().wonGames + (int)result.First().OriginalGameHistory.First().lostGames,
+                        TimeAttackGamesPlayed = (int)result.First().TimeAtackHistory.First().wonGames + (int)result.First().TimeAtackHistory.First().lostGames,
+                        SuddenDeathGamesPlayed = (int)result.First().SuddenDeathHistory.First().wonGames + (int)result.First().SuddenDeathHistory.First().lostGames,
+                        OriginalGamesWon = (int)result.First().OriginalGameHistory.First().wonGames,
+                        TimeAttackGamesWon = (int)result.First().TimeAtackHistory.First().wonGames,
+                        SuddenDeathGamesWon = (int)result.First().SuddenDeathHistory.First().wonGames,
+                        FriendsAmount = result.First().UserRelationship.Where(relation => relation.relationState.Equals("friend")).Count()
+                    };
+                    playerStatsResult = Option<PlayerStats>.Some(playerStats);
+                }
+                else
+                {
+                    playerStatsResult = Option<PlayerStats>.None;
                 }
             }
             return playerStatsResult;

@@ -39,6 +39,7 @@ namespace Contracts.Tests
                 Email = _registeredPlayer2.Email,
                 Password = _registeredPlayer2.Password
             });
+            DataBaseOperation.CreateGameHistoryPlayer(_registeredPlayer1.Id);
         }
 
         [TestCleanup()]
@@ -50,7 +51,7 @@ namespace Contracts.Tests
         [TestMethod()]
         public void SearchPlayerSuccessfulTest()
         {
-            (_, PlayerDC result) = _serviceImplementation.SearchNoFriendPlayer(_registeredPlayer1.Username,_registeredPlayer2.Username);
+            (_, PlayerDC result) = _serviceImplementation.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(_registeredPlayer2, result, "SearchPlayerSuccessfulTest");
         }
 
@@ -153,6 +154,38 @@ namespace Contracts.Tests
 
             int result = _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(expected, result, "SendFriendRequestBlockedRelationTest");
+        }
+
+        [TestMethod()]
+        public void GetPlayerProfileSuccessfulTest()
+        {
+            PlayerStatsDC expected = new PlayerStatsDC()
+            {
+                OriginalGamesPlayed = 60,
+                TimeAttackGamesPlayed = 30,
+                SuddenDeathGamesPlayed = 103,
+                OriginalGamesWon = 10,
+                TimeAttackGamesWon = 5,
+                SuddenDeathGamesWon = 3,
+                FriendsAmount = 0
+            };
+
+            (int _, PlayerStatsDC result) = _serviceImplementation.GetPlayerProfile(_registeredPlayer1.Username);
+            Assert.AreEqual(expected, result, "GetPlayerProfileSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void GetPlayerProfileNonExistentUserTest()
+        {
+            (int code, _) = _serviceImplementation.GetPlayerProfile("juan");
+            Assert.AreEqual(205, code, "GetPlayerProfileNonExistentTest");
+        }
+
+        [TestMethod()]
+        public void GetPlayerProfileNullUsernameTest()
+        {
+            (int code, _) = _serviceImplementation.GetPlayerProfile(null);
+            Assert.AreEqual(205, code, "GetPlayerProfileNullUsernameTest");
         }
     }
 }

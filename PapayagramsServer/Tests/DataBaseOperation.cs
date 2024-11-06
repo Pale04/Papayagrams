@@ -16,5 +16,15 @@
                 context.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('User', RESEED, 0)");
             }
         }
+
+        public static void CreateGameHistoryPlayer(int userId)
+        {
+            using (var context = new papayagramsEntities())
+            {
+                context.Database.ExecuteSqlCommand($"update [OriginalGameHistory] SET wonGames = 10, lostGames = 50 where userId = {userId}");
+                context.Database.ExecuteSqlCommand($"update [TimeAtackHistory] SET wonGames = 5, lostGames = 25 where userId = {userId}");
+                context.Database.ExecuteSqlCommand($"update [SuddenDeathHistory] SET wonGames = 3, lostGames = 100 where userId = {userId}");
+            }
+        }
     }
 }

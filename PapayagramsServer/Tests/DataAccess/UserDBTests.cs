@@ -32,6 +32,7 @@ namespace DataAccess.Tests
         {
             UserDB.RegisterUser(_registeredPlayer1);
             UserDB.RegisterUser(_registeredPlayer2);
+            DataBaseOperation.CreateGameHistoryPlayer(_registeredPlayer1.Id);
         }
 
         [TestCleanup()]
@@ -294,6 +295,29 @@ namespace DataAccess.Tests
             Assert.AreEqual(expected, result, "UpdateUserStatusNonExistentTest");
         }
 
+        [TestMethod()]
+        public void GetPlayerStatsSuccessfulTest()
+        {
+            PlayerStats expected = new PlayerStats()
+            {
+                OriginalGamesPlayed = 60,
+                TimeAttackGamesPlayed = 30,
+                SuddenDeathGamesPlayed = 103,
+                OriginalGamesWon = 10,
+                TimeAttackGamesWon = 5,
+                SuddenDeathGamesWon = 3,
+                FriendsAmount = 0
+            };
 
+            Option<PlayerStats> result = UserDB.GetPlayerStats(_registeredPlayer1.Username);
+            Assert.AreEqual(expected, (PlayerStats)result.Case, "GetPlayerStatsSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void GetPlayerStatsNonExistentUserTest()
+        {
+            Option<PlayerStats> result = UserDB.GetPlayerStats("Pale");
+            Assert.IsTrue(result.IsNone, "GetPlayerStatsNonExistentUserTest");
+        }
     }
 }
