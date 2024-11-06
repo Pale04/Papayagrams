@@ -87,6 +87,11 @@ namespace Contracts
             return isEqual;
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public static PlayerStatsDC ConvertToPlayerStatsDC(PlayerStats playerStats)
         {
             return new PlayerStatsDC
@@ -220,6 +225,44 @@ namespace Contracts
 
         [DataMember]
         public int TimeLimitMinutes { get; set; }
+
+        public override bool Equals(object other)
+        {
+            bool isEqual = false;
+            if (other != null && GetType() == other.GetType())
+            {
+                GameConfigurationDC gameConfiguration = (GameConfigurationDC)other;
+                isEqual = GameMode == gameConfiguration.GameMode &&
+                          InitialPieces == gameConfiguration.InitialPieces &&
+                          MaxPlayers == gameConfiguration.MaxPlayers &&
+                          WordsLanguage == gameConfiguration.WordsLanguage &&
+                          TimeLimitMinutes == gameConfiguration.TimeLimitMinutes;
+            }
+            return isEqual;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1943627975;
+            hashCode = hashCode * -1521134295 + GameMode.GetHashCode();
+            hashCode = hashCode * -1521134295 + InitialPieces.GetHashCode();
+            hashCode = hashCode * -1521134295 + MaxPlayers.GetHashCode();
+            hashCode = hashCode * -1521134295 + WordsLanguage.GetHashCode();
+            hashCode = hashCode * -1521134295 + TimeLimitMinutes.GetHashCode();
+            return hashCode;
+        }
+
+        public static GameConfigurationDC ConvertToGameConfigurationDC (GameConfiguration gameConfiguration)
+        {
+            return new GameConfigurationDC
+            {
+                GameMode = (GameModeDC)Enum.Parse(typeof(GameModeDC), gameConfiguration.GameMode.ToString()),
+                InitialPieces = gameConfiguration.InitialPieces,
+                MaxPlayers = gameConfiguration.MaxPlayers,
+                WordsLanguage = (LanguageDC)Enum.Parse(typeof(LanguageDC), gameConfiguration.WordsLanguage.ToString()),
+                TimeLimitMinutes = gameConfiguration.TimeLimitMinutes
+            };
+        }
     }
     
     [DataContract]
@@ -231,6 +274,9 @@ namespace Contracts
         [DataMember]
         public List<PlayerDC> Players;
 
+        //[DataMember]
+        //public GameConfigurationDC GameConfiguration { get; set; }
+
         public static GameRoomDC ConvertToGameRoomDC(GameRoom room)
         {
             List<PlayerDC> players = room.Players.ConvertAll(PlayerDC.ConvertToPlayerDC);
@@ -239,6 +285,7 @@ namespace Contracts
             {
                 RoomCode = room.RoomCode,
                 Players = players
+                //GameConfiguration = GameConfigurationDC.ConvertToGameConfigurationDC(room.GameConfiguration)
             };
         }
     }

@@ -45,15 +45,17 @@ namespace DomainClasses
 
         public GameConfiguration GameConfiguration { get; set; }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object other)
         {
-            if (obj == null || GetType() != obj.GetType())
+            bool isEqual = false;
+
+            if (other != null || GetType() == other.GetType())
             {
-                return false;
+                GameRoom room = (GameRoom)other;
+                isEqual = RoomCode == room.RoomCode;
             }
 
-            GameRoom gameRoom = (GameRoom)obj;
-            return RoomCode == gameRoom.RoomCode;
+            return isEqual;
         }
 
         public override int GetHashCode()

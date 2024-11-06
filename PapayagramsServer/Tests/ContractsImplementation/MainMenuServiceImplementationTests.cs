@@ -187,5 +187,28 @@ namespace Contracts.Tests
             (int code, _) = _serviceImplementation.GetPlayerProfile(null);
             Assert.AreEqual(205, code, "GetPlayerProfileNullUsernameTest");
         }
+
+        [TestMethod()]
+        public void ConvertGameConfigurationDC ()
+        {
+            GameConfigurationDC esperado = new GameConfigurationDC
+            {
+                GameMode = GameModeDC.Original,
+                InitialPieces = 10,
+                MaxPlayers = 4,
+                WordsLanguage = LanguageDC.English,
+                TimeLimitMinutes = 5
+            };
+
+            GameConfigurationDC resultado = GameConfigurationDC.ConvertToGameConfigurationDC(new GameConfiguration
+            {
+                GameMode = GameMode.Original,
+                InitialPieces = 10,
+                MaxPlayers = 4,
+                WordsLanguage = Language.English,
+                TimeLimitMinutes = 5
+            });
+            Assert.AreEqual(esperado, resultado, "ConvertGameConfigurationDC");
+        }
     }
 }

@@ -20,14 +20,21 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Error("Error while trying to update user status", error);
+                _logger.Fatal("Error while trying to update user status", error);
                 return (102, null);
             }
 
             GameRoom gameRoom = new GameRoom
             {
-                State = GameRoomState.Waiting
-                //TODO: set the configuration
+                State = GameRoomState.Waiting,
+                GameConfiguration = new GameConfiguration
+                {
+                    GameMode = (GameMode)Enum.Parse(typeof(GameMode), gameConfiguration.GameMode.ToString()),
+                    InitialPieces = gameConfiguration.InitialPieces,
+                    MaxPlayers = gameConfiguration.MaxPlayers,
+                    WordsLanguage = (Language)Enum.Parse(typeof(Language), gameConfiguration.WordsLanguage.ToString()),
+                    TimeLimitMinutes = gameConfiguration.TimeLimitMinutes
+                }
             };
             gameRoom.Players.Add(PlayersPool.GetPlayer(username));
             GameRoomsPool.AddGameRoom(gameRoom);
@@ -43,13 +50,13 @@ namespace Contracts
             throw new NotImplementedException();
         }
 
-        public (int, GameRoomDC) JoinGame(string username, string roomCode)
+        public (int returnCode, GameRoomDC joinedGameRoom) JoinGame(string username, string roomCode)
         {
-            int resultCode = 0;
+            int code = 0;
             GameRoomDC serializedGameRoom = null;
             GameRoom room = GameRoomsPool.GetGameRoom(roomCode);
 
-            if (room != null && room.State.Equals(GameRoomState.Waiting))
+            if (room != null && room.State.Equals(GameRoomState.Waiting) && room.Players.Count < room.GameConfiguration.MaxPlayers)
             {
                 try
                 {
@@ -57,21 +64,21 @@ namespace Contracts
                 }
                 catch (EntityException error)
                 {
-                    _logger.Error("Error while trying to update user status", error);
+                    _logger.Fatal("Error while trying to update user status", error);
                     return (102, null);
                 }
 
                 CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
-                BroadcastRefreshLobby(roomCode);
-                room.Players.Add(PlayersPool.GetPlayer(username));
                 serializedGameRoom = GameRoomDC.ConvertToGameRoomDC(room);
+                BroadcastRefreshLobby(serializedGameRoom);
+                room.Players.Add(PlayersPool.GetPlayer(username));
             }
             else
             {
-                resultCode = 401;
+                code = 401;
             }
 
-            return (resultCode, serializedGameRoom);
+            return (code, serializedGameRoom);
         }
 
         public int LeaveLobby(string username, string code)
@@ -113,17 +120,15 @@ namespace Contracts
             throw new NotImplementedException();
         }
 
-        public void BroadcastRefreshLobby (string roomCode)
+        public void BroadcastRefreshLobby (GameRoomDC gameRoom)
         {
-            GameRoom room = GameRoomsPool.GetGameRoom(roomCode);
-
-            if (room != null)
+            if (gameRoom != null)
             {
-                List<Player> players = room.Players;
-                foreach (Player p in players)
+                List<PlayerDC> players = gameRoom.Players;
+                foreach (PlayerDC p in players)
                 {
                     var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(p.Username);
-                    callbackChannel?.RefreshLobby(GameRoomDC.ConvertToGameRoomDC(room));
+                    callbackChannel?.RefreshLobby(gameRoom);
                 }
             }
         }
@@ -134,18 +139,15 @@ namespace Contracts
             CallbacksPool.RemoveMainMenuCallbackChannel(username);
         }
 
+        /// <summary>
+        /// Verify if the game room exists and if has available slots for players
+        /// </summary>
+        /// <param name="gameCode">Game code of the game room</param>
+        /// <returns>true if it's available, false otherwise</returns>
         public bool VerifyGameRoom(string gameCode)
         {
-            GameRoomDC serializedGameRoom = null;
             GameRoom room = GameRoomsPool.GetGameRoom(gameCode);
-            
-            if (room != null)
-            {
-                //todo
-                return true;
-            }
-
-            return false;
+            return room != null && room.State.Equals(GameRoomState.Waiting) && room.Players.Count < room.GameConfiguration.MaxPlayers;
         }
     }
 }
