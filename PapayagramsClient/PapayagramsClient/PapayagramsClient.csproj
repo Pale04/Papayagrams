@@ -300,17 +300,17 @@
     <Folder Include="Resources\PlayerImages\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\add-friend-svgrepo-com.jpg" />
-    <Resource Include="Resources\Icons\back-svgrepo-com.jpg" />
-    <Resource Include="Resources\Icons\cog-setting-gear-svgrepo-com.jpg" />
-    <Resource Include="Resources\Icons\done-ring-round-svgrepo-com.jpg" />
-    <Resource Include="Resources\Icons\edit-svgrepo-com.jpg" />
-    <Resource Include="Resources\Icons\exit-svgrepo-com.jpg" />
-    <Resource Include="Resources\Icons\friend-svgrepo-com.jpg" />
-    <Resource Include="Resources\Icons\trophy-svgrepo-com.jpg" />
+    <None Include="Connected Services\PapayagramsService\item1.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\PapayagramsService\item1.disco" />
+    <Resource Include="Resources\Icons\add-friend-svgrepo-com.png" />
+    <Resource Include="Resources\Icons\back-svgrepo-com.png" />
+    <Resource Include="Resources\Icons\cog-setting-gear-svgrepo-com.png" />
+    <Resource Include="Resources\Icons\done-ring-round-svgrepo-com.png" />
+    <Resource Include="Resources\Icons\edit-svgrepo-com.png" />
+    <Resource Include="Resources\Icons\exit-svgrepo-com.png" />
+    <Resource Include="Resources\Icons\friend-svgrepo-com.png" />
+    <Resource Include="Resources\Icons\trophy-svgrepo-com.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

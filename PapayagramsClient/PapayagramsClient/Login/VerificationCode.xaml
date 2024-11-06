@@ -13,7 +13,7 @@
 
     <Grid>
         <Button Style="{StaticResource PrimaryButton}" Name="ReturnButton" Margin="34,40,982,614" Click="ReturnToLogin">
-            <Image Source="../Resources/Icons/back-svgrepo-com.jpg" Width="40" Height="40"/>
+            <Image Source="../Resources/Icons/back-svgrepo-com.png" Width="40" Height="40"/>
         </Button>
 
         <Label Content="{x:Static p:Resources.verificationCode}" Margin="292,189,292,397" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="26"/>
