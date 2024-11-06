@@ -14,7 +14,6 @@ namespace PapayagramsClient.Menu
         {
             InitializeComponent();
             SetPlayerData();
-            BackImage.SetImage("../Resources/Icons/back-svgrepo-com.svg");
         }
 
         private void SetPlayerData()

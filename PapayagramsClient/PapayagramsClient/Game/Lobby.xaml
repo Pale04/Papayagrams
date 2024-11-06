@@ -28,10 +28,10 @@
         </StackPanel>
 
         <Button Style="{StaticResource PrimaryButton}" HorizontalAlignment="Left" Margin="36,36,0,0" VerticalAlignment="Top" Height="47" Width="46" Click="ReturnToMainMenu">
-            <Image Source="../Resources/Icons/back-svgrepo-com.jpg"/>
+            <Image Source="../Resources/Icons/back-svgrepo-com.png"/>
         </Button>
         <Label Name="GameRoomCodeText" Content="Label" HorizontalAlignment="Center" Margin="0,44,0,0" VerticalAlignment="Top"/>
-        <StackPanel Name="PlayersStackPanel" Margin="10,370,260,120"/>
-        <Button Style="{StaticResource PrimaryButton}" Content="{x:Static p:Resources.createGameCreate}" HorizontalAlignment="Center" Margin="0,625,0,0" VerticalAlignment="Top" Width="300" Click="CreateGame"/>
+        <StackPanel Name="PlayersStackPanel" Margin="10,330,260,160"/>
+        <Button Style="{StaticResource PrimaryButton}" Content="{x:Static p:Resources.createGameCreate}" HorizontalAlignment="Center" Margin="0,600,0,0" VerticalAlignment="Top" Width="300" Click="CreateGame"/>
     </Grid>
 </Page>

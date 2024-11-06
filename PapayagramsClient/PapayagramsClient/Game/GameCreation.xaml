@@ -13,7 +13,7 @@
 
     <Grid>
         <Button Style="{StaticResource PrimaryButton}" Name="BackButton" HorizontalAlignment="Left" Margin="46,43,0,0" VerticalAlignment="Top" Height="60" Width="61" Click="ReturnToMainMenu">
-            <Image Source="../Resources/Icons/back-svgrepo-com.jpg"/>
+            <Image Source="../Resources/Icons/back-svgrepo-com.png"/>
         </Button>
 
         <StackPanel Width="900" Margin="90,30,90,30">
@@ -32,7 +32,7 @@
                     <Separator Height="25" Opacity="0"/>
                     <Label Content="{x:Static p:Resources.createGameMaxPlayers}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="32" Height="50"/>
                     <Separator Height="25" Opacity="0"/>
-                    <Label Content="{x:Static p:Resources.createGameLanguage}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="32" Height="50"/>
+                    <Label Content="{x:Static p:Resources.createGameLanguage}" HorizontalAlignment="Right" FontSize="32" Height="53"/>
                     <Separator Height="25" Opacity="0"/>
                     <Label Content="{x:Static p:Resources.createGameTimeLimit}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="32" Height="50"/>
                     <Separator Height="25" Opacity="0"/>
@@ -59,7 +59,7 @@
                         <ComboBoxItem Content="English"/>
                         <ComboBoxItem Content="Español"/>
                     </ComboBox>
-                    <Separator Height="25" Opacity="0"/>
+                    <Separator Height="31" Opacity="0"/>
                     <ComboBox Name="TimeLimitComboBox" FontSize="32" VerticalAlignment="Center" Height="50">
                         <ComboBoxItem Content="{x:Static p:Resources.gameCreationNoTimeLimit}"/>
                     </ComboBox>

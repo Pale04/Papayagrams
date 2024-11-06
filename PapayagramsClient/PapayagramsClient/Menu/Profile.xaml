@@ -13,7 +13,7 @@
 
     <Grid>
         <Button Style="{StaticResource PrimaryButton}" HorizontalAlignment="Left" Margin="46,53,0,0" VerticalAlignment="Top" Height="60" Width="61" Click="ReturnToMainMenu">
-            <svg:SVGImage Name="BackImage"/>
+            <Image Source="../Resources/Icons/back-svgrepo-com.png"/>
         </Button>
 
         <Label Content="{x:Static p:Resources.profileTitle}" HorizontalAlignment="Left" Margin="138,32,0,0" VerticalAlignment="Top" FontSize="64" FontWeight="Bold"/>
