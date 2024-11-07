@@ -7,8 +7,7 @@ namespace PapayagramsClient.ClientData
     {
         public int Points { get; set; }
         public List<List<char>> GameBoard {  get; set; }
-        public int PiecesInHand { get; set; }
-        public int PiecesInPile { get; set; }
+        public LinkedList<string> PiecesInHand { get; set; }
     }
 
     public static class CurrentGame

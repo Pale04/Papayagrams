@@ -154,7 +154,7 @@ namespace PapayagramsClient.Game
         private void ReturnToMainMenu(object sender, RoutedEventArgs e)
         {
             _host.LeaveLobby(CurrentPlayer.Player.Username, CurrentGame.RoomCode);
-            NavigationService.GoBack();
+            NavigationService.Navigate(new MainMenu());
         }
 
         private void SendMessage(object sender, RoutedEventArgs e)
