@@ -15,7 +15,7 @@ namespace BussinessLogic
         /// <param name="gameRoomCode">The game room code of the player</param>
         public static void RemovePlayerFromGameRoom(string username, string gameRoomCode)
         {
-            Player player = PlayersPool.GetPlayer(username);
+            Player player = PlayersOnlinePool.GetPlayer(username);
             GameRoom gameRoom = (GameRoom)_gameRooms[gameRoomCode];
             gameRoom.Players.Remove(player);
 
@@ -73,7 +73,7 @@ namespace BussinessLogic
 
             for (int i = 0; i < 4; i++)
             {
-                code += (char)random.Next(65, 91);
+                code += (char)random.Next(65, 90);
             }
 
             return code;
