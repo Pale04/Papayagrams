@@ -1214,17 +1214,35 @@ namespace PapayagramsClient.PapayagramsService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.IGameService", CallbackContract=typeof(PapayagramsClient.PapayagramsService.IGameServiceCallback))]
     public interface IGameService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/ReachServer", ReplyAction="http://tempuri.org/IGameService/ReachServerResponse")]
-        void ReachServer(string username);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/ReachServer")]
+        void ReachServer(string username, string gameRoomCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/ReachServer", ReplyAction="http://tempuri.org/IGameService/ReachServerResponse")]
-        System.Threading.Tasks.Task ReachServerAsync(string username);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/ReachServer")]
+        System.Threading.Tasks.Task ReachServerAsync(string username, string gameRoomCode);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/DumpPiece")]
+        void DumpPiece(string piece);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/DumpPiece")]
+        System.Threading.Tasks.Task DumpPieceAsync(string piece);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/TakeSeed")]
+        void TakeSeed();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/TakeSeed")]
+        System.Threading.Tasks.Task TakeSeedAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/ShoutPapaya", ReplyAction="http://tempuri.org/IGameService/ShoutPapayaResponse")]
+        void ShoutPapaya(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/ShoutPapaya", ReplyAction="http://tempuri.org/IGameService/ShoutPapayaResponse")]
+        System.Threading.Tasks.Task ShoutPapayaAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/LeaveGame", ReplyAction="http://tempuri.org/IGameService/LeaveGameResponse")]
-        void LeaveGame(string username);
+        void LeaveGame(string gameRoomCode, string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/LeaveGame", ReplyAction="http://tempuri.org/IGameService/LeaveGameResponse")]
-        System.Threading.Tasks.Task LeaveGameAsync(string username);
+        System.Threading.Tasks.Task LeaveGameAsync(string gameRoomCode, string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1232,6 +1250,21 @@ namespace PapayagramsClient.PapayagramsService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RefreshGameRoom", ReplyAction="http://tempuri.org/IGameService/RefreshGameRoomResponse")]
         void RefreshGameRoom(string roomCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/ReceiveStartingHand", ReplyAction="http://tempuri.org/IGameService/ReceiveStartingHandResponse")]
+        void ReceiveStartingHand(char[] initalPieces);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/AddDumpSeedsToHand", ReplyAction="http://tempuri.org/IGameService/AddDumpSeedsToHandResponse")]
+        void AddDumpSeedsToHand(string[] pieces);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/AddSeedToHand", ReplyAction="http://tempuri.org/IGameService/AddSeedToHandResponse")]
+        void AddSeedToHand(string piece);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RestrictDump", ReplyAction="http://tempuri.org/IGameService/RestrictDumpResponse")]
+        void RestrictDump();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/EndGame", ReplyAction="http://tempuri.org/IGameService/EndGameResponse")]
+        void EndGame(string winner);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1262,20 +1295,44 @@ namespace PapayagramsClient.PapayagramsService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void ReachServer(string username) {
-            base.Channel.ReachServer(username);
+        public void ReachServer(string username, string gameRoomCode) {
+            base.Channel.ReachServer(username, gameRoomCode);
         }
         
-        public System.Threading.Tasks.Task ReachServerAsync(string username) {
-            return base.Channel.ReachServerAsync(username);
+        public System.Threading.Tasks.Task ReachServerAsync(string username, string gameRoomCode) {
+            return base.Channel.ReachServerAsync(username, gameRoomCode);
         }
         
-        public void LeaveGame(string username) {
-            base.Channel.LeaveGame(username);
+        public void DumpPiece(string piece) {
+            base.Channel.DumpPiece(piece);
         }
         
-        public System.Threading.Tasks.Task LeaveGameAsync(string username) {
-            return base.Channel.LeaveGameAsync(username);
+        public System.Threading.Tasks.Task DumpPieceAsync(string piece) {
+            return base.Channel.DumpPieceAsync(piece);
+        }
+        
+        public void TakeSeed() {
+            base.Channel.TakeSeed();
+        }
+        
+        public System.Threading.Tasks.Task TakeSeedAsync() {
+            return base.Channel.TakeSeedAsync();
+        }
+        
+        public void ShoutPapaya(string username) {
+            base.Channel.ShoutPapaya(username);
+        }
+        
+        public System.Threading.Tasks.Task ShoutPapayaAsync(string username) {
+            return base.Channel.ShoutPapayaAsync(username);
+        }
+        
+        public void LeaveGame(string gameRoomCode, string username) {
+            base.Channel.LeaveGame(gameRoomCode, username);
+        }
+        
+        public System.Threading.Tasks.Task LeaveGameAsync(string gameRoomCode, string username) {
+            return base.Channel.LeaveGameAsync(gameRoomCode, username);
         }
     }
     

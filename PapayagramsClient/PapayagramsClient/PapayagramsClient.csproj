@@ -38,6 +38,9 @@
     <Reference Include="ExCSS, Version=4.2.3.0, Culture=neutral, PublicKeyToken=bdbe16be9b936b9a, processorArchitecture=MSIL">
       <HintPath>..\packages\ExCSS.4.2.3\lib\net48\ExCSS.dll</HintPath>
     </Reference>
+    <Reference Include="NHunspell, Version=1.2.5554.16953, Culture=neutral, PublicKeyToken=1ac793ea843b4366, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHunspell.1.2.5554.16953\lib\net\NHunspell.dll</HintPath>
+    </Reference>
     <Reference Include="SVGImage, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SVGImage.3.0.0\lib\net48\SVGImage.dll</HintPath>
     </Reference>
@@ -247,6 +250,9 @@
     <None Include="Connected Services\PapayagramsService\item3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\PapayagramsService\item4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.AchievementDC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -268,6 +274,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\Dictionaries\en_US.aff" />
+    <None Include="Resources\Dictionaries\en_US.dic" />
+    <None Include="Resources\Dictionaries\es_MX.aff" />
+    <None Include="Resources\Dictionaries\es_MX.dic" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -314,6 +324,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\PapayagramsService\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Hunspellx64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Hunspellx86.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

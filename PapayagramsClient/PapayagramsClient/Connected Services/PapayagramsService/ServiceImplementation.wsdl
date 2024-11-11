@@ -46,6 +46,7 @@
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Contracts" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ILoginService_RegisterUser_InputMessage">
@@ -210,8 +211,17 @@
   <wsdl:message name="IGameService_ReachServer_InputMessage">
     <wsdl:part name="parameters" element="tns:ReachServer" />
   </wsdl:message>
-  <wsdl:message name="IGameService_ReachServer_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ReachServerResponse" />
+  <wsdl:message name="IGameService_DumpPiece_InputMessage">
+    <wsdl:part name="parameters" element="tns:DumpPiece" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_TakeSeed_InputMessage">
+    <wsdl:part name="parameters" element="tns:TakeSeed" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_ShoutPapaya_InputMessage">
+    <wsdl:part name="parameters" element="tns:ShoutPapaya" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_ShoutPapaya_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ShoutPapayaResponse" />
   </wsdl:message>
   <wsdl:message name="IGameService_LeaveGame_InputMessage">
     <wsdl:part name="parameters" element="tns:LeaveGame" />
@@ -224,6 +234,36 @@
   </wsdl:message>
   <wsdl:message name="IGameService_RefreshGameRoom_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:RefreshGameRoomResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_ReceiveStartingHand_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveStartingHand" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_ReceiveStartingHand_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveStartingHandResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_AddDumpSeedsToHand_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:AddDumpSeedsToHand" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_AddDumpSeedsToHand_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:AddDumpSeedsToHandResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_AddSeedToHand_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:AddSeedToHand" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_AddSeedToHand_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:AddSeedToHandResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_RestrictDump_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RestrictDump" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_RestrictDump_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RestrictDumpResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_EndGame_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:EndGame" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_EndGame_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:EndGameResponse" />
   </wsdl:message>
   <wsdl:message name="IGameCodeVerificationService_VerifyGameRoom_InputMessage">
     <wsdl:part name="parameters" element="tns:VerifyGameRoom" />
@@ -351,7 +391,16 @@
   <wsdl:portType name="IGameService">
     <wsdl:operation name="ReachServer">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/ReachServer" message="tns:IGameService_ReachServer_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/ReachServerResponse" message="tns:IGameService_ReachServer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DumpPiece">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/DumpPiece" message="tns:IGameService_DumpPiece_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TakeSeed">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/TakeSeed" message="tns:IGameService_TakeSeed_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ShoutPapaya">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/ShoutPapaya" message="tns:IGameService_ShoutPapaya_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/ShoutPapayaResponse" message="tns:IGameService_ShoutPapaya_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="LeaveGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/LeaveGame" message="tns:IGameService_LeaveGame_InputMessage" />
@@ -360,6 +409,26 @@
     <wsdl:operation name="RefreshGameRoom">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/RefreshGameRoom" message="tns:IGameService_RefreshGameRoom_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/RefreshGameRoomResponse" message="tns:IGameService_RefreshGameRoom_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveStartingHand">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/ReceiveStartingHand" message="tns:IGameService_ReceiveStartingHand_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/ReceiveStartingHandResponse" message="tns:IGameService_ReceiveStartingHand_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDumpSeedsToHand">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/AddDumpSeedsToHand" message="tns:IGameService_AddDumpSeedsToHand_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/AddDumpSeedsToHandResponse" message="tns:IGameService_AddDumpSeedsToHand_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddSeedToHand">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/AddSeedToHand" message="tns:IGameService_AddSeedToHand_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/AddSeedToHandResponse" message="tns:IGameService_AddSeedToHand_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RestrictDump">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/RestrictDump" message="tns:IGameService_RestrictDump_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/RestrictDumpResponse" message="tns:IGameService_RestrictDump_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndGame">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/EndGame" message="tns:IGameService_EndGame_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/EndGameResponse" message="tns:IGameService_EndGame_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IGameCodeVerificationService">
@@ -634,6 +703,24 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="DumpPiece">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/DumpPiece" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="TakeSeed">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/TakeSeed" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ShoutPapaya">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/ShoutPapaya" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -649,6 +736,51 @@
     </wsdl:operation>
     <wsdl:operation name="RefreshGameRoom">
       <soap12:operation soapAction="http://tempuri.org/IGameService/RefreshGameRoom" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveStartingHand">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/ReceiveStartingHand" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDumpSeedsToHand">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/AddDumpSeedsToHand" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSeedToHand">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/AddSeedToHand" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RestrictDump">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/RestrictDump" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndGame">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/EndGame" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
