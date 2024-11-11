@@ -116,8 +116,8 @@ namespace Contracts
 
         public void StartGame(string roomCode)
         {
-            //TODO
-            throw new NotImplementedException();
+            GameRoomsPool.GetGameRoom(roomCode).State = GameRoomState.InGame;
+            GamesInProgressPool.PrepareGame(roomCode);
         }
 
         public void BroadcastRefreshLobby (GameRoomDC gameRoom)

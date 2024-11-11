@@ -6,11 +6,8 @@ namespace Contracts
     [ServiceContract(CallbackContract = typeof(IGameServiceCallback))]
     public interface IGameService
     {
-        //Crear un objeto juego con metodo isEveryoneReady()
-        //se crea la pila de fichas
-        //Se guarda callback y hasta que estén todos dentro del juego entonces se llama StartGame
         [OperationContract(IsOneWay = true)]
-        void ReachServer(string username);
+        void ReachServer(string username, string gameRoomCode);
 
         [OperationContract(IsOneWay = true)]
         void DumpPiece(string piece);
@@ -24,7 +21,7 @@ namespace Contracts
         void ShoutPapaya(string username);
 
         [OperationContract]
-        void LeaveGame(string username);
+        void LeaveGame(string gameRoomCode, string username);
     }
 
     [ServiceContract]
@@ -34,9 +31,8 @@ namespace Contracts
         [OperationContract]
         void RefreshGameRoom(string roomCode);
 
-        //El server manda las fichas iniciales después de que TODOS reportan al server.
         [OperationContract]
-        void ReceiveStartingHand(List<string> initalPieces);
+        void ReceiveStartingHand(List<char> initalPieces);
 
         //El server manda tres fichas a un jugador después de utilizar el dump
         [OperationContract]
@@ -47,6 +43,7 @@ namespace Contracts
         void AddSeedToHand(string piece);
 
         //Hay menos fichas en la pila que jugadores, entonces los clientes deben deshabilitar el dump.
+        //También puede suceder que hay dos jugadores y dos fichas, entonces ya no hay suficientes fichas para regresar.
         [OperationContract]
         void RestrictDump();
 

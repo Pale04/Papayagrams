@@ -1,5 +1,7 @@
 ﻿using BussinessLogic;
+using DomainClasses;
 using System;
+using System.Linq;
 using System.ServiceModel;
 
 namespace Contracts
@@ -11,16 +13,27 @@ namespace Contracts
             throw new NotImplementedException();
         }
 
-        public void LeaveGame(string username)
+        public void LeaveGame(string gameRoomCode, string username)
         {
             CallbacksPool.RemoveGameCallbackChannel(username);
+            GamesInProgressPool.ExitGame(gameRoomCode, username);
         }
 
-        public void ReachServer(string username)
+        public void ReachServer(string username, string gameRoomCode)
         {
             CallbacksPool.PlayerArrivesToGame(username, OperationContext.Current.GetCallbackChannel<IGameServiceCallback>());
             CallbacksPool.RemovePregameCallbackChannel(username);
-            //TODO: esperar a que todos reporten para que llame a StartGame()
+            GamesInProgressPool.ConnectToGame(gameRoomCode, username);
+
+            while (!GamesInProgressPool.IsEveryoneReady(gameRoomCode))
+            {
+            }
+
+            //Permite que solamente el primero que llegó a la partida sea el que la comience
+            if (GamesInProgressPool.GetGame(gameRoomCode).ConnectedPlayers.First().Username.Equals(username))
+            {
+                StartGamePlay(gameRoomCode);
+            }
         }
 
         public void ShoutPapaya(string username)
@@ -33,11 +46,20 @@ namespace Contracts
             throw new NotImplementedException();
         }
 
-        //manda las piezas e inicia el cronometro
-        private void StartGame()
+        /// <summary>
+        /// Send the initial pieces to every player and start the timer for start to playing
+        /// </summary>
+        /// <param name="gameRoomCode"></param>
+        private void StartGamePlay(string gameRoomCode)
         {
-            throw new NotImplementedException();
+            Game game = GamesInProgressPool.GetGame(gameRoomCode);
+            foreach (Player player in game.ConnectedPlayers)
+            {
+                var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
+                channel.ReceiveStartingHand(game.GetInitialPieces(GameRoomsPool.GetGameRoom(gameRoomCode).GameConfiguration.InitialPieces));
+            }
+
+            //TODO: iniciar cronometro
         }
-        
     }
 }
