@@ -28,5 +28,16 @@
 
             return isEqual;
         }
+
+        public override int GetHashCode()
+        {
+            return OriginalGamesPlayed.GetHashCode() ^
+                   TimeAttackGamesPlayed.GetHashCode() ^
+                   SuddenDeathGamesPlayed.GetHashCode() ^
+                   OriginalGamesWon.GetHashCode() ^
+                   TimeAttackGamesWon.GetHashCode() ^
+                   SuddenDeathGamesWon.GetHashCode() ^
+                   FriendsAmount.GetHashCode();
+        }
     }
 }

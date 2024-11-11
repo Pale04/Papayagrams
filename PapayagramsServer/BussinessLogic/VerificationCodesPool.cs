@@ -1,27 +1,10 @@
-﻿using DomainClasses;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace BussinessLogic
 {
-    public class PlayersPool
+    public class VerificationCodesPool
     {
-        private static Dictionary<string, Player> _players = new Dictionary<string, Player>();
         private static Dictionary<string, string> _accountVerificationCodes = new Dictionary<string, string>();
-
-        public static void AddPlayer(Player player)
-        {
-            _players.Remove(player.Username);
-            _players.Add(player.Username, player);
-        }
-
-        public static Player GetPlayer(string username)
-        {
-            return _players[username];
-        }
-
-        public static void RemovePlayer(string username) {
-            _players.Remove(username);
-        }
 
         /// <summary>
         /// Generate a new account verification code for the specified username and remove any previous code
@@ -41,7 +24,7 @@ namespace BussinessLogic
                 code = CodeGenerator.GenerateCode();
             } while (_accountVerificationCodes.ContainsValue(code));
 
-            _accountVerificationCodes.Add(username,code);
+            _accountVerificationCodes.Add(username, code);
 
             return code;
         }

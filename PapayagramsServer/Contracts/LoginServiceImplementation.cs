@@ -107,7 +107,7 @@ namespace Contracts
                 code = 207;
             }
 
-            PlayersPool.AddPlayer((Player)playerLogged.Case);
+            PlayersOnlinePool.AddPlayer((Player)playerLogged.Case);
             Console.WriteLine("User " + username + " logged in");
 
             return (code, PlayerDC.ConvertToPlayerDC((Player)playerLogged.Case));
@@ -142,7 +142,7 @@ namespace Contracts
             }
 
             CallbacksPool.RemoveAllCallbacksChannels(username);
-            PlayersPool.RemovePlayer(username);
+            PlayersOnlinePool.RemovePlayer(username);
             return 0;
         }
 
@@ -153,7 +153,7 @@ namespace Contracts
                 return 101;
             }
 
-            if (!PlayersPool.AccountVerificationCodeCorrect(username, code))
+            if (!VerificationCodesPool.AccountVerificationCodeCorrect(username, code))
             {
                 return 208;
             }
@@ -171,7 +171,7 @@ namespace Contracts
 
             if (codeResult == 1)
             {
-                PlayersPool.RemoveAccountVerificationCode(username);
+                VerificationCodesPool.RemoveAccountVerificationCode(username);
                 return 0;
             }
             else
@@ -200,7 +200,7 @@ namespace Contracts
             }
 
             Player playerChecking = (Player)player.Case;
-            string code = PlayersPool.GenerateAccountVerificationCode(username);
+            string code = VerificationCodesPool.GenerateAccountVerificationCode(username);
 
             try
             {

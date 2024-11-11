@@ -36,7 +36,7 @@ namespace Contracts
                     TimeLimitMinutes = gameConfiguration.TimeLimitMinutes
                 }
             };
-            gameRoom.Players.Add(PlayersPool.GetPlayer(username));
+            gameRoom.Players.Add(PlayersOnlinePool.GetPlayer(username));
             GameRoomsPool.AddGameRoom(gameRoom);
             CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
             Console.WriteLine($"sala de juego creada: {gameRoom.RoomCode}");
@@ -71,7 +71,7 @@ namespace Contracts
                 CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
                 serializedGameRoom = GameRoomDC.ConvertToGameRoomDC(room);
                 BroadcastRefreshLobby(serializedGameRoom);
-                room.Players.Add(PlayersPool.GetPlayer(username));
+                room.Players.Add(PlayersOnlinePool.GetPlayer(username));
             }
             else
             {
@@ -116,8 +116,8 @@ namespace Contracts
 
         public void StartGame(string roomCode)
         {
-            //TODO
-            throw new NotImplementedException();
+            GameRoomsPool.GetGameRoom(roomCode).State = GameRoomState.InGame;
+            GamesInProgressPool.PrepareGame(roomCode);
         }
 
         public void BroadcastRefreshLobby (GameRoomDC gameRoom)
