@@ -13,12 +13,12 @@ namespace PapayagramsClient.Game
         private GameServiceClient _host;
         public Game()
         {
-            if (CurrentPlayer.Configuration.Language.Equals(LanguageDC.Spanish))
+            if (CurrentGame.GameConfig.WordsLanguage.Equals(LanguageDC.Spanish))
             {
                 spellCheckAff = "../Resources/Dictionaries/es_MX.aff";
                 spellCheckDict = "../Resources/Dictionaries/es_MX.dic";
             }
-            else if (CurrentPlayer.Configuration.Language.Equals(LanguageDC.English))
+            else if (CurrentGame.GameConfig.WordsLanguage.Equals(LanguageDC.English))
             {
                 spellCheckAff = "../Resources/Dictionaries/en_US.aff";
                 spellCheckDict = "../Resources/Dictionaries/en_US.dic";

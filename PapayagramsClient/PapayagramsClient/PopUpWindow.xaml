@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="PopUpWindow" Height="200" Width="400">
     <Grid>
-        <Label Name="MessageLabel"  HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" MaxWidth="180" Margin="82,30,0,0" FontSize="20">
+        <Label Name="MessageLabel" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="100" Margin="82,30,0,0" FontSize="20">
             <TextBlock TextWrapping="WrapWithOverflow"/>
         </Label>
         <svg:SVGImage Name="IconImage" Margin="20,29,323,100"/>

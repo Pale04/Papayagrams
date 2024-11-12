@@ -81,6 +81,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="WPFControls\WPFGameBoardPieceSpot.xaml.cs">
+      <DependentUpon>WPFGameBoardPieceSpot.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPFControls\WPFGamePiece.xaml.cs">
+      <DependentUpon>WPFGamePiece.xaml</DependentUpon>
+    </Compile>
     <Page Include="Game\Game.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -184,6 +190,14 @@
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Page Include="Menu\Profile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPFControls\WPFGameBoardPieceSpot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPFControls\WPFGamePiece.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

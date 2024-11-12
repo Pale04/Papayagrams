@@ -39,9 +39,9 @@
 
                 <StackPanel Grid.Column="1">
                     <ComboBox Name="GameModeComboBox" FontSize="32" VerticalAlignment="Center" Height="50" SelectedIndex="0">
-                        <ComboBoxItem Content="{x:Reference p:Resources.createGameClassicMode}"/>
-                        <ComboBoxItem Content="{x:Reference p:Resources.createGameTimeAttackMode}"/>
-                        <ComboBoxItem Content="{x:Reference p:Resources.createGameSuddenDeathMode}"/>
+                        <ComboBoxItem Content="{x:Static p:Resources.createGameClassicMode}"/>
+                        <ComboBoxItem Content="{x:Static p:Resources.createGameTimeAttackMode}"/>
+                        <ComboBoxItem Content="{x:Static p:Resources.createGameSuddenDeathMode}"/>
                     </ComboBox>
                     <Separator Height="25" Opacity="0"/>
                     <ComboBox Name="InitialPiecesComboBox" FontSize="32" VerticalAlignment="Center" Height="50" SelectedIndex="0">
@@ -56,12 +56,12 @@
                     </ComboBox>
                     <Separator Height="25" Opacity="0"/>
                     <ComboBox Name="WordsLanguageComboBox" FontSize="32" VerticalAlignment="Center" Height="50" SelectedIndex="0">
-                        <ComboBoxItem Content="{x:Reference p:Resources.createGameEnglishLanguage}"/>
-                        <ComboBoxItem Content="{x:Reference p:Resources.createGameSpanishLanguage}"/>
+                        <ComboBoxItem Content="{x:Static p:Resources.createGameEnglishLanguage}"/>
+                        <ComboBoxItem Content="{x:Static p:Resources.createGameSpanishLanguage}"/>
                     </ComboBox>
                     <Separator Height="31" Opacity="0"/>
                     <ComboBox Name="TimeLimitComboBox" FontSize="32" VerticalAlignment="Center" Height="50" SelectedIndex="0">
-                        <ComboBoxItem Content="{x:Reference p:Resources.createGameNoTimeLimit}"/>
+                        <ComboBoxItem Content="{x:Static p:Resources.createGameNoTimeLimit}"/>
                     </ComboBox>
                     <Separator Height="25" Opacity="0"/>
                 </StackPanel>

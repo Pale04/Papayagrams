@@ -177,12 +177,13 @@ namespace PapayagramsClient.Game
 
         private void CreateGame(object sender, RoutedEventArgs e)
         {
-            if (CurrentGame.PlayersInRoom.Count < 2)
+            if (CurrentGame.PlayersInRoom.Count < 1)
             {
                 return;
             }
 
             _host.StartGame(CurrentGame.RoomCode);
+            NavigationService.Navigate(new Game());
         }
     }
 }

@@ -4,12 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PapayagramsClient.Game"
+      xmlns:userComponents="clr-namespace:PapayagramsClient.WPFControls"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1080"
       xmlns:p="clr-namespace:PapayagramsClient.Properties"
       Title="Game">
 
     <Grid>
-        
+        <userComponents:WPFGamePiece Margin="167,590,863,70"/>
+        <userComponents:WPFGameBoardPieceSpot Height="50" Width="50" Background="LightBlue"/>
     </Grid>
 </Page>
