@@ -7,8 +7,8 @@ namespace DomainClasses
     {
         private Stack<char> _piecesPile = new Stack<char>();
         private List<Player> _connectedPlayers = new List<Player>();
-        
-        public List<Player> ConnectedPlayers { get; }
+
+        public List<Player> ConnectedPlayers { get { return _connectedPlayers; } }
 
         /// <summary>
         /// Generate the pieces pile with the specified amount of pieces for the game room

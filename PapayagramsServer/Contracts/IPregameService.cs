@@ -29,7 +29,7 @@ namespace Contracts
         [OperationContract(IsOneWay = true)]
         void SendMessage(Message message);
 
-        [OperationContract(IsOneWay = true)]
+        [OperationContract]
         void StartGame(string roomCode);
 
         [OperationContract]
@@ -42,13 +42,13 @@ namespace Contracts
     [ServiceContract]
     public interface IPregameServiceCallback 
     {
-        [OperationContract(IsOneWay = true)]
+        [OperationContract]
         void ReceiveMessage(Message message);
 
-        [OperationContract(IsOneWay = true)]
-        void StartGameResponse();
+        [OperationContract]
+        void CarryInsideGame();
 
-        [OperationContract(IsOneWay = true)]
+        [OperationContract]
         void RefreshLobby(GameRoomDC gameRoom);
     }
 

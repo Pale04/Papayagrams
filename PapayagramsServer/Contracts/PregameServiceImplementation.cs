@@ -118,6 +118,7 @@ namespace Contracts
         {
             GameRoomsPool.GetGameRoom(roomCode).State = GameRoomState.InGame;
             GamesInProgressPool.PrepareGame(roomCode);
+            //TODO: llamar el callback de CarryInsideGame para todos menos al admin
         }
 
         public void BroadcastRefreshLobby (GameRoomDC gameRoom)
