@@ -146,7 +146,7 @@ namespace PapayagramsClient.Game
             }
         }
 
-        public void StartGameResponse()
+        public void CarryInsideGame()
         {
             NavigationService.Navigate(new Game());
         }

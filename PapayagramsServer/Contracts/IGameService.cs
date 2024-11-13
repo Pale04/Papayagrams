@@ -17,7 +17,7 @@ namespace Contracts
         void TakeSeed();
 
         //Un jugador terminó todas sus fichas y hay menos fichas en la pila que jugadores.
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void ShoutPapaya(string username);
 
         [OperationContract]
@@ -41,11 +41,6 @@ namespace Contracts
         //El server manda una ficha a cada jugador cuando un jugador termina todas sus fichas.
         [OperationContract]
         void AddSeedToHand(string piece);
-
-        //Hay menos fichas en la pila que jugadores, entonces los clientes deben deshabilitar el dump.
-        //También puede suceder que hay dos jugadores y dos fichas, entonces ya no hay suficientes fichas para regresar.
-        [OperationContract]
-        void RestrictDump();
 
         [OperationContract]
         void EndGame(string winner);
