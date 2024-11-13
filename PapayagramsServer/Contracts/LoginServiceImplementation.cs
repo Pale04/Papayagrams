@@ -45,6 +45,7 @@ namespace Contracts
                     }
                     else if (UserDB.GetPlayerByEmail(newPlayer.Email).IsSome)
                     {
+                        _logger.Info($"Attempt of account registration with a registered email: {newPlayer.Email}\nDate: {DateTime.UtcNow}");
                         codeResult = 202;
                     }
                     else
@@ -97,6 +98,7 @@ namespace Contracts
             }
             else if (loginResult == -2)
             {
+                _logger.Info($"Attempt of login with incorrect password\nAccount: {username}\nDate: {DateTime.UtcNow}");
                 return (206, null);
             }
 

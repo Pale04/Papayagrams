@@ -37,12 +37,11 @@ namespace DomainClasses
 
     public class GameRoom
     {
-        public string RoomCode { get; set; }
+        private List<Player> _players = new List<Player>();
         
-        public List<Player> Players = new List<Player>();
-
+        public string RoomCode { get; set; }
+        public List<Player> Players { get { return _players; } }
         public GameRoomState State { get; set; }
-
         public GameConfiguration GameConfiguration { get; set; }
 
         public override bool Equals(object other)

@@ -59,7 +59,7 @@ namespace Contracts
                 channel.ReceiveStartingHand(game.GetInitialPieces(GameRoomsPool.GetGameRoom(gameRoomCode).GameConfiguration.InitialPieces));
             }
 
-            //TODO: iniciar cronometro
+            //TODO: iniciar cronometro en un hilo, entonces estará llamando cada cierto tiempo a RefreshTimer
         }
     }
 }

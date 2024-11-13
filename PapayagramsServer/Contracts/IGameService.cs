@@ -32,6 +32,9 @@ namespace Contracts
         void RefreshGameRoom(string roomCode);
 
         [OperationContract]
+        void RefreshTimer(int remainingMinutes);
+
+        [OperationContract]
         void ReceiveStartingHand(List<char> initalPieces);
 
         //El server manda tres fichas a un jugador después de utilizar el dump

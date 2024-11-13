@@ -114,23 +114,21 @@ namespace Contracts
             }
         }
 
+        /// <summary>
+        /// Prepare the game and bring in every player except the admin.
+        /// </summary>
+        /// <param name="roomCode">Code of the game room</param>
         public void StartGame(string roomCode)
         {
-            GameRoomsPool.GetGameRoom(roomCode).State = GameRoomState.InGame;
+            GameRoom gameRoom = GameRoomsPool.GetGameRoom(roomCode);
+            gameRoom.State = GameRoomState.InGame;
             GamesInProgressPool.PrepareGame(roomCode);
-            //TODO: llamar el callback de CarryInsideGame para todos menos al admin
-        }
 
-        public void BroadcastRefreshLobby (GameRoomDC gameRoom)
-        {
-            if (gameRoom != null)
+            //Redirige a todos los jugadores al tablero, menos al administrador de la sala (el primero en la lista)
+            for (int i = 1; i < gameRoom.Players.Length(); i++)
             {
-                List<PlayerDC> players = gameRoom.Players;
-                foreach (PlayerDC p in players)
-                {
-                    var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(p.Username);
-                    callbackChannel?.RefreshLobby(gameRoom);
-                }
+                var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(gameRoom.Players[i].Username);
+                callbackChannel.CarryInsideGame();
             }
         }
 
@@ -149,6 +147,19 @@ namespace Contracts
         {
             GameRoom room = GameRoomsPool.GetGameRoom(gameCode);
             return room != null && room.State.Equals(GameRoomState.Waiting) && room.Players.Count < room.GameConfiguration.MaxPlayers;
+        }
+
+        private void BroadcastRefreshLobby(GameRoomDC gameRoom)
+        {
+            if (gameRoom != null)
+            {
+                List<PlayerDC> players = gameRoom.Players;
+                foreach (PlayerDC p in players)
+                {
+                    var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(p.Username);
+                    callbackChannel?.RefreshLobby(gameRoom);
+                }
+            }
         }
     }
 }
