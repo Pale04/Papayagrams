@@ -187,6 +187,9 @@
   <wsdl:message name="IPregameService_StartGame_InputMessage">
     <wsdl:part name="parameters" element="tns:StartGame" />
   </wsdl:message>
+  <wsdl:message name="IPregameService_StartGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartGameResponse" />
+  </wsdl:message>
   <wsdl:message name="IPregameService_InviteFriend_InputMessage">
     <wsdl:part name="parameters" element="tns:InviteFriend" />
   </wsdl:message>
@@ -202,11 +205,20 @@
   <wsdl:message name="IPregameService_ReceiveMessage_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReceiveMessage" />
   </wsdl:message>
-  <wsdl:message name="IPregameService_StartGameResponse_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:StartGameResponse" />
+  <wsdl:message name="IPregameService_ReceiveMessage_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_CarryInsideGame_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:CarryInsideGame" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_CarryInsideGame_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:CarryInsideGameResponse" />
   </wsdl:message>
   <wsdl:message name="IPregameService_RefreshLobby_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:RefreshLobby" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_RefreshLobby_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RefreshLobbyResponse" />
   </wsdl:message>
   <wsdl:message name="IGameService_ReachServer_InputMessage">
     <wsdl:part name="parameters" element="tns:ReachServer" />
@@ -219,9 +231,6 @@
   </wsdl:message>
   <wsdl:message name="IGameService_ShoutPapaya_InputMessage">
     <wsdl:part name="parameters" element="tns:ShoutPapaya" />
-  </wsdl:message>
-  <wsdl:message name="IGameService_ShoutPapaya_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ShoutPapayaResponse" />
   </wsdl:message>
   <wsdl:message name="IGameService_LeaveGame_InputMessage">
     <wsdl:part name="parameters" element="tns:LeaveGame" />
@@ -252,12 +261,6 @@
   </wsdl:message>
   <wsdl:message name="IGameService_AddSeedToHand_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:AddSeedToHandResponse" />
-  </wsdl:message>
-  <wsdl:message name="IGameService_RestrictDump_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:RestrictDump" />
-  </wsdl:message>
-  <wsdl:message name="IGameService_RestrictDump_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:RestrictDumpResponse" />
   </wsdl:message>
   <wsdl:message name="IGameService_EndGame_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:EndGame" />
@@ -369,6 +372,7 @@
     </wsdl:operation>
     <wsdl:operation name="StartGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/StartGame" message="tns:IPregameService_StartGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/StartGameResponse" message="tns:IPregameService_StartGame_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="InviteFriend">
       <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/InviteFriend" message="tns:IPregameService_InviteFriend_InputMessage" />
@@ -380,12 +384,15 @@
     </wsdl:operation>
     <wsdl:operation name="ReceiveMessage">
       <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/ReceiveMessage" message="tns:IPregameService_ReceiveMessage_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/ReceiveMessageResponse" message="tns:IPregameService_ReceiveMessage_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="StartGameResponse">
-      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/StartGameResponse" message="tns:IPregameService_StartGameResponse_OutputCallbackMessage" />
+    <wsdl:operation name="CarryInsideGame">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/CarryInsideGame" message="tns:IPregameService_CarryInsideGame_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/CarryInsideGameResponse" message="tns:IPregameService_CarryInsideGame_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="RefreshLobby">
       <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/RefreshLobby" message="tns:IPregameService_RefreshLobby_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/RefreshLobbyResponse" message="tns:IPregameService_RefreshLobby_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IGameService">
@@ -400,7 +407,6 @@
     </wsdl:operation>
     <wsdl:operation name="ShoutPapaya">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/ShoutPapaya" message="tns:IGameService_ShoutPapaya_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/ShoutPapayaResponse" message="tns:IGameService_ShoutPapaya_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="LeaveGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/LeaveGame" message="tns:IGameService_LeaveGame_InputMessage" />
@@ -421,10 +427,6 @@
     <wsdl:operation name="AddSeedToHand">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/AddSeedToHand" message="tns:IGameService_AddSeedToHand_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/AddSeedToHandResponse" message="tns:IGameService_AddSeedToHand_InputCallbackMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="RestrictDump">
-      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/RestrictDump" message="tns:IGameService_RestrictDump_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/RestrictDumpResponse" message="tns:IGameService_RestrictDump_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="EndGame">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/EndGame" message="tns:IGameService_EndGame_OutputCallbackMessage" />
@@ -657,6 +659,9 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="InviteFriend">
       <soap12:operation soapAction="http://tempuri.org/IPregameService/InviteFriend" style="document" />
@@ -678,18 +683,27 @@
     </wsdl:operation>
     <wsdl:operation name="ReceiveMessage">
       <soap12:operation soapAction="http://tempuri.org/IPregameService/ReceiveMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="StartGameResponse">
-      <soap12:operation soapAction="http://tempuri.org/IPregameService/StartGameResponse" style="document" />
+    <wsdl:operation name="CarryInsideGame">
+      <soap12:operation soapAction="http://tempuri.org/IPregameService/CarryInsideGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="RefreshLobby">
       <soap12:operation soapAction="http://tempuri.org/IPregameService/RefreshLobby" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -721,9 +735,6 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="LeaveGame">
       <soap12:operation soapAction="http://tempuri.org/IGameService/LeaveGame" style="document" />
@@ -763,15 +774,6 @@
     </wsdl:operation>
     <wsdl:operation name="AddSeedToHand">
       <soap12:operation soapAction="http://tempuri.org/IGameService/AddSeedToHand" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="RestrictDump">
-      <soap12:operation soapAction="http://tempuri.org/IGameService/RestrictDump" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

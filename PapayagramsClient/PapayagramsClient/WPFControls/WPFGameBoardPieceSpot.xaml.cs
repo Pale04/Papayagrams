@@ -1,23 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PapayagramsClient.WPFControls
 {
-    /// <summary>
-    /// Lógica de interacción para UserControl1.xaml
-    /// </summary>
     public partial class WPFGameBoardPieceSpot : UserControl
     {
         public WPFGameBoardPieceSpot()
@@ -29,13 +15,13 @@ namespace PapayagramsClient.WPFControls
         {
             base.OnDrop(e);
 
-            // If the DataObject contains string data, extract it.
-            if (e.Data.GetDataPresent(DataFormats.StringFormat))
+            if (e.Data.GetDataPresent(DataFormats.StringFormat) && e.Data.GetDataPresent("Color"))
             {
-                string dataString = (string)e.Data.GetData(DataFormats.StringFormat);
+                string letter = (string)e.Data.GetData(DataFormats.StringFormat);
+                string color = (string)e.Data.GetData("Color");
                
-                // change letter of control
-                LetterLabel.Content = dataString;
+                LetterLabel.Content = letter;
+                MainGrid.Background = (Brush) new BrushConverter().ConvertFromString(color);
 
                 e.Effects = DragDropEffects.Move;
             }

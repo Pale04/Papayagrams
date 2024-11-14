@@ -3,30 +3,28 @@ using PapayagramsClient.PapayagramsService;
 using System.ServiceModel;
 using System.Windows.Controls;
 using NHunspell;
+using System;
 
 namespace PapayagramsClient.Game
 {
     public partial class Game : Page, IGameServiceCallback
     {
-        private string spellCheckDict;
-        private string spellCheckAff;
+        private string _spellCheckDict;
+        private string _spellCheckAff;
         private GameServiceClient _host;
+
         public Game()
         {
-            if (CurrentGame.GameConfig.WordsLanguage.Equals(LanguageDC.Spanish))
-            {
-                spellCheckAff = "../Resources/Dictionaries/es_MX.aff";
-                spellCheckDict = "../Resources/Dictionaries/es_MX.dic";
-            }
-            else if (CurrentGame.GameConfig.WordsLanguage.Equals(LanguageDC.English))
-            {
-                spellCheckAff = "../Resources/Dictionaries/en_US.aff";
-                spellCheckDict = "../Resources/Dictionaries/en_US.dic";
-            }
-            else
+            Console.WriteLine("Entering game...");
+            ChooseLanguageDictionary();
+
+            if (_spellCheckAff == null)
             {
                 return;
             }
+
+            InitializeComponent();
+            FillGameGrids();
 
             InstanceContext context = new InstanceContext(this);
             _host = new GameServiceClient(context);
@@ -43,13 +41,45 @@ namespace PapayagramsClient.Game
             }
 
             _host.ReachServer(CurrentPlayer.Player.Username, CurrentGame.RoomCode);
-
-            InitializeComponent();
         }
 
         ~Game()
         {
             _host.Close();
+        }
+
+        private void ChooseLanguageDictionary()
+        {
+            if (CurrentGame.GameConfig.WordsLanguage.Equals(LanguageDC.Spanish))
+            {
+                _spellCheckAff = "../Resources/Dictionaries/es_MX.aff";
+                _spellCheckDict = "../Resources/Dictionaries/es_MX.dic";
+            }
+            else if (CurrentGame.GameConfig.WordsLanguage.Equals(LanguageDC.English))
+            {
+                _spellCheckAff = "../Resources/Dictionaries/en_US.aff";
+                _spellCheckDict = "../Resources/Dictionaries/en_US.dic";
+            }
+        }
+
+        private void FillGameGrids()
+        {
+            for (int i = 0; i < 25; i++)
+            {
+                BoardGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                BoardGrid.RowDefinitions.Add(new RowDefinition());
+            }
+
+            for (int i = 0; i < 25; i++)
+            {
+                for (int j = 0; j < 25; j++)
+                {
+                    WPFControls.WPFGameBoardPieceSpot spot = new WPFControls.WPFGameBoardPieceSpot();
+                    Grid.SetColumn(spot, i);
+                    Grid.SetRow(spot, j);
+                    BoardGrid.Children.Add(spot);
+                }
+            }
         }
 
         public void RefreshGameRoom(string roomCode)
@@ -76,15 +106,15 @@ namespace PapayagramsClient.Game
             throw new System.NotImplementedException();
         }
 
-        private void playSeed(string piece)
+        private void PlaySeed(string piece)
         {
             // Poner una pieza
             throw new System.NotImplementedException();
         }
 
-        private bool verifyWord(string word)
+        private bool VerifyWord(string word)
         {
-            using (var hunspell = new Hunspell(spellCheckAff, spellCheckDict))
+            using (var hunspell = new Hunspell(_spellCheckAff, _spellCheckDict))
             {
                 hunspell.Spell(word);
                 // TODO
@@ -93,29 +123,26 @@ namespace PapayagramsClient.Game
             throw new System.NotImplementedException();
         }
 
-        private void renderPieces() { 
-            throw new System.NotImplementedException(); 
-        }
-
         public void ReceiveStartingHand(char[] initialPieces)
         {
-            foreach (var piece in initialPieces)
+            Console.WriteLine("Received pieces......");
+            foreach (var letter in initialPieces)
             {
-                CurrentGame.GameData.PiecesInHand.AddLast(piece.ToString());
+                PiecesPanel.Children.Add(new WPFControls.WPFGamePiece(letter.ToString()) { Width = 50, Height = 60 });
             }
         }
 
         public void AddDumpSeedsToHand(string[] pieces)
         {
-            foreach (var piece in pieces)
+            foreach (var letter in pieces)
             {
-                CurrentGame.GameData.PiecesInHand.AddLast(piece);
+                PiecesPanel.Children.Add(new WPFControls.WPFGamePiece(letter) { Width = 50 });
             }
         }
 
         public void AddSeedToHand(string piece)
         {
-            CurrentGame.GameData.PiecesInHand.AddLast(piece);
+            PiecesPanel.Children.Add(new WPFControls.WPFGamePiece(piece) { Width = 50 });
         }
 
         public void RestrictDump()

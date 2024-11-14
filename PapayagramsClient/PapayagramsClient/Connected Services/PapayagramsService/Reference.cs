@@ -1093,10 +1093,10 @@ namespace PapayagramsClient.PapayagramsService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/SendMessage")]
         System.Threading.Tasks.Task SendMessageAsync(PapayagramsClient.PapayagramsService.Message message);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/StartGame")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/StartGame", ReplyAction="http://tempuri.org/IPregameService/StartGameResponse")]
         void StartGame(string roomCode);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/StartGame")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/StartGame", ReplyAction="http://tempuri.org/IPregameService/StartGameResponse")]
         System.Threading.Tasks.Task StartGameAsync(string roomCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/InviteFriend", ReplyAction="http://tempuri.org/IPregameService/InviteFriendResponse")]
@@ -1115,13 +1115,13 @@ namespace PapayagramsClient.PapayagramsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IPregameServiceCallback {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/ReceiveMessage")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/ReceiveMessage", ReplyAction="http://tempuri.org/IPregameService/ReceiveMessageResponse")]
         void ReceiveMessage(PapayagramsClient.PapayagramsService.Message message);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/StartGameResponse")]
-        void StartGameResponse();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/CarryInsideGame", ReplyAction="http://tempuri.org/IPregameService/CarryInsideGameResponse")]
+        void CarryInsideGame();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/RefreshLobby")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/RefreshLobby", ReplyAction="http://tempuri.org/IPregameService/RefreshLobbyResponse")]
         void RefreshLobby(PapayagramsClient.PapayagramsService.GameRoomDC gameRoom);
     }
     
@@ -1232,10 +1232,10 @@ namespace PapayagramsClient.PapayagramsService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/TakeSeed")]
         System.Threading.Tasks.Task TakeSeedAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/ShoutPapaya", ReplyAction="http://tempuri.org/IGameService/ShoutPapayaResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/ShoutPapaya")]
         void ShoutPapaya(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/ShoutPapaya", ReplyAction="http://tempuri.org/IGameService/ShoutPapayaResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/ShoutPapaya")]
         System.Threading.Tasks.Task ShoutPapayaAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/LeaveGame", ReplyAction="http://tempuri.org/IGameService/LeaveGameResponse")]
@@ -1259,9 +1259,6 @@ namespace PapayagramsClient.PapayagramsService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/AddSeedToHand", ReplyAction="http://tempuri.org/IGameService/AddSeedToHandResponse")]
         void AddSeedToHand(string piece);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RestrictDump", ReplyAction="http://tempuri.org/IGameService/RestrictDumpResponse")]
-        void RestrictDump();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/EndGame", ReplyAction="http://tempuri.org/IGameService/EndGameResponse")]
         void EndGame(string winner);

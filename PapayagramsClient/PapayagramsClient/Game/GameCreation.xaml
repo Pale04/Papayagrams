@@ -45,7 +45,9 @@
                     </ComboBox>
                     <Separator Height="25" Opacity="0"/>
                     <ComboBox Name="InitialPiecesComboBox" FontSize="32" VerticalAlignment="Center" Height="50" SelectedIndex="0">
-                        <ComboBoxItem Content="50"/>
+                        <ComboBoxItem Content="15"/>
+                        <ComboBoxItem Content="20"/>
+                        <ComboBoxItem Content="10"/>
                     </ComboBox>
                     <Separator Height="25" Opacity="0"/>
                     <ComboBox Name="MaxPlayersComboBox" FontSize="32" VerticalAlignment="Center" Height="50" SelectedIndex="0">

@@ -10,8 +10,23 @@
       xmlns:p="clr-namespace:PapayagramsClient.Properties"
       Title="Game">
 
-    <Grid>
-        <userComponents:WPFGamePiece Margin="167,590,863,70"/>
-        <userComponents:WPFGameBoardPieceSpot Height="50" Width="50" Background="LightBlue"/>
+    <Grid HorizontalAlignment="Left" Width="1080">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="600"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border BorderBrush="Black" BorderThickness="2">
+            <Grid Name="BoardGrid" Grid.Row="0"/>
+        </Border>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Height="100" VerticalAlignment="Center">
+            <Separator Width="20"/>
+            <Image Width="110"/>
+            <Separator Width="20"/>
+            <Border BorderBrush="Black" BorderThickness="1">
+                <StackPanel Name="PiecesPanel" Width="900" Orientation="Horizontal"/>
+            </Border>
+        </StackPanel>
     </Grid>
 </Page>

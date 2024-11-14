@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="50"
              AllowDrop="True">
-    <Grid>
+    <Grid x:Name="MainGrid">
         <Label x:Name="LetterLabel" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
     </Grid>
 </UserControl>
