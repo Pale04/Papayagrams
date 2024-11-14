@@ -33,9 +33,9 @@ namespace PapayagramsClient.Game
                 return;
             }
 
-            (int err, GameRoomDC gameRoom) = _host.CreateGame(CurrentPlayer.Player.Username, gameConfig);
+            (int returnCode, GameRoomDC gameRoom) = _host.CreateGame(CurrentPlayer.Player.Username, gameConfig);
 
-            if (err != 0)
+            if (returnCode != 0)
             {
                 // TODO: Add error message "an error ocurred, try again"
                 NavigationService.GoBack();
@@ -70,9 +70,9 @@ namespace PapayagramsClient.Game
                 return;
             }
 
-            (int err, GameRoomDC gameRoom) = _host.JoinGame(CurrentPlayer.Player.Username, gameRoomCode);
+            (int returnCode, GameRoomDC gameRoom) = _host.JoinGame(CurrentPlayer.Player.Username, gameRoomCode);
 
-            switch (err)
+            switch (returnCode)
             {
                 case 0:
                     InitializeComponent();
@@ -154,7 +154,7 @@ namespace PapayagramsClient.Game
         private void ReturnToMainMenu(object sender, RoutedEventArgs e)
         {
             _host.LeaveLobby(CurrentPlayer.Player.Username, CurrentGame.RoomCode);
-            NavigationService.GoBack();
+            NavigationService.Navigate(new MainMenu());
         }
 
         private void SendMessage(object sender, RoutedEventArgs e)
@@ -177,12 +177,13 @@ namespace PapayagramsClient.Game
 
         private void CreateGame(object sender, RoutedEventArgs e)
         {
-            if (CurrentGame.PlayersInRoom.Count < 2)
+            if (CurrentGame.PlayersInRoom.Count < 1)
             {
                 return;
             }
 
             _host.StartGame(CurrentGame.RoomCode);
+            NavigationService.Navigate(new Game());
         }
     }
 }

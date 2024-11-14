@@ -4,12 +4,29 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PapayagramsClient.Game"
+      xmlns:userComponents="clr-namespace:PapayagramsClient.WPFControls"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1080"
       xmlns:p="clr-namespace:PapayagramsClient.Properties"
       Title="Game">
 
-    <Grid>
-        
+    <Grid HorizontalAlignment="Left" Width="1080">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="600"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border BorderBrush="Black" BorderThickness="2">
+            <Grid Name="BoardGrid" Grid.Row="0"/>
+        </Border>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Height="100" VerticalAlignment="Center">
+            <Separator Width="20"/>
+            <Image Width="110"/>
+            <Separator Width="20"/>
+            <Border BorderBrush="Black" BorderThickness="1">
+                <StackPanel Name="PiecesPanel" Width="900" Orientation="Horizontal"/>
+            </Border>
+        </StackPanel>
     </Grid>
 </Page>

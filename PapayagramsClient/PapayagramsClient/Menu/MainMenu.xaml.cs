@@ -7,6 +7,7 @@ using System.Windows.Navigation;
 using PapayagramsClient.PapayagramsService;
 using PapayagramsClient.Menu;
 using System.IO;
+using System.Threading;
 
 namespace PapayagramsClient
 {
@@ -33,7 +34,7 @@ namespace PapayagramsClient
                 return;
             }
 
-            _host.ReportToServer(CurrentPlayer.Player.Username);
+            int returnCode = _host.ReportToServer(CurrentPlayer.Player.Username);
         }
 
         ~MainMenu()
@@ -53,7 +54,18 @@ namespace PapayagramsClient
 
         private void GoToProfile(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Profile());
+            (int returnCode, PlayerStatsDC userStats) = _host.GetPlayerProfile(CurrentPlayer.Player.Username);
+            switch (returnCode)
+            {
+                case 102:
+                    new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    return;
+                case 205:
+                    new PopUpWindow(Properties.Resources.errorOccurredTitle, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
+                    return;
+            }
+
+            NavigationService.Navigate(new Profile(userStats));
         }
 
         public void ReceiveFriendRequest(PlayerDC player)
@@ -86,10 +98,10 @@ namespace PapayagramsClient
                 return;
             }
 
-            int result = host.Logout(CurrentPlayer.Player.Username);
+            int returnCode = host.Logout(CurrentPlayer.Player.Username);
             host.Close();
 
-            switch (result)
+            switch (returnCode)
             {
                 case 0:
                     CurrentPlayer.Player = null;

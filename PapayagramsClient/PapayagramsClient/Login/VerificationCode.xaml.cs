@@ -28,10 +28,10 @@ namespace PapayagramsClient.Login
             }
 
             string code = CodeTextbox.Text;
-            int result = host.VerifyAccount(_player.Username, code);
+            int returnCode = host.VerifyAccount(_player.Username, code);
             host.Close();
 
-            switch (result)
+            switch (returnCode)
             {
                 case 0:
                     break;
@@ -73,9 +73,9 @@ namespace PapayagramsClient.Login
                 return;
             }
 
-            int result = host.SendAccountVerificationCode(_player.Username);
+            int returnCode = host.SendAccountVerificationCode(_player.Username);
 
-            switch (result)
+            switch (returnCode)
             {
                 case 102:
                     new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();

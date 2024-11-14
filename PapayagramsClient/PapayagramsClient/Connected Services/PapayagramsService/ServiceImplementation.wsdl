@@ -1,0 +1,839 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="ServiceImplementation" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_ILoginService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IMainMenuService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IPregameService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IGameService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IGameCodeVerificationService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Contracts" />
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ILoginService_RegisterUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterUser" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_RegisterUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_Logout_InputMessage">
+    <wsdl:part name="parameters" element="tns:Logout" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_Logout_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_VerifyAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyAccount" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_VerifyAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_SendAccountVerificationCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendAccountVerificationCode" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_SendAccountVerificationCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendAccountVerificationCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_GetFriends_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriends" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_GetFriends_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriendsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_RemoveFriend_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveFriend" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_RemoveFriend_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveFriendResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_BlockFriend_InputMessage">
+    <wsdl:part name="parameters" element="tns:BlockFriend" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_BlockFriend_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BlockFriendResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_GetFriendRequests_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriendRequests" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_GetFriendRequests_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriendRequestsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_AcceptFriendRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptFriendRequest" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_AcceptFriendRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptFriendRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_RejectFriendRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:RejectFriendRequest" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_RejectFriendRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RejectFriendRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_SearchNoFriendPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchNoFriendPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_SearchNoFriendPlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchNoFriendPlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_SendFriendRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendFriendRequest" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_SendFriendRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendFriendRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_GetPlayerProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerProfile" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_GetPlayerProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_GetAchievements_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAchievements" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_GetAchievements_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAchievementsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_GetLeaderboard_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaderboard" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_GetLeaderboard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaderboardResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_ReportToServer_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReportToServer" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_ReportToServer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReportToServerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_ReceiveFriendRequest_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveFriendRequest" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_ReceiveFriendRequest_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveFriendRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_ReceiveGameInvitation_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveGameInvitation" />
+  </wsdl:message>
+  <wsdl:message name="IMainMenuService_ReceiveGameInvitation_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveGameInvitationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_CreateGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateGame" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_CreateGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_JoinGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:JoinGame" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_JoinGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JoinGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_LeaveLobby_InputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveLobby" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_LeaveLobby_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveLobbyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_SendMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessage" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_StartGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartGame" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_StartGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_InviteFriend_InputMessage">
+    <wsdl:part name="parameters" element="tns:InviteFriend" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_InviteFriend_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InviteFriendResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_ReturnToLobby_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReturnToLobby" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_ReturnToLobby_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReturnToLobbyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_ReceiveMessage_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveMessage" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_ReceiveMessage_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_CarryInsideGame_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:CarryInsideGame" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_CarryInsideGame_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:CarryInsideGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_RefreshLobby_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RefreshLobby" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_RefreshLobby_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RefreshLobbyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_ReachServer_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReachServer" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_DumpPiece_InputMessage">
+    <wsdl:part name="parameters" element="tns:DumpPiece" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_TakeSeed_InputMessage">
+    <wsdl:part name="parameters" element="tns:TakeSeed" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_ShoutPapaya_InputMessage">
+    <wsdl:part name="parameters" element="tns:ShoutPapaya" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_LeaveGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveGame" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_LeaveGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_RefreshGameRoom_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RefreshGameRoom" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_RefreshGameRoom_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RefreshGameRoomResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_ReceiveStartingHand_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveStartingHand" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_ReceiveStartingHand_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveStartingHandResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_AddDumpSeedsToHand_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:AddDumpSeedsToHand" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_AddDumpSeedsToHand_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:AddDumpSeedsToHandResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_AddSeedToHand_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:AddSeedToHand" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_AddSeedToHand_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:AddSeedToHandResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_EndGame_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:EndGame" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_EndGame_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:EndGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameCodeVerificationService_VerifyGameRoom_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyGameRoom" />
+  </wsdl:message>
+  <wsdl:message name="IGameCodeVerificationService_VerifyGameRoom_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyGameRoomResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ILoginService">
+    <wsdl:operation name="RegisterUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/RegisterUser" message="tns:ILoginService_RegisterUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/RegisterUserResponse" message="tns:ILoginService_RegisterUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/Login" message="tns:ILoginService_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/LoginResponse" message="tns:ILoginService_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/Logout" message="tns:ILoginService_Logout_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/LogoutResponse" message="tns:ILoginService_Logout_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/VerifyAccount" message="tns:ILoginService_VerifyAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/VerifyAccountResponse" message="tns:ILoginService_VerifyAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendAccountVerificationCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/SendAccountVerificationCode" message="tns:ILoginService_SendAccountVerificationCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/SendAccountVerificationCodeResponse" message="tns:ILoginService_SendAccountVerificationCode_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IMainMenuService">
+    <wsdl:operation name="GetFriends">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/GetFriends" message="tns:IMainMenuService_GetFriends_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/GetFriendsResponse" message="tns:IMainMenuService_GetFriends_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFriend">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/RemoveFriend" message="tns:IMainMenuService_RemoveFriend_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/RemoveFriendResponse" message="tns:IMainMenuService_RemoveFriend_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BlockFriend">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/BlockFriend" message="tns:IMainMenuService_BlockFriend_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/BlockFriendResponse" message="tns:IMainMenuService_BlockFriend_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFriendRequests">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/GetFriendRequests" message="tns:IMainMenuService_GetFriendRequests_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/GetFriendRequestsResponse" message="tns:IMainMenuService_GetFriendRequests_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptFriendRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/AcceptFriendRequest" message="tns:IMainMenuService_AcceptFriendRequest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/AcceptFriendRequestResponse" message="tns:IMainMenuService_AcceptFriendRequest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RejectFriendRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/RejectFriendRequest" message="tns:IMainMenuService_RejectFriendRequest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/RejectFriendRequestResponse" message="tns:IMainMenuService_RejectFriendRequest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchNoFriendPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/SearchNoFriendPlayer" message="tns:IMainMenuService_SearchNoFriendPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/SearchNoFriendPlayerResponse" message="tns:IMainMenuService_SearchNoFriendPlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendFriendRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/SendFriendRequest" message="tns:IMainMenuService_SendFriendRequest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/SendFriendRequestResponse" message="tns:IMainMenuService_SendFriendRequest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/GetPlayerProfile" message="tns:IMainMenuService_GetPlayerProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/GetPlayerProfileResponse" message="tns:IMainMenuService_GetPlayerProfile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAchievements">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/GetAchievements" message="tns:IMainMenuService_GetAchievements_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/GetAchievementsResponse" message="tns:IMainMenuService_GetAchievements_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaderboard">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/GetLeaderboard" message="tns:IMainMenuService_GetLeaderboard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/GetLeaderboardResponse" message="tns:IMainMenuService_GetLeaderboard_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReportToServer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/ReportToServer" message="tns:IMainMenuService_ReportToServer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/ReportToServerResponse" message="tns:IMainMenuService_ReportToServer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveFriendRequest">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/ReceiveFriendRequest" message="tns:IMainMenuService_ReceiveFriendRequest_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/ReceiveFriendRequestResponse" message="tns:IMainMenuService_ReceiveFriendRequest_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveGameInvitation">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/ReceiveGameInvitation" message="tns:IMainMenuService_ReceiveGameInvitation_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/ReceiveGameInvitationResponse" message="tns:IMainMenuService_ReceiveGameInvitation_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IPregameService">
+    <wsdl:operation name="CreateGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/CreateGame" message="tns:IPregameService_CreateGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/CreateGameResponse" message="tns:IPregameService_CreateGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JoinGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/JoinGame" message="tns:IPregameService_JoinGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/JoinGameResponse" message="tns:IPregameService_JoinGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LeaveLobby">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/LeaveLobby" message="tns:IPregameService_LeaveLobby_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/LeaveLobbyResponse" message="tns:IPregameService_LeaveLobby_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/SendMessage" message="tns:IPregameService_SendMessage_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/StartGame" message="tns:IPregameService_StartGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/StartGameResponse" message="tns:IPregameService_StartGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InviteFriend">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/InviteFriend" message="tns:IPregameService_InviteFriend_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/InviteFriendResponse" message="tns:IPregameService_InviteFriend_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReturnToLobby">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/ReturnToLobby" message="tns:IPregameService_ReturnToLobby_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/ReturnToLobbyResponse" message="tns:IPregameService_ReturnToLobby_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveMessage">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/ReceiveMessage" message="tns:IPregameService_ReceiveMessage_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/ReceiveMessageResponse" message="tns:IPregameService_ReceiveMessage_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CarryInsideGame">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/CarryInsideGame" message="tns:IPregameService_CarryInsideGame_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/CarryInsideGameResponse" message="tns:IPregameService_CarryInsideGame_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RefreshLobby">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/RefreshLobby" message="tns:IPregameService_RefreshLobby_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/RefreshLobbyResponse" message="tns:IPregameService_RefreshLobby_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IGameService">
+    <wsdl:operation name="ReachServer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/ReachServer" message="tns:IGameService_ReachServer_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DumpPiece">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/DumpPiece" message="tns:IGameService_DumpPiece_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TakeSeed">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/TakeSeed" message="tns:IGameService_TakeSeed_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ShoutPapaya">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/ShoutPapaya" message="tns:IGameService_ShoutPapaya_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LeaveGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/LeaveGame" message="tns:IGameService_LeaveGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/LeaveGameResponse" message="tns:IGameService_LeaveGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RefreshGameRoom">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/RefreshGameRoom" message="tns:IGameService_RefreshGameRoom_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/RefreshGameRoomResponse" message="tns:IGameService_RefreshGameRoom_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveStartingHand">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/ReceiveStartingHand" message="tns:IGameService_ReceiveStartingHand_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/ReceiveStartingHandResponse" message="tns:IGameService_ReceiveStartingHand_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDumpSeedsToHand">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/AddDumpSeedsToHand" message="tns:IGameService_AddDumpSeedsToHand_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/AddDumpSeedsToHandResponse" message="tns:IGameService_AddDumpSeedsToHand_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddSeedToHand">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/AddSeedToHand" message="tns:IGameService_AddSeedToHand_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/AddSeedToHandResponse" message="tns:IGameService_AddSeedToHand_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndGame">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/EndGame" message="tns:IGameService_EndGame_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/EndGameResponse" message="tns:IGameService_EndGame_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IGameCodeVerificationService">
+    <wsdl:operation name="VerifyGameRoom">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameCodeVerificationService/VerifyGameRoom" message="tns:IGameCodeVerificationService_VerifyGameRoom_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameCodeVerificationService/VerifyGameRoomResponse" message="tns:IGameCodeVerificationService_VerifyGameRoom_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_ILoginService" type="tns:ILoginService">
+    <wsp:PolicyReference URI="#NetTcpBinding_ILoginService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="RegisterUser">
+      <soap12:operation soapAction="http://tempuri.org/ILoginService/RegisterUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/ILoginService/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap12:operation soapAction="http://tempuri.org/ILoginService/Logout" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAccount">
+      <soap12:operation soapAction="http://tempuri.org/ILoginService/VerifyAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendAccountVerificationCode">
+      <soap12:operation soapAction="http://tempuri.org/ILoginService/SendAccountVerificationCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IMainMenuService" type="tns:IMainMenuService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IMainMenuService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetFriends">
+      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/GetFriends" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFriend">
+      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/RemoveFriend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BlockFriend">
+      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/BlockFriend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFriendRequests">
+      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/GetFriendRequests" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptFriendRequest">
+      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/AcceptFriendRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RejectFriendRequest">
+      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/RejectFriendRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchNoFriendPlayer">
+      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/SearchNoFriendPlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFriendRequest">
+      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/SendFriendRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerProfile">
+      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/GetPlayerProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAchievements">
+      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/GetAchievements" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaderboard">
+      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/GetLeaderboard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReportToServer">
+      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/ReportToServer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveFriendRequest">
+      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/ReceiveFriendRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveGameInvitation">
+      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/ReceiveGameInvitation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IPregameService" type="tns:IPregameService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IPregameService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="CreateGame">
+      <soap12:operation soapAction="http://tempuri.org/IPregameService/CreateGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JoinGame">
+      <soap12:operation soapAction="http://tempuri.org/IPregameService/JoinGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeaveLobby">
+      <soap12:operation soapAction="http://tempuri.org/IPregameService/LeaveLobby" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <soap12:operation soapAction="http://tempuri.org/IPregameService/SendMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <soap12:operation soapAction="http://tempuri.org/IPregameService/StartGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InviteFriend">
+      <soap12:operation soapAction="http://tempuri.org/IPregameService/InviteFriend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnToLobby">
+      <soap12:operation soapAction="http://tempuri.org/IPregameService/ReturnToLobby" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveMessage">
+      <soap12:operation soapAction="http://tempuri.org/IPregameService/ReceiveMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CarryInsideGame">
+      <soap12:operation soapAction="http://tempuri.org/IPregameService/CarryInsideGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RefreshLobby">
+      <soap12:operation soapAction="http://tempuri.org/IPregameService/RefreshLobby" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IGameService" type="tns:IGameService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IGameService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="ReachServer">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/ReachServer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="DumpPiece">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/DumpPiece" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="TakeSeed">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/TakeSeed" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ShoutPapaya">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/ShoutPapaya" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="LeaveGame">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/LeaveGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RefreshGameRoom">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/RefreshGameRoom" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveStartingHand">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/ReceiveStartingHand" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDumpSeedsToHand">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/AddDumpSeedsToHand" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSeedToHand">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/AddSeedToHand" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndGame">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/EndGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IGameCodeVerificationService" type="tns:IGameCodeVerificationService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IGameCodeVerificationService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="VerifyGameRoom">
+      <soap12:operation soapAction="http://tempuri.org/IGameCodeVerificationService/VerifyGameRoom" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceImplementation">
+    <wsdl:port name="NetTcpBinding_ILoginService" binding="tns:NetTcpBinding_ILoginService">
+      <soap12:address location="net.tcp://localhost:8090/Contracts" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IMainMenuService" binding="tns:NetTcpBinding_IMainMenuService">
+      <soap12:address location="net.tcp://localhost:8090/Contracts" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IPregameService" binding="tns:NetTcpBinding_IPregameService">
+      <soap12:address location="net.tcp://localhost:8090/Contracts" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IGameService" binding="tns:NetTcpBinding_IGameService">
+      <soap12:address location="net.tcp://localhost:8090/Contracts" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IGameCodeVerificationService" binding="tns:NetTcpBinding_IGameCodeVerificationService">
+      <soap12:address location="net.tcp://localhost:8090/Contracts" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

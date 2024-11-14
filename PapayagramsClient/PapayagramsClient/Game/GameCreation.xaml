@@ -6,7 +6,6 @@
       xmlns:local="clr-namespace:PapayagramsClient.Game"
       mc:Ignorable="d" 
       xmlns:p="clr-namespace:PapayagramsClient.Properties"
-      xmlns:svg="clr-namespace:SVGImage.SVG;assembly=SVGImage"
       d:DesignHeight="720" d:DesignWidth="1080"
       Background="#D9D9D9"
       Title="GameCreation">
@@ -39,29 +38,32 @@
                 </StackPanel>
 
                 <StackPanel Grid.Column="1">
-                    <ComboBox Name="GameModeComboBox" FontSize="32" VerticalAlignment="Center" Height="50">
-                        <ComboBoxItem Content="Classic"/>
-                        <ComboBoxItem Content="Time attack"/>
-                        <ComboBoxItem Content="Sudden death"/>
+                    <ComboBox Name="GameModeComboBox" FontSize="32" VerticalAlignment="Center" Height="50" SelectedIndex="0">
+                        <ComboBoxItem Content="{x:Static p:Resources.createGameClassicMode}"/>
+                        <ComboBoxItem Content="{x:Static p:Resources.createGameTimeAttackMode}"/>
+                        <ComboBoxItem Content="{x:Static p:Resources.createGameSuddenDeathMode}"/>
                     </ComboBox>
                     <Separator Height="25" Opacity="0"/>
-                    <ComboBox Name="InitialPiecesComboBox" FontSize="32" VerticalAlignment="Center" Height="50">
-                        <ComboBoxItem Content="50"/>
+                    <ComboBox Name="InitialPiecesComboBox" FontSize="32" VerticalAlignment="Center" Height="50" SelectedIndex="0">
+                        <ComboBoxItem Content="15"/>
+                        <ComboBoxItem Content="20"/>
+                        <ComboBoxItem Content="10"/>
                     </ComboBox>
                     <Separator Height="25" Opacity="0"/>
-                    <ComboBox Name="MaxPlayersComboBox" FontSize="32" VerticalAlignment="Center" Height="50">
+                    <ComboBox Name="MaxPlayersComboBox" FontSize="32" VerticalAlignment="Center" Height="50" SelectedIndex="0">
                         <ComboBoxItem Content="2"/>
                         <ComboBoxItem Content="3"/>
                         <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5"/>
                     </ComboBox>
                     <Separator Height="25" Opacity="0"/>
-                    <ComboBox Name="WordsLanguageComboBox" FontSize="32" VerticalAlignment="Center" Height="50">
-                        <ComboBoxItem Content="English"/>
-                        <ComboBoxItem Content="Español"/>
+                    <ComboBox Name="WordsLanguageComboBox" FontSize="32" VerticalAlignment="Center" Height="50" SelectedIndex="0">
+                        <ComboBoxItem Content="{x:Static p:Resources.createGameEnglishLanguage}"/>
+                        <ComboBoxItem Content="{x:Static p:Resources.createGameSpanishLanguage}"/>
                     </ComboBox>
                     <Separator Height="31" Opacity="0"/>
-                    <ComboBox Name="TimeLimitComboBox" FontSize="32" VerticalAlignment="Center" Height="50">
-                        <ComboBoxItem Content="{x:Static p:Resources.gameCreationNoTimeLimit}"/>
+                    <ComboBox Name="TimeLimitComboBox" FontSize="32" VerticalAlignment="Center" Height="50" SelectedIndex="0">
+                        <ComboBoxItem Content="{x:Static p:Resources.createGameNoTimeLimit}"/>
                     </ComboBox>
                     <Separator Height="25" Opacity="0"/>
                 </StackPanel>

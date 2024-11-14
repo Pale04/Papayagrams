@@ -319,18 +319,45 @@
     <value>The field cannot be empty</value>
   </data>
   <data name="loginVerificationCode" xml:space="preserve">
-    <value />
+    <value>Enter the code we sent to your email</value>
   </data>
   <data name="verificationWrongCode" xml:space="preserve">
     <value>Wrong code, try again</value>
   </data>
-  <data name="gameCreationNoTimeLimit" xml:space="preserve">
+  <data name="createGameNoTimeLimit" xml:space="preserve">
     <value>No limit</value>
   </data>
-  <data name="gameCreationMinutes" xml:space="preserve">
+  <data name="createGameMinutes" xml:space="preserve">
     <value>minutes</value>
   </data>
   <data name="verificationResendMessage" xml:space="preserve">
     <value>Send code again</value>
+  </data>
+  <data name="errorUnexpectedError" xml:space="preserve">
+    <value>An unexpected error occurred, try again and if the problem persiste, restart the game</value>
+  </data>
+  <data name="errorOccurredTitle" xml:space="preserve">
+    <value>An error occurred</value>
+  </data>
+  <data name="createGameClassicMode" xml:space="preserve">
+    <value>Classic</value>
+  </data>
+  <data name="createGameSuddenDeathMode" xml:space="preserve">
+    <value>Sudden death</value>
+  </data>
+  <data name="createGameTimeAttackMode" xml:space="preserve">
+    <value>Time attack</value>
+  </data>
+  <data name="createGameSpanishLanguage" xml:space="preserve">
+    <value>Spanish</value>
+  </data>
+  <data name="createGameEnglishLanguage" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="joinGameCantJoinTitle" xml:space="preserve">
+    <value>Couldn´t connect to lobby</value>
+  </data>
+  <data name="joinGameCantJoin" xml:space="preserve">
+    <value>The game code is wrong or the lobby is full</value>
   </data>
 </root>
