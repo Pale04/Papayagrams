@@ -34,7 +34,7 @@ namespace Contracts
         [OperationContract]
         void RefreshTimer(int remainingMinutes);
 
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void ReceiveStartingHand(List<char> initalPieces);
 
         //El server manda tres fichas a un jugador después de utilizar el dump

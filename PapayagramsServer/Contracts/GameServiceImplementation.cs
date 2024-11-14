@@ -25,9 +25,11 @@ namespace Contracts
             CallbacksPool.RemovePregameCallbackChannel(username);
             GamesInProgressPool.ConnectToGame(gameRoomCode, username);
 
-            while (!GamesInProgressPool.IsEveryoneReady(gameRoomCode))
+            /*while (!GamesInProgressPool.IsEveryoneReady(gameRoomCode))
             {
-            }
+            }*/
+
+            //TODO: añadir el timer
 
             //Permite que solamente el primero que llegó a la partida sea el que la comience
             if (GamesInProgressPool.GetGame(gameRoomCode).ConnectedPlayers.First().Username.Equals(username))
@@ -56,7 +58,7 @@ namespace Contracts
             foreach (Player player in game.ConnectedPlayers)
             {
                 var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
-                channel.ReceiveStartingHand(game.GetInitialPieces(GameRoomsPool.GetGameRoom(gameRoomCode).GameConfiguration.InitialPieces));
+                channel.ReceiveStartingHand(game.GetInitialPieces(34));
             }
 
             //TODO: iniciar cronometro en un hilo, entonces estará llamando cada cierto tiempo a RefreshTimer

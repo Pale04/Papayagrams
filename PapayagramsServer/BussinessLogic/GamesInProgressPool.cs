@@ -27,11 +27,6 @@ namespace BussinessLogic
             return _gamesInProgress[gameRoomCode];
         }
 
-        public static bool IsEveryoneReady(string gameRoomCode)
-        {
-            return GameRoomsPool.GetGameRoom(gameRoomCode).Players.Equals(_gamesInProgress[gameRoomCode].ConnectedPlayers);
-        }
-
         /// <summary>
         /// Remove a player from a game. If no one are left, the game is removed and the game becomes in waiting state. 
         /// </summary>
