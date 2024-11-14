@@ -214,6 +214,9 @@ namespace Contracts
         [DataMember]
         public GameModeDC GameMode { get; set; }
 
+        /// <summary>
+        /// Number of pieces that every player will have at the beginning of the game
+        /// </summary>
         [DataMember]
         public int InitialPieces { get; set; }
 

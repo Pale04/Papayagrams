@@ -42,13 +42,13 @@ namespace Contracts
     [ServiceContract]
     public interface IPregameServiceCallback 
     {
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void ReceiveMessage(Message message);
 
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void CarryInsideGame();
 
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void RefreshLobby(GameRoomDC gameRoom);
     }
 

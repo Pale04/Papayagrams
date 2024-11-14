@@ -31,7 +31,7 @@ namespace DomainClasses
         }
 
         /// <summary>
-        /// Retrieve pieces for one player at the beginning of the game.
+        /// Retrieve pieces for only one player at the beginning of the game.
         /// </summary>
         /// <param name="initialPieces">Number of pieces that must be distributed to every player</param>
         /// <returns>List with the pieces</returns>

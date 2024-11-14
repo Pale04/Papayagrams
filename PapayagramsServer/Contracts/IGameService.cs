@@ -28,24 +28,24 @@ namespace Contracts
     public interface IGameServiceCallback
     {
         //Se llama cada vez que se actualiza la pila, cuando alguien se sale de la partida.
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void RefreshGameRoom(string roomCode);
 
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void RefreshTimer(int remainingMinutes);
 
         [OperationContract(IsOneWay = true)]
         void ReceiveStartingHand(List<char> initalPieces);
 
         //El server manda tres fichas a un jugador después de utilizar el dump
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void AddDumpSeedsToHand(List<string> pieces);
 
         //El server manda una ficha a cada jugador cuando un jugador termina todas sus fichas.
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void AddSeedToHand(string piece);
 
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void EndGame(string winner);
     }
 }

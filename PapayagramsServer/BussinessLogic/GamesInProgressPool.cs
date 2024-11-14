@@ -27,6 +27,16 @@ namespace BussinessLogic
             return _gamesInProgress[gameRoomCode];
         }
 
+        public static void StartGameTimer(string gameRoomCode)
+        {
+            int timeLimit = GameRoomsPool.GetGameRoom(gameRoomCode).GameConfiguration.TimeLimitMinutes;
+            if (timeLimit != 0)
+            {
+                System.Timers.Timer gameTimer = new System.Timers.Timer(GameRoomsPool.GetGameRoom(gameRoomCode).GameConfiguration.TimeLimitMinutes * 1000);
+                //TODO: iniciar cronometro en un hilo (creo que Timer ya crea un hilo: INVESTIGAR) que estará llamando cada cierto tiempo a RefreshTimer de cada jugador
+            }            
+        }
+
         /// <summary>
         /// Remove a player from a game. If no one are left, the game is removed and the game becomes in waiting state. 
         /// </summary>
@@ -43,6 +53,11 @@ namespace BussinessLogic
                 _gamesInProgress.Remove(gameRoomCode);
                 GameRoomsPool.GetGameRoom(gameRoomCode).State = GameRoomState.Waiting;
             }
+        }
+
+        private static void SendTimerUpdateToPlayers()
+        {
+            //TODO:llamar refreshtimer de cada jugador.
         }
     }
 }

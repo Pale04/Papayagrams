@@ -3,6 +3,7 @@ using DomainClasses;
 using System;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading.Tasks;
 
 namespace Contracts
 {
@@ -19,22 +20,17 @@ namespace Contracts
             GamesInProgressPool.ExitGame(gameRoomCode, username);
         }
 
-        public void ReachServer(string username, string gameRoomCode)
+        public async void ReachServer(string username, string gameRoomCode)
         {
             CallbacksPool.PlayerArrivesToGame(username, OperationContext.Current.GetCallbackChannel<IGameServiceCallback>());
             CallbacksPool.RemovePregameCallbackChannel(username);
             GamesInProgressPool.ConnectToGame(gameRoomCode, username);
 
-            /*while (!GamesInProgressPool.IsEveryoneReady(gameRoomCode))
-            {
-            }*/
-
-            //TODO: añadir el timer
-
-            //Permite que solamente el primero que llegó a la partida sea el que la comience
+            // Permite que solamente el primero que llegó al servidor sea el que la comience el juego
             if (GamesInProgressPool.GetGame(gameRoomCode).ConnectedPlayers.First().Username.Equals(username))
             {
-                StartGamePlay(gameRoomCode);
+                await Task.Delay(10000);
+                PlayGame(gameRoomCode);
             }
         }
 
@@ -52,16 +48,15 @@ namespace Contracts
         /// Send the initial pieces to every player and start the timer for start to playing
         /// </summary>
         /// <param name="gameRoomCode"></param>
-        private void StartGamePlay(string gameRoomCode)
+        private static void PlayGame(string gameRoomCode)
         {
             Game game = GamesInProgressPool.GetGame(gameRoomCode);
             foreach (Player player in game.ConnectedPlayers)
             {
                 var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
-                channel.ReceiveStartingHand(game.GetInitialPieces(34));
+                channel.ReceiveStartingHand(game.GetInitialPieces(GameRoomsPool.GetGameRoom(gameRoomCode).GameConfiguration.InitialPieces));
             }
-
-            //TODO: iniciar cronometro en un hilo, entonces estará llamando cada cierto tiempo a RefreshTimer
+            GamesInProgressPool.StartGameTimer(gameRoomCode);
         }
     }
 }

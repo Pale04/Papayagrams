@@ -32,6 +32,9 @@ namespace DomainClasses
 
         public Language WordsLanguage { get; set; }
 
+        /// <summary>
+        /// Total minutes that will be during the game. 0 means that has not time limit.
+        /// </summary>
         public int TimeLimitMinutes { get; set; }
     }
 
