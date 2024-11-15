@@ -6,10 +6,28 @@ namespace PapayagramsClient.WPFControls
 {
     public partial class WPFGamePiece : UserControl
     {
+        public static readonly RoutedEvent PiecePlacedEvent = EventManager.RegisterRoutedEvent(
+            name: "PiecePlaced",
+            routingStrategy: RoutingStrategy.Bubble,
+            handlerType: typeof(RoutedEventHandler),
+            ownerType: typeof(WPFGamePiece));
+
         public WPFGamePiece(string letter)
         {
             InitializeComponent();
             PieceLetter.Text = letter;
+        }
+
+        public event RoutedEventHandler PiecePlaced
+        {
+            add { AddHandler(PiecePlacedEvent, value); }
+            remove { RemoveHandler(PiecePlacedEvent, value); }
+        }
+
+        public void RaisePiecePlacedEvent()
+        {
+            RoutedEventArgs routedEventArgs = new RoutedEventArgs(routedEvent: PiecePlacedEvent);
+            RaiseEvent(routedEventArgs);
         }
 
         protected override void OnMouseMove(MouseEventArgs e)

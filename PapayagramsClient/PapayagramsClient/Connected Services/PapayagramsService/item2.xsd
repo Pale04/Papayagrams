@@ -447,16 +447,23 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="RefreshTimer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="remainingMinutes" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RefreshTimerResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ReceiveStartingHand">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="initalPieces" nillable="true" type="q17:ArrayOfchar" />
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ReceiveStartingHandResponse">
-    <xs:complexType>
-      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="AddDumpSeedsToHand">

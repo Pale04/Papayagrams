@@ -16,17 +16,26 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Border BorderBrush="Black" BorderThickness="2">
-            <Grid Name="BoardGrid" Grid.Row="0"/>
+        <Border BorderBrush="Black" BorderThickness="2" Width="600">
+            <Grid Name="BoardGrid" Grid.Row="0" HorizontalAlignment="Center" Width="600"/>
         </Border>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Height="100" VerticalAlignment="Center">
-            <Separator Width="20"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Height="110" VerticalAlignment="Center">
+            <Separator Width="20" Opacity="0"/>
             <Image Width="110"/>
-            <Separator Width="20"/>
-            <Border BorderBrush="Black" BorderThickness="1">
-                <StackPanel Name="PiecesPanel" Width="900" Orientation="Horizontal"/>
-            </Border>
+            <Separator Width="10" Opacity="0"/>
+
+            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <StackPanel Name="PiecesPanel" Width="900" Orientation="Horizontal" Height="90">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type userComponents:WPFGamePiece}">
+                            <Setter Property="Margin" Value="0, 10, 0, 0"/>
+                            <EventSetter Event="PiecePlaced" Handler="PlaySeed"/>
+                        </Style>
+                    </StackPanel.Resources>
+                </StackPanel>
+            </ScrollViewer>
+
         </StackPanel>
     </Grid>
 </Page>

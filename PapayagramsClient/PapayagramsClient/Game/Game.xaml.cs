@@ -4,6 +4,9 @@ using System.ServiceModel;
 using System.Windows.Controls;
 using NHunspell;
 using System;
+using System.Windows;
+using PapayagramsClient.WPFControls;
+using System.Linq;
 
 namespace PapayagramsClient.Game
 {
@@ -106,10 +109,15 @@ namespace PapayagramsClient.Game
             throw new System.NotImplementedException();
         }
 
-        private void PlaySeed(string piece)
+        private void PlaySeed(object sender, RoutedEventArgs e)
         {
-            // Poner una pieza
-            throw new System.NotImplementedException();
+            WPFGamePiece piece = (WPFGamePiece)sender;
+            PiecesPanel.Children.Remove(piece);
+
+            int pieceRow = Grid.GetRow(piece);
+            int pieceColumn = Grid.GetColumn(piece);
+
+            // TODO: Search neighbor pieces for words
         }
 
         private bool VerifyWord(string word)
@@ -125,10 +133,9 @@ namespace PapayagramsClient.Game
 
         public void ReceiveStartingHand(char[] initialPieces)
         {
-            Console.WriteLine("Received pieces......");
             foreach (var letter in initialPieces)
             {
-                PiecesPanel.Children.Add(new WPFControls.WPFGamePiece(letter.ToString()) { Width = 50, Height = 60 });
+                PiecesPanel.Children.Add(new WPFControls.WPFGamePiece(letter.ToString()));
             }
         }
 
@@ -136,23 +143,23 @@ namespace PapayagramsClient.Game
         {
             foreach (var letter in pieces)
             {
-                PiecesPanel.Children.Add(new WPFControls.WPFGamePiece(letter) { Width = 50 });
+                PiecesPanel.Children.Add(new WPFControls.WPFGamePiece(letter));
             }
         }
 
         public void AddSeedToHand(string piece)
         {
-            PiecesPanel.Children.Add(new WPFControls.WPFGamePiece(piece) { Width = 50 });
-        }
-
-        public void RestrictDump()
-        {
-            throw new System.NotImplementedException();
+            PiecesPanel.Children.Add(new WPFControls.WPFGamePiece(piece));
         }
 
         public void EndGame(string winner)
         {
             throw new System.NotImplementedException();
+        }
+
+        public void RefreshTimer(int remainingMinutes)
+        {
+            throw new NotImplementedException();
         }
     }
 }
