@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Achievement.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameRoom.cs" />
     <Compile Include="Player.cs" />

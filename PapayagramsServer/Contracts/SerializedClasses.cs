@@ -44,7 +44,6 @@ namespace Contracts
                 Id = player.Id,
                 Username = player.Username,
                 Email = player.Email,
-                Password = player.Password,
                 ProfileIcon = player.ProfileIcon
             };
         }
@@ -126,7 +125,7 @@ namespace Contracts
             if (obj != null && GetType() == obj.GetType())
             {
                 AchievementDC achievement = (AchievementDC)obj;
-                isEqual = Id == achievement.Id && Description == achievement.Description && IsAchieved == achievement.IsAchieved;
+                isEqual = Id == achievement.Id && Description.Equals(achievement.Description) && IsAchieved == achievement.IsAchieved;
             }
 
             return isEqual;
@@ -135,6 +134,16 @@ namespace Contracts
         public override int GetHashCode()
         {
             return Id.GetHashCode() ^ Description.GetHashCode() ^ IsAchieved.GetHashCode();
+        }
+
+        public static AchievementDC ConvertToAchievementDC(Achievement achievement)
+        {
+            return new AchievementDC
+            {
+                Id = achievement.Id,
+                Description = achievement.Description,
+                IsAchieved = achievement.IsAchieved
+            };
         }
     }
 

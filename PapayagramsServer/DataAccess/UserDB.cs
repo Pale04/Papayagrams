@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.Entity.Core;
 using System.Data.Entity;
 using System;
+using System.Collections.Generic;
 
 namespace DataAccess
 {
@@ -263,6 +264,45 @@ namespace DataAccess
                 }
             }
             return playerStatsResult;
+        }
+
+        /// <summary>
+        /// Obtains all existing achievements and every one indicates if the player has achieved it
+        /// </summary>
+        /// <param name="username">Username of the player</param>
+        /// <returns>A list with all the achievements if the operation was successful, an empty list otherwise.</returns>
+        public static List<DomainClasses.Achievement> GetPlayerAchievements (string username)
+        {
+            List<DomainClasses.Achievement> achievementsList = new List<DomainClasses.Achievement>();
+            using (var context = new papayagramsEntities())
+            {
+                var achievementsResult = context.Achievement;
+                if (achievementsResult.Any())
+                {
+                    foreach (var achievement in achievementsResult)
+                    {
+                        achievementsList.Add(new DomainClasses.Achievement
+                        {
+                            Id = achievement.id,
+                            Description = achievement.description
+                        });
+                    }
+                }
+
+                var userResult = context.User.Where(p => p.username == username).Include(p => p.UserAchieved);
+                if (userResult.Any())
+                {
+                    foreach (var userAchievement in userResult.First().UserAchieved)
+                    {
+                        DomainClasses.Achievement achievementFound = achievementsList.Find(a => a.Id == userAchievement.achievementId);
+                        if (achievementFound != null)
+                        {
+                            achievementFound.IsAchieved = true;
+                        }
+                    }
+                }
+            }
+            return achievementsList;
         }
     }
 }

@@ -6,6 +6,7 @@
         {
             using (var context = new papayagramsEntities())
             {
+                context.Database.ExecuteSqlCommand("delete from [UserAchieved]");
                 context.Database.ExecuteSqlCommand("delete from [UserRelationship]");
                 context.Database.ExecuteSqlCommand("delete from [TimeAtackHistory]");
                 context.Database.ExecuteSqlCommand("delete from [SuddenDeathHistory]");
@@ -13,7 +14,9 @@
                 context.Database.ExecuteSqlCommand("delete from [UserConfiguration]");
                 context.Database.ExecuteSqlCommand("delete from [UserStatus]");
                 context.Database.ExecuteSqlCommand("delete from [User]");
+                context.Database.ExecuteSqlCommand("delete from [Achievement]");
                 context.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('User', RESEED, 0)");
+                context.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Achievement', RESEED, 0)");
             }
         }
 
@@ -24,6 +27,22 @@
                 context.Database.ExecuteSqlCommand($"update [OriginalGameHistory] SET wonGames = 10, lostGames = 50 where userId = {userId}");
                 context.Database.ExecuteSqlCommand($"update [TimeAtackHistory] SET wonGames = 5, lostGames = 25 where userId = {userId}");
                 context.Database.ExecuteSqlCommand($"update [SuddenDeathHistory] SET wonGames = 3, lostGames = 100 where userId = {userId}");
+            }
+        }
+
+        public static void RegisterAchievements(string achievement1, string achievement2)
+        {
+            using (var context = new papayagramsEntities())
+            {
+                context.Database.ExecuteSqlCommand($"insert into [Achievement] (description) values ('{achievement1}'), ('{achievement2}')");
+            }
+        }
+
+        public static void RegisterUserAchievement(int userId, int achievementId)
+        {
+            using (var context = new papayagramsEntities())
+            {
+                context.Database.ExecuteSqlCommand($"insert into [UserAchieved] (userId, achievementId) values ({userId}, {achievementId})");
             }
         }
     }

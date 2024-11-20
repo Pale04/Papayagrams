@@ -9,15 +9,38 @@ namespace Contracts
 {
     public partial class ServiceImplementation : IGameService
     {
-        public void DumpPiece(string piece)
+        public void DumpPiece(string gameRoomCode, string username, char piece)
         {
-            throw new NotImplementedException();
+            Game game = GamesInProgressPool.GetGame(gameRoomCode);
+            var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(username);
+            channel.AddSeedsToHand(game.PutInDump(piece));
+
+            foreach (Player player in game.ConnectedPlayers)
+            {
+                var playerChannel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
+                playerChannel.RefreshGameRoom(game.PiecesPile, game.ConnectedPlayers.ConvertAll(PlayerDC.ConvertToPlayerDC));
+            }
         }
 
         public void LeaveGame(string gameRoomCode, string username)
         {
             CallbacksPool.RemoveGameCallbackChannel(username);
             GamesInProgressPool.ExitGame(gameRoomCode, username);
+            Game game = GamesInProgressPool.GetGame(gameRoomCode);
+
+            if (game.ConnectedPlayers.Count == 0)
+            {
+                GamesInProgressPool.RemoveGame(gameRoomCode);
+                GameRoomsPool.GetGameRoom(gameRoomCode).State = GameRoomState.Waiting;
+            }
+            else
+            {
+                foreach (Player player in game.ConnectedPlayers)
+                {
+                    var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
+                    channel.RefreshGameRoom(game.PiecesPile, game.ConnectedPlayers.ConvertAll(PlayerDC.ConvertToPlayerDC));
+                }
+            }
         }
 
         public async void ReachServer(string username, string gameRoomCode)
@@ -34,29 +57,76 @@ namespace Contracts
             }
         }
 
-        public void ShoutPapaya(string username)
+        public void ShoutPapaya(string gameRoomCode, string username)
         {
             throw new NotImplementedException();
         }
 
-        public void TakeSeed()
+        public void TakeSeed(string gameRoomCode)
+        {
+            Game game = GamesInProgressPool.GetGame(gameRoomCode);
+            
+            if (!game.ThereAreLessPiecesThanPlayers())
+            {
+                foreach (Player player in game.ConnectedPlayers)
+                {
+                    var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
+                    channel.AddSeedsToHand(game.TakeSeed());
+                }
+            }
+
+            foreach (Player player in game.ConnectedPlayers)
+            {
+                var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
+                channel.RefreshGameRoom(game.PiecesPile, game.ConnectedPlayers.ConvertAll(PlayerDC.ConvertToPlayerDC));
+            }
+        }
+
+        public void CalculateWinner()
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Send the initial pieces to every player and start the timer for start to playing
+        /// Send the initial pieces to every player and start the timer to start to playing
         /// </summary>
         /// <param name="gameRoomCode"></param>
         private static void PlayGame(string gameRoomCode)
         {
+            GameRoom gameRoom = GameRoomsPool.GetGameRoom(gameRoomCode);
             Game game = GamesInProgressPool.GetGame(gameRoomCode);
+
             foreach (Player player in game.ConnectedPlayers)
             {
                 var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
-                channel.ReceiveStartingHand(game.GetInitialPieces(GameRoomsPool.GetGameRoom(gameRoomCode).GameConfiguration.InitialPieces));
+                channel.AddSeedsToHand(game.GetInitialPieces(gameRoom.GameConfiguration.InitialPieces));
             }
-            GamesInProgressPool.StartGameTimer(gameRoomCode);
+
+            foreach (Player player in game.ConnectedPlayers)
+            {
+                var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
+                channel.RefreshGameRoom(game.PiecesPile, game.ConnectedPlayers.ConvertAll(PlayerDC.ConvertToPlayerDC));
+            }
+
+            int timeLimitMinutes = gameRoom.GameConfiguration.TimeLimitMinutes;
+            if (timeLimitMinutes != 0)
+            {
+                System.Threading.Thread timerThread = new System.Threading.Thread(() => {
+                    System.Threading.Thread.Sleep(timeLimitMinutes * 60000);
+                    SendEndGameNotification(gameRoomCode);
+                });
+                timerThread.Start();
+            }
+        }
+
+        private static void SendEndGameNotification(string gameRoomCode)
+        {
+            GameRoom gameRoom = GameRoomsPool.GetGameRoom(gameRoomCode);
+            foreach (Player player in gameRoom.Players)
+            {
+                var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
+                channel.EndGame();
+            }
         }
     }
 }

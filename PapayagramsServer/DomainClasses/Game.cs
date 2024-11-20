@@ -9,6 +9,7 @@ namespace DomainClasses
         private List<Player> _connectedPlayers = new List<Player>();
 
         public List<Player> ConnectedPlayers { get { return _connectedPlayers; } }
+        public Stack<char> PiecesPile { get { return _piecesPile; } }
 
         /// <summary>
         /// Generate the pieces pile with the specified amount of pieces for the game room
@@ -45,17 +46,17 @@ namespace DomainClasses
             return pieces;
         }
 
-        public List<char> GetPieceForEveryone()
+        /// <summary>
+        /// Retrieve a list with one piece from the pile
+        /// </summary>
+        /// <returns>List with the piece</returns>
+        public List<char> TakeSeed()
         {
-            List<char> pieces = new List<char>();
-            if (!ThereAreLessPiecesThanPlayers())
+            List<char> piece = new List<char>
             {
-                foreach (Player _ in ConnectedPlayers)
-                {
-                    pieces.Add(_piecesPile.Pop());
-                }
-            }
-            return pieces;
+                _piecesPile.Pop()
+            };
+            return piece;
         }
 
         /// <summary>
@@ -79,7 +80,7 @@ namespace DomainClasses
             return returnPieces;
         }
 
-        private bool ThereAreLessPiecesThanPlayers()
+        public bool ThereAreLessPiecesThanPlayers()
         {
             return _piecesPile.Count < _connectedPlayers.Count;
         }

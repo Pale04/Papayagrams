@@ -4,6 +4,8 @@ using LanguageExt;
 using System;
 using System.Data.Entity.Core;
 using Tests;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DataAccess.Tests
 {
@@ -27,12 +29,25 @@ namespace DataAccess.Tests
             ProfileIcon = 1
         };
 
+        private readonly DomainClasses.Achievement _achievement1 = new DomainClasses.Achievement()
+        {
+            Id = 1,
+            Description = "Description1",
+        };
+        private readonly DomainClasses.Achievement _achievement2 = new DomainClasses.Achievement()
+        {
+            Id = 2,
+            Description = "Description2"
+        };
+
         [TestInitialize()]
         public void SetUp()
         {
             UserDB.RegisterUser(_registeredPlayer1);
             UserDB.RegisterUser(_registeredPlayer2);
             DataBaseOperation.CreateGameHistoryPlayer(_registeredPlayer1.Id);
+            DataBaseOperation.RegisterAchievements(_achievement1.Description, _achievement2.Description);
+            DataBaseOperation.RegisterUserAchievement(_registeredPlayer1.Id, _achievement1.Id);
         }
 
         [TestCleanup()]
@@ -318,6 +333,40 @@ namespace DataAccess.Tests
         {
             Option<PlayerStats> result = UserDB.GetPlayerStats("Pale");
             Assert.IsTrue(result.IsNone, "GetPlayerStatsNonExistentUserTest");
+        }
+
+        [TestMethod()]
+        public void GetPlayerAchievementsSuccessfulTest()
+        {
+            _achievement1.IsAchieved = true;
+            List<DomainClasses.Achievement> expected = new List<DomainClasses.Achievement>()
+            {
+                _achievement1,
+                _achievement2
+            };
+            List<DomainClasses.Achievement> result = UserDB.GetPlayerAchievements(_registeredPlayer1.Username);
+
+            Assert.IsTrue(expected.SequenceEqual(result), "GetPlayerAchievementsSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void GetPlayerAchievementsWithoutAnyAchieved()
+        {
+            _achievement1.IsAchieved = false;
+            List<DomainClasses.Achievement> expected = new List<DomainClasses.Achievement>()
+            {
+                _achievement1,
+                _achievement2
+            };
+            List<DomainClasses.Achievement> result = UserDB.GetPlayerAchievements(_registeredPlayer2.Username);
+            Assert.IsTrue(expected.SequenceEqual(result), "GetPlayerAchievementsWithoutAnyAchieved");
+        }
+
+        [TestMethod()]
+        public void GetPlayerAchievementsNonExistentUserTest()
+        {
+            List<DomainClasses.Achievement> result = UserDB.GetPlayerAchievements("Pale");
+            Assert.IsTrue(result.Count == 2, "GetPlayerAchievementsNonExistentUserTest");
         }
     }
 }

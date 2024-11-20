@@ -1,6 +1,8 @@
 ﻿using DataAccess;
 using DomainClasses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Linq;
 using Tests;
 
 namespace Contracts.Tests
@@ -24,6 +26,17 @@ namespace Contracts.Tests
             Password = "040704"
         };
 
+        private readonly AchievementDC _achievement1 = new AchievementDC()
+        {
+            Id = 1,
+            Description = "Description1",
+        };
+        private readonly AchievementDC _achievement2 = new AchievementDC()
+        {
+            Id = 2,
+            Description = "Description2"
+        };
+
         [TestInitialize()]
         public void SetUp()
         {
@@ -40,6 +53,8 @@ namespace Contracts.Tests
                 Password = _registeredPlayer2.Password
             });
             DataBaseOperation.CreateGameHistoryPlayer(_registeredPlayer1.Id);
+            DataBaseOperation.RegisterAchievements(_achievement1.Description, _achievement2.Description);
+            DataBaseOperation.RegisterUserAchievement(_registeredPlayer1.Id, _achievement1.Id);
         }
 
         [TestCleanup()]
@@ -209,6 +224,45 @@ namespace Contracts.Tests
                 TimeLimitMinutes = 5
             });
             Assert.AreEqual(esperado, resultado, "ConvertGameConfigurationDC");
+        }
+
+        [TestMethod()]
+        public void GetAchievementsSuccessfulTest()
+        {
+            _achievement1.IsAchieved = true;
+            List<AchievementDC> expected = new List<AchievementDC>()
+            {
+                _achievement1,
+                _achievement2
+            };
+            (int _, List<AchievementDC> result) = _serviceImplementation.GetAchievements(_registeredPlayer1.Username);
+            Assert.IsTrue(expected.SequenceEqual(result), "GetAchievementsSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void GetAchievementsNonExistentUserTest()
+        {
+            _achievement1.IsAchieved = false;
+            List<AchievementDC> expected = new List<AchievementDC>()
+            {
+                _achievement1,
+                _achievement2
+            };
+            (int _, List<AchievementDC> result) = _serviceImplementation.GetAchievements("juan");
+            Assert.IsTrue(expected.SequenceEqual(result), "GetAchievementsNonExistentUserTest");
+        }
+
+        [TestMethod()]
+        public void GetAchievementsNullUsernameTest()
+        {
+            _achievement1.IsAchieved = false;
+            List<AchievementDC> expected = new List<AchievementDC>()
+            {
+                _achievement1,
+                _achievement2
+            };
+            (int _, List<AchievementDC> result) = _serviceImplementation.GetAchievements(null);
+            Assert.IsTrue(expected.SequenceEqual(result), "GetAchievementsNullUsernameTest");
         }
     }
 }

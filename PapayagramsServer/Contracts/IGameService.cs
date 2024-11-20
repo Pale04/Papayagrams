@@ -10,18 +10,22 @@ namespace Contracts
         void ReachServer(string username, string gameRoomCode);
 
         [OperationContract(IsOneWay = true)]
-        void DumpPiece(string piece);
+        void DumpPiece(string gameRoomCode, string username, char piece);
 
         //Cuando un jugador termina todas sus fichas y el server le manda una a cada jugador.
         [OperationContract(IsOneWay = true)]
-        void TakeSeed();
+        void TakeSeed(string gameRoomCode);
 
         //Un jugador terminó todas sus fichas y hay menos fichas en la pila que jugadores.
         [OperationContract(IsOneWay = true)]
-        void ShoutPapaya(string username);
+        void ShoutPapaya(string gameRoomCode, string username);
 
         [OperationContract]
         void LeaveGame(string gameRoomCode, string username);
+
+        //TODO: refinar
+        [OperationContract]
+        void CalculateWinner();
     }
 
     [ServiceContract]
@@ -29,23 +33,16 @@ namespace Contracts
     {
         //Se llama cada vez que se actualiza la pila, cuando alguien se sale de la partida.
         [OperationContract(IsOneWay = true)]
-        void RefreshGameRoom(string roomCode);
+        void RefreshGameRoom(Stack<char> piecesPile, List<PlayerDC> connectedPlayers);
 
         [OperationContract(IsOneWay = true)]
         void RefreshTimer(int remainingMinutes);
 
+        //Manda fichas iniciales, fichas del dump y una ficha cuando alguien se acaba las suyas
         [OperationContract(IsOneWay = true)]
-        void ReceiveStartingHand(List<char> initalPieces);
-
-        //El server manda tres fichas a un jugador después de utilizar el dump
-        [OperationContract(IsOneWay = true)]
-        void AddDumpSeedsToHand(List<string> pieces);
-
-        //El server manda una ficha a cada jugador cuando un jugador termina todas sus fichas.
-        [OperationContract(IsOneWay = true)]
-        void AddSeedToHand(string piece);
+        void AddSeedsToHand(List<char> initalPieces);
 
         [OperationContract(IsOneWay = true)]
-        void EndGame(string winner);
+        void EndGame();
     }
 }

@@ -23,7 +23,19 @@ namespace Contracts
 
         public (int, List<AchievementDC>) GetAchievements(string username)
         {
-            throw new NotImplementedException();
+            List<DomainClasses.Achievement> achievementsList = new List<DomainClasses.Achievement>();
+
+            try
+            {
+                achievementsList = UserDB.GetPlayerAchievements(username);
+            }
+            catch (EntityException error)
+            {
+                _logger.Error($"Error while trying to get achievements of: {username}", error);
+                return (102, null);
+            }
+
+            return (0, achievementsList.ConvertAll(AchievementDC.ConvertToAchievementDC));
         }
 
         public (int, List<FriendDC>) GetFriendRequests(string username)
