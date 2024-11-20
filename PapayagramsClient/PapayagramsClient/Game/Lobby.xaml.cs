@@ -28,7 +28,7 @@ namespace PapayagramsClient.Game
             }
             catch (EndpointNotFoundException)
             {
-                new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                 NavigationService.GoBack();
                 return;
             }
@@ -66,7 +66,7 @@ namespace PapayagramsClient.Game
             }
             catch (EndpointNotFoundException)
             {
-                new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                 return;
             }
 
@@ -87,11 +87,11 @@ namespace PapayagramsClient.Game
                     return;
 
                 case 102:
-                    new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
                     break;
 
                 case 401:
-                    new PopUpWindow(Properties.Resources.lobbyRoomNotFoundTitle, Properties.Resources.lobbyRoomNotFound, 2).ShowDialog();
+                    new SelectionPopUpWindow(Properties.Resources.lobbyRoomNotFoundTitle, Properties.Resources.lobbyRoomNotFound, 2).ShowDialog();
                     break;
             }
         }

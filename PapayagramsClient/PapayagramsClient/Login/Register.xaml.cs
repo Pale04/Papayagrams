@@ -43,7 +43,7 @@ namespace PapayagramsClient.Login
             }
             catch (EndpointNotFoundException)
             {
-                new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                 return;
             }
 
@@ -71,7 +71,7 @@ namespace PapayagramsClient.Login
                 }
             }
 
-            new PopUpWindow(Properties.Resources.registerSuccessfulTitle, Properties.Resources.registerSuccessful, 0).ShowDialog();
+            new SelectionPopUpWindow(Properties.Resources.registerSuccessfulTitle, Properties.Resources.registerSuccessful, 0).ShowDialog();
             this.NavigationService.GoBack();
         }
         

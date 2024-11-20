@@ -360,4 +360,16 @@
   <data name="joinGameCantJoin" xml:space="preserve">
     <value>El código es incorrecto o el lobby está lleno</value>
   </data>
+  <data name="globalClose" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="globalAccept" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="gameLeaveGameTitle" xml:space="preserve">
+    <value>Salir del juego</value>
+  </data>
+  <data name="gameLeaveGame" xml:space="preserve">
+    <value>¿Estás seguro que quieres salir?</value>
+  </data>
 </root>

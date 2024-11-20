@@ -39,7 +39,7 @@ namespace PapayagramsClient.Login
             }
             catch (EndpointNotFoundException)
             {
-                new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                 return;
             }
 
@@ -52,7 +52,7 @@ namespace PapayagramsClient.Login
                 switch (returnCode)
                 {
                     case 102:
-                        new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                        new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
                         break;
                     case 203:
                         UsernameErrorText.Content = Properties.Resources.globalEmptyUsername;

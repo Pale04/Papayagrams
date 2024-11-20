@@ -202,7 +202,7 @@
     <value>Sudden death</value>
   </data>
   <data name="gameModeClasic" xml:space="preserve">
-    <value>Clasic</value>
+    <value>Classic</value>
   </data>
   <data name="joinGameTitle" xml:space="preserve">
     <value>Join game</value>
@@ -359,5 +359,17 @@
   </data>
   <data name="joinGameCantJoin" xml:space="preserve">
     <value>The game code is wrong or the lobby is full</value>
+  </data>
+  <data name="globalClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="globalAccept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="gameLeaveGameTitle" xml:space="preserve">
+    <value>Leave game</value>
+  </data>
+  <data name="gameLeaveGame" xml:space="preserve">
+    <value>Are you sure you want to leave?</value>
   </data>
 </root>

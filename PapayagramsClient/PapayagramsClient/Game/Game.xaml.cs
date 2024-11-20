@@ -2,30 +2,20 @@
 using PapayagramsClient.PapayagramsService;
 using System.ServiceModel;
 using System.Windows.Controls;
-using NHunspell;
 using System;
 using System.Windows;
 using PapayagramsClient.WPFControls;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace PapayagramsClient.Game
 {
     public partial class Game : Page, IGameServiceCallback
     {
-        private string _spellCheckDict;
-        private string _spellCheckAff;
         private GameServiceClient _host;
 
         public Game()
         {
             Console.WriteLine("Entering game...");
-            ChooseLanguageDictionary();
-
-            if (_spellCheckAff == null)
-            {
-                return;
-            }
-
             InitializeComponent();
             FillGameGrids();
 
@@ -38,7 +28,7 @@ namespace PapayagramsClient.Game
             }
             catch (EndpointNotFoundException)
             {
-                new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                 NavigationService.GoBack();
                 return;
             }
@@ -49,20 +39,6 @@ namespace PapayagramsClient.Game
         ~Game()
         {
             _host.Close();
-        }
-
-        private void ChooseLanguageDictionary()
-        {
-            if (CurrentGame.GameConfig.WordsLanguage.Equals(LanguageDC.Spanish))
-            {
-                _spellCheckAff = "../Resources/Dictionaries/es_MX.aff";
-                _spellCheckDict = "../Resources/Dictionaries/es_MX.dic";
-            }
-            else if (CurrentGame.GameConfig.WordsLanguage.Equals(LanguageDC.English))
-            {
-                _spellCheckAff = "../Resources/Dictionaries/en_US.aff";
-                _spellCheckDict = "../Resources/Dictionaries/en_US.dic";
-            }
         }
 
         private void FillGameGrids()
@@ -77,7 +53,7 @@ namespace PapayagramsClient.Game
             {
                 for (int j = 0; j < 25; j++)
                 {
-                    WPFControls.WPFGameBoardPieceSpot spot = new WPFControls.WPFGameBoardPieceSpot();
+                    WPFGameBoardPieceSpot spot = new WPFControls.WPFGameBoardPieceSpot();
                     Grid.SetColumn(spot, i);
                     Grid.SetRow(spot, j);
                     BoardGrid.Children.Add(spot);
@@ -87,55 +63,43 @@ namespace PapayagramsClient.Game
 
         public void RefreshGameRoom(string roomCode)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void LeaveGame()
         {
-            // TODO: Agregar popup de confirmación para salir
-            _host.LeaveGame(CurrentGame.RoomCode, CurrentPlayer.Player.Username);
-            NavigationService.Navigate(new MainMenu());
+            if ((bool)new SelectionPopUpWindow(Properties.Resources.gameLeaveGameTitle, Properties.Resources.gameLeaveGame, 4).ShowDialog())
+            {
+                _host.LeaveGame(CurrentGame.RoomCode, CurrentPlayer.Player.Username);
+                NavigationService.Navigate(new MainMenu());
+            }
         }
 
-        private void DumpPiece(string piece)
+        private void DumpSeed(object sender, RoutedEventArgs e)
         {
-            if (CurrentGame.GameData.PilePieces < CurrentGame.PlayersInRoom.Count)
-            {
+            //if (CurrentGame.GameData.PilePieces < CurrentGame.PlayersInRoom.Count)
+            //{
                 // show message of cant dump
-                return;
-            }
+                //return;
+            //}
 
-            // tirar una pieza
-            throw new System.NotImplementedException();
+            WPFGamePiece piece = (WPFGamePiece)sender;
+            Console.WriteLine("piece " + piece.PieceLetter.Text + " dumped.");
+            _host.DumpPiece(piece.PieceLetter.Text);
+            PiecesPanel.Children.Remove(piece);
         }
 
         private void PlaySeed(object sender, RoutedEventArgs e)
         {
             WPFGamePiece piece = (WPFGamePiece)sender;
             PiecesPanel.Children.Remove(piece);
-
-            int pieceRow = Grid.GetRow(piece);
-            int pieceColumn = Grid.GetColumn(piece);
-
-            // TODO: Search neighbor pieces for words
-        }
-
-        private bool VerifyWord(string word)
-        {
-            using (var hunspell = new Hunspell(_spellCheckAff, _spellCheckDict))
-            {
-                hunspell.Spell(word);
-                // TODO
-            }
-
-            throw new System.NotImplementedException();
         }
 
         public void ReceiveStartingHand(char[] initialPieces)
         {
             foreach (var letter in initialPieces)
             {
-                PiecesPanel.Children.Add(new WPFControls.WPFGamePiece(letter.ToString()));
+                PiecesPanel.Children.Add(new WPFGamePiece(letter.ToString()));
             }
         }
 
@@ -143,23 +107,49 @@ namespace PapayagramsClient.Game
         {
             foreach (var letter in pieces)
             {
-                PiecesPanel.Children.Add(new WPFControls.WPFGamePiece(letter));
+                PiecesPanel.Children.Add(new WPFGamePiece(letter));
             }
         }
 
         public void AddSeedToHand(string piece)
         {
-            PiecesPanel.Children.Add(new WPFControls.WPFGamePiece(piece));
+            PiecesPanel.Children.Add(new WPFGamePiece(piece));
+        }
+
+        private (int points, List<string> correctWords) EvaluateBoard()
+        {
+            return (0, null);
         }
 
         public void EndGame(string winner)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void RefreshTimer(int remainingMinutes)
         {
             throw new NotImplementedException();
+        }
+
+        private void PickupSeed(object sender, RoutedEventArgs e)
+        {
+            WPFGameBoardPieceSpot piece = (WPFGameBoardPieceSpot)sender;
+            Console.WriteLine("picked up piece: " +  piece.LetterLabel.Content);
+
+            string pieceLetter = (string)piece.LetterLabel.Content;
+
+            PiecesPanel.Children.Add(new WPFGamePiece(pieceLetter));
+
+            piece.LetterLabel.Content = "";
+            piece.MainGrid.Background = null;
+        }
+
+        private void MovePiece(object sender, RoutedEventArgs e)
+        {
+            WPFGameBoardPieceSpot piece = (WPFGameBoardPieceSpot)sender;
+            Console.WriteLine("moved piece: " +  piece.LetterLabel.Content);
+            piece.LetterLabel.Content = "";
+            piece.MainGrid.Background = null;
         }
     }
 }

@@ -12,6 +12,12 @@ namespace PapayagramsClient.WPFControls
             handlerType: typeof(RoutedEventHandler),
             ownerType: typeof(WPFGamePiece));
 
+        public static readonly RoutedEvent PieceDumpedEvent = EventManager.RegisterRoutedEvent(
+            name: "PieceDumped",
+            routingStrategy: RoutingStrategy.Bubble,
+            handlerType: typeof(RoutedEventHandler),
+            ownerType: typeof(WPFGamePiece));
+
         public WPFGamePiece(string letter)
         {
             InitializeComponent();
@@ -30,12 +36,25 @@ namespace PapayagramsClient.WPFControls
             RaiseEvent(routedEventArgs);
         }
 
+        public event RoutedEventHandler PieceDumped
+        {
+            add { AddHandler(PieceDumpedEvent, value); }
+            remove { RemoveHandler(PieceDumpedEvent, value); }
+        }
+
+        public void RaisePieceDumpedEvent()
+        {
+            RoutedEventArgs routedEventArgs = new RoutedEventArgs(routedEvent: PieceDumpedEvent);
+            RaiseEvent(routedEventArgs);
+        }
+
         protected override void OnMouseMove(MouseEventArgs e)
         {
             DataObject data = new DataObject();
             data.SetData("Color", GamePiece.Fill.ToString());
             data.SetData(DataFormats.StringFormat, PieceLetter.Text);
             data.SetData("Object", this);
+            data.SetData("ObjectType", "Piece");
 
             DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
         }

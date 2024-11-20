@@ -27,10 +27,10 @@
             <Image Source="../Resources/Icons/exit-svgrepo-com.png"/>
         </Button>
 
-        <Button HorizontalAlignment="Left" Margin="139,611,0,0" VerticalAlignment="Top" Height="50" Width="50">
+        <Button HorizontalAlignment="Left" Margin="139,611,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="GoToConfiguration">
             <Image Source="../Resources/Icons/cog-setting-gear-svgrepo-com.png"/>
         </Button>
-        <Button HorizontalAlignment="Left" Margin="220,611,0,0" VerticalAlignment="Top" Height="50" Width="50">
+        <Button HorizontalAlignment="Left" Margin="220,611,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="GoToAchievements">
             <Image Source="../Resources/Icons/trophy-svgrepo-com.png"/>
         </Button>
 
