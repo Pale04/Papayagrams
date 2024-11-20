@@ -8,6 +8,8 @@
              d:DesignHeight="50" d:DesignWidth="50"
              AllowDrop="True">
     <Grid x:Name="MainGrid">
-        <Label x:Name="LetterLabel" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Border BorderBrush="Gray" BorderThickness="1">
+            <Label x:Name="LetterLabel" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Height="41" Width="41"/>
+        </Border>
     </Grid>
 </UserControl>

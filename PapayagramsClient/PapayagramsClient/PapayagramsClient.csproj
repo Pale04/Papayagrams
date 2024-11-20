@@ -126,6 +126,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SelectionPopUpWindow.xaml.cs">
+      <DependentUpon>SelectionPopUpWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WordChecker.cs" />
+    <Compile Include="WPFControls\WPFAchievementView.xaml.cs">
+      <DependentUpon>WPFAchievementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPFControls\WPFDump.xaml.cs">
+      <DependentUpon>WPFDump.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPFControls\WPFGameBoardPieceSpot.xaml.cs">
       <DependentUpon>WPFGameBoardPieceSpot.xaml</DependentUpon>
     </Compile>
@@ -165,10 +175,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Menu\Leaderboards.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PopUpWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -222,9 +228,6 @@
     <Compile Include="Menu\Leaderboards.xaml.cs">
       <DependentUpon>Leaderboards.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PopUpWindow.xaml.cs">
-      <DependentUpon>PopUpWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Login\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
@@ -235,6 +238,18 @@
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Page Include="Menu\Profile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SelectionPopUpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPFControls\WPFAchievementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPFControls\WPFDump.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -391,6 +406,22 @@
     <None Include="Hunspellx86.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\error-svgrepo-com.png" />
+    <Resource Include="Resources\Icons\info-circle-svgrepo-com.png" />
+    <Resource Include="Resources\Icons\success-svgrepo-com.png" />
+    <Resource Include="Resources\Icons\warning-svgrepo-com.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\question-circle-svgrepo-com.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\medal-svgrepo-com.png" />
+    <Resource Include="Resources\Icons\trash-bin-svgrepo-com.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\trash-bin-open-svgrepo-com.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

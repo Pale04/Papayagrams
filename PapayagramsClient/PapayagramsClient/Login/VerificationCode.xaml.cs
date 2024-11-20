@@ -23,7 +23,7 @@ namespace PapayagramsClient.Login
             }
             catch (EndpointNotFoundException)
             {
-                new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                 return;
             }
 
@@ -42,10 +42,10 @@ namespace PapayagramsClient.Login
                     ErrorText.Content = Properties.Resources.verificationWrongCode;
                     return;
                 case 102:
-                    new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
                     return;
                 case 209:
-                    new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                     return;
                 default:
                     return;
@@ -69,7 +69,7 @@ namespace PapayagramsClient.Login
             }
             catch (EndpointNotFoundException)
             {
-                new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                 return;
             }
 
@@ -78,10 +78,10 @@ namespace PapayagramsClient.Login
             switch (returnCode)
             {
                 case 102:
-                    new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
                     return;
                 case 104:
-                    new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                     return;
                 default:
                     break;

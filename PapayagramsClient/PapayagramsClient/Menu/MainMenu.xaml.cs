@@ -6,8 +6,6 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using PapayagramsClient.PapayagramsService;
 using PapayagramsClient.Menu;
-using System.IO;
-using System.Threading;
 
 namespace PapayagramsClient
 {
@@ -29,7 +27,7 @@ namespace PapayagramsClient
             }
             catch (EndpointNotFoundException)
             {
-                new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                 NavigationService.GoBack();
                 return;
             }
@@ -58,10 +56,10 @@ namespace PapayagramsClient
             switch (returnCode)
             {
                 case 102:
-                    new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
                     return;
                 case 205:
-                    new PopUpWindow(Properties.Resources.errorOccurredTitle, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
+                    new SelectionPopUpWindow(Properties.Resources.errorOccurredTitle, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
                     return;
             }
 
@@ -69,11 +67,6 @@ namespace PapayagramsClient
         }
 
         public void ReceiveFriendRequest(PlayerDC player)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ReceiveGameInvitation()
         {
             throw new NotImplementedException();
         }
@@ -93,8 +86,7 @@ namespace PapayagramsClient
             }
             catch (EndpointNotFoundException)
             {
-                new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
-                NavigationService.GoBack();
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                 return;
             }
 
@@ -109,12 +101,29 @@ namespace PapayagramsClient
                     break;
 
                 case 102:
-                    new PopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
                     break;
 
                 case 205:
                     break;
             }
+        }
+
+        private void GoToAchievements(object sender, RoutedEventArgs e)
+        {
+            (int returnCode, AchievementDC[] achievements) = _host.GetAchievements(CurrentPlayer.Player.Username);
+
+            switch (returnCode)
+            {
+                case 0:
+                    NavigationService.Navigate(new Achievements(achievements));
+                    break;
+            }
+        }
+
+        private void GoToConfiguration(object sender, RoutedEventArgs e)
+        {
+            // TODO
         }
     }
 }

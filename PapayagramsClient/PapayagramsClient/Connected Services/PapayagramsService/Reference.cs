@@ -1251,7 +1251,10 @@ namespace PapayagramsClient.PapayagramsService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RefreshGameRoom", ReplyAction="http://tempuri.org/IGameService/RefreshGameRoomResponse")]
         void RefreshGameRoom(string roomCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/ReceiveStartingHand", ReplyAction="http://tempuri.org/IGameService/ReceiveStartingHandResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RefreshTimer", ReplyAction="http://tempuri.org/IGameService/RefreshTimerResponse")]
+        void RefreshTimer(int remainingMinutes);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/ReceiveStartingHand")]
         void ReceiveStartingHand(char[] initalPieces);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/AddDumpSeedsToHand", ReplyAction="http://tempuri.org/IGameService/AddDumpSeedsToHandResponse")]

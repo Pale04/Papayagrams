@@ -1,15 +1,31 @@
-﻿using System.Windows.Controls;
+﻿using PapayagramsClient.PapayagramsService;
+using System;
+using System.Windows.Controls;
 
 namespace PapayagramsClient.Menu
 {
-    /// <summary>
-    /// Lógica de interacción para Achievements.xaml
-    /// </summary>
     public partial class Achievements : Page
     {
-        public Achievements()
+        public Achievements(AchievementDC[] achievements)
         {
             InitializeComponent();
+            AddAchievementProgress();
+            AddAchievementList();
+        }
+
+        private void AddAchievementList()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AddAchievementProgress()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ReturnToMainMenu(object sender, System.Windows.RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }

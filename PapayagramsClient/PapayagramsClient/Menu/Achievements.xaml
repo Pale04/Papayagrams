@@ -5,10 +5,26 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PapayagramsClient.Menu"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="720" d:DesignWidth="1080"
+      xmlns:p="clr-namespace:PapayagramsClient.Properties"
+      Background="#D9D9D9"
       Title="Achievements">
 
     <Grid>
-        
+        <Button Style="{StaticResource PrimaryButton}" HorizontalAlignment="Left" Margin="46,53,0,0" VerticalAlignment="Top" Height="60" Width="61" Click="ReturnToMainMenu">
+            <Image Source="../Resources/Icons/back-svgrepo-com.png"/>
+        </Button>
+
+        <Label Content="{x:Static p:Resources.mainMenuAchievements}" HorizontalAlignment="Left" Margin="138,32,0,0" VerticalAlignment="Top" FontSize="64" FontWeight="Bold"/>
+
+        <StackPanel Margin="40,148,40,496" Background="White" Opacity="21" Width="1000" Height="75" Orientation="Horizontal">
+            <ProgressBar Name="AchievementsProgress" HorizontalAlignment="Left" Margin="20, 0, 10, 0" Height="10" VerticalAlignment="Center" Width="800" Minimum="0" Maximum="100"/>
+            <Label Name="ProgressLabel" Content="20/20" FontSize="26" Margin="0, 0, 10, 0" VerticalContentAlignment="Center"/>
+            <Image Source="../Resources/Icons/trophy-svgrepo-com.png" HorizontalAlignment="Right"/>
+        </StackPanel>
+
+        <ScrollViewer>
+            <StackPanel Name="AchievementListPanel" Margin="40,256,40,34"/>
+        </ScrollViewer>
     </Grid>
 </Page>

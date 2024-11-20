@@ -244,11 +244,14 @@
   <wsdl:message name="IGameService_RefreshGameRoom_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:RefreshGameRoomResponse" />
   </wsdl:message>
+  <wsdl:message name="IGameService_RefreshTimer_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RefreshTimer" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_RefreshTimer_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RefreshTimerResponse" />
+  </wsdl:message>
   <wsdl:message name="IGameService_ReceiveStartingHand_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReceiveStartingHand" />
-  </wsdl:message>
-  <wsdl:message name="IGameService_ReceiveStartingHand_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ReceiveStartingHandResponse" />
   </wsdl:message>
   <wsdl:message name="IGameService_AddDumpSeedsToHand_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:AddDumpSeedsToHand" />
@@ -416,9 +419,12 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/RefreshGameRoom" message="tns:IGameService_RefreshGameRoom_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/RefreshGameRoomResponse" message="tns:IGameService_RefreshGameRoom_InputCallbackMessage" />
     </wsdl:operation>
+    <wsdl:operation name="RefreshTimer">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/RefreshTimer" message="tns:IGameService_RefreshTimer_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/RefreshTimerResponse" message="tns:IGameService_RefreshTimer_InputCallbackMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ReceiveStartingHand">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/ReceiveStartingHand" message="tns:IGameService_ReceiveStartingHand_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/ReceiveStartingHandResponse" message="tns:IGameService_ReceiveStartingHand_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddDumpSeedsToHand">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/AddDumpSeedsToHand" message="tns:IGameService_AddDumpSeedsToHand_OutputCallbackMessage" />
@@ -754,11 +760,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ReceiveStartingHand">
-      <soap12:operation soapAction="http://tempuri.org/IGameService/ReceiveStartingHand" style="document" />
+    <wsdl:operation name="RefreshTimer">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/RefreshTimer" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveStartingHand">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/ReceiveStartingHand" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

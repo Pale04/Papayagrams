@@ -27,7 +27,7 @@ namespace PapayagramsClient.Game
             }
             else
             {
-                new PopUpWindow(Properties.Resources.joinGameCantJoinTitle, Properties.Resources.joinGameCantJoin, 2).ShowDialog();
+                new SelectionPopUpWindow(Properties.Resources.joinGameCantJoinTitle, Properties.Resources.joinGameCantJoin, 2).ShowDialog();
                 return;
             }
         }

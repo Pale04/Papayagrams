@@ -313,7 +313,25 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Clasic.
+        ///   Busca una cadena traducida similar a Are you sure you want to leave?.
+        /// </summary>
+        public static string gameLeaveGame {
+            get {
+                return ResourceManager.GetString("gameLeaveGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Leave game.
+        /// </summary>
+        public static string gameLeaveGameTitle {
+            get {
+                return ResourceManager.GetString("gameLeaveGameTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Classic.
         /// </summary>
         public static string gameModeClasic {
             get {
@@ -336,6 +354,24 @@ namespace PapayagramsClient.Properties {
         public static string gameModeTimeAttack {
             get {
                 return ResourceManager.GetString("gameModeTimeAttack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Accept.
+        /// </summary>
+        public static string globalAccept {
+            get {
+                return ResourceManager.GetString("globalAccept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Close.
+        /// </summary>
+        public static string globalClose {
+            get {
+                return ResourceManager.GetString("globalClose", resourceCulture);
             }
         }
         
