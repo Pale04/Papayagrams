@@ -23,8 +23,19 @@ namespace PapayagramsClient.WPFControls
             if (e.Data.GetDataPresent(DataFormats.StringFormat) && e.Data.GetDataPresent("Color") && e.Data.GetDataPresent("Object"))
             {
                 e.Effects = DragDropEffects.Move;
-                WPFGamePiece gamePiece = (WPFGamePiece)e.Data.GetData("Object");
-                gamePiece.RaisePieceDumpedEvent();
+
+                switch (e.Data.GetData("ObjectType"))
+                {
+                    case "Piece":
+                        WPFGamePiece gamePiece = (WPFGamePiece)e.Data.GetData("Object");
+                        gamePiece.RaisePieceDumpedEvent();
+                        break;
+
+                    case "PieceSpot":
+                        WPFGameBoardPieceSpot pieceSpot = (WPFGameBoardPieceSpot)e.Data.GetData("Object");
+                        pieceSpot.RaisePieceDumpedEvent();
+                        break;
+                }
             }
             e.Handled = true;
         }

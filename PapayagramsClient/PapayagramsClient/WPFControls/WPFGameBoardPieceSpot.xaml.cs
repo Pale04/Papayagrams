@@ -19,6 +19,12 @@ namespace PapayagramsClient.WPFControls
             handlerType: typeof(RoutedEventHandler),
             ownerType: typeof(WPFGameBoardPieceSpot));
 
+        public static readonly RoutedEvent PieceDumpedEvent = EventManager.RegisterRoutedEvent(
+            name: "PieceDumped",
+            routingStrategy: RoutingStrategy.Bubble,
+            handlerType: typeof(RoutedEventHandler),
+            ownerType: typeof(WPFGameBoardPieceSpot));
+
         Brush _previousFill;
         string _previousLetter;
 
@@ -36,6 +42,18 @@ namespace PapayagramsClient.WPFControls
         public void RaisePiecePickedUpEvent()
         {
             RoutedEventArgs routedEventArgs = new RoutedEventArgs(routedEvent: PiecePickedUpEvent);
+            RaiseEvent(routedEventArgs);
+        }
+
+        public event RoutedEventHandler PieceDumped
+        {
+            add { AddHandler(PieceDumpedEvent, value); }
+            remove { RemoveHandler(PieceDumpedEvent, value); }
+        }
+
+        public void RaisePieceDumpedEvent()
+        {
+            RoutedEventArgs routedEventArgs = new RoutedEventArgs(routedEvent: PieceDumpedEvent);
             RaiseEvent(routedEventArgs);
         }
 

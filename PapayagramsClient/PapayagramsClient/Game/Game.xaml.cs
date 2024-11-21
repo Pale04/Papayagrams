@@ -34,6 +34,11 @@ namespace PapayagramsClient.Game
             }
 
             _host.ReachServer(CurrentPlayer.Player.Username, CurrentGame.RoomCode);
+            CurrentGame.GameData = new GameProgressData()
+            {
+                PilePieces = 144,
+                Points = 0
+            };
         }
 
         ~Game()
@@ -53,7 +58,7 @@ namespace PapayagramsClient.Game
             {
                 for (int j = 0; j < 25; j++)
                 {
-                    WPFGameBoardPieceSpot spot = new WPFControls.WPFGameBoardPieceSpot();
+                    WPFGameBoardPieceSpot spot = new WPFGameBoardPieceSpot();
                     Grid.SetColumn(spot, i);
                     Grid.SetRow(spot, j);
                     BoardGrid.Children.Add(spot);
@@ -61,12 +66,7 @@ namespace PapayagramsClient.Game
             }
         }
 
-        public void RefreshGameRoom(string roomCode)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void LeaveGame()
+        private void LeaveGame(object sender, RoutedEventArgs e)
         {
             if ((bool)new SelectionPopUpWindow(Properties.Resources.gameLeaveGameTitle, Properties.Resources.gameLeaveGame, 4).ShowDialog())
             {
@@ -75,45 +75,43 @@ namespace PapayagramsClient.Game
             }
         }
 
-        private void DumpSeed(object sender, RoutedEventArgs e)
+        private void DumpSeedFromHand(object sender, RoutedEventArgs e)
         {
-            //if (CurrentGame.GameData.PilePieces < CurrentGame.PlayersInRoom.Count)
-            //{
-                // show message of cant dump
-                //return;
-            //}
-
             WPFGamePiece piece = (WPFGamePiece)sender;
-            Console.WriteLine("piece " + piece.PieceLetter.Text + " dumped.");
-            _host.DumpPiece(piece.PieceLetter.Text);
-            PiecesPanel.Children.Remove(piece);
+            if (DumpSeed(piece.PieceLetter.Text))
+            {
+                PiecesPanel.Children.Remove(piece);
+            }
+        }
+
+        private void DumpSeedFromBoard(object sender, RoutedEventArgs e)
+        {
+            WPFGameBoardPieceSpot piece = (WPFGameBoardPieceSpot)sender;
+            if (DumpSeed((string)piece.LetterLabel.Content))
+            {
+                piece.LetterLabel.Content = "";
+                piece.MainGrid.Background = null;
+            }
+        }
+
+        private bool DumpSeed(string letter)
+        {
+            if (CurrentGame.GameData.PilePieces < CurrentGame.PlayersInRoom.Count)
+            {
+                // message of not enough pieces
+                return false;
+            }
+
+            Console.WriteLine("piece " + letter + " dumped.");
+            _host.DumpPiece(CurrentGame.RoomCode, CurrentPlayer.Player.Username, char.Parse(letter));
+
+            return true;
         }
 
         private void PlaySeed(object sender, RoutedEventArgs e)
         {
             WPFGamePiece piece = (WPFGamePiece)sender;
             PiecesPanel.Children.Remove(piece);
-        }
-
-        public void ReceiveStartingHand(char[] initialPieces)
-        {
-            foreach (var letter in initialPieces)
-            {
-                PiecesPanel.Children.Add(new WPFGamePiece(letter.ToString()));
-            }
-        }
-
-        public void AddDumpSeedsToHand(string[] pieces)
-        {
-            foreach (var letter in pieces)
-            {
-                PiecesPanel.Children.Add(new WPFGamePiece(letter));
-            }
-        }
-
-        public void AddSeedToHand(string piece)
-        {
-            PiecesPanel.Children.Add(new WPFGamePiece(piece));
         }
 
         private (int points, List<string> correctWords) EvaluateBoard()
@@ -134,6 +132,11 @@ namespace PapayagramsClient.Game
         private void PickupSeed(object sender, RoutedEventArgs e)
         {
             WPFGameBoardPieceSpot piece = (WPFGameBoardPieceSpot)sender;
+            if (string.IsNullOrEmpty((string)piece.LetterLabel.Content))
+            {
+                return;
+            }
+
             Console.WriteLine("picked up piece: " +  piece.LetterLabel.Content);
 
             string pieceLetter = (string)piece.LetterLabel.Content;
@@ -150,6 +153,24 @@ namespace PapayagramsClient.Game
             Console.WriteLine("moved piece: " +  piece.LetterLabel.Content);
             piece.LetterLabel.Content = "";
             piece.MainGrid.Background = null;
+        }
+
+        public void RefreshGameRoom(Stack<char> piecesPile, PlayerDC[] connectedPlayers)
+        {
+            CurrentGame.GameData.PilePieces = piecesPile.Count;
+        }
+
+        public void AddSeedsToHand(char[] pieces)
+        {
+            foreach (var letter in pieces)
+            {
+                PiecesPanel.Children.Add(new WPFGamePiece(letter.ToString()));
+            }
+        }
+
+        public void EndGame()
+        {
+            throw new NotImplementedException();
         }
     }
 }

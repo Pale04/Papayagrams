@@ -146,11 +146,6 @@ namespace PapayagramsClient.Game
             }
         }
 
-        public void CarryInsideGame()
-        {
-            NavigationService.Navigate(new Game());
-        }
-
         private void ReturnToMainMenu(object sender, RoutedEventArgs e)
         {
             _host.LeaveLobby(CurrentPlayer.Player.Username, CurrentGame.RoomCode);
@@ -172,7 +167,7 @@ namespace PapayagramsClient.Game
             };
 
             _host.SendMessage(message);
-            
+            MessageTextbox.Text = "";
         }
 
         private void CreateGame(object sender, RoutedEventArgs e)
@@ -184,6 +179,11 @@ namespace PapayagramsClient.Game
 
             _host.StartGame(CurrentGame.RoomCode);
             NavigationService.Navigate(new Game());
+        }
+
+        public void CarryInsideGame()
+        {
+            throw new NotImplementedException();
         }
     }
 }

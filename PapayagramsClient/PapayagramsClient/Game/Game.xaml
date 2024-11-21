@@ -17,12 +17,19 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <Button HorizontalAlignment="Left" Margin="24,26,0,0" VerticalAlignment="Top" Height="56" Width="55" Click="LeaveGame" BorderBrush="Transparent">
+            <Image Source="../Resources/Icons/exit-svgrepo-com.png"/>
+        </Button>
+
+        <StackPanel Name="PlayersStackPanel" Margin="5,244,866,160"/>
+
         <Border BorderBrush="Black" BorderThickness="2" Width="600">
             <Grid Name="BoardGrid" Grid.Row="0" HorizontalAlignment="Center" Width="600">
                 <Grid.Resources>
                     <Style TargetType="{x:Type userComponents:WPFGameBoardPieceSpot}">
                         <EventSetter Event="PiecePickedUp" Handler="PickupSeed"/>
                         <EventSetter Event="PieceMoved" Handler="MovePiece"/>
+                        <EventSetter Event="PieceDumped" Handler="DumpSeedFromBoard"/>
                     </Style>
                 </Grid.Resources>
             </Grid>
@@ -39,7 +46,7 @@
                         <Style TargetType="{x:Type userComponents:WPFGamePiece}">
                             <Setter Property="Margin" Value="0, 10, 0, 0"/>
                             <EventSetter Event="PiecePlaced" Handler="PlaySeed"/>
-                            <EventSetter Event="PieceDumped" Handler="DumpSeed"/>
+                            <EventSetter Event="PieceDumped" Handler="DumpSeedFromHand"/>
                         </Style>
                     </StackPanel.Resources>
                 </StackPanel>

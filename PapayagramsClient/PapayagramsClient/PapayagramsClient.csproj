@@ -327,6 +327,9 @@
     <None Include="Connected Services\PapayagramsService\item4.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\PapayagramsService\item5.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.AchievementDC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
