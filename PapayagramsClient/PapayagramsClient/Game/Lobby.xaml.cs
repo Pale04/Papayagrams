@@ -172,18 +172,27 @@ namespace PapayagramsClient.Game
 
         private void CreateGame(object sender, RoutedEventArgs e)
         {
-            if (CurrentGame.PlayersInRoom.Count < 1)
+            Console.WriteLine("Players in game:");
+            foreach (PlayerDC player in CurrentGame.PlayersInRoom)
+            {
+                Console.WriteLine(player.Username);
+            }
+
+            if (CurrentGame.PlayersInRoom.Count < 2)
             {
                 return;
             }
 
-            _host.StartGame(CurrentGame.RoomCode);
-            NavigationService.Navigate(new Game());
+            if (CurrentGame.PlayersInRoom[0].Username == CurrentPlayer.Player.Username)
+            {
+                _host.StartGame(CurrentGame.RoomCode);
+                NavigationService.Navigate(new Game());
+            }
         }
 
         public void CarryInsideGame()
         {
-            throw new NotImplementedException();
+            NavigationService.Navigate(new Game());
         }
     }
 }

@@ -13,6 +13,7 @@ namespace PapayagramsClient.Menu
         public Profile(PlayerStatsDC userStats)
         {
             InitializeComponent();
+            _userStats = userStats;
             SetPlayerData();
         }
 

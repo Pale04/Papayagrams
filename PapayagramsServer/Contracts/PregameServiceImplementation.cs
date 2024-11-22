@@ -69,9 +69,9 @@ namespace Contracts
                 }
 
                 CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
+                room.Players.Add(PlayersOnlinePool.GetPlayer(username));
                 serializedGameRoom = GameRoomDC.ConvertToGameRoomDC(room);
                 BroadcastRefreshLobby(serializedGameRoom);
-                room.Players.Add(PlayersOnlinePool.GetPlayer(username));
             }
             else
             {
@@ -154,8 +154,9 @@ namespace Contracts
             if (gameRoom != null)
             {
                 List<PlayerDC> players = gameRoom.Players;
-                foreach (PlayerDC p in players)
+                for (int i = 0; i < players.Count -1; i++)
                 {
+                    PlayerDC p = players[i];
                     var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(p.Username);
                     callbackChannel?.RefreshLobby(gameRoom);
                 }
