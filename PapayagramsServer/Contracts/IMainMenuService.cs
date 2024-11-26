@@ -49,7 +49,7 @@ namespace Contracts
     {
         [OperationContract]
         void ReceiveFriendRequest(PlayerDC player);
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void ReceiveGameInvitation(GameInvitationDC invitation);
     }
 }

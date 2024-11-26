@@ -214,5 +214,10 @@ namespace Contracts
                 return 104;
             }
         }
+
+        public PlayerDC AccessAsGuest()
+        {
+            return PlayerDC.ConvertToPlayerDC(PlayersOnlinePool.CreateGuestProfile());
+        }
     }
 }

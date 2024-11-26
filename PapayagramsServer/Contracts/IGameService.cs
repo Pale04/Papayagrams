@@ -18,31 +18,31 @@ namespace Contracts
 
         //Un jugador terminó todas sus fichas y hay menos fichas en la pila que jugadores.
         [OperationContract(IsOneWay = true)]
-        void ShoutPapaya(string gameRoomCode, string username);
+        void ShoutPapaya(string gameRoomCode);
 
         [OperationContract]
         void LeaveGame(string gameRoomCode, string username);
 
-        //TODO: refinar
-        [OperationContract]
-        void CalculateWinner();
+        [OperationContract(IsOneWay = true)]
+        void CalculateWinner(string username, int score);
     }
 
     [ServiceContract]
     public interface IGameServiceCallback
     {
-        //Se llama cada vez que se actualiza la pila, cuando alguien se sale de la partida.
         [OperationContract(IsOneWay = true)]
-        void RefreshGameRoom(Stack<char> piecesPile, List<PlayerDC> connectedPlayers);
+        void RefreshGameRoom(int piecesNumber, List<PlayerDC> connectedPlayers);
 
         [OperationContract(IsOneWay = true)]
         void RefreshTimer(int remainingMinutes);
 
-        //Manda fichas iniciales, fichas del dump y una ficha cuando alguien se acaba las suyas
         [OperationContract(IsOneWay = true)]
         void AddSeedsToHand(List<char> initalPieces);
 
         [OperationContract(IsOneWay = true)]
-        void EndGame();
+        void NotifyEndOfGame();
+
+        [OperationContract(IsOneWay = true)]
+        void EndGame(string winnerUsername, int score);
     }
 }

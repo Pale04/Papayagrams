@@ -9,7 +9,7 @@ namespace BussinessLogic
         private static Hashtable _gameRooms = new Hashtable();
 
         /// <summary>
-        /// Remove the player of the specified operation context from the game room of the specified code
+        /// Remove the player of the specified game room. If the game room is empty, remove the game room
         /// </summary>
         /// <param name="context">The context of the player to remove</param>
         /// <param name="gameRoomCode">The game room code of the player</param>
@@ -66,6 +66,10 @@ namespace BussinessLogic
 
     internal class CodeGenerator
     {
+        /// <summary>
+        /// Generate a random 4 character code
+        /// </summary>
+        /// <returns></returns>
         public static string GenerateCode()
         {
             string code = string.Empty;

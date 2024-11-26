@@ -58,16 +58,19 @@ namespace Contracts
 
             if (room != null && room.State.Equals(GameRoomState.Waiting) && room.Players.Count < room.GameConfiguration.MaxPlayers)
             {
-                try
+                if (!PlayersOnlinePool.IsGuest(username))
                 {
-                    UserDB.UpdateUserStatus(username, PlayerStatus.in_game);
+                    try
+                    {
+                        UserDB.UpdateUserStatus(username, PlayerStatus.in_game);
+                    }
+                    catch (EntityException error)
+                    {
+                        _logger.Fatal("Error while trying to update user status", error);
+                        return (102, null);
+                    }
                 }
-                catch (EntityException error)
-                {
-                    _logger.Fatal("Error while trying to update user status", error);
-                    return (102, null);
-                }
-
+                
                 CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
                 serializedGameRoom = GameRoomDC.ConvertToGameRoomDC(room);
                 BroadcastRefreshLobby(serializedGameRoom);
@@ -86,14 +89,17 @@ namespace Contracts
             GameRoomsPool.RemovePlayerFromGameRoom(username, code);
             CallbacksPool.RemovePregameCallbackChannel(username);
 
-            try
+            if (!PlayersOnlinePool.IsGuest(username))
             {
-                UserDB.UpdateUserStatus(username, PlayerStatus.online);
-            }
-            catch (EntityException error)
-            {
-                _logger.Error("Error while trying to update user status", error);
-                return 102;
+                try
+                {
+                    UserDB.UpdateUserStatus(username, PlayerStatus.online);
+                }
+                catch (EntityException error)
+                {
+                    _logger.Error("Error while trying to update user status", error);
+                    return 102;
+                }
             }
 
             return 0;
@@ -107,10 +113,7 @@ namespace Contracts
             foreach (Player p in players)
             {
                 var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(p.Username);
-                if (callbackChannel != null)
-                {
-                    callbackChannel.ReceiveMessage(message);
-                }    
+                callbackChannel.ReceiveMessage(message);    
             }
         }
 
@@ -132,10 +135,16 @@ namespace Contracts
             }
         }
 
-        public void ReturnToLobby(string username)
+        public void ReturnToLobby(string gameRoomCode, string username)
         {
             CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
             CallbacksPool.RemoveMainMenuCallbackChannel(username);
+            GameRoom room = GameRoomsPool.GetGameRoom(gameRoomCode);
+
+            if (room.State.Equals(GameRoomState.InGame))
+            {
+                room.State = GameRoomState.Waiting;
+            }
         }
 
         /// <summary>
@@ -157,7 +166,7 @@ namespace Contracts
                 foreach (PlayerDC p in players)
                 {
                     var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(p.Username);
-                    callbackChannel?.RefreshLobby(gameRoom);
+                    callbackChannel.RefreshLobby(gameRoom);
                 }
             }
         }

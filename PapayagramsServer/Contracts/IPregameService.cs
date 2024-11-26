@@ -36,7 +36,7 @@ namespace Contracts
         void InviteFriend(string username);
 
         [OperationContract]
-        void ReturnToLobby(string username);
+        void ReturnToLobby(string gameRoomCode, string username);
     }
 
     [ServiceContract]

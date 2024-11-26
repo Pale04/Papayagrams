@@ -19,5 +19,8 @@ namespace Contracts
 
         [OperationContract]
         int SendAccountVerificationCode(string username);
+
+        [OperationContract]
+        PlayerDC AccessAsGuest();
     }
 }
