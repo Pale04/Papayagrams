@@ -24,7 +24,7 @@ namespace Contracts
         void LeaveGame(string gameRoomCode, string username);
 
         [OperationContract(IsOneWay = true)]
-        void CalculateWinner(string username, int score);
+        void CalculateWinner(string gameRoomCode, string username, int score);
     }
 
     [ServiceContract]

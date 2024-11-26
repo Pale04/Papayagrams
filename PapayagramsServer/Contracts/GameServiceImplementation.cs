@@ -80,7 +80,7 @@ namespace Contracts
         public void TakeSeed(string gameRoomCode)
         {
             Game game = GamesInProgressPool.GetGame(gameRoomCode);
-            
+
             if (!game.ThereAreLessPiecesThanPlayers())
             {
                 foreach (Player player in game.ConnectedPlayers)
@@ -95,6 +95,33 @@ namespace Contracts
                 var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
                 channel.RefreshGameRoom(game.PiecesPile.Count, game.ConnectedPlayers.ConvertAll(PlayerDC.ConvertToPlayerDC));
             }
+        }
+
+        private static void SendEndGameNotification(string gameRoomCode)
+        {
+            GameRoom gameRoom = GameRoomsPool.GetGameRoom(gameRoomCode);
+            foreach (Player player in gameRoom.Players)
+            {
+                var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
+                //TODO: mandar al ganador
+                channel.EndGame("xd",0);
+            }
+        }
+
+        public void ShoutPapaya(string gameRoomCode)
+        {
+            foreach (Player player in GamesInProgressPool.GetGame(gameRoomCode).ConnectedPlayers)
+            {
+                var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
+                channel.NotifyEndOfGame();
+            }
+        }
+
+        public void CalculateWinner(string gameRoomCode, string username, int score)
+        {
+            //TODO: Implementar
+            
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -127,27 +154,6 @@ namespace Contracts
                 });
                 timerThread.Start();
             }
-        }
-
-        private static void SendEndGameNotification(string gameRoomCode)
-        {
-            GameRoom gameRoom = GameRoomsPool.GetGameRoom(gameRoomCode);
-            foreach (Player player in gameRoom.Players)
-            {
-                var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
-                //TODO: mandar al ganador
-                channel.EndGame("xd",0);
-            }
-        }
-
-        public void ShoutPapaya(string gameRoomCode)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CalculateWinner(string username, int score)
-        {
-            throw new NotImplementedException();
         }
     }
 }
