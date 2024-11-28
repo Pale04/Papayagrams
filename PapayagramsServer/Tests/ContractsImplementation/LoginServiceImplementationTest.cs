@@ -187,5 +187,12 @@ namespace Contracts.Tests
             int result = _serviceImplementation.SendAccountVerificationCode("");
             Assert.AreEqual(expected, result, "SendAccountVerificationCodeEmptyUsernameTest");
         }
+
+        [TestMethod()]
+        public void AccessAsGuestSuccessfulTest()
+        {
+            PlayerDC player = _serviceImplementation.AccessAsGuest();
+            Assert.IsNotNull(player.Username, "AccessAsGuestTest");
+        }
     }
 }

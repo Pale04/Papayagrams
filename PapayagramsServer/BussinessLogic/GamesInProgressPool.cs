@@ -28,7 +28,7 @@ namespace BussinessLogic
         }
 
         /// <summary>
-        /// Remove a player from a game. If no one are left, the game is removed and the game becomes in waiting state. 
+        /// Remove a player from a game. 
         /// </summary>
         /// <param name="gameRoomCode">Code of the game room</param>
         /// <param name="username">Username of the player</param>

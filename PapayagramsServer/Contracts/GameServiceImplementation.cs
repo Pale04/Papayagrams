@@ -1,6 +1,8 @@
 ﻿using BussinessLogic;
+using DataAccess;
 using DomainClasses;
 using System;
+using System.Data;
 using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
@@ -18,7 +20,7 @@ namespace Contracts
             foreach (Player player in game.ConnectedPlayers)
             {
                 var playerChannel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
-                playerChannel.RefreshGameRoom(game.PiecesPile, game.ConnectedPlayers.ConvertAll(PlayerDC.ConvertToPlayerDC));
+                playerChannel.RefreshGameRoom(game.PiecesPile.Count, game.ConnectedPlayers.ConvertAll(PlayerDC.ConvertToPlayerDC));
             }
         }
 
@@ -26,19 +28,31 @@ namespace Contracts
         {
             CallbacksPool.RemoveGameCallbackChannel(username);
             GamesInProgressPool.ExitGame(gameRoomCode, username);
+            GameRoomsPool.RemovePlayerFromGameRoom(username, gameRoomCode);
             Game game = GamesInProgressPool.GetGame(gameRoomCode);
 
             if (game.ConnectedPlayers.Count == 0)
             {
                 GamesInProgressPool.RemoveGame(gameRoomCode);
-                GameRoomsPool.GetGameRoom(gameRoomCode).State = GameRoomState.Waiting;
             }
             else
             {
                 foreach (Player player in game.ConnectedPlayers)
                 {
                     var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
-                    channel.RefreshGameRoom(game.PiecesPile, game.ConnectedPlayers.ConvertAll(PlayerDC.ConvertToPlayerDC));
+                    channel.RefreshGameRoom(game.PiecesPile.Count, game.ConnectedPlayers.ConvertAll(PlayerDC.ConvertToPlayerDC));
+                }
+            }
+
+            if (!PlayersOnlinePool.IsGuest(username))
+            {
+                try
+                {
+                    UserDB.UpdateUserStatus(username, PlayerStatus.online);
+                }
+                catch (EntityException error)
+                {
+                    _logger.Error("Error while trying to update user status", error);
                 }
             }
         }
@@ -59,13 +73,14 @@ namespace Contracts
 
         public void ShoutPapaya(string gameRoomCode, string username)
         {
+            //TODO: Implementar
             throw new NotImplementedException();
         }
 
         public void TakeSeed(string gameRoomCode)
         {
             Game game = GamesInProgressPool.GetGame(gameRoomCode);
-            
+
             if (!game.ThereAreLessPiecesThanPlayers())
             {
                 foreach (Player player in game.ConnectedPlayers)
@@ -78,12 +93,34 @@ namespace Contracts
             foreach (Player player in game.ConnectedPlayers)
             {
                 var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
-                channel.RefreshGameRoom(game.PiecesPile, game.ConnectedPlayers.ConvertAll(PlayerDC.ConvertToPlayerDC));
+                channel.RefreshGameRoom(game.PiecesPile.Count, game.ConnectedPlayers.ConvertAll(PlayerDC.ConvertToPlayerDC));
             }
         }
 
-        public void CalculateWinner()
+        private static void SendEndGameNotification(string gameRoomCode)
         {
+            GameRoom gameRoom = GameRoomsPool.GetGameRoom(gameRoomCode);
+            foreach (Player player in gameRoom.Players)
+            {
+                var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
+                //TODO: mandar al ganador
+                channel.EndGame("xd",0);
+            }
+        }
+
+        public void ShoutPapaya(string gameRoomCode)
+        {
+            foreach (Player player in GamesInProgressPool.GetGame(gameRoomCode).ConnectedPlayers)
+            {
+                var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
+                channel.NotifyEndOfGame();
+            }
+        }
+
+        public void CalculateWinner(string gameRoomCode, string username, int score)
+        {
+            //TODO: Implementar
+            
             throw new NotImplementedException();
         }
 
@@ -105,7 +142,7 @@ namespace Contracts
             foreach (Player player in game.ConnectedPlayers)
             {
                 var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
-                channel.RefreshGameRoom(game.PiecesPile, game.ConnectedPlayers.ConvertAll(PlayerDC.ConvertToPlayerDC));
+                channel.RefreshGameRoom(game.PiecesPile.Count, game.ConnectedPlayers.ConvertAll(PlayerDC.ConvertToPlayerDC));
             }
 
             int timeLimitMinutes = gameRoom.GameConfiguration.TimeLimitMinutes;
@@ -116,16 +153,6 @@ namespace Contracts
                     SendEndGameNotification(gameRoomCode);
                 });
                 timerThread.Start();
-            }
-        }
-
-        private static void SendEndGameNotification(string gameRoomCode)
-        {
-            GameRoom gameRoom = GameRoomsPool.GetGameRoom(gameRoomCode);
-            foreach (Player player in gameRoom.Players)
-            {
-                var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
-                channel.EndGame();
             }
         }
     }
