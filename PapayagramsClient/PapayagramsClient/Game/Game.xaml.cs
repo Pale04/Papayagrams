@@ -136,6 +136,12 @@ namespace PapayagramsClient.Game
 
             if (PiecesPanel.Children.Count < 1)
             {
+                if (CurrentGame.GameData.PilePieces < CurrentGame.PlayersInRoom.Count)
+                {
+                    _host.ShoutPapaya(CurrentGame.RoomCode);
+                    return;
+                }
+
                 _host.TakeSeed(CurrentGame.RoomCode);
                 CurrentGame.GameData.Points += FINISH_PIECES_POINTS;
             }
@@ -330,7 +336,11 @@ namespace PapayagramsClient.Game
 
         private void ExitFinishedGame(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            CurrentGame.State = CurrentGame.GameState.Finished;
+            CurrentGame.GameConfig = null;
+            CurrentGame.GameData = new GameProgressData();
+            CurrentGame.PlayersInRoom = null;
+            CurrentGame.RoomCode = null;
         }
     }
 }
