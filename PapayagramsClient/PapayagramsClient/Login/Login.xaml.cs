@@ -3,10 +3,16 @@ using System.IO;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Navigation;
 
 namespace PapayagramsClient.Login
 {
+    public static class LoginCommands
+    {
+        public static RoutedCommand LoginToAccount = new RoutedCommand();
+    }
+
     public partial class Login : Page
     {
         public Login()
@@ -14,7 +20,7 @@ namespace PapayagramsClient.Login
             InitializeComponent();
         }
 
-        private void SignIn(object sender, RoutedEventArgs e)
+        private void LogIn()
         {
             ClearErrorLabels();
 
@@ -79,6 +85,19 @@ namespace PapayagramsClient.Login
             NavigationService.Navigate(new MainMenu());
         }
 
+        private void SignIn(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter || e.Key == Key.Return)
+            {
+                LogIn();
+            }
+        }
+
+        private void SignIn(object sender, RoutedEventArgs e)
+        {
+            LogIn();
+        }
+
         private void RegisterNewUser(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Register());
@@ -88,6 +107,11 @@ namespace PapayagramsClient.Login
         {
             PasswordErrorText.Content = "";
             UsernameErrorText.Content = "";
+        }
+
+        private void JoinAsGuest(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new JoinAsGuest());
         }
     }
 }

@@ -46,8 +46,7 @@
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Contracts" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic" />
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ILoginService_RegisterUser_InputMessage">
@@ -79,6 +78,12 @@
   </wsdl:message>
   <wsdl:message name="ILoginService_SendAccountVerificationCode_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendAccountVerificationCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_AccessAsGuest_InputMessage">
+    <wsdl:part name="parameters" element="tns:AccessAsGuest" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_AccessAsGuest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AccessAsGuestResponse" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_GetFriends_InputMessage">
     <wsdl:part name="parameters" element="tns:GetFriends" />
@@ -161,9 +166,6 @@
   <wsdl:message name="IMainMenuService_ReceiveGameInvitation_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReceiveGameInvitation" />
   </wsdl:message>
-  <wsdl:message name="IMainMenuService_ReceiveGameInvitation_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ReceiveGameInvitationResponse" />
-  </wsdl:message>
   <wsdl:message name="IPregameService_CreateGame_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateGame" />
   </wsdl:message>
@@ -233,9 +235,6 @@
   <wsdl:message name="IGameService_CalculateWinner_InputMessage">
     <wsdl:part name="parameters" element="tns:CalculateWinner" />
   </wsdl:message>
-  <wsdl:message name="IGameService_CalculateWinner_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CalculateWinnerResponse" />
-  </wsdl:message>
   <wsdl:message name="IGameService_RefreshGameRoom_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:RefreshGameRoom" />
   </wsdl:message>
@@ -244,6 +243,9 @@
   </wsdl:message>
   <wsdl:message name="IGameService_AddSeedsToHand_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:AddSeedsToHand" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_NotifyEndOfGame_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyEndOfGame" />
   </wsdl:message>
   <wsdl:message name="IGameService_EndGame_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:EndGame" />
@@ -274,6 +276,10 @@
     <wsdl:operation name="SendAccountVerificationCode">
       <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/SendAccountVerificationCode" message="tns:ILoginService_SendAccountVerificationCode_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/SendAccountVerificationCodeResponse" message="tns:ILoginService_SendAccountVerificationCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AccessAsGuest">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/AccessAsGuest" message="tns:ILoginService_AccessAsGuest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/AccessAsGuestResponse" message="tns:ILoginService_AccessAsGuest_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMainMenuService">
@@ -331,7 +337,6 @@
     </wsdl:operation>
     <wsdl:operation name="ReceiveGameInvitation">
       <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/ReceiveGameInvitation" message="tns:IMainMenuService_ReceiveGameInvitation_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/ReceiveGameInvitationResponse" message="tns:IMainMenuService_ReceiveGameInvitation_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IPregameService">
@@ -391,7 +396,6 @@
     </wsdl:operation>
     <wsdl:operation name="CalculateWinner">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/CalculateWinner" message="tns:IGameService_CalculateWinner_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/CalculateWinnerResponse" message="tns:IGameService_CalculateWinner_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="RefreshGameRoom">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/RefreshGameRoom" message="tns:IGameService_RefreshGameRoom_OutputCallbackMessage" />
@@ -401,6 +405,9 @@
     </wsdl:operation>
     <wsdl:operation name="AddSeedsToHand">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/AddSeedsToHand" message="tns:IGameService_AddSeedsToHand_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyEndOfGame">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/NotifyEndOfGame" message="tns:IGameService_NotifyEndOfGame_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="EndGame">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/EndGame" message="tns:IGameService_EndGame_OutputCallbackMessage" />
@@ -453,6 +460,15 @@
     </wsdl:operation>
     <wsdl:operation name="SendAccountVerificationCode">
       <soap12:operation soapAction="http://tempuri.org/ILoginService/SendAccountVerificationCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AccessAsGuest">
+      <soap12:operation soapAction="http://tempuri.org/ILoginService/AccessAsGuest" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -583,9 +599,6 @@
     </wsdl:operation>
     <wsdl:operation name="ReceiveGameInvitation">
       <soap12:operation soapAction="http://tempuri.org/IMainMenuService/ReceiveGameInvitation" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -714,9 +727,6 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="RefreshGameRoom">
       <soap12:operation soapAction="http://tempuri.org/IGameService/RefreshGameRoom" style="document" />
@@ -732,6 +742,12 @@
     </wsdl:operation>
     <wsdl:operation name="AddSeedsToHand">
       <soap12:operation soapAction="http://tempuri.org/IGameService/AddSeedsToHand" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyEndOfGame">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/NotifyEndOfGame" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

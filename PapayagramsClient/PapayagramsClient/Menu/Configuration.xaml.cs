@@ -24,5 +24,15 @@ namespace PapayagramsClient.Menu
         {
             InitializeComponent();
         }
+
+        private void ReturnToMainMenu(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GoToChangePassword(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

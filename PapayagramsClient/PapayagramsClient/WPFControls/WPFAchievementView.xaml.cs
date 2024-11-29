@@ -17,9 +17,22 @@ namespace PapayagramsClient.WPFControls
 {
     public partial class WPFAchievementView : UserControl
     {
-        public WPFAchievementView()
+        public WPFAchievementView(string achievementDescription, bool unlocked)
         {
             InitializeComponent();
+            AchievementDescriptionLabel.Content = achievementDescription;
+
+            Visibility doneImageVisible;
+            if (unlocked)
+            {
+                doneImageVisible = Visibility.Visible;
+            }
+            else
+            {
+                doneImageVisible = Visibility.Hidden;
+            }
+
+            AchivementDoneImage.Visibility = doneImageVisible;
         }
     }
 }

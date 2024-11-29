@@ -115,6 +115,42 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cursor.
+        /// </summary>
+        public static string configurationCursor {
+            get {
+                return ResourceManager.GetString("configurationCursor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a App language.
+        /// </summary>
+        public static string configurationLanguage {
+            get {
+                return ResourceManager.GetString("configurationLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Piece color.
+        /// </summary>
+        public static string configurationPieceColor {
+            get {
+                return ResourceManager.GetString("configurationPieceColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Same as system.
+        /// </summary>
+        public static string configurationSystemLanguage {
+            get {
+                return ResourceManager.GetString("configurationSystemLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Classic.
         /// </summary>
         public static string createGameClassicMode {
@@ -241,6 +277,24 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Classic.
+        /// </summary>
+        public static string cursorClassic {
+            get {
+                return ResourceManager.GetString("cursorClassic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Papaya.
+        /// </summary>
+        public static string cursorPapaya {
+            get {
+                return ResourceManager.GetString("cursorPapaya", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error while connecting.
         /// </summary>
         public static string errorConnectionTitle {
@@ -282,6 +336,42 @@ namespace PapayagramsClient.Properties {
         public static string errorUnexpectedError {
             get {
                 return ResourceManager.GetString("errorUnexpectedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Calculating results.
+        /// </summary>
+        public static string gameEndCalculating {
+            get {
+                return ResourceManager.GetString("gameEndCalculating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Game finished.
+        /// </summary>
+        public static string gameEndFinished {
+            get {
+                return ResourceManager.GetString("gameEndFinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Leave.
+        /// </summary>
+        public static string gameEndLeave {
+            get {
+                return ResourceManager.GetString("gameEndLeave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The winner is.
+        /// </summary>
+        public static string gameEndWinner {
+            get {
+                return ResourceManager.GetString("gameEndWinner", resourceCulture);
             }
         }
         
@@ -372,6 +462,15 @@ namespace PapayagramsClient.Properties {
         public static string globalClose {
             get {
                 return ResourceManager.GetString("globalClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Configuration.
+        /// </summary>
+        public static string globalConfiguration {
+            get {
+                return ResourceManager.GetString("globalConfiguration", resourceCulture);
             }
         }
         
@@ -619,7 +718,7 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Sudden death games played.
+        ///   Busca una cadena traducida similar a Sudden death games played: .
         /// </summary>
         public static string profileSuddenDeathGames {
             get {
@@ -628,7 +727,7 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Sudden death games won.
+        ///   Busca una cadena traducida similar a Sudden death games won: .
         /// </summary>
         public static string profileSuddenDeathGamesWon {
             get {
@@ -637,7 +736,7 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Time attack games played.
+        ///   Busca una cadena traducida similar a Time attack games played: .
         /// </summary>
         public static string profileTimeAttackGames {
             get {
@@ -646,7 +745,7 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Time attack games won.
+        ///   Busca una cadena traducida similar a Time attack games won: .
         /// </summary>
         public static string profileTimeAttackGamesWon {
             get {

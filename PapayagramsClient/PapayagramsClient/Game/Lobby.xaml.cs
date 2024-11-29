@@ -47,6 +47,7 @@ namespace PapayagramsClient.Game
             CurrentGame.State = CurrentGame.GameState.InLobby;
             CurrentGame.PlayersInRoom = gameRoom.Players.ToList();
             CurrentGame.GameConfig = gameConfig;
+            RefreshLobby(gameRoom);
         }
 
         // Join to game room with code x
@@ -178,7 +179,7 @@ namespace PapayagramsClient.Game
                 Console.WriteLine(player.Username);
             }
 
-            if (CurrentGame.PlayersInRoom.Count < 2)
+            if (CurrentGame.PlayersInRoom.Count < 1)
             {
                 return;
             }

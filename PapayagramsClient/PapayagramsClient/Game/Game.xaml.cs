@@ -6,12 +6,19 @@ using System;
 using System.Windows;
 using PapayagramsClient.WPFControls;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PapayagramsClient.Game
 {
     public partial class Game : Page, IGameServiceCallback
     {
         private GameServiceClient _host;
+
+        private List<string> _createdWords;
+
+        private const double MID_WORD_MULTIPLIER = 1.2;
+        private const double LARGE_WORD_MULTIPLIER = 1.5;
+        private const int FINISH_PIECES_POINTS = 4;
 
         public Game()
         {
@@ -39,6 +46,8 @@ namespace PapayagramsClient.Game
                 PilePieces = 144,
                 Points = 0
             };
+
+            ShowCurrentPlayers();
         }
 
         ~Game()
@@ -63,6 +72,18 @@ namespace PapayagramsClient.Game
                     Grid.SetRow(spot, j);
                     BoardGrid.Children.Add(spot);
                 }
+            }
+        }
+
+        private void ShowCurrentPlayers()
+        {
+            PlayersStackPanel.Children.Clear();
+
+            foreach (PlayerDC player in CurrentGame.PlayersInRoom)
+            {
+                Label playerLabel = new Label();
+                playerLabel.Content = player.Username;
+                PlayersStackPanel.Children.Add(playerLabel);
             }
         }
 
@@ -112,16 +133,125 @@ namespace PapayagramsClient.Game
         {
             WPFGamePiece piece = (WPFGamePiece)sender;
             PiecesPanel.Children.Remove(piece);
+
+            if (PiecesPanel.Children.Count < 1)
+            {
+                _host.TakeSeed(CurrentGame.RoomCode);
+                CurrentGame.GameData.Points += FINISH_PIECES_POINTS;
+            }
         }
 
-        private (int points, List<string> correctWords) EvaluateBoard()
+        private (int wordsPoints, List<string> correctWords) EvaluateBoard()
         {
-            return (0, null);
+
+            List<string> builtWords = new List<string>();
+
+            // horizontal word checking
+            for (int i = 0; i<25; i++)
+            {
+                string word = string.Empty;
+
+                for (int j = 0; j<25; j++)
+                {
+                    WPFGameBoardPieceSpot pieceSpot = BoardGrid.Children.Cast<WPFGameBoardPieceSpot>().First(spot => Grid.GetColumn(spot) == j && Grid.GetRow(spot) == i);
+
+                    string letter = (string)pieceSpot.LetterLabel.Content;
+
+                    if (string.IsNullOrWhiteSpace(letter))
+                    {
+                        if (word.Length > 1)
+                        {
+                            builtWords.Add(word);
+                        }
+                    }
+                    else
+                    {
+                        word = word + letter;
+
+                        if (j == 24)
+                        {
+                            builtWords.Add(word);
+                        }
+                    }
+                }
+            }
+
+            // vertical word checking
+            for (int i = 0; i<25; i++)
+            {
+                string word = string.Empty;
+
+                for (int j = 0; j<25; j++)
+                {
+                    WPFGameBoardPieceSpot pieceSpot = BoardGrid.Children.Cast<WPFGameBoardPieceSpot>().First(spot => Grid.GetColumn(spot) == i && Grid.GetRow(spot) == j);
+
+                    string letter = (string)pieceSpot.LetterLabel.Content;
+
+                    if (string.IsNullOrWhiteSpace(letter))
+                    {
+                        if (word.Length > 1)
+                        {
+                            builtWords.Add(word);
+                        }
+                    }
+                    else
+                    {
+                        word = word + letter;
+
+                        if (i == 24)
+                        {
+                            builtWords.Add(word);
+                        }
+                    }
+                }
+            }
+
+            (int points, List<string> correctWords) = GetCorrectWords(builtWords);
+
+            return (0, correctWords);
         }
 
-        public void EndGame(string winner)
+        private int CalculateWordPoints(string word)
         {
-            throw new NotImplementedException();
+            int points = 0;
+
+            if (word.Length < 2)
+            {
+                return 0;
+            }
+            else if (word.Length < 7)
+            {
+                points = word.Length;
+            }
+            else if (word.Length <= 9)
+            {
+                points = (int)Math.Floor(word.Length * MID_WORD_MULTIPLIER);
+            }
+            else if (word.Length > 9)
+            {
+                points = (int)Math.Floor(word.Length * LARGE_WORD_MULTIPLIER);
+            }
+
+            return points;
+        }
+
+        private (int, List<string>) GetCorrectWords(List<string> wordList)
+        {
+            List<string> correctWords = new List<string>();
+            int points = 0;
+
+            foreach (string word in wordList)
+            {
+                bool validWord = WordChecker.ValidWord(word, CurrentGame.GameConfig.WordsLanguage);
+
+                if (validWord)
+                {
+                    correctWords.Add(word);
+                    points += CalculateWordPoints(word);
+                }
+            }
+
+            return (points, correctWords);
         }
 
         public void RefreshTimer(int remainingMinutes)
@@ -155,11 +285,6 @@ namespace PapayagramsClient.Game
             piece.MainGrid.Background = null;
         }
 
-        public void RefreshGameRoom(Stack<char> piecesPile, PlayerDC[] connectedPlayers)
-        {
-            CurrentGame.GameData.PilePieces = piecesPile.Count;
-        }
-
         public void AddSeedsToHand(char[] pieces)
         {
             foreach (var letter in pieces)
@@ -168,7 +293,42 @@ namespace PapayagramsClient.Game
             }
         }
 
-        public void EndGame()
+        public void RefreshGameRoom(int piecesNumber, PlayerDC[] connectedPlayers)
+        {
+            CurrentGame.GameData.PilePieces = piecesNumber;
+            CurrentGame.PlayersInRoom = connectedPlayers.ToList();
+
+            ShowCurrentPlayers();
+        }
+
+        public void NotifyEndOfGame()
+        {
+            CalculatingResultsOverlay.Visibility = Visibility.Visible;
+            CalculatingResultsOverlay.IsEnabled = true;
+
+            (int points, List<string> words) = EvaluateBoard();
+            _createdWords = words;
+
+            _host.CalculateWinner(CurrentGame.RoomCode, CurrentPlayer.Player.Username, points);
+        }
+
+        public void EndGame(string winnerUsername, int score)
+        {
+            WinnerLabel.Content = Properties.Resources.gameEndWinner + " " + winnerUsername;
+
+            foreach (string word in _createdWords)
+            {
+                CorrectWordsPanel.Children.Add(new Label() { Content = word });
+            }
+
+            CalculatingResultsOverlay.Visibility = Visibility.Hidden;
+            CalculatingResultsOverlay.IsEnabled = false;
+
+            WinnerOverlay.Visibility = Visibility.Visible;
+            WinnerOverlay.IsEnabled = true;
+        }
+
+        private void ExitFinishedGame(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
         }

@@ -51,7 +51,21 @@
                     </StackPanel.Resources>
                 </StackPanel>
             </ScrollViewer>
-
         </StackPanel>
+
+        <Grid x:Name="CalculatingResultsOverlay" Panel.ZIndex="1" Opacity="40" Background="Beige" Grid.RowSpan="2" Visibility="Hidden" IsEnabled="False">
+            <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="{x:Static p:Resources.gameEndFinished}" FontSize="45"/>
+            <Label VerticalAlignment="Top" HorizontalAlignment="Center" Content="{x:Static p:Resources.gameEndCalculating}" Margin="0,400,0,0" FontSize="25"/>
+        </Grid>
+
+        <Grid x:Name="WinnerOverlay" Panel.ZIndex="2" Opacity="40" Background="Beige" Grid.RowSpan="2" Visibility="Hidden" IsEnabled="False">
+            <Label Name="WinnerLabel" VerticalAlignment="Top" Panel.ZIndex="3" Content="hola" HorizontalContentAlignment="Center" FontSize="50" Margin="0,62,0,0"/>
+
+            <ScrollViewer Height="300" Width="400" HorizontalContentAlignment="Center">
+                <StackPanel x:Name="CorrectWordsPanel"/>
+            </ScrollViewer>
+
+            <Button Content="{x:Static p:Resources.gameEndLeave}" Click="ExitFinishedGame" VerticalAlignment="Top" FontSize="30" Width="170" Margin="0,566,0,0"/>
+        </Grid>
     </Grid>
 </Page>

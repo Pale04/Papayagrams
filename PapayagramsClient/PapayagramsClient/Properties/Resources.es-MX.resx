@@ -372,4 +372,37 @@
   <data name="gameLeaveGame" xml:space="preserve">
     <value>¿Estás seguro que quieres salir?</value>
   </data>
+  <data name="gameEndFinished" xml:space="preserve">
+    <value>Juego finalizado</value>
+  </data>
+  <data name="gameEndCalculating" xml:space="preserve">
+    <value>Calculando resultados</value>
+  </data>
+  <data name="gameEndLeave" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="gameEndWinner" xml:space="preserve">
+    <value>El ganador es</value>
+  </data>
+  <data name="globalConfiguration" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="configurationPieceColor" xml:space="preserve">
+    <value>Color de piezas</value>
+  </data>
+  <data name="configurationLanguage" xml:space="preserve">
+    <value>Lenguaje de juego</value>
+  </data>
+  <data name="configurationCursor" xml:space="preserve">
+    <value>Cursor</value>
+  </data>
+  <data name="cursorClassic" xml:space="preserve">
+    <value>Clasico</value>
+  </data>
+  <data name="cursorPapaya" xml:space="preserve">
+    <value>Papaya</value>
+  </data>
+  <data name="configurationSystemLanguage" xml:space="preserve">
+    <value>Mismo que el sistema</value>
+  </data>
 </root>
