@@ -210,7 +210,6 @@ namespace DataAccess
         /// <param name="status">Status of the player</param>
         /// <returns>1 if the update was successful, 0 otherwise </returns>
         /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
-
         public static int UpdateUserStatus (string username, PlayerStatus status)
         {
             int result = 0;
@@ -303,6 +302,49 @@ namespace DataAccess
                 }
             }
             return achievementsList;
+        }
+
+        /// <summary>
+        /// Update the original game history of the player and add the victory or defeat
+        /// </summary>
+        /// <param name="username">Username of the player</param>
+        /// <param name="gameWon">If the player won the game or not</param>
+        /// <returns>1 if the update was successful, 0 otherwise</returns>
+        /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
+        public static int UpdateOriginalGameHistory(string username, bool gameWon)
+        {
+            int result = 0;
+            using (var contex = new papayagramsEntities())
+            {
+                var player = contex.User.Where(p => p.username == username).Include(p => p.OriginalGameHistory);
+                
+                if (player.Any())
+                {
+                    var gameHistory = player.First().OriginalGameHistory.First();
+                    if (gameWon)
+                    {
+                        gameHistory.wonGames++;
+                    }
+                    else
+                    {
+                        gameHistory.lostGames++;
+                    }
+                    result = contex.SaveChanges();
+                }
+            }
+            return result;
+        }
+
+        public static int UpdateSuddenDeathHistory()
+        {
+            //todo
+            throw new NotImplementedException();
+        }
+
+        public static int UpdateTimeAtackHistory()
+        {
+            //todo
+            throw new NotImplementedException();
         }
     }
 }

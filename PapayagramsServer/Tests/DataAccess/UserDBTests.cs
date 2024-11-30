@@ -368,5 +368,24 @@ namespace DataAccess.Tests
             List<DomainClasses.Achievement> result = UserDB.GetPlayerAchievements("Pale");
             Assert.IsTrue(result.Count == 2, "GetPlayerAchievementsNonExistentUserTest");
         }
+
+        [TestMethod()]
+        public void UpdateOriginalGameHistoryWongGameTest()
+        {
+            int expected = 1;
+            int result = UserDB.UpdateOriginalGameHistory(_registeredPlayer1.Username, true);
+            Assert.AreEqual(expected, result, "UpdateOriginalGameHistorySuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void UpdateOriginalGameHistoryLostGameTest()
+        {
+            int expected = 1;
+            int result = UserDB.UpdateOriginalGameHistory(_registeredPlayer1.Username, false);
+            Assert.AreEqual(expected, result, "UpdateOriginalGameHistoryNonExistentUserTest");
+        }
+
+        [TestMethod()]
+        public void 
     }
 }
