@@ -18,16 +18,16 @@
         </Grid.ColumnDefinitions>
         
         <StackPanel Grid.Column="0" VerticalAlignment="Center">
-            <Label Content="{x:Static p:Resources.globalSignIn}" HorizontalContentAlignment="Center" FontSize="64" FontWeight="Bold"/>
-            <Separator Opacity="0" Height="40"/>
+            <Label Content="{x:Static p:Resources.globalSignIn}" Focusable="False" HorizontalContentAlignment="Center" FontSize="64" FontWeight="Bold"/>
+            <Separator Opacity="0" Height="40" Focusable="False"/>
 
             <Label Content="{x:Static p:Resources.globalUsername}" HorizontalContentAlignment="Center" FontSize="36"/>
-            <TextBox Style="{StaticResource CustomTextBox}" Name="UsernameTextbox" TextWrapping="Wrap" Width="430"/>
+            <TextBox Style="{StaticResource CustomTextBox}" Name="UsernameTextbox" TextWrapping="Wrap" Width="430" KeyDown="SignIn"/>
             <Label Name="UsernameErrorText" HorizontalContentAlignment="Center" Foreground="Red" FontSize="20" Height="35"/>
             <Separator Opacity="0" Height="12"/>
 
             <Label Content="{x:Static p:Resources.globalPassword}" HorizontalContentAlignment="Center" FontSize="36"/>
-            <TextBox Style="{StaticResource CustomTextBox}" Name="PasswordTextbox" TextWrapping="Wrap" Width="430"/>
+            <TextBox Style="{StaticResource CustomTextBox}" Name="PasswordTextbox" TextWrapping="Wrap" Width="430" KeyDown="SignIn"/>
             <Label Name="PasswordErrorText" HorizontalContentAlignment="Center" Foreground="Red" FontSize="20" Height="35"/>
             <Separator Opacity="0" Height="20"/>
 
@@ -37,7 +37,7 @@
             <Separator Opacity="0" Height="5"/>
             <Button Style="{StaticResource LinkButton}" x:Name="RegisterButton" Content="{x:Static p:Resources.signInSignUp}" Click="RegisterNewUser" VerticalAlignment="Center" FontSize="16"/>
             <Separator Opacity="0" Height="5"/>
-            <Button Style="{StaticResource LinkButton}" x:Name="JoinAsGuestButton" Content="{x:Static p:Resources.signInJoinAsGuest}" VerticalAlignment="Center" FontSize="16"/>
+            <Button Style="{StaticResource LinkButton}" Click="JoinAsGuest" x:Name="JoinAsGuestButton" Content="{x:Static p:Resources.signInJoinAsGuest}" VerticalAlignment="Center" FontSize="16"/>
         </StackPanel>
     </Grid>
 </Page>

@@ -1,18 +1,12 @@
-﻿using PapayagramsClient.Menu;
-using PapayagramsClient.PapayagramsService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PapayagramsClient.PapayagramsService;
 
 namespace PapayagramsClient
 {
     public class Configuration
     {
         public LanguageDC Language { get; set; }
-        public int pieceSize { get; set; }
         public int cursor { get; set; }
+        public string pieceColor { get; set; }
     }
 
     public class CurrentPlayer

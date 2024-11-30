@@ -21,8 +21,8 @@
         <Rectangle HorizontalAlignment="Left" Height="250" Margin="46,414,0,0" VerticalAlignment="Top" Width="950" Fill="#F3ECCD"/>
 
         <Image Name="ProfilePictureImage" Width="175" Height="175" Margin="78,186,828,358"/>
-        <Label Name="UsernameLabel" Content="adios" Margin="272,188,610,483" FontSize="32"/>
-        <Label Name="EmailLabel" Content="hola" Margin="272,250,610,423" FontSize="20"/>
+        <Label Name="UsernameLabel" Margin="272,188,610,483" FontSize="32"/>
+        <Label Name="EmailLabel" Margin="272,250,610,423" FontSize="20"/>
 
         <Label Content="{x:Static p:Resources.profileStatsTitle}" HorizontalAlignment="Left" Margin="86,417,0,0" VerticalAlignment="Top" FontSize="30" FontWeight="Bold"/>
 

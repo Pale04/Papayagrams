@@ -18,12 +18,6 @@ namespace PapayagramsClient.ClientData
             Finished
         }
         
-        public enum PlayerState
-        {
-            Connected,
-            Disconected
-        }
-
         public static string RoomCode { get; set; }
         public static GameState State { get; set; }
         public static List<PlayerDC> PlayersInRoom { get; set; }

@@ -12,7 +12,7 @@ namespace BussinessLogic
             if (!_gamesInProgress.ContainsKey(gameRoomCode))
             {
                 Game game = new Game();
-                game.GeneratePiecesPile(144);
+                game.GeneratePiecesPile(44);
                 _gamesInProgress.Add(gameRoomCode, game);
             }
         }

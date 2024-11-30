@@ -47,6 +47,7 @@ namespace PapayagramsClient.Game
             CurrentGame.State = CurrentGame.GameState.InLobby;
             CurrentGame.PlayersInRoom = gameRoom.Players.ToList();
             CurrentGame.GameConfig = gameConfig;
+            RefreshLobby(gameRoom);
         }
 
         // Join to game room with code x
@@ -172,18 +173,27 @@ namespace PapayagramsClient.Game
 
         private void CreateGame(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine("Players in game:");
+            foreach (PlayerDC player in CurrentGame.PlayersInRoom)
+            {
+                Console.WriteLine(player.Username);
+            }
+
             if (CurrentGame.PlayersInRoom.Count < 1)
             {
                 return;
             }
 
-            _host.StartGame(CurrentGame.RoomCode);
-            NavigationService.Navigate(new Game());
+            if (CurrentGame.PlayersInRoom[0].Username == CurrentPlayer.Player.Username)
+            {
+                _host.StartGame(CurrentGame.RoomCode);
+                NavigationService.Navigate(new Game());
+            }
         }
 
         public void CarryInsideGame()
         {
-            throw new NotImplementedException();
+            NavigationService.Navigate(new Game());
         }
     }
 }

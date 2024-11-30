@@ -286,10 +286,10 @@
     <value>Original games played</value>
   </data>
   <data name="profileTimeAttackGames" xml:space="preserve">
-    <value>Time attack games played</value>
+    <value>Time attack games played: </value>
   </data>
   <data name="profileSuddenDeathGames" xml:space="preserve">
-    <value>Sudden death games played</value>
+    <value>Sudden death games played: </value>
   </data>
   <data name="profileGamesWon" xml:space="preserve">
     <value>Games won</value>
@@ -298,10 +298,10 @@
     <value>Original games won</value>
   </data>
   <data name="profileTimeAttackGamesWon" xml:space="preserve">
-    <value>Time attack games won</value>
+    <value>Time attack games won: </value>
   </data>
   <data name="profileSuddenDeathGamesWon" xml:space="preserve">
-    <value>Sudden death games won</value>
+    <value>Sudden death games won: </value>
   </data>
   <data name="profileNumberFriends" xml:space="preserve">
     <value>Number of friends</value>
@@ -371,5 +371,38 @@
   </data>
   <data name="gameLeaveGame" xml:space="preserve">
     <value>Are you sure you want to leave?</value>
+  </data>
+  <data name="gameEndFinished" xml:space="preserve">
+    <value>Game finished</value>
+  </data>
+  <data name="gameEndCalculating" xml:space="preserve">
+    <value>Calculating results</value>
+  </data>
+  <data name="gameEndLeave" xml:space="preserve">
+    <value>Leave</value>
+  </data>
+  <data name="gameEndWinner" xml:space="preserve">
+    <value>The winner is</value>
+  </data>
+  <data name="globalConfiguration" xml:space="preserve">
+    <value>Configuration</value>
+  </data>
+  <data name="configurationPieceColor" xml:space="preserve">
+    <value>Piece color</value>
+  </data>
+  <data name="configurationLanguage" xml:space="preserve">
+    <value>App language</value>
+  </data>
+  <data name="configurationCursor" xml:space="preserve">
+    <value>Cursor</value>
+  </data>
+  <data name="cursorClassic" xml:space="preserve">
+    <value>Classic</value>
+  </data>
+  <data name="cursorPapaya" xml:space="preserve">
+    <value>Papaya</value>
+  </data>
+  <data name="configurationSystemLanguage" xml:space="preserve">
+    <value>Same as system</value>
   </data>
 </root>

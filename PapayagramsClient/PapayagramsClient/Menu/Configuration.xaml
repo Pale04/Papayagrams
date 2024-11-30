@@ -5,10 +5,57 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PapayagramsClient.Menu"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="720" d:DesignWidth="1080"
+      xmlns:p="clr-namespace:PapayagramsClient.Properties"
+      Background="#D9D9D9"
       Title="Configuration">
 
     <Grid>
-        
+        <Button Style="{StaticResource PrimaryButton}" HorizontalAlignment="Left" Margin="46,53,0,0" VerticalAlignment="Top" Height="60" Width="61" Click="ReturnToMainMenu">
+            <Image Source="../Resources/Icons/back-svgrepo-com.png"/>
+        </Button>
+
+        <Label Content="{x:Static p:Resources.globalConfiguration}" HorizontalAlignment="Left" Margin="138,32,0,0" VerticalAlignment="Top" FontSize="64" FontWeight="Bold"/>
+
+        <Grid Height="400" Width="700">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" HorizontalAlignment="Right" Margin="0, 0, 15, 0">
+                <Label Content="{x:Static p:Resources.configurationPieceColor}" FontSize="30"/>
+                <Separator Height="30" Opacity="0"/>
+                <Label Content="{x:Static p:Resources.configurationLanguage}" FontSize="30"/>
+                <Separator Height="30" Opacity="0"/>
+                <Label Content="{x:Static p:Resources.configurationCursor}" FontSize="30"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <Separator Height="2" Opacity="0"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Background="#F9E888" Width="40" Height="40" BorderThickness="2" BorderBrush="Black" Margin="0, 0, 15, 0"/>
+                    <Button Background="#D1F988" Width="40" Height="40" BorderThickness="2" BorderBrush="Black" Margin="0, 0, 15, 0"/>
+                    <Button Background="#FFA8D8" Width="40" Height="40" BorderThickness="2" BorderBrush="Black" Margin="0, 0, 15, 0"/>
+                    <Button Background="#F98B88" Width="40" Height="40" BorderThickness="2" BorderBrush="Black" Margin="0, 0, 15, 0"/>
+                    <Button Background="#88E4F9" Width="40" Height="40" BorderThickness="2" BorderBrush="Black" Margin="0, 0, 15, 0"/>
+                </StackPanel>
+
+                <Separator Height="40" Opacity="0"/>
+                <ComboBox FontSize="30" SelectedIndex="0">
+                    <ComboBoxItem Content="{x:Static p:Resources.createGameEnglishLanguage}"/>
+                    <ComboBoxItem Content="{x:Static p:Resources.createGameSpanishLanguage}"/>
+                    <ComboBoxItem Content="{x:Static p:Resources.configurationSystemLanguage}"/>
+                </ComboBox>
+
+                <Separator Height="30" Opacity="0"/>
+                <ComboBox FontSize="30" SelectedIndex="0">
+                    <ComboBoxItem Content="{x:Static p:Resources.cursorClassic}"/>
+                    <ComboBoxItem Content="{x:Static p:Resources.cursorPapaya}"/>
+                </ComboBox>
+            </StackPanel>
+
+            <Button Content="{x:Static p:Resources.changePasswordTitle}" Height="80" Width="550" Click="GoToChangePassword" Grid.ColumnSpan="2" Style="{StaticResource SecondaryButton}" VerticalAlignment="Bottom"/>
+        </Grid>
     </Grid>
 </Page>

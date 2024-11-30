@@ -17,13 +17,13 @@
 
         <Label Content="{x:Static p:Resources.mainMenuAchievements}" HorizontalAlignment="Left" Margin="138,32,0,0" VerticalAlignment="Top" FontSize="64" FontWeight="Bold"/>
 
-        <StackPanel Margin="40,148,40,496" Background="White" Opacity="21" Width="1000" Height="75" Orientation="Horizontal">
+        <StackPanel Margin="40,148,40,496" Background="White" Opacity="21" Width="1000" Orientation="Horizontal">
             <ProgressBar Name="AchievementsProgress" HorizontalAlignment="Left" Margin="20, 0, 10, 0" Height="10" VerticalAlignment="Center" Width="800" Minimum="0" Maximum="100"/>
             <Label Name="ProgressLabel" Content="20/20" FontSize="26" Margin="0, 0, 10, 0" VerticalContentAlignment="Center"/>
             <Image Source="../Resources/Icons/trophy-svgrepo-com.png" HorizontalAlignment="Right"/>
         </StackPanel>
 
-        <ScrollViewer>
+        <ScrollViewer Width="1000" Margin="40,254,40,0" VerticalAlignment="Top" Height="435">
             <StackPanel Name="AchievementListPanel" Margin="40,256,40,34"/>
         </ScrollViewer>
     </Grid>

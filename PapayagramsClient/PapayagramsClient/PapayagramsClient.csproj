@@ -126,6 +126,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Login\JoinAsGuest.xaml.cs">
+      <DependentUpon>JoinAsGuest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SelectionPopUpWindow.xaml.cs">
       <DependentUpon>SelectionPopUpWindow.xaml</DependentUpon>
     </Compile>
@@ -155,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\Lobby.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Login\JoinAsGuest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -325,9 +332,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\PapayagramsService\item4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\PapayagramsService\item5.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.AchievementDC.datasource">
