@@ -81,9 +81,10 @@ namespace PapayagramsClient.Game
                     CurrentGame.RoomCode = gameRoom.RoomCode;
                     CurrentGame.State = CurrentGame.GameState.InLobby;
                     CurrentGame.PlayersInRoom = gameRoom.Players.ToList();
+                    //CurrentGame.GameConfig = gameRoom.GameConfiguration();
                     RefreshLobby(new GameRoomDC
                     {
-                        Players = CurrentGame.PlayersInRoom.ToArray()
+                        Players = CurrentGame.PlayersInRoom.ToArray(),
                     });
                     return;
 

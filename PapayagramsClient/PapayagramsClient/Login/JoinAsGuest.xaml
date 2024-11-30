@@ -15,7 +15,7 @@
             <Image Source="../Resources/Icons/back-svgrepo-com.png" Width="40" Height="40"/>
         </Button>
 
-        <TextBox Name="CodeTextbox" Style="{StaticResource CustomTextBox}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="217" Height="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" Padding="0"/>
+        <TextBox Name="CodeTextbox" Style="{StaticResource CustomTextBox}" Width="217" Height="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" MaxLength="4"/>
         <Button Style="{StaticResource PrimaryButton}" Content="{x:Static p:Resources.joinGameJoin}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,414,0,0" Width="279" Click="JoinGameRoom"/>
     </Grid>
 </Page>

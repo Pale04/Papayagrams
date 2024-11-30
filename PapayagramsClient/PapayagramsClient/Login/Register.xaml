@@ -21,17 +21,17 @@
             <Separator Opacity="0" Height="18"/>
 
             <Label Content="{x:Static p:Resources.globalUsername}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="34"/>
-            <TextBox Style="{StaticResource CustomTextBox}" Name="UsernameTextbox" TextWrapping="Wrap" Width="425"/>
+            <TextBox Style="{StaticResource CustomTextBox}" Name="UsernameTextbox" TextWrapping="Wrap" Width="425" MaxLength="50"/>
             <Label Name="UsernameErrorText" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" Foreground="Red" Height="35"/>
             <Separator Opacity="0" Height="8"/>
 
             <Label Content="{x:Static p:Resources.globalPassword}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="34"/>
-            <TextBox Style="{StaticResource CustomTextBox}" Name="PasswordTextbox" TextWrapping="Wrap" Width="425"/>
+            <TextBox Style="{StaticResource CustomTextBox}" Name="PasswordTextbox" TextWrapping="Wrap" Width="425" MaxLength="120"/>
             <Label Name="PasswordErrorText" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" Foreground="Red" Height="35"/>
             <Separator Opacity="0" Height="8"/>
 
             <Label Content="{x:Static p:Resources.globalEmail}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="34"/>
-            <TextBox Style="{StaticResource CustomTextBox}" Name="EmailTextbox" TextWrapping="Wrap" Width="425"/>
+            <TextBox Style="{StaticResource CustomTextBox}" Name="EmailTextbox" TextWrapping="Wrap" Width="425" MaxLength="50"/>
             <Label Name="EmailErrorText" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" Foreground="Red" Height="35"/>
             <Separator Opacity="0" Height="15"/>
             
