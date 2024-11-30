@@ -286,8 +286,8 @@ namespace Contracts
         [DataMember]
         public List<PlayerDC> Players;
 
-        //[DataMember]
-        //public GameConfigurationDC GameConfiguration { get; set; }
+        [DataMember]
+        public GameConfigurationDC GameConfiguration { get; set; }
 
         public static GameRoomDC ConvertToGameRoomDC(GameRoom room)
         {
@@ -296,8 +296,8 @@ namespace Contracts
             return new GameRoomDC
             {
                 RoomCode = room.RoomCode,
-                Players = players
-                //GameConfiguration = GameConfigurationDC.ConvertToGameConfigurationDC(room.GameConfiguration)
+                Players = players,
+                GameConfiguration = GameConfigurationDC.ConvertToGameConfigurationDC(room.GameConfiguration)
             };
         }
     }

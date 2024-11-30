@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DomainClasses
 {
     public class Game
     {
+        private Dictionary<string, int> _playersScores = new Dictionary<string, int>();
         private Stack<char> _piecesPile = new Stack<char>();
         private List<Player> _connectedPlayers = new List<Player>();
 
         public List<Player> ConnectedPlayers { get { return _connectedPlayers; } }
         public Stack<char> PiecesPile { get { return _piecesPile; } }
+        public Dictionary<string, int> PlayersScores { get { return _playersScores; } }
 
         /// <summary>
         /// Generate the pieces pile with the specified amount of pieces for the game room
@@ -83,6 +86,21 @@ namespace DomainClasses
         public bool ThereAreLessPiecesThanPlayers()
         {
             return _piecesPile.Count < _connectedPlayers.Count;
+        }
+
+        public void AddScore(string username, int score)
+        {
+            _playersScores.Add(username,score);
+        }
+
+        public int GetScore(string username)
+        {
+            return _playersScores[username];
+        }
+
+        public string GetWinner()
+        {
+            return _playersScores.OrderByDescending(x => x.Value).First().Key;
         }
     }
 }
