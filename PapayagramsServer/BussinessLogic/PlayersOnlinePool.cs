@@ -43,6 +43,7 @@ namespace BussinessLogic
             };
 
             _guests.Add(username, guest);
+            _players.Add(username, guest);
             return guest;
         }
 

@@ -1,6 +1,7 @@
 ﻿using NHunspell;
 using PapayagramsClient.PapayagramsService;
 using System;
+using System.IO;
 
 namespace PapayagramsClient
 {
@@ -31,13 +32,13 @@ namespace PapayagramsClient
         {
             if (language.Equals(LanguageDC.Spanish))
             {
-                _spellCheckAff = "../Resources/Dictionaries/es_MX.aff";
-                _spellCheckDict = "../Resources/Dictionaries/es_MX.dic";
+                _spellCheckAff = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Dictionaries\\es_MX.aff";
+                _spellCheckDict = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Dictionaries\\es_MX.dic";
             }
             else if (language.Equals(LanguageDC.English))
             {
-                _spellCheckAff = "../Resources/Dictionaries/en_US.aff";
-                _spellCheckDict = "../Resources/Dictionaries/en_US.dic";
+                _spellCheckAff = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Dictionaries\\en_US.aff";
+                _spellCheckDict = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Dictionaries\\en_US.dic";
             }
             else
             {
