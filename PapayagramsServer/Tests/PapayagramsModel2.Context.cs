@@ -14,14 +14,28 @@ namespace Tests
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
+    using System.Configuration;
+
     public partial class papayagramsEntities : DbContext
     {
         public papayagramsEntities()
-            : base("name=papayagramsEntities")
+            : base(GetConnectionString())
         {
         }
-    
+
+        private static string GetConnectionString()
+        {
+            string password = Environment.GetEnvironmentVariable("Papayagrams_DataBasePassword");
+
+            if (string.IsNullOrEmpty(password))
+            {
+                throw new InvalidOperationException("Enviroment variable not found");
+            }
+
+            string connectionString = ConfigurationManager.ConnectionStrings["papayagramsEntities"].ConnectionString;
+            return connectionString.Replace("{password_placeholder}", password);
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
