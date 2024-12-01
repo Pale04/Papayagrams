@@ -20,7 +20,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Error while trying to update user status", error);
+                _logger.Fatal("Database connection failed", error);
                 return (102, null);
             }
 
@@ -66,7 +66,7 @@ namespace Contracts
                     }
                     catch (EntityException error)
                     {
-                        _logger.Fatal("Error while trying to update user status", error);
+                        _logger.Fatal("Database connection failed", error);
                         return (102, null);
                     }
                 }
@@ -97,7 +97,7 @@ namespace Contracts
                 }
                 catch (EntityException error)
                 {
-                    _logger.Error("Error while trying to update user status", error);
+                    _logger.Fatal("Database connection failed", error);
                     return 102;
                 }
             }

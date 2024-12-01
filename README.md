@@ -236,20 +236,23 @@ while  (true)
 - Las excepciones atrapadas por bloques catch se nombrarán "error".
 
 ### Bitácora
-Se usará la librería _log4net_ para la bitácora.
+**Librería:** log4net.
 
-Se regitrarán mensajes de información varia (**Info**):
-- Guardado de datos de usuario
+La bitácora debe manejarse prioritariamente en la clase que implemente los contratos (_ServiceImplementation_) en el servidor, ya que es la primera capa de comunicación directa con el servidor.
 
-Los errores se registrarán dentro de la clase correspondiente a la implementación de los contratos ofrecidos por el servidor, y si es necesario.
+Las siguientes listas muestran una guía para identificar en qué nivel registrar cada elemento en la bitácora.
 
-**Fatal**:
+**FATAL**: errores que afectan al sistema completamente
 - EntityException
-- SmtpCommandException
 - FileNotFoundException
 
-**Warning**:
-- (excepción de falta de conexión)
+**WARNING**: situaciones anormales que pueden indicar futuros problemas
+- SmtpCommandException
+
+**INFO**: eventos significativos en la ejecución del sistema.
+- Intentos de inicio de sesión
+- Intentos de verificación de la cuenta
+- 
 
 ### Códigos de error
 Para manejar los diferentes resultados o flujos que puede generar la ejecución de un método en la parte del servidor, estos devolverán un código de acuerdo al resultado obtenido.
@@ -272,6 +275,7 @@ Para facilitar el registro de errores en bitacora y mensajes de error para el us
 7. **Respetar el principio de encapsulación.** Utilice siempre campos privados y propiedades públicas si se necesita acceder al campo desde fuera de la clase o struct. Asegúrese de ubicar en el mismo lugar el campo privado y la propiedad pública.
 8. **Limitar la cantidad de información crítica al usuario.** No mostrar el error especifico al usuario para evitar revelar información sensible sobre la aplicación, en su lugar, notificarle con un mensaje breve y descriptivo de lo que sucedió.
 9. **Encriptación de contraseñas que se registran en la base de datos.**
+10. **No registrar información sensible o confidencial en las bitácoras de error.** Esto se hace con el fin de mantener segura la información de los usuarios en cualquier situación que se vulnere el sistema de bitácoras. En su lugar se pueden utilizar identificadores o palabras clave.
 ---
 
 ## Referencias

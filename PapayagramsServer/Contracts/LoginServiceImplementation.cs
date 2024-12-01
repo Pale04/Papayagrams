@@ -45,7 +45,6 @@ namespace Contracts
                     }
                     else if (UserDB.GetPlayerByEmail(newPlayer.Email).IsSome)
                     {
-                        _logger.Info($"Attempt of account registration with a registered email: {newPlayer.Email}\nDate: {DateTime.UtcNow}");
                         codeResult = 202;
                     }
                     else
@@ -56,7 +55,7 @@ namespace Contracts
                 }
                 catch (EntityException error)
                 {
-                    _logger.Error("Error while trying to register a new user", error);
+                    _logger.Fatal("Database connection failed", error);
                     return 102;
                 }
             }
@@ -88,7 +87,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Error($"Error while trying to log in: {username}", error);
+                _logger.Fatal("Database connection failed", error);
                 return (102, null);
             }
 
@@ -98,7 +97,7 @@ namespace Contracts
             }
             else if (loginResult == -2)
             {
-                _logger.Info($"Attempt of login with incorrect password\nAccount: {username}\nDate: {DateTime.UtcNow}");
+                _logger.Info($"Login attempt failed (username id: {username})");
                 return (206, null);
             }
 
@@ -110,7 +109,7 @@ namespace Contracts
             }
 
             PlayersOnlinePool.AddPlayer((Player)playerLogged.Case);
-            Console.WriteLine("User " + username + " logged in");
+            _logger.Info($"Login successful (username id: {username})");
 
             return (code, PlayerDC.ConvertToPlayerDC((Player)playerLogged.Case));
         }
@@ -134,7 +133,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Error($"Error while trying to log out: {username}", error);
+                _logger.Error("Database connection failed", error);
                 return 102;
             }
 
@@ -145,6 +144,7 @@ namespace Contracts
 
             CallbacksPool.RemoveAllCallbacksChannels(username);
             PlayersOnlinePool.RemovePlayer(username);
+
             return 0;
         }
 
@@ -157,6 +157,7 @@ namespace Contracts
 
             if (!VerificationCodesPool.AccountVerificationCodeCorrect(username, code))
             {
+                _logger.Info($"Account verification attempt failed (username id: {username})");
                 return 208;
             }
 
@@ -167,13 +168,14 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Error($"Error while trying to verify the account: {username}", error);
+                _logger.Error("Database connection failed", error);
                 return 102;
             }
 
             if (codeResult == 1)
             {
                 VerificationCodesPool.RemoveAccountVerificationCode(username);
+                _logger.Info($"Account verification successful (username id: {username})");
                 return 0;
             }
             else
@@ -192,7 +194,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Error($"Error while trying obtain user: {username}",error);
+                _logger.Error("Database connection failed",error);
                 return 102;
             }
 
@@ -210,7 +212,7 @@ namespace Contracts
             }
             catch (SmtpCommandException error)
             {
-                _logger.Error("Error while trying to send the account verification code", error);
+                _logger.Warn($"Verificaton email sending failed (username id: {username})", error);
                 return 104;
             }
         }
