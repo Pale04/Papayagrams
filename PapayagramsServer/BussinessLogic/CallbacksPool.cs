@@ -2,7 +2,7 @@
 
 namespace BussinessLogic
 {
-    public class CallbacksPool
+    public static class CallbacksPool
     {
         private static Hashtable _mainMenuPlayers = new Hashtable();
         private static Hashtable _pregamePlayers = new Hashtable();

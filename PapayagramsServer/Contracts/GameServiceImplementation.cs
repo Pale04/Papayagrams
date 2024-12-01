@@ -2,7 +2,6 @@
 using DataAccess;
 using DomainClasses;
 using System.Data;
-using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
 
@@ -17,7 +16,7 @@ namespace Contracts
             GamesInProgressPool.ConnectToGame(gameRoomCode, username);
 
             // Permite que solamente el primero que llegó al servidor sea el que comience el juego
-            if (GamesInProgressPool.GetGame(gameRoomCode).ConnectedPlayers.First().Username.Equals(username))
+            if (GamesInProgressPool.GetGame(gameRoomCode).ConnectedPlayers[0].Username.Equals(username))
             {
                 Task.Delay(10000);
                 PlayGame(gameRoomCode);

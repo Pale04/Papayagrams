@@ -2,7 +2,7 @@
 
 namespace BussinessLogic
 {
-    public class VerificationCodesPool
+    public static class VerificationCodesPool
     {
         private static Dictionary<string, string> _accountVerificationCodes = new Dictionary<string, string>();
 

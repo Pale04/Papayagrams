@@ -6,7 +6,7 @@ using DomainClasses;
 
 namespace DataAccess
 {
-    public class GameHistoryDB
+    public static class GameHistoryDB
     {
         /// <summary>
         /// Update the game history specified of the player and add the victory or defeat

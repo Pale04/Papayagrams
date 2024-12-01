@@ -23,7 +23,7 @@ namespace Contracts
 
         public (int, List<AchievementDC>) GetAchievements(string username)
         {
-            List<DomainClasses.Achievement> achievementsList = new List<DomainClasses.Achievement>();
+            List<DomainClasses.Achievement> achievementsList;
 
             try
             {
@@ -31,7 +31,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Error($"Error while trying to get achievements of: {username}", error);
+                _logger.Fatal("Database connnection failed", error);
                 return (102, null);
             }
 

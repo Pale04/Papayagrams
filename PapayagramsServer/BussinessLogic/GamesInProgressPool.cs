@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BussinessLogic
 {
-    public class GamesInProgressPool
+    public static class GamesInProgressPool
     {
         private static Dictionary<string,Game> _gamesInProgress = new Dictionary<string,Game>();
 

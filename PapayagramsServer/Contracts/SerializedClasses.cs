@@ -67,13 +67,13 @@ namespace Contracts
         [DataMember]
         public int FriendsAmount { get; set; }
 
-        public override bool Equals(object other)
+        public override bool Equals(object obj)
         {
             bool isEqual = false;
 
-            if (other != null && GetType() == other.GetType())
+            if (obj != null && GetType() == obj.GetType())
             {
-                PlayerStatsDC playerStats = (PlayerStatsDC)other;
+                PlayerStatsDC playerStats = (PlayerStatsDC)obj;
                 isEqual = OriginalGamesPlayed == playerStats.OriginalGamesPlayed &&
                           TimeAttackGamesPlayed == playerStats.TimeAttackGamesPlayed &&
                           SuddenDeathGamesPlayed == playerStats.SuddenDeathGamesPlayed &&
@@ -88,7 +88,7 @@ namespace Contracts
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return OriginalGamesPlayed.GetHashCode() ^ TimeAttackGamesPlayed.GetHashCode() ^ SuddenDeathGamesPlayed.GetHashCode() ^OriginalGamesWon.GetHashCode() ^ TimeAttackGamesWon.GetHashCode() ^ SuddenDeathGamesWon.GetHashCode() ^ FriendsAmount.GetHashCode();
         }
 
         public static PlayerStatsDC ConvertToPlayerStatsDC(PlayerStats playerStats)
@@ -179,22 +179,22 @@ namespace Contracts
     public class Message
     {
         [DataMember]
-        public string AuthorUsername;
+        public string AuthorUsername { get; set; }
         [DataMember]
-        public string GameRoomCode;
+        public string GameRoomCode { get; set; }
         [DataMember]
-        public DateTime Time;
+        public DateTime Time { get; set; }
         [DataMember]
-        public string Content;
+        public string Content { get; set; }
     }
 
     [DataContract]
     public class GameInvitationDC
     {
         [DataMember]
-        public string GameRoomCode;
+        public string GameRoomCode { get; set; }
         [DataMember]
-        public string PlayerUsername;
+        public string PlayerUsername { get; set; }
     }
 
     [DataContract]
@@ -238,12 +238,12 @@ namespace Contracts
         [DataMember]
         public int TimeLimitMinutes { get; set; }
 
-        public override bool Equals(object other)
+        public override bool Equals(object obj)
         {
             bool isEqual = false;
-            if (other != null && GetType() == other.GetType())
+            if (obj != null && GetType() == obj.GetType())
             {
-                GameConfigurationDC gameConfiguration = (GameConfigurationDC)other;
+                GameConfigurationDC gameConfiguration = (GameConfigurationDC)obj;
                 isEqual = GameMode == gameConfiguration.GameMode &&
                           InitialPieces == gameConfiguration.InitialPieces &&
                           MaxPlayers == gameConfiguration.MaxPlayers &&
@@ -284,7 +284,7 @@ namespace Contracts
         public string RoomCode { get; set; }
 
         [DataMember]
-        public List<PlayerDC> Players;
+        public List<PlayerDC> Players { get; set; }
 
         [DataMember]
         public GameConfigurationDC GameConfiguration { get; set; }

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace DataAccess
 {
-    public class UserRelationshipDB
+    public static class UserRelationshipDB
     {
         /// <summary>
         /// Retrieve the player searched if exists and they are not friends
@@ -28,9 +28,9 @@ namespace DataAccess
                     Option<Player>.None :
                     Option<Player>.Some(new Player
                     {
-                        Id = resultList.First().id,
-                        Username = resultList.First().username,
-                        Email = resultList.First().email,
+                        Id = resultList[0].id,
+                        Username = resultList[0].username,
+                        Email = resultList[0].email,
                     });
             }
             return foundPlayer;

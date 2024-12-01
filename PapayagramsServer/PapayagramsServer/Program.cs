@@ -7,7 +7,7 @@ using System.ServiceModel;
 
 namespace PapayagramsServer
 {
-    internal class Program
+    internal static class Program
     {
         static void Main(string[] args)
         {

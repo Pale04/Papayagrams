@@ -12,13 +12,12 @@ namespace Contracts
     public partial class ServiceImplementation : ILoginService
     {
         private static readonly ILog _logger = LogManager.GetLogger(typeof(ServiceImplementation));
-        private static readonly MailService.MailService _mailService = new MailService.MailService();
 
         /// <summary>
         /// Create an account for a new user and send an email with the verification code
         /// </summary>
         /// <param name="player">PlayerDC object with the user's data</param>
-        /// <returns>0 if the registration was successful, a error code otherwise</returns>
+        /// <returns>0 if the registration was successful, an error code otherwise</returns>
         public int RegisterUser(PlayerDC player)
         {
             int codeResult = 0;
@@ -97,7 +96,7 @@ namespace Contracts
             }
             else if (loginResult == -2)
             {
-                _logger.Info($"Login attempt failed (username id: {username})");
+                _logger.InfoFormat("Login attempt failed (username id: {username})",username);
                 return (206, null);
             }
 
@@ -109,7 +108,7 @@ namespace Contracts
             }
 
             PlayersOnlinePool.AddPlayer((Player)playerLogged.Case);
-            _logger.Info($"Login successful (username id: {username})");
+            _logger.InfoFormat("Login successful (username id: {username})", username);
 
             return (code, PlayerDC.ConvertToPlayerDC((Player)playerLogged.Case));
         }
@@ -157,7 +156,7 @@ namespace Contracts
 
             if (!VerificationCodesPool.AccountVerificationCodeCorrect(username, code))
             {
-                _logger.Info($"Account verification attempt failed (username id: {username})");
+                _logger.InfoFormat("Account verification attempt failed (username id: {username})", username);
                 return 208;
             }
 
@@ -175,7 +174,7 @@ namespace Contracts
             if (codeResult == 1)
             {
                 VerificationCodesPool.RemoveAccountVerificationCode(username);
-                _logger.Info($"Account verification successful (username id: {username})");
+                _logger.InfoFormat("Account verification successful (username id: {username})",username);
                 return 0;
             }
             else
@@ -208,7 +207,7 @@ namespace Contracts
 
             try
             {
-                return _mailService.SendMail(playerChecking.Email, "Account verification code", $"Your account verification code is: {code}");
+                return MailService.MailService.SendMail(playerChecking.Email, "Account verification code", $"Your account verification code is: {code}");
             }
             catch (SmtpCommandException error)
             {

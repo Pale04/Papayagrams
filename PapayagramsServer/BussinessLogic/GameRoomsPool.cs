@@ -1,10 +1,11 @@
 ﻿using DomainClasses;
 using System;
 using System.Collections;
+using System.Text;
 
 namespace BussinessLogic
 {
-    public class GameRoomsPool
+    public static class GameRoomsPool
     {
         private static Hashtable _gameRooms = new Hashtable();
 
@@ -63,7 +64,7 @@ namespace BussinessLogic
         }
     }
 
-    internal class CodeGenerator
+    internal static class CodeGenerator
     {
         /// <summary>
         /// Generate a random 4 character code
@@ -71,15 +72,15 @@ namespace BussinessLogic
         /// <returns>A string with the code</returns>
         public static string GenerateCode()
         {
-            string code = string.Empty;
+            StringBuilder code = new StringBuilder();
             Random random = new Random();
 
             for (int i = 0; i < 4; i++)
             {
-                code += (char)random.Next(65, 90);
+                code.Append((char)random.Next(65, 90));
             }
 
-            return code;
+            return code.ToString();
         }
     }
 }

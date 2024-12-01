@@ -40,20 +40,20 @@ namespace DomainClasses
 
     public class GameRoom
     {
-        private List<Player> _players = new List<Player>();
+        private readonly List<Player> _players = new List<Player>();
         
         public string RoomCode { get; set; }
         public List<Player> Players { get { return _players; } }
         public GameRoomState State { get; set; }
         public GameConfiguration GameConfiguration { get; set; }
 
-        public override bool Equals(object other)
+        public override bool Equals(object obj)
         {
             bool isEqual = false;
 
-            if (other != null || GetType() == other.GetType())
+            if (obj != null && GetType() == obj.GetType())
             {
-                GameRoom room = (GameRoom)other;
+                GameRoom room = (GameRoom)obj;
                 isEqual = RoomCode == room.RoomCode;
             }
 
@@ -62,7 +62,7 @@ namespace DomainClasses
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return RoomCode.GetHashCode();
         }
     }
 }

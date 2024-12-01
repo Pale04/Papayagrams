@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace DataAccess
 {
-    public class UserDB
+    public static class UserDB
     {
         /// <summary>
         /// Register a new player in the database
@@ -95,10 +95,10 @@ namespace DataAccess
                     Option<Player>.None :
                     Option<Player>.Some(new Player
                     {
-                        Id = playerResult.First().id,
-                        Username = playerResult.First().username,
-                        Email = playerResult.First().email,
-                        ProfileIcon = playerResult.First().UserConfiguration.icon,
+                        Id = playerResult[0].id,
+                        Username = playerResult[0].username,
+                        Email = playerResult[0].email,
+                        ProfileIcon = playerResult[0].UserConfiguration.icon,
                     });
             }
 
@@ -122,10 +122,10 @@ namespace DataAccess
                     Option<Player>.None :
                     Option<Player>.Some(new Player
                     {
-                        Id = playerResult.First().id,
-                        Username = playerResult.First().username,
-                        Email = playerResult.First().email,
-                        ProfileIcon = playerResult.First().UserConfiguration.icon,
+                        Id = playerResult[0].id,
+                        Username = playerResult[0].username,
+                        Email = playerResult[0].email,
+                        ProfileIcon = playerResult[0].UserConfiguration.icon,
                     });
             }
 
@@ -198,7 +198,7 @@ namespace DataAccess
                         OriginalGamesWon = (int)result.First().OriginalGameHistory.First().wonGames,
                         TimeAttackGamesWon = (int)result.First().TimeAtackHistory.First().wonGames,
                         SuddenDeathGamesWon = (int)result.First().SuddenDeathHistory.First().wonGames,
-                        FriendsAmount = result.First().UserRelationship.Where(relation => relation.relationState.Equals("friend")).Count()
+                        FriendsAmount = result.First().UserRelationship.Count(relation => relation.relationState.Equals("friend"))
                     };
                     playerStatsResult = Option<PlayerStats>.Some(playerStats);
                 }

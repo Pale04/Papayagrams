@@ -3,11 +3,9 @@ namespace DomainClasses
 {
     public class Achievement
     {
-        private bool _isAchieved = false;
-
         public int Id { get; set; }
         public string Description { get; set; }
-        public bool IsAchieved { get { return _isAchieved; } set { _isAchieved = value; } }
+        public bool IsAchieved { get; set; }
 
         public override bool Equals(object obj)
         {

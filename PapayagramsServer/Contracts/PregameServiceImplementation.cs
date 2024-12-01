@@ -84,9 +84,9 @@ namespace Contracts
             return (code, serializedGameRoom);
         }
 
-        public int LeaveLobby(string username, string code)
+        public int LeaveLobby(string username, string roomCode)
         {
-            GameRoomsPool.RemovePlayerFromGameRoom(username, code);
+            GameRoomsPool.RemovePlayerFromGameRoom(username, roomCode);
             CallbacksPool.RemovePregameCallbackChannel(username);
 
             if (!PlayersOnlinePool.IsGuest(username))
@@ -158,7 +158,7 @@ namespace Contracts
             return room != null && room.State.Equals(GameRoomState.Waiting) && room.Players.Count < room.GameConfiguration.MaxPlayers;
         }
 
-        private void BroadcastRefreshLobby(GameRoomDC gameRoom)
+        private static void BroadcastRefreshLobby(GameRoomDC gameRoom)
         {
             if (gameRoom != null)
             {
