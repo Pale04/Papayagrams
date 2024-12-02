@@ -194,5 +194,29 @@ namespace Contracts.Tests
             PlayerDC player = _serviceImplementation.AccessAsGuest();
             Assert.IsNotNull(player.Username, "AccessAsGuestTest");
         }
+
+        [TestMethod()]
+        public void SendPasswordRecoveryPINSuccessfulTest()
+        {
+            int expected = 0;
+            int result = _serviceImplementation.SendPasswordRecoveryPIN(_registeredPlayer.Username);
+            Assert.AreEqual(expected, result, "SendPasswordRecoveryPINSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void SendPasswordRecoveryPINNullUsernameTest()
+        {
+            int expected = 101;
+            int result = _serviceImplementation.SendPasswordRecoveryPIN(null);
+            Assert.AreEqual(expected, result, "SendPasswordRecoveryPINNullUsernameTest");
+        }
+
+        [TestMethod()]
+        public void SendPasswordRecoveryPINNonExistentUsernameTest()
+        {
+            int expected = 205;
+            int result = _serviceImplementation.SendPasswordRecoveryPIN("DavidXD");
+            Assert.AreEqual(expected, result, "SendPasswordRecoveryPINNonExistentUsernameTest");
+        }
     }
 }

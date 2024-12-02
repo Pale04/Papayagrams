@@ -148,13 +148,37 @@ namespace Contracts
     }
 
     [DataContract]
+    public enum RelationStateDC
+    {
+        [EnumMember]
+        Friend,
+        [EnumMember]
+        Blocked,
+        [EnumMember]
+        Pending
+    }
+
+    [DataContract]
     public class FriendDC
     {
+        [DataMember] 
+        public int Id { get; set; }
+
         [DataMember]
         public string Username { get; set; }
 
         [DataMember]
-        public string Status { get; set; }
+        public RelationStateDC RelationState { get; set; }
+
+        public static FriendDC ConvertToFriendDC(Friend friend)
+        {
+            return new FriendDC
+            {
+                Id = friend.Id,
+                Username = friend.Username,
+                RelationState = (RelationStateDC)Enum.Parse(typeof(RelationStateDC), friend.RelationState.ToString())
+            };
+        }
 
         public override bool Equals(object obj)
         {
@@ -163,7 +187,7 @@ namespace Contracts
             if (obj != null && GetType() == obj.GetType())
             {
                 FriendDC friend = (FriendDC)obj;
-                isEqual = Username == friend.Username && Status == friend.Status;
+                isEqual = Id == friend.Id && Username.Equals(friend.Username) && RelationState.Equals(friend.RelationState);
             }
 
             return isEqual;
@@ -171,7 +195,7 @@ namespace Contracts
 
         public override int GetHashCode()
         {
-            return Username.GetHashCode() ^ Status.GetHashCode();
+            return Id.GetHashCode() ^ Username.GetHashCode() ^ RelationState.GetHashCode();
         }
     }
 
