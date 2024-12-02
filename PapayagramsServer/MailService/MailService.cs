@@ -11,6 +11,14 @@ namespace MailService
         private static readonly string _smtpServer = "smtp.gmail.com";
         private static readonly int _smtpPort = 587;
 
+        /// <summary>
+        /// Send an email
+        /// </summary>
+        /// <param name="receiverEmail">destination email</param>
+        /// <param name="subject">subject of the email</param>
+        /// <param name="body">message of the email</param>
+        /// <returns>0 if the email was sent correctly, an exception otherwise</returns>
+        /// <exception cref="SmtpCommandException">Thrown when the process fails</exception>"
         public static int SendMail(string receiverEmail, string subject, string body)
         {
             var mail = new MimeMessage();

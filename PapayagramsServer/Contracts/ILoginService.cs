@@ -9,7 +9,7 @@ namespace Contracts
         int RegisterUser(PlayerDC player);
 
         [OperationContract]
-        (int, PlayerDC) Login(string username, string password);
+        (int errorCode, PlayerDC loggedPlayer) Login(string username, string password);
 
         [OperationContract]
         int Logout(string username);
@@ -22,5 +22,8 @@ namespace Contracts
 
         [OperationContract]
         PlayerDC AccessAsGuest();
+
+        [OperationContract]
+        int SendPasswordRecoveryPIN(string username);
     }
 }

@@ -68,7 +68,7 @@ namespace Contracts
         /// <param name="username">Username of the account</param>
         /// <param name="password">Password of the account</param>
         /// <returns>(0,Player) if the log in was succesful, (errorCode, null) otherwise</returns>
-        public (int, PlayerDC) Login(string username, string password)
+        public (int errorCode, PlayerDC loggedPlayer) Login(string username, string password)
         {
             if (string.IsNullOrEmpty(username))
             {
@@ -219,6 +219,43 @@ namespace Contracts
         public PlayerDC AccessAsGuest()
         {
             return PlayerDC.ConvertToPlayerDC(PlayersOnlinePool.CreateGuestProfile());
+        }
+
+        public int SendPasswordRecoveryPIN(string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                return 101;
+            }
+
+            Option<Player> wrappedPlayer;
+            try
+            {
+                wrappedPlayer = UserDB.GetPlayerByUsername(username);
+            }
+            catch (EntityException error)
+            {
+                _logger.Fatal("Database connection failed", error);
+                return 102;
+            }
+
+            if (wrappedPlayer.IsNone)
+            {
+                return 205;
+            }
+
+            Player player = (Player)wrappedPlayer.Case;
+            string pin = VerificationCodesPool.GeneratePasswordRecoveryPIN(username);
+
+            try
+            {
+                return MailService.MailService.SendMail(player.Email, "Password recovery PIN", $"Your password recovery PIN is: {pin}");
+            }
+            catch (SmtpCommandException error)
+            {
+                _logger.Warn($"Password recovery email sending failed (username id: {username})", error);
+                return 104;
+            }
         }
     }
 }

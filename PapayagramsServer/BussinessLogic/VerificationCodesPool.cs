@@ -5,6 +5,7 @@ namespace BussinessLogic
     public static class VerificationCodesPool
     {
         private static Dictionary<string, string> _accountVerificationCodes = new Dictionary<string, string>();
+        private static Dictionary<string, string> _passwordRecoveryPINes = new Dictionary<string, string>();
 
         /// <summary>
         /// Generate a new account verification code for the specified username and remove any previous code
@@ -43,6 +44,23 @@ namespace BussinessLogic
         public static void RemoveAccountVerificationCode(string code)
         {
             _accountVerificationCodes.Remove(code);
+        }
+
+        public static string GeneratePasswordRecoveryPIN(string username)
+        {
+            if (_passwordRecoveryPINes.ContainsKey(username))
+            {
+                _passwordRecoveryPINes.Remove(username);
+            }
+            
+            string pin;
+            do
+            {
+                pin = CodeGenerator.GenerateCode();
+            } while (_passwordRecoveryPINes.ContainsValue(pin));
+
+            _passwordRecoveryPINes.Add(username, pin);
+            return pin;
         }
     }
 }

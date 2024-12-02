@@ -94,7 +94,7 @@ BEGIN
 	AND NOT username = @searcherUsername
 	AND NOT EXISTS (SELECT * FROM [UserRelationship] 
 					WHERE ((senderId = @searcherId AND receiverId = @searchedId) OR (senderId = @searchedId AND receiverId = @searcherId))
-					AND relationState = 'friend');
+					AND (relationState = 'friend' OR relationState = 'blocked'));
 END;
 GO
 

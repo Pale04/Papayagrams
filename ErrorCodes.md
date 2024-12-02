@@ -22,7 +22,9 @@
 302. Cannot send a friend request. You have a pending friend request from that player.
 303. Cannot send a friend request. You are already friends.
 304. Cannot send a friend request. Your relationship is blocked.
-305. 
+305. Friend request response failed. No request exists with the specified usernames.
+306. Friend request response failed. Respondent not found.
+307. Friend request response failed. Requester not found.
 
 ## Pregame
 401. Game room not found or doesn't exist.
