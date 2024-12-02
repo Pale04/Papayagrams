@@ -73,6 +73,7 @@ namespace DataAccess
         /// <param name="requestingPlayerUsername">username of the player who sent the request</param>
         /// <param name="acceptRequest">Response of the player</param>
         /// <returns>1 if the operation was successful, 0 if no request exists, -1 if evaluator not found an -2 if requester not found</returns>
+        /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
         public static int RespondFriendRequest(string evaluatingPlayerUsername, string requestingPlayerUsername, bool acceptRequest)
         {
             int result = 0;
@@ -112,6 +113,7 @@ namespace DataAccess
         /// </summary>
         /// <param name="username">Username of the player</param>
         /// <returns>A list with Friend objects</returns>
+        /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
         public static List<Friend> GetFriends(string username)
         {
             List<Friend> friends = new List<Friend>();
@@ -143,6 +145,7 @@ namespace DataAccess
         /// </summary>
         /// <param name="username">Username of the player</param>
         /// <returns>A list with Friend objects</returns>
+        /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
         public static List<Friend> GetPendingFriendRequests(string username)
         {
             List<Friend> pendingRequestsList = new List<Friend>();
@@ -172,6 +175,7 @@ namespace DataAccess
         /// </summary>
         /// <param name="username">Username of the player</param>
         /// <returns>A list with Friend objects</returns>
+        /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
         public static List<Friend> GetBlockedPlayers(string username)
         {
             List<Friend> blockedPlayersList = new List<Friend>();
@@ -196,11 +200,43 @@ namespace DataAccess
             return blockedPlayersList;
         }
 
+        /// <summary>
+        /// Block other player
+        /// </summary>
+        /// <param name="username">Username ot the player blocking</param>
+        /// <param name="blockedUsername">Username of the player being blocked</param>
+        /// <returns>1 if the operation was successful, 0 otherwise</returns>
+        /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
         public static int BlockPlayer(string username, string blockedUsername)
         {
-            //TODO: el que bloquea ahora se vuelve sender y el bloqueado se vuelve receiver. Todo
-            // para que sirva el método "GetBlockedPlayers"
-            return 0;
+            int result = 0;
+            using (var context = new papayagramsEntities())
+            {
+                var player = context.User.Where(p => p.username == username).Include(p => p.UserRelationship).Include(p => p.UserRelationship1).FirstOrDefault();
+                var blockedPlayer = context.User.Where(p => p.username == blockedUsername).FirstOrDefault();
+
+                if (player != null && blockedPlayer != null)
+                {
+                    var relationWithOther = player.UserRelationship.Where(r => r.receiverId == blockedPlayer.id).FirstOrDefault();
+                    var relationWithOther2 = player.UserRelationship1.Where(r => r.senderId == blockedPlayer.id).FirstOrDefault();
+
+                    if (relationWithOther != null || relationWithOther2 != null)
+                    {
+                        context.UserRelationship.Remove(relationWithOther != null ? relationWithOther : relationWithOther2);
+                        context.SaveChanges();
+                    }
+
+                    context.UserRelationship.Add(new UserRelationship
+                    {
+                        senderId = player.id,
+                        receiverId = blockedPlayer.id,
+                        relationState = "blocked"
+                    });
+                    result = context.SaveChanges();
+                }
+            }
+
+            return result;
         }
     }
 }

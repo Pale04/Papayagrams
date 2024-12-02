@@ -98,6 +98,7 @@ BEGIN
 END;
 GO
 
+-- Actualizado 02/12/24
 CREATE PROCEDURE send_friend_request
 	@senderUsername VARCHAR(50),
 	@receiverUsername VARCHAR(50)
@@ -115,11 +116,11 @@ BEGIN
 	BEGIN
 		RETURN -2
 	END
-	ELSE IF EXISTS (SELECT * FROM [UserRelationship] WHERE (senderId = @senderId AND receiverId = @receiverId) OR (senderId = @receiverId AND receiverId = @senderId) AND relationState = 'friend')
+	ELSE IF EXISTS (SELECT * FROM [UserRelationship] WHERE ((senderId = @senderId AND receiverId = @receiverId) OR (senderId = @receiverId AND receiverId = @senderId)) AND relationState = 'friend')
 	BEGIN
 		RETURN -3
 	END
-	ELSE IF EXISTS (SELECT * FROM [UserRelationship] WHERE (senderId = @senderId AND receiverId = @receiverId) OR (senderId = @receiverId AND receiverId = @senderId)  AND relationState = 'blocked')
+	ELSE IF EXISTS (SELECT * FROM [UserRelationship] WHERE ((senderId = @senderId AND receiverId = @receiverId) OR (senderId = @receiverId AND receiverId = @senderId))  AND relationState = 'blocked')
 	BEGIN
 		RETURN -4
 	END

@@ -125,7 +125,7 @@ namespace Contracts
             if (obj != null && GetType() == obj.GetType())
             {
                 AchievementDC achievement = (AchievementDC)obj;
-                isEqual = Id == achievement.Id && Description.Equals(achievement.Description) && IsAchieved == achievement.IsAchieved;
+                isEqual = Id == achievement.Id && IsAchieved == achievement.IsAchieved;
             }
 
             return isEqual;
@@ -133,7 +133,7 @@ namespace Contracts
 
         public override int GetHashCode()
         {
-            return Id.GetHashCode() ^ Description.GetHashCode() ^ IsAchieved.GetHashCode();
+            return Id.GetHashCode() ^ IsAchieved.GetHashCode();
         }
 
         public static AchievementDC ConvertToAchievementDC(Achievement achievement)

@@ -22,7 +22,7 @@ namespace Contracts
         int RemoveFriend(string username, string friendUsername);
 
         [OperationContract]
-        int BlockFriend(string username, string friendUsername);
+        int BlockPlayer(string username, string friendUsername);
 
         [OperationContract]
         int UnblockFriend(string username, string friendUsername);
