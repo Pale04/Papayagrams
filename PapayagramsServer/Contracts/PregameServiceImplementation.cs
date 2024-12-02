@@ -20,7 +20,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Error while trying to update user status", error);
+                _logger.Fatal("Database connection failed", error);
                 return (102, null);
             }
 
@@ -66,7 +66,7 @@ namespace Contracts
                     }
                     catch (EntityException error)
                     {
-                        _logger.Fatal("Error while trying to update user status", error);
+                        _logger.Fatal("Database connection failed", error);
                         return (102, null);
                     }
                 }
@@ -84,9 +84,9 @@ namespace Contracts
             return (code, serializedGameRoom);
         }
 
-        public int LeaveLobby(string username, string code)
+        public int LeaveLobby(string username, string roomCode)
         {
-            GameRoomsPool.RemovePlayerFromGameRoom(username, code);
+            GameRoomsPool.RemovePlayerFromGameRoom(username, roomCode);
             CallbacksPool.RemovePregameCallbackChannel(username);
 
             if (!PlayersOnlinePool.IsGuest(username))
@@ -97,7 +97,7 @@ namespace Contracts
                 }
                 catch (EntityException error)
                 {
-                    _logger.Error("Error while trying to update user status", error);
+                    _logger.Fatal("Database connection failed", error);
                     return 102;
                 }
             }
@@ -158,7 +158,7 @@ namespace Contracts
             return room != null && room.State.Equals(GameRoomState.Waiting) && room.Players.Count < room.GameConfiguration.MaxPlayers;
         }
 
-        private void BroadcastRefreshLobby(GameRoomDC gameRoom)
+        private static void BroadcastRefreshLobby(GameRoomDC gameRoom)
         {
             if (gameRoom != null)
             {

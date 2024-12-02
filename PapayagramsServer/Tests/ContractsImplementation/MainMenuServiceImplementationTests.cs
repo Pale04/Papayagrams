@@ -26,15 +26,9 @@ namespace Contracts.Tests
             Password = "040704"
         };
 
-        private readonly AchievementDC _achievement1 = new AchievementDC()
+        private readonly List<DomainClasses.Achievement> _achievements = new List<DomainClasses.Achievement>()
         {
-            Id = 1,
-            Description = "Description1",
-        };
-        private readonly AchievementDC _achievement2 = new AchievementDC()
-        {
-            Id = 2,
-            Description = "Description2"
+            new DomainClasses.Achievement() { Id = 11, Description = "1 game won in original game mode"},
         };
 
         [TestInitialize()]
@@ -53,8 +47,7 @@ namespace Contracts.Tests
                 Password = _registeredPlayer2.Password
             });
             DataBaseOperation.CreateGameHistoryPlayer(_registeredPlayer1.Id);
-            DataBaseOperation.RegisterAchievements(_achievement1.Description, _achievement2.Description);
-            DataBaseOperation.RegisterUserAchievement(_registeredPlayer1.Id, _achievement1.Id);
+            DataBaseOperation.RegisterUserAchievement(_registeredPlayer1.Id, _achievements[0].Id);
         }
 
         [TestCleanup()]
@@ -88,7 +81,7 @@ namespace Contracts.Tests
         [TestMethod()]
         public void SearchPlayerRequestPendingTest()
         {
-            UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
             (_, PlayerDC result) = _serviceImplementation.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(_registeredPlayer2, result, "SearchPlayerRequestPendingTest");
         }
@@ -96,7 +89,7 @@ namespace Contracts.Tests
         [TestMethod()]
         public void SearchPlayerFriendTest()
         {
-            UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
 
             Assert.Fail("Incomplete test");
             //TODO: Implement the method to accept the friend request
@@ -229,11 +222,10 @@ namespace Contracts.Tests
         [TestMethod()]
         public void GetAchievementsSuccessfulTest()
         {
-            _achievement1.IsAchieved = true;
+            _achievements[0].IsAchieved = true;
             List<AchievementDC> expected = new List<AchievementDC>()
             {
-                _achievement1,
-                _achievement2
+                AchievementDC.ConvertToAchievementDC(_achievements[0]),
             };
             (int _, List<AchievementDC> result) = _serviceImplementation.GetAchievements(_registeredPlayer1.Username);
             Assert.IsTrue(expected.SequenceEqual(result), "GetAchievementsSuccessfulTest");
@@ -242,11 +234,10 @@ namespace Contracts.Tests
         [TestMethod()]
         public void GetAchievementsNonExistentUserTest()
         {
-            _achievement1.IsAchieved = false;
+            _achievements[0].IsAchieved = false;
             List<AchievementDC> expected = new List<AchievementDC>()
             {
-                _achievement1,
-                _achievement2
+                AchievementDC.ConvertToAchievementDC(_achievements[0]),
             };
             (int _, List<AchievementDC> result) = _serviceImplementation.GetAchievements("juan");
             Assert.IsTrue(expected.SequenceEqual(result), "GetAchievementsNonExistentUserTest");
@@ -255,11 +246,10 @@ namespace Contracts.Tests
         [TestMethod()]
         public void GetAchievementsNullUsernameTest()
         {
-            _achievement1.IsAchieved = false;
+            _achievements[0].IsAchieved = false;
             List<AchievementDC> expected = new List<AchievementDC>()
             {
-                _achievement1,
-                _achievement2
+                AchievementDC.ConvertToAchievementDC(_achievements[0]),
             };
             (int _, List<AchievementDC> result) = _serviceImplementation.GetAchievements(null);
             Assert.IsTrue(expected.SequenceEqual(result), "GetAchievementsNullUsernameTest");

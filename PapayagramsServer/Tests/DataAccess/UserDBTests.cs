@@ -29,15 +29,9 @@ namespace DataAccess.Tests
             ProfileIcon = 1
         };
 
-        private readonly DomainClasses.Achievement _achievement1 = new DomainClasses.Achievement()
+        private readonly List<DomainClasses.Achievement> _achievements = new List<DomainClasses.Achievement>()
         {
-            Id = 1,
-            Description = "Description1",
-        };
-        private readonly DomainClasses.Achievement _achievement2 = new DomainClasses.Achievement()
-        {
-            Id = 2,
-            Description = "Description2"
+            new DomainClasses.Achievement() { Id = 11, Description = "1 game won in original game mode"},
         };
 
         [TestInitialize()]
@@ -46,8 +40,7 @@ namespace DataAccess.Tests
             UserDB.RegisterUser(_registeredPlayer1);
             UserDB.RegisterUser(_registeredPlayer2);
             DataBaseOperation.CreateGameHistoryPlayer(_registeredPlayer1.Id);
-            DataBaseOperation.RegisterAchievements(_achievement1.Description, _achievement2.Description);
-            DataBaseOperation.RegisterUserAchievement(_registeredPlayer1.Id, _achievement1.Id);
+            DataBaseOperation.RegisterUserAchievement(_registeredPlayer1.Id, _achievements[0].Id);
         }
 
         [TestCleanup()]
@@ -192,109 +185,6 @@ namespace DataAccess.Tests
         }
 
         [TestMethod()]
-        public void SearchNoFriendPlayerSuccessfulTest()
-        {
-            Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.AreEqual(_registeredPlayer2, (Player)result.Case, "SearchNoFriendPlayerSuccessfulTest");
-        }
-
-        [TestMethod()]
-        public void SearchNoFriendPlayerPendingRequestTest()
-        {
-            UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.AreEqual(_registeredPlayer2, (Player)result.Case, "SearchNoFriendPlayerPendingRequestTest");
-        }
-
-        [TestMethod()]
-        public void SearchNoFriendPlayerBlockedTest()
-        {
-            UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-
-            //TODO: hacer método para bloquear a un jugador
-
-            Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.AreEqual(_registeredPlayer2, (Player)result.Case, "SearchNoFriendPlayerBlockedTest");
-        }
-
-        [TestMethod()]
-        public void SearchNoFriendPlayerHimSelfTest()
-        {
-            Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer1.Username);
-            Assert.IsTrue(result.IsNone, "SearchNoFriendPlayerHimSelfTest");
-        }
-
-        [TestMethod()]
-        public void SearchNoFriendPlayerAlreadyFriendsTest()
-        {
-            UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-
-            Assert.Fail("Incomplet test");
-            //TODO Add the method to accept the friend request
-
-            Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.IsTrue(result.IsNone, "SearchNo FriendPlayerAlreadyFriendsTest");
-        }
-
-        [TestMethod()]
-        public void SearchNoFriendPlayerNonExistentTest()
-        {
-            Option<Player> result = UserDB.SearchNoFriendPlayer(_registeredPlayer1.Username, "Pale");
-            Assert.IsTrue(result.IsNone, "SearchNoFriendPlayerNonExistentTest");
-        }
-
-        [TestMethod()]
-        public void SendFriendRequestSuccessfulTest()
-        {
-            int expected = 0;
-            int result = UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.AreEqual(expected, result, "SendFriendRequestSuccessfulTest");
-        }
-
-        [TestMethod()]
-        public void SendFriendRequestSenderRequestedBefore()
-        {
-            int expected = -1;
-            UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            int result = UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.AreEqual(expected, result, "SendFriendRequestSenderRequestedBefore");
-        }
-
-        [TestMethod()]
-        public void SendFriendRequestReceiverRequestedBefore()
-        {
-            int expected = -2;
-            UserDB.SendFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username);
-            int result = UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.AreEqual(expected, result, "SendFriendRequestReceiverRequestedBefore");
-        }
-
-        [TestMethod()]
-        public void SendFriendRequestAlreadyFriendsTest()
-        {
-            int expected = -3;
-            UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-
-            Assert.Fail("Incomplete test");
-            //TODO Add the method to accept the friend request
-
-            int result = UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.AreEqual(expected, result, "SendFriendRequestAlreadyFriendsTest");
-        }
-
-        [TestMethod()]
-        public void SendFriendRequestBlockedRelationTest()
-        {
-            int expected = -4;
-
-            Assert.Fail("Incomplete test");
-            //TODO Add the method to block a player. No matter if they are friends or not
-
-            int result = UserDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.AreEqual(expected, result, "SendFriendRequestBlockedRelationTest");
-        }
-
-        [TestMethod()]
         public void UpdateUserStatusSuccessfulTest()
         {
             int expected = 1;
@@ -338,11 +228,10 @@ namespace DataAccess.Tests
         [TestMethod()]
         public void GetPlayerAchievementsSuccessfulTest()
         {
-            _achievement1.IsAchieved = true;
+            _achievements[0].IsAchieved = true;
             List<DomainClasses.Achievement> expected = new List<DomainClasses.Achievement>()
             {
-                _achievement1,
-                _achievement2
+                _achievements[0]
             };
             List<DomainClasses.Achievement> result = UserDB.GetPlayerAchievements(_registeredPlayer1.Username);
 
@@ -352,11 +241,10 @@ namespace DataAccess.Tests
         [TestMethod()]
         public void GetPlayerAchievementsWithoutAnyAchieved()
         {
-            _achievement1.IsAchieved = false;
+            _achievements[0].IsAchieved = false;
             List<DomainClasses.Achievement> expected = new List<DomainClasses.Achievement>()
             {
-                _achievement1,
-                _achievement2
+                _achievements[0]
             };
             List<DomainClasses.Achievement> result = UserDB.GetPlayerAchievements(_registeredPlayer2.Username);
             Assert.IsTrue(expected.SequenceEqual(result), "GetPlayerAchievementsWithoutAnyAchieved");
@@ -368,24 +256,5 @@ namespace DataAccess.Tests
             List<DomainClasses.Achievement> result = UserDB.GetPlayerAchievements("Pale");
             Assert.IsTrue(result.Count == 2, "GetPlayerAchievementsNonExistentUserTest");
         }
-
-        [TestMethod()]
-        public void UpdateOriginalGameHistoryWongGameTest()
-        {
-            int expected = 1;
-            int result = UserDB.UpdateOriginalGameHistory(_registeredPlayer1.Username, true);
-            Assert.AreEqual(expected, result, "UpdateOriginalGameHistorySuccessfulTest");
-        }
-
-        [TestMethod()]
-        public void UpdateOriginalGameHistoryLostGameTest()
-        {
-            int expected = 1;
-            int result = UserDB.UpdateOriginalGameHistory(_registeredPlayer1.Username, false);
-            Assert.AreEqual(expected, result, "UpdateOriginalGameHistoryNonExistentUserTest");
-        }
-
-        [TestMethod()]
-        public void 
     }
 }

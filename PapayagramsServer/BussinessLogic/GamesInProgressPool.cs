@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BussinessLogic
 {
-    public class GamesInProgressPool
+    public static class GamesInProgressPool
     {
         private static Dictionary<string,Game> _gamesInProgress = new Dictionary<string,Game>();
 
@@ -28,7 +28,7 @@ namespace BussinessLogic
         }
 
         /// <summary>
-        /// Remove a player from a game. 
+        /// Remove a player from a game, if no players are left in the game, remove the game
         /// </summary>
         /// <param name="gameRoomCode">Code of the game room</param>
         /// <param name="username">Username of the player</param>
@@ -37,11 +37,12 @@ namespace BussinessLogic
             Player player = PlayersOnlinePool.GetPlayer(username);
             Game game = _gamesInProgress[gameRoomCode];
             game.ConnectedPlayers.Remove(player);
-        }
 
-        public static void RemoveGame(string gameRoomCode)
-        {
-            _gamesInProgress.Remove(gameRoomCode);
+            if (game.ConnectedPlayers.Count == 0)
+            {
+                _gamesInProgress.Remove(gameRoomCode);
+                GameRoomsPool.GetGameRoom(gameRoomCode).State = GameRoomState.Waiting;
+            }
         }
     }
 }

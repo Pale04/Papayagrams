@@ -23,7 +23,7 @@ namespace Contracts
 
         public (int, List<AchievementDC>) GetAchievements(string username)
         {
-            List<DomainClasses.Achievement> achievementsList = new List<DomainClasses.Achievement>();
+            List<DomainClasses.Achievement> achievementsList;
 
             try
             {
@@ -31,7 +31,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Error($"Error while trying to get achievements of: {username}", error);
+                _logger.Fatal("Database connnection failed", error);
                 return (102, null);
             }
 
@@ -63,7 +63,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Error($"Error while trying to get player stats of: {username}", error);
+                _logger.Fatal("Database connection failed", error);
                 return (102, null);
             }
 
@@ -92,7 +92,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Error("Error while trying to update user status", error);
+                _logger.Fatal("Database connection failed", error);
                 return 102;
             }
 
@@ -112,11 +112,11 @@ namespace Contracts
 
             try
             {
-                playerOption = UserDB.SearchNoFriendPlayer(searcherUsername, searchedUsername);
+                playerOption = UserRelationshipDB.SearchNoFriendPlayer(searcherUsername, searchedUsername);
             }
             catch (EntityException error)
             {
-                _logger.Error($"Error while trying to search: {searchedUsername} by: {searcherUsername}", error);
+                _logger.Fatal("Database connection failed", error);
                 return (102, null);
             }
 
@@ -133,11 +133,11 @@ namespace Contracts
             int result;
             try
             {
-                result = UserDB.SendFriendRequest(senderUsername, receiverUsername);
+                result = UserRelationshipDB.SendFriendRequest(senderUsername, receiverUsername);
             }
             catch (EntityException error)
             {
-                _logger.Error($"Error while trying to send a friend request from {senderUsername} to {receiverUsername}", error);
+                _logger.Fatal("Database connection failed", error);
                 return 102;
             }
 

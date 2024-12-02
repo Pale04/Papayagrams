@@ -7,8 +7,8 @@ namespace DomainClasses
     public class Game
     {
         private Dictionary<string, int> _playersScores = new Dictionary<string, int>();
-        private Stack<char> _piecesPile = new Stack<char>();
-        private List<Player> _connectedPlayers = new List<Player>();
+        private readonly Stack<char> _piecesPile = new Stack<char>();
+        private readonly List<Player> _connectedPlayers = new List<Player>();
 
         public List<Player> ConnectedPlayers { get { return _connectedPlayers; } }
         public Stack<char> PiecesPile { get { return _piecesPile; } }

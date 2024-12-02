@@ -70,13 +70,13 @@ namespace DomainClasses
 
         public int ProfileIcon { get; set; }
 
-        public override bool Equals(object other)
+        public override bool Equals(object obj)
         {
             bool isEqual = false;
 
-            if (other != null && GetType() == other.GetType())
+            if (obj != null && GetType() == obj.GetType())
             {
-                Player player = (Player)other;
+                Player player = (Player)obj;
                 isEqual = Id == player.Id && Username.Equals(player.Username) && Email.Equals(player.Email);
             }
 

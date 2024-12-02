@@ -1,22 +1,22 @@
-[1] Cambiar avatar
+[1] Change profile icon
 
-[2] Agregar un amigo
-[3] Agregar 10 amigos
+[2] Add 1 friend
+[3] Add 10 friends
 
 [4] 1 game completed
-[5] Completar 5 partidas
-[6] Completar 10 partidas
-[7] Completar 20 partidas
-[8] Completar 100 partidas
+[5] 5 games completed
+[6] 10 games completed
+[7] 20 games completed
+[8] 100 games completed
 
-[9] Ganar 1 partida
-[10] Ganar 10 partidas
+[9] Win 1 game
+[10] Win 10 games
 
 [11] 1 game won in original game mode
-[12] Ganar 5 partidas en modo original
+[12] 5 games won in original game mode
 
-[13] Ganar 1 partida en modo contra-reloj
-[14] Ganar 5 partidas en modo contra-reloj
+[13] Win 1 game in time attack mode
+[14] Win 5 games in time attack mode
 
-[15] Ganar 1 partida en modo muerte subita
-[16] Ganar 5 partidas en modo muerte subita
+[15] Win 1 game in sudden death mode
+[16] Win 5 games in sudden death mode

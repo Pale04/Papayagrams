@@ -1,29 +1,22 @@
 ﻿using MailKit.Net.Smtp;
 using MimeKit;
-using System.Configuration;
+using System;
 
 namespace MailService
 {
-    public class MailService
+    public static class MailService
     {
-        private static string _papayagramsAccount;
-        private static string _papayagramsPassword;
-        private static string _smtpServer = "smtp.gmail.com";
-        private static int _smtpPort = 587;
+        private static readonly string _papayagramsAccount = "papayagrams@gmail.com";
+        private static readonly string _papayagramsPassword = Environment.GetEnvironmentVariable("Papayagrams_EmailPassword");
+        private static readonly string _smtpServer = "smtp.gmail.com";
+        private static readonly int _smtpPort = 587;
 
-        public MailService()
-        {
-            _papayagramsAccount = ConfigurationManager.AppSettings["papayagramsEmail"];
-            _papayagramsPassword = ConfigurationManager.AppSettings["papayagramsPassword"];
-        }
-
-        public int SendMail(string receiverEmail, string subject, string body)
+        public static int SendMail(string receiverEmail, string subject, string body)
         {
             var mail = new MimeMessage();
             
             mail.From.Add(MailboxAddress.Parse(_papayagramsAccount));
             mail.To.Add(MailboxAddress.Parse(receiverEmail));
-
             mail.Subject = subject;
             mail.Body = new TextPart(MimeKit.Text.TextFormat.Plain)
             {
