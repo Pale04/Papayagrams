@@ -1,12 +1,13 @@
 ﻿using ClientTests.PapayagramsService;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PapayagramsClient.PapayagramsService;
 
 namespace ClientTests
 {
     [TestClass]
     public class LoginTests
     {
-        private LoginServiceClient _host = new LoginServiceClient();
+        private PapayagramsService.LoginServiceClient _host = new PapayagramsService.LoginServiceClient();
         private PlayerDC _registeredPlayer = new PlayerDC
         {
             Username = "registered",

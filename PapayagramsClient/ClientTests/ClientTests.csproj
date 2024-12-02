@@ -64,21 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Connected Services\PapayagramsService\ClientTests.PapayagramsService.AchievementDC.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\PapayagramsService\ClientTests.PapayagramsService.FriendDC.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\PapayagramsService\ClientTests.PapayagramsService.GameRoomDC.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\PapayagramsService\ClientTests.PapayagramsService.PlayerDC.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\PapayagramsService\ClientTests.PapayagramsService.PlayerStatsDC.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\PapayagramsService\item.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -96,6 +81,11 @@
     </None>
     <None Include="Connected Services\PapayagramsService\ServiceImplementation.wsdl" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\PapayagramsClient.PapayagramsService.AchievementDC.datasource" />
+    <None Include="Properties\DataSources\PapayagramsClient.PapayagramsService.FriendDC.datasource" />
+    <None Include="Properties\DataSources\PapayagramsClient.PapayagramsService.GameRoomDC.datasource" />
+    <None Include="Properties\DataSources\PapayagramsClient.PapayagramsService.PlayerDC.datasource" />
+    <None Include="Properties\DataSources\PapayagramsClient.PapayagramsService.PlayerStatsDC.datasource" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

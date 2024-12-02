@@ -9,778 +9,23 @@
 //------------------------------------------------------------------------------
 
 namespace ClientTests.PapayagramsService {
-    using System.Runtime.Serialization;
-    using System;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerDC", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
-    [System.SerializableAttribute()]
-    public partial class PlayerDC : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string EmailField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PasswordField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ProfileIconField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UsernameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email {
-            get {
-                return this.EmailField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
-                    this.EmailField = value;
-                    this.RaisePropertyChanged("Email");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Password {
-            get {
-                return this.PasswordField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
-                    this.PasswordField = value;
-                    this.RaisePropertyChanged("Password");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ProfileIcon {
-            get {
-                return this.ProfileIconField;
-            }
-            set {
-                if ((this.ProfileIconField.Equals(value) != true)) {
-                    this.ProfileIconField = value;
-                    this.RaisePropertyChanged("ProfileIcon");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Username {
-            get {
-                return this.UsernameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
-                    this.UsernameField = value;
-                    this.RaisePropertyChanged("Username");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FriendDC", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
-    [System.SerializableAttribute()]
-    public partial class FriendDC : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StatusField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UsernameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Status {
-            get {
-                return this.StatusField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
-                    this.StatusField = value;
-                    this.RaisePropertyChanged("Status");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Username {
-            get {
-                return this.UsernameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
-                    this.UsernameField = value;
-                    this.RaisePropertyChanged("Username");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerStatsDC", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
-    [System.SerializableAttribute()]
-    public partial class PlayerStatsDC : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int FriendsAmountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int OriginalGamesPlayedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int OriginalGamesWonField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int SuddenDeathGamesPlayedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int SuddenDeathGamesWonField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int TimeAttackGamesPlayedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int TimeAttackGamesWonField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int FriendsAmount {
-            get {
-                return this.FriendsAmountField;
-            }
-            set {
-                if ((this.FriendsAmountField.Equals(value) != true)) {
-                    this.FriendsAmountField = value;
-                    this.RaisePropertyChanged("FriendsAmount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int OriginalGamesPlayed {
-            get {
-                return this.OriginalGamesPlayedField;
-            }
-            set {
-                if ((this.OriginalGamesPlayedField.Equals(value) != true)) {
-                    this.OriginalGamesPlayedField = value;
-                    this.RaisePropertyChanged("OriginalGamesPlayed");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int OriginalGamesWon {
-            get {
-                return this.OriginalGamesWonField;
-            }
-            set {
-                if ((this.OriginalGamesWonField.Equals(value) != true)) {
-                    this.OriginalGamesWonField = value;
-                    this.RaisePropertyChanged("OriginalGamesWon");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int SuddenDeathGamesPlayed {
-            get {
-                return this.SuddenDeathGamesPlayedField;
-            }
-            set {
-                if ((this.SuddenDeathGamesPlayedField.Equals(value) != true)) {
-                    this.SuddenDeathGamesPlayedField = value;
-                    this.RaisePropertyChanged("SuddenDeathGamesPlayed");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int SuddenDeathGamesWon {
-            get {
-                return this.SuddenDeathGamesWonField;
-            }
-            set {
-                if ((this.SuddenDeathGamesWonField.Equals(value) != true)) {
-                    this.SuddenDeathGamesWonField = value;
-                    this.RaisePropertyChanged("SuddenDeathGamesWon");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int TimeAttackGamesPlayed {
-            get {
-                return this.TimeAttackGamesPlayedField;
-            }
-            set {
-                if ((this.TimeAttackGamesPlayedField.Equals(value) != true)) {
-                    this.TimeAttackGamesPlayedField = value;
-                    this.RaisePropertyChanged("TimeAttackGamesPlayed");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int TimeAttackGamesWon {
-            get {
-                return this.TimeAttackGamesWonField;
-            }
-            set {
-                if ((this.TimeAttackGamesWonField.Equals(value) != true)) {
-                    this.TimeAttackGamesWonField = value;
-                    this.RaisePropertyChanged("TimeAttackGamesWon");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AchievementDC", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
-    [System.SerializableAttribute()]
-    public partial class AchievementDC : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DescriptionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsAchievedField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Description {
-            get {
-                return this.DescriptionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
-                    this.DescriptionField = value;
-                    this.RaisePropertyChanged("Description");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsAchieved {
-            get {
-                return this.IsAchievedField;
-            }
-            set {
-                if ((this.IsAchievedField.Equals(value) != true)) {
-                    this.IsAchievedField = value;
-                    this.RaisePropertyChanged("IsAchieved");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GameInvitationDC", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
-    [System.SerializableAttribute()]
-    public partial class GameInvitationDC : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string GameRoomCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PlayerUsernameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string GameRoomCode {
-            get {
-                return this.GameRoomCodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.GameRoomCodeField, value) != true)) {
-                    this.GameRoomCodeField = value;
-                    this.RaisePropertyChanged("GameRoomCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PlayerUsername {
-            get {
-                return this.PlayerUsernameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PlayerUsernameField, value) != true)) {
-                    this.PlayerUsernameField = value;
-                    this.RaisePropertyChanged("PlayerUsername");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GameConfigurationDC", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
-    [System.SerializableAttribute()]
-    public partial class GameConfigurationDC : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ClientTests.PapayagramsService.GameModeDC GameModeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int InitialPiecesField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int MaxPlayersField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int TimeLimitMinutesField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ClientTests.PapayagramsService.LanguageDC WordsLanguageField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public ClientTests.PapayagramsService.GameModeDC GameMode {
-            get {
-                return this.GameModeField;
-            }
-            set {
-                if ((this.GameModeField.Equals(value) != true)) {
-                    this.GameModeField = value;
-                    this.RaisePropertyChanged("GameMode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int InitialPieces {
-            get {
-                return this.InitialPiecesField;
-            }
-            set {
-                if ((this.InitialPiecesField.Equals(value) != true)) {
-                    this.InitialPiecesField = value;
-                    this.RaisePropertyChanged("InitialPieces");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int MaxPlayers {
-            get {
-                return this.MaxPlayersField;
-            }
-            set {
-                if ((this.MaxPlayersField.Equals(value) != true)) {
-                    this.MaxPlayersField = value;
-                    this.RaisePropertyChanged("MaxPlayers");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int TimeLimitMinutes {
-            get {
-                return this.TimeLimitMinutesField;
-            }
-            set {
-                if ((this.TimeLimitMinutesField.Equals(value) != true)) {
-                    this.TimeLimitMinutesField = value;
-                    this.RaisePropertyChanged("TimeLimitMinutes");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public ClientTests.PapayagramsService.LanguageDC WordsLanguage {
-            get {
-                return this.WordsLanguageField;
-            }
-            set {
-                if ((this.WordsLanguageField.Equals(value) != true)) {
-                    this.WordsLanguageField = value;
-                    this.RaisePropertyChanged("WordsLanguage");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GameModeDC", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
-    public enum GameModeDC : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Original = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        SuddenDeath = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        TimeAttack = 2,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="LanguageDC", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
-    public enum LanguageDC : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        English = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Spanish = 1,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GameRoomDC", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
-    [System.SerializableAttribute()]
-    public partial class GameRoomDC : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ClientTests.PapayagramsService.GameConfigurationDC GameConfigurationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ClientTests.PapayagramsService.PlayerDC[] PlayersField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string RoomCodeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public ClientTests.PapayagramsService.GameConfigurationDC GameConfiguration {
-            get {
-                return this.GameConfigurationField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.GameConfigurationField, value) != true)) {
-                    this.GameConfigurationField = value;
-                    this.RaisePropertyChanged("GameConfiguration");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public ClientTests.PapayagramsService.PlayerDC[] Players {
-            get {
-                return this.PlayersField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PlayersField, value) != true)) {
-                    this.PlayersField = value;
-                    this.RaisePropertyChanged("Players");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string RoomCode {
-            get {
-                return this.RoomCodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.RoomCodeField, value) != true)) {
-                    this.RoomCodeField = value;
-                    this.RaisePropertyChanged("RoomCode");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Message", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
-    [System.SerializableAttribute()]
-    public partial class Message : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AuthorUsernameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ContentField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string GameRoomCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime TimeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AuthorUsername {
-            get {
-                return this.AuthorUsernameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AuthorUsernameField, value) != true)) {
-                    this.AuthorUsernameField = value;
-                    this.RaisePropertyChanged("AuthorUsername");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Content {
-            get {
-                return this.ContentField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ContentField, value) != true)) {
-                    this.ContentField = value;
-                    this.RaisePropertyChanged("Content");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string GameRoomCode {
-            get {
-                return this.GameRoomCodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.GameRoomCodeField, value) != true)) {
-                    this.GameRoomCodeField = value;
-                    this.RaisePropertyChanged("GameRoomCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime Time {
-            get {
-                return this.TimeField;
-            }
-            set {
-                if ((this.TimeField.Equals(value) != true)) {
-                    this.TimeField = value;
-                    this.RaisePropertyChanged("Time");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.ILoginService")]
     public interface ILoginService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/RegisterUser", ReplyAction="http://tempuri.org/ILoginService/RegisterUserResponse")]
-        int RegisterUser(ClientTests.PapayagramsService.PlayerDC player);
+        int RegisterUser(PapayagramsClient.PapayagramsService.PlayerDC player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/RegisterUser", ReplyAction="http://tempuri.org/ILoginService/RegisterUserResponse")]
-        System.Threading.Tasks.Task<int> RegisterUserAsync(ClientTests.PapayagramsService.PlayerDC player);
+        System.Threading.Tasks.Task<int> RegisterUserAsync(PapayagramsClient.PapayagramsService.PlayerDC player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Login", ReplyAction="http://tempuri.org/ILoginService/LoginResponse")]
-        System.ValueTuple<int, ClientTests.PapayagramsService.PlayerDC> Login(string username, string password);
+        System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC> Login(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Login", ReplyAction="http://tempuri.org/ILoginService/LoginResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.PlayerDC>> LoginAsync(string username, string password);
+        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC>> LoginAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Logout", ReplyAction="http://tempuri.org/ILoginService/LogoutResponse")]
         int Logout(string username);
@@ -801,10 +46,10 @@ namespace ClientTests.PapayagramsService {
         System.Threading.Tasks.Task<int> SendAccountVerificationCodeAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/AccessAsGuest", ReplyAction="http://tempuri.org/ILoginService/AccessAsGuestResponse")]
-        ClientTests.PapayagramsService.PlayerDC AccessAsGuest();
+        PapayagramsClient.PapayagramsService.PlayerDC AccessAsGuest();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/AccessAsGuest", ReplyAction="http://tempuri.org/ILoginService/AccessAsGuestResponse")]
-        System.Threading.Tasks.Task<ClientTests.PapayagramsService.PlayerDC> AccessAsGuestAsync();
+        System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC> AccessAsGuestAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -834,19 +79,19 @@ namespace ClientTests.PapayagramsService {
                 base(binding, remoteAddress) {
         }
         
-        public int RegisterUser(ClientTests.PapayagramsService.PlayerDC player) {
+        public int RegisterUser(PapayagramsClient.PapayagramsService.PlayerDC player) {
             return base.Channel.RegisterUser(player);
         }
         
-        public System.Threading.Tasks.Task<int> RegisterUserAsync(ClientTests.PapayagramsService.PlayerDC player) {
+        public System.Threading.Tasks.Task<int> RegisterUserAsync(PapayagramsClient.PapayagramsService.PlayerDC player) {
             return base.Channel.RegisterUserAsync(player);
         }
         
-        public System.ValueTuple<int, ClientTests.PapayagramsService.PlayerDC> Login(string username, string password) {
+        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC> Login(string username, string password) {
             return base.Channel.Login(username, password);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.PlayerDC>> LoginAsync(string username, string password) {
+        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC>> LoginAsync(string username, string password) {
             return base.Channel.LoginAsync(username, password);
         }
         
@@ -874,11 +119,11 @@ namespace ClientTests.PapayagramsService {
             return base.Channel.SendAccountVerificationCodeAsync(username);
         }
         
-        public ClientTests.PapayagramsService.PlayerDC AccessAsGuest() {
+        public PapayagramsClient.PapayagramsService.PlayerDC AccessAsGuest() {
             return base.Channel.AccessAsGuest();
         }
         
-        public System.Threading.Tasks.Task<ClientTests.PapayagramsService.PlayerDC> AccessAsGuestAsync() {
+        public System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC> AccessAsGuestAsync() {
             return base.Channel.AccessAsGuestAsync();
         }
     }
@@ -888,10 +133,10 @@ namespace ClientTests.PapayagramsService {
     public interface IMainMenuService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetFriends", ReplyAction="http://tempuri.org/IMainMenuService/GetFriendsResponse")]
-        System.ValueTuple<int, ClientTests.PapayagramsService.FriendDC[]> GetFriends(string username);
+        System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]> GetFriends(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetFriends", ReplyAction="http://tempuri.org/IMainMenuService/GetFriendsResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.FriendDC[]>> GetFriendsAsync(string username);
+        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]>> GetFriendsAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/RemoveFriend", ReplyAction="http://tempuri.org/IMainMenuService/RemoveFriendResponse")]
         int RemoveFriend(string username, string friendUsername);
@@ -906,10 +151,10 @@ namespace ClientTests.PapayagramsService {
         System.Threading.Tasks.Task<int> BlockFriendAsync(string username, string friendUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetFriendRequests", ReplyAction="http://tempuri.org/IMainMenuService/GetFriendRequestsResponse")]
-        System.ValueTuple<int, ClientTests.PapayagramsService.FriendDC[]> GetFriendRequests(string username);
+        System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]> GetFriendRequests(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetFriendRequests", ReplyAction="http://tempuri.org/IMainMenuService/GetFriendRequestsResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.FriendDC[]>> GetFriendRequestsAsync(string username);
+        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]>> GetFriendRequestsAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/AcceptFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/AcceptFriendRequestResponse")]
         int AcceptFriendRequest(string username, string friendUsername);
@@ -924,10 +169,10 @@ namespace ClientTests.PapayagramsService {
         System.Threading.Tasks.Task<int> RejectFriendRequestAsync(string username, string friendUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SearchNoFriendPlayer", ReplyAction="http://tempuri.org/IMainMenuService/SearchNoFriendPlayerResponse")]
-        System.ValueTuple<int, ClientTests.PapayagramsService.PlayerDC> SearchNoFriendPlayer(string searcherUsername, string searchedUsername);
+        System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC> SearchNoFriendPlayer(string searcherUsername, string searchedUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SearchNoFriendPlayer", ReplyAction="http://tempuri.org/IMainMenuService/SearchNoFriendPlayerResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.PlayerDC>> SearchNoFriendPlayerAsync(string searcherUsername, string searchedUsername);
+        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC>> SearchNoFriendPlayerAsync(string searcherUsername, string searchedUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SendFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/SendFriendRequestResponse")]
         int SendFriendRequest(string senderUsername, string receiverUsername);
@@ -936,22 +181,22 @@ namespace ClientTests.PapayagramsService {
         System.Threading.Tasks.Task<int> SendFriendRequestAsync(string senderUsername, string receiverUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetPlayerProfile", ReplyAction="http://tempuri.org/IMainMenuService/GetPlayerProfileResponse")]
-        System.ValueTuple<int, ClientTests.PapayagramsService.PlayerStatsDC> GetPlayerProfile(string username);
+        System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerStatsDC> GetPlayerProfile(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetPlayerProfile", ReplyAction="http://tempuri.org/IMainMenuService/GetPlayerProfileResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.PlayerStatsDC>> GetPlayerProfileAsync(string username);
+        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerStatsDC>> GetPlayerProfileAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetAchievements", ReplyAction="http://tempuri.org/IMainMenuService/GetAchievementsResponse")]
-        System.ValueTuple<int, ClientTests.PapayagramsService.AchievementDC[]> GetAchievements(string username);
+        System.ValueTuple<int, PapayagramsClient.PapayagramsService.AchievementDC[]> GetAchievements(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetAchievements", ReplyAction="http://tempuri.org/IMainMenuService/GetAchievementsResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.AchievementDC[]>> GetAchievementsAsync(string username);
+        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.AchievementDC[]>> GetAchievementsAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetLeaderboard", ReplyAction="http://tempuri.org/IMainMenuService/GetLeaderboardResponse")]
-        int GetLeaderboard(ClientTests.PapayagramsService.PlayerDC player);
+        int GetLeaderboard(PapayagramsClient.PapayagramsService.PlayerDC player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetLeaderboard", ReplyAction="http://tempuri.org/IMainMenuService/GetLeaderboardResponse")]
-        System.Threading.Tasks.Task<int> GetLeaderboardAsync(ClientTests.PapayagramsService.PlayerDC player);
+        System.Threading.Tasks.Task<int> GetLeaderboardAsync(PapayagramsClient.PapayagramsService.PlayerDC player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/ReportToServer", ReplyAction="http://tempuri.org/IMainMenuService/ReportToServerResponse")]
         int ReportToServer(string username);
@@ -964,10 +209,10 @@ namespace ClientTests.PapayagramsService {
     public interface IMainMenuServiceCallback {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/ReceiveFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/ReceiveFriendRequestResponse")]
-        void ReceiveFriendRequest(ClientTests.PapayagramsService.PlayerDC player);
+        void ReceiveFriendRequest(PapayagramsClient.PapayagramsService.PlayerDC player);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMainMenuService/ReceiveGameInvitation")]
-        void ReceiveGameInvitation(ClientTests.PapayagramsService.GameInvitationDC invitation);
+        void ReceiveGameInvitation(PapayagramsClient.PapayagramsService.GameInvitationDC invitation);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -998,11 +243,11 @@ namespace ClientTests.PapayagramsService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public System.ValueTuple<int, ClientTests.PapayagramsService.FriendDC[]> GetFriends(string username) {
+        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]> GetFriends(string username) {
             return base.Channel.GetFriends(username);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.FriendDC[]>> GetFriendsAsync(string username) {
+        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]>> GetFriendsAsync(string username) {
             return base.Channel.GetFriendsAsync(username);
         }
         
@@ -1022,11 +267,11 @@ namespace ClientTests.PapayagramsService {
             return base.Channel.BlockFriendAsync(username, friendUsername);
         }
         
-        public System.ValueTuple<int, ClientTests.PapayagramsService.FriendDC[]> GetFriendRequests(string username) {
+        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]> GetFriendRequests(string username) {
             return base.Channel.GetFriendRequests(username);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.FriendDC[]>> GetFriendRequestsAsync(string username) {
+        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]>> GetFriendRequestsAsync(string username) {
             return base.Channel.GetFriendRequestsAsync(username);
         }
         
@@ -1046,11 +291,11 @@ namespace ClientTests.PapayagramsService {
             return base.Channel.RejectFriendRequestAsync(username, friendUsername);
         }
         
-        public System.ValueTuple<int, ClientTests.PapayagramsService.PlayerDC> SearchNoFriendPlayer(string searcherUsername, string searchedUsername) {
+        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC> SearchNoFriendPlayer(string searcherUsername, string searchedUsername) {
             return base.Channel.SearchNoFriendPlayer(searcherUsername, searchedUsername);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.PlayerDC>> SearchNoFriendPlayerAsync(string searcherUsername, string searchedUsername) {
+        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC>> SearchNoFriendPlayerAsync(string searcherUsername, string searchedUsername) {
             return base.Channel.SearchNoFriendPlayerAsync(searcherUsername, searchedUsername);
         }
         
@@ -1062,27 +307,27 @@ namespace ClientTests.PapayagramsService {
             return base.Channel.SendFriendRequestAsync(senderUsername, receiverUsername);
         }
         
-        public System.ValueTuple<int, ClientTests.PapayagramsService.PlayerStatsDC> GetPlayerProfile(string username) {
+        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerStatsDC> GetPlayerProfile(string username) {
             return base.Channel.GetPlayerProfile(username);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.PlayerStatsDC>> GetPlayerProfileAsync(string username) {
+        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerStatsDC>> GetPlayerProfileAsync(string username) {
             return base.Channel.GetPlayerProfileAsync(username);
         }
         
-        public System.ValueTuple<int, ClientTests.PapayagramsService.AchievementDC[]> GetAchievements(string username) {
+        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.AchievementDC[]> GetAchievements(string username) {
             return base.Channel.GetAchievements(username);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.AchievementDC[]>> GetAchievementsAsync(string username) {
+        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.AchievementDC[]>> GetAchievementsAsync(string username) {
             return base.Channel.GetAchievementsAsync(username);
         }
         
-        public int GetLeaderboard(ClientTests.PapayagramsService.PlayerDC player) {
+        public int GetLeaderboard(PapayagramsClient.PapayagramsService.PlayerDC player) {
             return base.Channel.GetLeaderboard(player);
         }
         
-        public System.Threading.Tasks.Task<int> GetLeaderboardAsync(ClientTests.PapayagramsService.PlayerDC player) {
+        public System.Threading.Tasks.Task<int> GetLeaderboardAsync(PapayagramsClient.PapayagramsService.PlayerDC player) {
             return base.Channel.GetLeaderboardAsync(player);
         }
         
@@ -1100,16 +345,16 @@ namespace ClientTests.PapayagramsService {
     public interface IPregameService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/CreateGame", ReplyAction="http://tempuri.org/IPregameService/CreateGameResponse")]
-        System.ValueTuple<int, ClientTests.PapayagramsService.GameRoomDC> CreateGame(string username, ClientTests.PapayagramsService.GameConfigurationDC gameConfiguration);
+        System.ValueTuple<int, PapayagramsClient.PapayagramsService.GameRoomDC> CreateGame(string username, PapayagramsClient.PapayagramsService.GameConfigurationDC gameConfiguration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/CreateGame", ReplyAction="http://tempuri.org/IPregameService/CreateGameResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.GameRoomDC>> CreateGameAsync(string username, ClientTests.PapayagramsService.GameConfigurationDC gameConfiguration);
+        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.GameRoomDC>> CreateGameAsync(string username, PapayagramsClient.PapayagramsService.GameConfigurationDC gameConfiguration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/JoinGame", ReplyAction="http://tempuri.org/IPregameService/JoinGameResponse")]
-        System.ValueTuple<int, ClientTests.PapayagramsService.GameRoomDC> JoinGame(string username, string roomCode);
+        System.ValueTuple<int, PapayagramsClient.PapayagramsService.GameRoomDC> JoinGame(string username, string roomCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/JoinGame", ReplyAction="http://tempuri.org/IPregameService/JoinGameResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.GameRoomDC>> JoinGameAsync(string username, string roomCode);
+        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.GameRoomDC>> JoinGameAsync(string username, string roomCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/LeaveLobby", ReplyAction="http://tempuri.org/IPregameService/LeaveLobbyResponse")]
         int LeaveLobby(string username, string roomCode);
@@ -1118,10 +363,10 @@ namespace ClientTests.PapayagramsService {
         System.Threading.Tasks.Task<int> LeaveLobbyAsync(string username, string roomCode);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/SendMessage")]
-        void SendMessage(ClientTests.PapayagramsService.Message message);
+        void SendMessage(PapayagramsClient.PapayagramsService.Message message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/SendMessage")]
-        System.Threading.Tasks.Task SendMessageAsync(ClientTests.PapayagramsService.Message message);
+        System.Threading.Tasks.Task SendMessageAsync(PapayagramsClient.PapayagramsService.Message message);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/StartGame", ReplyAction="http://tempuri.org/IPregameService/StartGameResponse")]
         void StartGame(string roomCode);
@@ -1146,13 +391,13 @@ namespace ClientTests.PapayagramsService {
     public interface IPregameServiceCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/ReceiveMessage")]
-        void ReceiveMessage(ClientTests.PapayagramsService.Message message);
+        void ReceiveMessage(PapayagramsClient.PapayagramsService.Message message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/CarryInsideGame")]
         void CarryInsideGame();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/RefreshLobby")]
-        void RefreshLobby(ClientTests.PapayagramsService.GameRoomDC gameRoom);
+        void RefreshLobby(PapayagramsClient.PapayagramsService.GameRoomDC gameRoom);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1183,19 +428,19 @@ namespace ClientTests.PapayagramsService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public System.ValueTuple<int, ClientTests.PapayagramsService.GameRoomDC> CreateGame(string username, ClientTests.PapayagramsService.GameConfigurationDC gameConfiguration) {
+        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.GameRoomDC> CreateGame(string username, PapayagramsClient.PapayagramsService.GameConfigurationDC gameConfiguration) {
             return base.Channel.CreateGame(username, gameConfiguration);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.GameRoomDC>> CreateGameAsync(string username, ClientTests.PapayagramsService.GameConfigurationDC gameConfiguration) {
+        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.GameRoomDC>> CreateGameAsync(string username, PapayagramsClient.PapayagramsService.GameConfigurationDC gameConfiguration) {
             return base.Channel.CreateGameAsync(username, gameConfiguration);
         }
         
-        public System.ValueTuple<int, ClientTests.PapayagramsService.GameRoomDC> JoinGame(string username, string roomCode) {
+        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.GameRoomDC> JoinGame(string username, string roomCode) {
             return base.Channel.JoinGame(username, roomCode);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.GameRoomDC>> JoinGameAsync(string username, string roomCode) {
+        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.GameRoomDC>> JoinGameAsync(string username, string roomCode) {
             return base.Channel.JoinGameAsync(username, roomCode);
         }
         
@@ -1207,11 +452,11 @@ namespace ClientTests.PapayagramsService {
             return base.Channel.LeaveLobbyAsync(username, roomCode);
         }
         
-        public void SendMessage(ClientTests.PapayagramsService.Message message) {
+        public void SendMessage(PapayagramsClient.PapayagramsService.Message message) {
             base.Channel.SendMessage(message);
         }
         
-        public System.Threading.Tasks.Task SendMessageAsync(ClientTests.PapayagramsService.Message message) {
+        public System.Threading.Tasks.Task SendMessageAsync(PapayagramsClient.PapayagramsService.Message message) {
             return base.Channel.SendMessageAsync(message);
         }
         
@@ -1285,7 +530,7 @@ namespace ClientTests.PapayagramsService {
     public interface IGameServiceCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/RefreshGameRoom")]
-        void RefreshGameRoom(int piecesNumber, ClientTests.PapayagramsService.PlayerDC[] connectedPlayers);
+        void RefreshGameRoom(int piecesNumber, PapayagramsClient.PapayagramsService.PlayerDC[] connectedPlayers);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/RefreshTimer")]
         void RefreshTimer(int remainingMinutes);
