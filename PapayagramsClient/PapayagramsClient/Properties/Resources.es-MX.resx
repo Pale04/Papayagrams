@@ -405,4 +405,7 @@
   <data name="configurationSystemLanguage" xml:space="preserve">
     <value>Mismo que el sistema</value>
   </data>
+  <data name="friendsTitle" xml:space="preserve">
+    <value>Amigos</value>
+  </data>
 </root>

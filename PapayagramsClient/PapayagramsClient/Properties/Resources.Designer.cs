@@ -340,6 +340,15 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Friends.
+        /// </summary>
+        public static string friendsTitle {
+            get {
+                return ResourceManager.GetString("friendsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Calculating results.
         /// </summary>
         public static string gameEndCalculating {

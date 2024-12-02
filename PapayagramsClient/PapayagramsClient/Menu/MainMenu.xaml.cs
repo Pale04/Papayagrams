@@ -12,6 +12,7 @@ namespace PapayagramsClient
     public partial class MainMenu : Page, IMainMenuServiceCallback
     {
         private MainMenuServiceClient _host;
+        private string _invitationGameCode;
 
         public MainMenu()
         {
@@ -33,6 +34,17 @@ namespace PapayagramsClient
             }
 
             int returnCode = _host.ReportToServer(CurrentPlayer.Player.Username);
+
+            switch (returnCode)
+            {
+                case 0:
+                    break;
+
+                case 102:
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    NavigationService.GoBack();
+                    return;
+            }
         }
 
         ~MainMenu()
@@ -67,11 +79,6 @@ namespace PapayagramsClient
         }
 
         public void ReceiveFriendRequest(PlayerDC player)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ReceiveGameInvitation(GameInvitationDC invitation)
         {
             throw new NotImplementedException();
         }
@@ -123,7 +130,60 @@ namespace PapayagramsClient
 
         private void GoToConfiguration(object sender, RoutedEventArgs e)
         {
-            // TODO
+            NavigationService.Navigate(new Configuration());
+        }
+
+        public void ReceiveGameInvitation(GameInvitationDC invitation)
+        {
+            GameInvitationPanel.Visibility = Visibility.Visible;
+            GameInvitationPanel.IsEnabled = true;
+
+            string friend = invitation.PlayerUsername;
+
+            GameInvitationPanel.MessageLabel.Text = friend + " " + Properties.Resources.gameInvitationMessage;
+            _invitationGameCode = invitation.GameRoomCode;
+        }
+
+        private void JoinInvitationGame(object sender, RoutedEventArgs e)
+        {
+            GameInvitationPanel.Visibility = Visibility.Hidden;
+            GameInvitationPanel.IsEnabled = false;
+
+            if (!string.IsNullOrWhiteSpace(_invitationGameCode))
+            {
+                bool roomAvailable = new GameCodeVerificationServiceClient().VerifyGameRoom(_invitationGameCode);
+
+                if (roomAvailable)
+                {
+                    NavigationService.Navigate(new Lobby(_invitationGameCode));
+                }
+                else
+                {
+                    new SelectionPopUpWindow(Properties.Resources.joinGameCantJoinTitle, Properties.Resources.joinGameCantJoin, 2).ShowDialog();
+                }
+            }
+
+            _invitationGameCode = "";
+        }
+
+        private void RejectInvitationGame(object sender, RoutedEventArgs e)
+        {
+            GameInvitationPanel.Visibility = Visibility.Hidden;
+            GameInvitationPanel.IsEnabled = false;
+
+            _invitationGameCode = "";
+        }
+
+        private void OpenFriendsOverlay(object sender, RoutedEventArgs e)
+        {
+            FriendsMenuPanel.Visibility = Visibility.Visible;
+            //TODO: Get use relationships
+            FriendsMenuPanel.FillLists();
+        }
+
+        private void CloseFriendsOverlay(object sender, RoutedEventArgs e)
+        {
+            FriendsMenuPanel.Visibility = Visibility.Hidden;
         }
     }
 }

@@ -150,4 +150,7 @@
   <data name="lobbyRoomNotFoundTitle" xml:space="preserve">
     <value>No se encontró la sala</value>
   </data>
+  <data name="friendsTitle" xml:space="preserve">
+    <value>Amigos</value>
+  </data>
 </root>

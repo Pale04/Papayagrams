@@ -129,6 +129,12 @@
     <Compile Include="Login\JoinAsGuest.xaml.cs">
       <DependentUpon>JoinAsGuest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Menu\FriendsMenu.xaml.cs">
+      <DependentUpon>FriendsMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\GameInvitation.xaml.cs">
+      <DependentUpon>GameInvitation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SelectionPopUpWindow.xaml.cs">
       <DependentUpon>SelectionPopUpWindow.xaml</DependentUpon>
     </Compile>
@@ -178,6 +184,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Menu\Configuration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Menu\FriendsMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Menu\GameInvitation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

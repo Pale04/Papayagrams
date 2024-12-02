@@ -64,7 +64,6 @@ namespace PapayagramsClient.Login
             else
             {
                 new SelectionPopUpWindow(Properties.Resources.joinGameCantJoinTitle, Properties.Resources.joinGameCantJoin, 2).ShowDialog();
-                return;
             }
         }
     }

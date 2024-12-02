@@ -5,13 +5,22 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PapayagramsClient"
       xmlns:p="clr-namespace:PapayagramsClient.Properties"
-      xmlns:svg="clr-namespace:SVGImage.SVG;assembly=SVGImage"
+      xmlns:menu="clr-namespace:PapayagramsClient.Menu"
       mc:Ignorable="d" 
       Title="MainMenu"
       d:DesignHeight="720" d:DesignWidth="1080"
       Background="#D9D9D9">
 
     <Grid>
+        <Grid.Resources>
+            <Style TargetType="{x:Type menu:GameInvitation}">
+                <EventSetter Event="AcceptedInvitation" Handler="JoinInvitationGame"/>
+                <EventSetter Event="RejectedInvitation" Handler="RejectInvitationGame"/>
+            </Style>
+            <Style TargetType="{x:Type menu:FriendsMenu}">
+                <EventSetter Event="ClosedFriendsMenu" Handler="CloseFriendsOverlay"/>
+            </Style>
+        </Grid.Resources>
         <Label Content="Papayagrams" HorizontalAlignment="Left" Margin="95,54,0,0" VerticalAlignment="Top" FontSize="64" Width="467" HorizontalContentAlignment="Center" FontWeight="Bold"/>
 
         <Button Style="{StaticResource PrimaryButton}" Name="CreateGameButton" Content="{x:Static p:Resources.mainMenuCreateGame}" HorizontalAlignment="Left" Margin="125,185,0,0" VerticalAlignment="Top" Width="400" Click="CreateNewGame"/>
@@ -19,7 +28,7 @@
         <Button Style="{StaticResource SecondaryButton}" Name="ProfileButton" Content="{x:Static p:Resources.mainMenuProfile}" HorizontalAlignment="Left" Margin="125,385,0,0" VerticalAlignment="Top" Width="400" Click="GoToProfile"/>
         <Button Style="{StaticResource SecondaryButton}" Name="LeaderboardButton" Content="{x:Static p:Resources.globalLeaderboard}" HorizontalAlignment="Left" Margin="125,485,0,0" VerticalAlignment="Top" Width="400"/>
 
-        <Button HorizontalAlignment="Left" Margin="968,611,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Logout" BorderBrush="Transparent">
+        <Button HorizontalAlignment="Left" Margin="968,611,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="OpenFriendsOverlay" BorderBrush="Transparent">
             <Image Source="../Resources/Icons/friend-svgrepo-com.png"/>
         </Button>
 
@@ -30,9 +39,12 @@
         <Button HorizontalAlignment="Left" Margin="139,611,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="GoToConfiguration" BorderBrush="Transparent">
             <Image Source="../Resources/Icons/cog-setting-gear-svgrepo-com.png"/>
         </Button>
+
         <Button HorizontalAlignment="Left" Margin="220,611,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="GoToAchievements" BorderBrush="Transparent">
             <Image Source="../Resources/Icons/trophy-svgrepo-com.png"/>
         </Button>
 
+        <menu:GameInvitation x:Name="GameInvitationPanel" Visibility="Hidden" IsEnabled="False" Panel.ZIndex="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0, 0, 10, 10"/>
+        <menu:FriendsMenu Panel.ZIndex="1" Visibility="Hidden" IsEnabled="False" x:Name="FriendsMenuPanel"/>
     </Grid>
 </Page>

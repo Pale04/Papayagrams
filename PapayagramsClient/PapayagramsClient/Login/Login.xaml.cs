@@ -8,11 +8,6 @@ using System.Windows.Navigation;
 
 namespace PapayagramsClient.Login
 {
-    public static class LoginCommands
-    {
-        public static RoutedCommand LoginToAccount = new RoutedCommand();
-    }
-
     public partial class Login : Page
     {
         public Login()

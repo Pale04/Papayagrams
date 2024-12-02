@@ -124,6 +124,15 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Friends.
+        /// </summary>
+        internal static string friendsTitle {
+            get {
+                return ResourceManager.GetString("friendsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No game room with that code exists.
         /// </summary>
         internal static string lobbyRoomNotFound {

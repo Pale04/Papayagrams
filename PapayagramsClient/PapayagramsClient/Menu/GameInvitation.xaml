@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="PapayagramsClient.Menu.GameInvitation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PapayagramsClient.Menu"
+             xmlns:p="clr-namespace:PapayagramsClient.Properties"
+             mc:Ignorable="d" 
+             Background="Transparent"
+             d:DesignHeight="220" Width="374">
+
+    <Border CornerRadius="20" BorderBrush="#e6b306" BorderThickness="3" Background="#e9ca99">
+        <Grid>
+            <TextBlock Name="MessageLabel" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" MaxWidth="300" Margin="10" Height="120" TextWrapping="Wrap"/>
+            <Button Content="{x:Static p:Resources.gameInvitationAccept}" FontSize="23" Style="{StaticResource PrimaryButton}" Height="50" Width="160" Margin="10,144,198,20" Click="AcceptInvitation"/>
+            <Button Content="{x:Static p:Resources.gameInvitationReject}" FontSize="23" Style="{StaticResource SecondaryButton}" Height="50" Width="160" Margin="198,144,10,20" Click="RejectInvitation"/>
+        </Grid>
+    </Border>
+</UserControl>

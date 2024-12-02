@@ -9,11 +9,9 @@ namespace PapayagramsClient
         public string pieceColor { get; set; }
     }
 
-    public class CurrentPlayer
+    public static class CurrentPlayer
     {
-        private static PlayerDC _player;
-
-        public static PlayerDC Player { get { return _player; } set { _player = value; } }
+        public static PlayerDC Player { get; set; }
 
         public static Configuration Configuration { get; set; }
     }

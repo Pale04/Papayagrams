@@ -147,6 +147,57 @@ namespace PapayagramsClient.Game
             }
         }
 
+        private WPFGameBoardPieceSpot GetPieceAt(int column, int row)
+        {
+            return BoardGrid.Children.Cast<WPFGameBoardPieceSpot>().First(spot => Grid.GetColumn(spot) == column && Grid.GetRow(spot) == row);
+        }
+
+        // type: 2 for column or 1 for row
+        private List<string> GetWordsFromRowOrColumn(int index, int type)
+        {
+            List<string> words = new List<string>();
+            string word = string.Empty;
+
+            for (int j = 0; j<25; j++)
+            {
+                WPFGameBoardPieceSpot pieceSpot;
+                switch (type)
+                {
+                    case 1:
+                        pieceSpot = GetPieceAt(j, index);
+                        break;
+                    case 2:
+                        pieceSpot = GetPieceAt(index, j);
+                        break;
+                    default:
+                        return new List<string>();
+                }
+
+                string letter = (string)pieceSpot.LetterLabel.Content;
+
+                if (string.IsNullOrWhiteSpace(letter))
+                {
+                    if (word.Length > 1)
+                    {
+                        words.Add(word);
+                        word = "";
+                    }
+                }
+                else
+                {
+                    word = word + letter;
+
+                    if (j == 24)
+                    {
+                        words.Add(word);
+                        word = "";
+                    }
+                }
+            }
+
+            return words;
+        }
+
         private (int wordsPoints, List<string> correctWords) EvaluateBoard()
         {
 
@@ -155,69 +206,27 @@ namespace PapayagramsClient.Game
             // horizontal word checking
             for (int i = 0; i<25; i++)
             {
-                string word = string.Empty;
-
-                for (int j = 0; j<25; j++)
+                foreach (string word in GetWordsFromRowOrColumn(i, 1))
                 {
-                    WPFGameBoardPieceSpot pieceSpot = BoardGrid.Children.Cast<WPFGameBoardPieceSpot>().First(spot => Grid.GetColumn(spot) == j && Grid.GetRow(spot) == i);
-
-                    string letter = (string)pieceSpot.LetterLabel.Content;
-
-                    if (string.IsNullOrWhiteSpace(letter))
-                    {
-                        if (word.Length > 1)
-                        {
-                            builtWords.Add(word);
-                        }
-                    }
-                    else
-                    {
-                        word = word + letter;
-
-                        if (j == 24)
-                        {
-                            builtWords.Add(word);
-                        }
-                    }
+                    builtWords.Add(word);
                 }
             }
 
             // vertical word checking
             for (int i = 0; i<25; i++)
             {
-                string word = string.Empty;
-
-                for (int j = 0; j<25; j++)
+                foreach (string word in GetWordsFromRowOrColumn(i, 2))
                 {
-                    WPFGameBoardPieceSpot pieceSpot = BoardGrid.Children.Cast<WPFGameBoardPieceSpot>().First(spot => Grid.GetColumn(spot) == i && Grid.GetRow(spot) == j);
-
-                    string letter = (string)pieceSpot.LetterLabel.Content;
-
-                    if (string.IsNullOrWhiteSpace(letter))
-                    {
-                        if (word.Length > 1)
-                        {
-                            builtWords.Add(word);
-                        }
-                    }
-                    else
-                    {
-                        word = word + letter;
-
-                        if (i == 24)
-                        {
-                            builtWords.Add(word);
-                        }
-                    }
+                    builtWords.Add(word);
                 }
             }
 
             (int points, List<string> correctWords) = GetCorrectWords(builtWords);
 
-            return (0, correctWords);
+            return (points, correctWords);
         }
 
-        private int CalculateWordPoints(string word)
+        private static int CalculateWordPoints(string word)
         {
             int points = 0;
 
@@ -241,7 +250,7 @@ namespace PapayagramsClient.Game
             return points;
         }
 
-        private (int, List<string>) GetCorrectWords(List<string> wordList)
+        private static (int, List<string>) GetCorrectWords(List<string> wordList)
         {
             List<string> correctWords = new List<string>();
             int points = 0;
@@ -283,7 +292,7 @@ namespace PapayagramsClient.Game
             piece.MainGrid.Background = null;
         }
 
-        private void MovePiece(object sender, RoutedEventArgs e)
+        private static void MovePiece(object sender, RoutedEventArgs e)
         {
             WPFGameBoardPieceSpot piece = (WPFGameBoardPieceSpot)sender;
             Console.WriteLine("moved piece: " +  piece.LetterLabel.Content);
@@ -291,9 +300,9 @@ namespace PapayagramsClient.Game
             piece.MainGrid.Background = null;
         }
 
-        public void AddSeedsToHand(char[] pieces)
+        public void AddSeedsToHand(char[] initialPieces)
         {
-            foreach (var letter in pieces)
+            foreach (var letter in initialPieces)
             {
                 PiecesPanel.Children.Add(new WPFGamePiece(letter.ToString()));
             }

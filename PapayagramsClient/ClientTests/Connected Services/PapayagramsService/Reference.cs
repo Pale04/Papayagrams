@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PapayagramsClient.PapayagramsService {
+namespace ClientTests.PapayagramsService {
     using System.Runtime.Serialization;
     using System;
     
@@ -472,7 +472,7 @@ namespace PapayagramsClient.PapayagramsService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private PapayagramsClient.PapayagramsService.GameModeDC GameModeField;
+        private ClientTests.PapayagramsService.GameModeDC GameModeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int InitialPiecesField;
@@ -484,7 +484,7 @@ namespace PapayagramsClient.PapayagramsService {
         private int TimeLimitMinutesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private PapayagramsClient.PapayagramsService.LanguageDC WordsLanguageField;
+        private ClientTests.PapayagramsService.LanguageDC WordsLanguageField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -497,7 +497,7 @@ namespace PapayagramsClient.PapayagramsService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public PapayagramsClient.PapayagramsService.GameModeDC GameMode {
+        public ClientTests.PapayagramsService.GameModeDC GameMode {
             get {
                 return this.GameModeField;
             }
@@ -549,7 +549,7 @@ namespace PapayagramsClient.PapayagramsService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public PapayagramsClient.PapayagramsService.LanguageDC WordsLanguage {
+        public ClientTests.PapayagramsService.LanguageDC WordsLanguage {
             get {
                 return this.WordsLanguageField;
             }
@@ -606,10 +606,10 @@ namespace PapayagramsClient.PapayagramsService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private PapayagramsClient.PapayagramsService.GameConfigurationDC GameConfigurationField;
+        private ClientTests.PapayagramsService.GameConfigurationDC GameConfigurationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private PapayagramsClient.PapayagramsService.PlayerDC[] PlayersField;
+        private ClientTests.PapayagramsService.PlayerDC[] PlayersField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RoomCodeField;
@@ -625,7 +625,7 @@ namespace PapayagramsClient.PapayagramsService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public PapayagramsClient.PapayagramsService.GameConfigurationDC GameConfiguration {
+        public ClientTests.PapayagramsService.GameConfigurationDC GameConfiguration {
             get {
                 return this.GameConfigurationField;
             }
@@ -638,7 +638,7 @@ namespace PapayagramsClient.PapayagramsService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public PapayagramsClient.PapayagramsService.PlayerDC[] Players {
+        public ClientTests.PapayagramsService.PlayerDC[] Players {
             get {
                 return this.PlayersField;
             }
@@ -771,16 +771,16 @@ namespace PapayagramsClient.PapayagramsService {
     public interface ILoginService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/RegisterUser", ReplyAction="http://tempuri.org/ILoginService/RegisterUserResponse")]
-        int RegisterUser(PapayagramsClient.PapayagramsService.PlayerDC player);
+        int RegisterUser(ClientTests.PapayagramsService.PlayerDC player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/RegisterUser", ReplyAction="http://tempuri.org/ILoginService/RegisterUserResponse")]
-        System.Threading.Tasks.Task<int> RegisterUserAsync(PapayagramsClient.PapayagramsService.PlayerDC player);
+        System.Threading.Tasks.Task<int> RegisterUserAsync(ClientTests.PapayagramsService.PlayerDC player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Login", ReplyAction="http://tempuri.org/ILoginService/LoginResponse")]
-        System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC> Login(string username, string password);
+        System.ValueTuple<int, ClientTests.PapayagramsService.PlayerDC> Login(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Login", ReplyAction="http://tempuri.org/ILoginService/LoginResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC>> LoginAsync(string username, string password);
+        System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.PlayerDC>> LoginAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/Logout", ReplyAction="http://tempuri.org/ILoginService/LogoutResponse")]
         int Logout(string username);
@@ -801,19 +801,19 @@ namespace PapayagramsClient.PapayagramsService {
         System.Threading.Tasks.Task<int> SendAccountVerificationCodeAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/AccessAsGuest", ReplyAction="http://tempuri.org/ILoginService/AccessAsGuestResponse")]
-        PapayagramsClient.PapayagramsService.PlayerDC AccessAsGuest();
+        ClientTests.PapayagramsService.PlayerDC AccessAsGuest();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/AccessAsGuest", ReplyAction="http://tempuri.org/ILoginService/AccessAsGuestResponse")]
-        System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC> AccessAsGuestAsync();
+        System.Threading.Tasks.Task<ClientTests.PapayagramsService.PlayerDC> AccessAsGuestAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ILoginServiceChannel : PapayagramsClient.PapayagramsService.ILoginService, System.ServiceModel.IClientChannel {
+    public interface ILoginServiceChannel : ClientTests.PapayagramsService.ILoginService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class LoginServiceClient : System.ServiceModel.ClientBase<PapayagramsClient.PapayagramsService.ILoginService>, PapayagramsClient.PapayagramsService.ILoginService {
+    public partial class LoginServiceClient : System.ServiceModel.ClientBase<ClientTests.PapayagramsService.ILoginService>, ClientTests.PapayagramsService.ILoginService {
         
         public LoginServiceClient() {
         }
@@ -834,19 +834,19 @@ namespace PapayagramsClient.PapayagramsService {
                 base(binding, remoteAddress) {
         }
         
-        public int RegisterUser(PapayagramsClient.PapayagramsService.PlayerDC player) {
+        public int RegisterUser(ClientTests.PapayagramsService.PlayerDC player) {
             return base.Channel.RegisterUser(player);
         }
         
-        public System.Threading.Tasks.Task<int> RegisterUserAsync(PapayagramsClient.PapayagramsService.PlayerDC player) {
+        public System.Threading.Tasks.Task<int> RegisterUserAsync(ClientTests.PapayagramsService.PlayerDC player) {
             return base.Channel.RegisterUserAsync(player);
         }
         
-        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC> Login(string username, string password) {
+        public System.ValueTuple<int, ClientTests.PapayagramsService.PlayerDC> Login(string username, string password) {
             return base.Channel.Login(username, password);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC>> LoginAsync(string username, string password) {
+        public System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.PlayerDC>> LoginAsync(string username, string password) {
             return base.Channel.LoginAsync(username, password);
         }
         
@@ -874,24 +874,24 @@ namespace PapayagramsClient.PapayagramsService {
             return base.Channel.SendAccountVerificationCodeAsync(username);
         }
         
-        public PapayagramsClient.PapayagramsService.PlayerDC AccessAsGuest() {
+        public ClientTests.PapayagramsService.PlayerDC AccessAsGuest() {
             return base.Channel.AccessAsGuest();
         }
         
-        public System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC> AccessAsGuestAsync() {
+        public System.Threading.Tasks.Task<ClientTests.PapayagramsService.PlayerDC> AccessAsGuestAsync() {
             return base.Channel.AccessAsGuestAsync();
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.IMainMenuService", CallbackContract=typeof(PapayagramsClient.PapayagramsService.IMainMenuServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.IMainMenuService", CallbackContract=typeof(ClientTests.PapayagramsService.IMainMenuServiceCallback))]
     public interface IMainMenuService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetFriends", ReplyAction="http://tempuri.org/IMainMenuService/GetFriendsResponse")]
-        System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]> GetFriends(string username);
+        System.ValueTuple<int, ClientTests.PapayagramsService.FriendDC[]> GetFriends(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetFriends", ReplyAction="http://tempuri.org/IMainMenuService/GetFriendsResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]>> GetFriendsAsync(string username);
+        System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.FriendDC[]>> GetFriendsAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/RemoveFriend", ReplyAction="http://tempuri.org/IMainMenuService/RemoveFriendResponse")]
         int RemoveFriend(string username, string friendUsername);
@@ -906,10 +906,10 @@ namespace PapayagramsClient.PapayagramsService {
         System.Threading.Tasks.Task<int> BlockFriendAsync(string username, string friendUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetFriendRequests", ReplyAction="http://tempuri.org/IMainMenuService/GetFriendRequestsResponse")]
-        System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]> GetFriendRequests(string username);
+        System.ValueTuple<int, ClientTests.PapayagramsService.FriendDC[]> GetFriendRequests(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetFriendRequests", ReplyAction="http://tempuri.org/IMainMenuService/GetFriendRequestsResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]>> GetFriendRequestsAsync(string username);
+        System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.FriendDC[]>> GetFriendRequestsAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/AcceptFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/AcceptFriendRequestResponse")]
         int AcceptFriendRequest(string username, string friendUsername);
@@ -924,10 +924,10 @@ namespace PapayagramsClient.PapayagramsService {
         System.Threading.Tasks.Task<int> RejectFriendRequestAsync(string username, string friendUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SearchNoFriendPlayer", ReplyAction="http://tempuri.org/IMainMenuService/SearchNoFriendPlayerResponse")]
-        System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC> SearchNoFriendPlayer(string searcherUsername, string searchedUsername);
+        System.ValueTuple<int, ClientTests.PapayagramsService.PlayerDC> SearchNoFriendPlayer(string searcherUsername, string searchedUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SearchNoFriendPlayer", ReplyAction="http://tempuri.org/IMainMenuService/SearchNoFriendPlayerResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC>> SearchNoFriendPlayerAsync(string searcherUsername, string searchedUsername);
+        System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.PlayerDC>> SearchNoFriendPlayerAsync(string searcherUsername, string searchedUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SendFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/SendFriendRequestResponse")]
         int SendFriendRequest(string senderUsername, string receiverUsername);
@@ -936,22 +936,22 @@ namespace PapayagramsClient.PapayagramsService {
         System.Threading.Tasks.Task<int> SendFriendRequestAsync(string senderUsername, string receiverUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetPlayerProfile", ReplyAction="http://tempuri.org/IMainMenuService/GetPlayerProfileResponse")]
-        System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerStatsDC> GetPlayerProfile(string username);
+        System.ValueTuple<int, ClientTests.PapayagramsService.PlayerStatsDC> GetPlayerProfile(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetPlayerProfile", ReplyAction="http://tempuri.org/IMainMenuService/GetPlayerProfileResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerStatsDC>> GetPlayerProfileAsync(string username);
+        System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.PlayerStatsDC>> GetPlayerProfileAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetAchievements", ReplyAction="http://tempuri.org/IMainMenuService/GetAchievementsResponse")]
-        System.ValueTuple<int, PapayagramsClient.PapayagramsService.AchievementDC[]> GetAchievements(string username);
+        System.ValueTuple<int, ClientTests.PapayagramsService.AchievementDC[]> GetAchievements(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetAchievements", ReplyAction="http://tempuri.org/IMainMenuService/GetAchievementsResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.AchievementDC[]>> GetAchievementsAsync(string username);
+        System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.AchievementDC[]>> GetAchievementsAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetLeaderboard", ReplyAction="http://tempuri.org/IMainMenuService/GetLeaderboardResponse")]
-        int GetLeaderboard(PapayagramsClient.PapayagramsService.PlayerDC player);
+        int GetLeaderboard(ClientTests.PapayagramsService.PlayerDC player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetLeaderboard", ReplyAction="http://tempuri.org/IMainMenuService/GetLeaderboardResponse")]
-        System.Threading.Tasks.Task<int> GetLeaderboardAsync(PapayagramsClient.PapayagramsService.PlayerDC player);
+        System.Threading.Tasks.Task<int> GetLeaderboardAsync(ClientTests.PapayagramsService.PlayerDC player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/ReportToServer", ReplyAction="http://tempuri.org/IMainMenuService/ReportToServerResponse")]
         int ReportToServer(string username);
@@ -964,19 +964,19 @@ namespace PapayagramsClient.PapayagramsService {
     public interface IMainMenuServiceCallback {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/ReceiveFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/ReceiveFriendRequestResponse")]
-        void ReceiveFriendRequest(PapayagramsClient.PapayagramsService.PlayerDC player);
+        void ReceiveFriendRequest(ClientTests.PapayagramsService.PlayerDC player);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMainMenuService/ReceiveGameInvitation")]
-        void ReceiveGameInvitation(PapayagramsClient.PapayagramsService.GameInvitationDC invitation);
+        void ReceiveGameInvitation(ClientTests.PapayagramsService.GameInvitationDC invitation);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IMainMenuServiceChannel : PapayagramsClient.PapayagramsService.IMainMenuService, System.ServiceModel.IClientChannel {
+    public interface IMainMenuServiceChannel : ClientTests.PapayagramsService.IMainMenuService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class MainMenuServiceClient : System.ServiceModel.DuplexClientBase<PapayagramsClient.PapayagramsService.IMainMenuService>, PapayagramsClient.PapayagramsService.IMainMenuService {
+    public partial class MainMenuServiceClient : System.ServiceModel.DuplexClientBase<ClientTests.PapayagramsService.IMainMenuService>, ClientTests.PapayagramsService.IMainMenuService {
         
         public MainMenuServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
@@ -998,11 +998,11 @@ namespace PapayagramsClient.PapayagramsService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]> GetFriends(string username) {
+        public System.ValueTuple<int, ClientTests.PapayagramsService.FriendDC[]> GetFriends(string username) {
             return base.Channel.GetFriends(username);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]>> GetFriendsAsync(string username) {
+        public System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.FriendDC[]>> GetFriendsAsync(string username) {
             return base.Channel.GetFriendsAsync(username);
         }
         
@@ -1022,11 +1022,11 @@ namespace PapayagramsClient.PapayagramsService {
             return base.Channel.BlockFriendAsync(username, friendUsername);
         }
         
-        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]> GetFriendRequests(string username) {
+        public System.ValueTuple<int, ClientTests.PapayagramsService.FriendDC[]> GetFriendRequests(string username) {
             return base.Channel.GetFriendRequests(username);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]>> GetFriendRequestsAsync(string username) {
+        public System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.FriendDC[]>> GetFriendRequestsAsync(string username) {
             return base.Channel.GetFriendRequestsAsync(username);
         }
         
@@ -1046,11 +1046,11 @@ namespace PapayagramsClient.PapayagramsService {
             return base.Channel.RejectFriendRequestAsync(username, friendUsername);
         }
         
-        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC> SearchNoFriendPlayer(string searcherUsername, string searchedUsername) {
+        public System.ValueTuple<int, ClientTests.PapayagramsService.PlayerDC> SearchNoFriendPlayer(string searcherUsername, string searchedUsername) {
             return base.Channel.SearchNoFriendPlayer(searcherUsername, searchedUsername);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC>> SearchNoFriendPlayerAsync(string searcherUsername, string searchedUsername) {
+        public System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.PlayerDC>> SearchNoFriendPlayerAsync(string searcherUsername, string searchedUsername) {
             return base.Channel.SearchNoFriendPlayerAsync(searcherUsername, searchedUsername);
         }
         
@@ -1062,27 +1062,27 @@ namespace PapayagramsClient.PapayagramsService {
             return base.Channel.SendFriendRequestAsync(senderUsername, receiverUsername);
         }
         
-        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerStatsDC> GetPlayerProfile(string username) {
+        public System.ValueTuple<int, ClientTests.PapayagramsService.PlayerStatsDC> GetPlayerProfile(string username) {
             return base.Channel.GetPlayerProfile(username);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerStatsDC>> GetPlayerProfileAsync(string username) {
+        public System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.PlayerStatsDC>> GetPlayerProfileAsync(string username) {
             return base.Channel.GetPlayerProfileAsync(username);
         }
         
-        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.AchievementDC[]> GetAchievements(string username) {
+        public System.ValueTuple<int, ClientTests.PapayagramsService.AchievementDC[]> GetAchievements(string username) {
             return base.Channel.GetAchievements(username);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.AchievementDC[]>> GetAchievementsAsync(string username) {
+        public System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.AchievementDC[]>> GetAchievementsAsync(string username) {
             return base.Channel.GetAchievementsAsync(username);
         }
         
-        public int GetLeaderboard(PapayagramsClient.PapayagramsService.PlayerDC player) {
+        public int GetLeaderboard(ClientTests.PapayagramsService.PlayerDC player) {
             return base.Channel.GetLeaderboard(player);
         }
         
-        public System.Threading.Tasks.Task<int> GetLeaderboardAsync(PapayagramsClient.PapayagramsService.PlayerDC player) {
+        public System.Threading.Tasks.Task<int> GetLeaderboardAsync(ClientTests.PapayagramsService.PlayerDC player) {
             return base.Channel.GetLeaderboardAsync(player);
         }
         
@@ -1096,20 +1096,20 @@ namespace PapayagramsClient.PapayagramsService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.IPregameService", CallbackContract=typeof(PapayagramsClient.PapayagramsService.IPregameServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.IPregameService", CallbackContract=typeof(ClientTests.PapayagramsService.IPregameServiceCallback))]
     public interface IPregameService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/CreateGame", ReplyAction="http://tempuri.org/IPregameService/CreateGameResponse")]
-        System.ValueTuple<int, PapayagramsClient.PapayagramsService.GameRoomDC> CreateGame(string username, PapayagramsClient.PapayagramsService.GameConfigurationDC gameConfiguration);
+        System.ValueTuple<int, ClientTests.PapayagramsService.GameRoomDC> CreateGame(string username, ClientTests.PapayagramsService.GameConfigurationDC gameConfiguration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/CreateGame", ReplyAction="http://tempuri.org/IPregameService/CreateGameResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.GameRoomDC>> CreateGameAsync(string username, PapayagramsClient.PapayagramsService.GameConfigurationDC gameConfiguration);
+        System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.GameRoomDC>> CreateGameAsync(string username, ClientTests.PapayagramsService.GameConfigurationDC gameConfiguration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/JoinGame", ReplyAction="http://tempuri.org/IPregameService/JoinGameResponse")]
-        System.ValueTuple<int, PapayagramsClient.PapayagramsService.GameRoomDC> JoinGame(string username, string roomCode);
+        System.ValueTuple<int, ClientTests.PapayagramsService.GameRoomDC> JoinGame(string username, string roomCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/JoinGame", ReplyAction="http://tempuri.org/IPregameService/JoinGameResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.GameRoomDC>> JoinGameAsync(string username, string roomCode);
+        System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.GameRoomDC>> JoinGameAsync(string username, string roomCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/LeaveLobby", ReplyAction="http://tempuri.org/IPregameService/LeaveLobbyResponse")]
         int LeaveLobby(string username, string roomCode);
@@ -1118,10 +1118,10 @@ namespace PapayagramsClient.PapayagramsService {
         System.Threading.Tasks.Task<int> LeaveLobbyAsync(string username, string roomCode);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/SendMessage")]
-        void SendMessage(PapayagramsClient.PapayagramsService.Message message);
+        void SendMessage(ClientTests.PapayagramsService.Message message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/SendMessage")]
-        System.Threading.Tasks.Task SendMessageAsync(PapayagramsClient.PapayagramsService.Message message);
+        System.Threading.Tasks.Task SendMessageAsync(ClientTests.PapayagramsService.Message message);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/StartGame", ReplyAction="http://tempuri.org/IPregameService/StartGameResponse")]
         void StartGame(string roomCode);
@@ -1146,22 +1146,22 @@ namespace PapayagramsClient.PapayagramsService {
     public interface IPregameServiceCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/ReceiveMessage")]
-        void ReceiveMessage(PapayagramsClient.PapayagramsService.Message message);
+        void ReceiveMessage(ClientTests.PapayagramsService.Message message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/CarryInsideGame")]
         void CarryInsideGame();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/RefreshLobby")]
-        void RefreshLobby(PapayagramsClient.PapayagramsService.GameRoomDC gameRoom);
+        void RefreshLobby(ClientTests.PapayagramsService.GameRoomDC gameRoom);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IPregameServiceChannel : PapayagramsClient.PapayagramsService.IPregameService, System.ServiceModel.IClientChannel {
+    public interface IPregameServiceChannel : ClientTests.PapayagramsService.IPregameService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class PregameServiceClient : System.ServiceModel.DuplexClientBase<PapayagramsClient.PapayagramsService.IPregameService>, PapayagramsClient.PapayagramsService.IPregameService {
+    public partial class PregameServiceClient : System.ServiceModel.DuplexClientBase<ClientTests.PapayagramsService.IPregameService>, ClientTests.PapayagramsService.IPregameService {
         
         public PregameServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
@@ -1183,19 +1183,19 @@ namespace PapayagramsClient.PapayagramsService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.GameRoomDC> CreateGame(string username, PapayagramsClient.PapayagramsService.GameConfigurationDC gameConfiguration) {
+        public System.ValueTuple<int, ClientTests.PapayagramsService.GameRoomDC> CreateGame(string username, ClientTests.PapayagramsService.GameConfigurationDC gameConfiguration) {
             return base.Channel.CreateGame(username, gameConfiguration);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.GameRoomDC>> CreateGameAsync(string username, PapayagramsClient.PapayagramsService.GameConfigurationDC gameConfiguration) {
+        public System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.GameRoomDC>> CreateGameAsync(string username, ClientTests.PapayagramsService.GameConfigurationDC gameConfiguration) {
             return base.Channel.CreateGameAsync(username, gameConfiguration);
         }
         
-        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.GameRoomDC> JoinGame(string username, string roomCode) {
+        public System.ValueTuple<int, ClientTests.PapayagramsService.GameRoomDC> JoinGame(string username, string roomCode) {
             return base.Channel.JoinGame(username, roomCode);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.GameRoomDC>> JoinGameAsync(string username, string roomCode) {
+        public System.Threading.Tasks.Task<System.ValueTuple<int, ClientTests.PapayagramsService.GameRoomDC>> JoinGameAsync(string username, string roomCode) {
             return base.Channel.JoinGameAsync(username, roomCode);
         }
         
@@ -1207,11 +1207,11 @@ namespace PapayagramsClient.PapayagramsService {
             return base.Channel.LeaveLobbyAsync(username, roomCode);
         }
         
-        public void SendMessage(PapayagramsClient.PapayagramsService.Message message) {
+        public void SendMessage(ClientTests.PapayagramsService.Message message) {
             base.Channel.SendMessage(message);
         }
         
-        public System.Threading.Tasks.Task SendMessageAsync(PapayagramsClient.PapayagramsService.Message message) {
+        public System.Threading.Tasks.Task SendMessageAsync(ClientTests.PapayagramsService.Message message) {
             return base.Channel.SendMessageAsync(message);
         }
         
@@ -1241,7 +1241,7 @@ namespace PapayagramsClient.PapayagramsService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.IGameService", CallbackContract=typeof(PapayagramsClient.PapayagramsService.IGameServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.IGameService", CallbackContract=typeof(ClientTests.PapayagramsService.IGameServiceCallback))]
     public interface IGameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/ReachServer")]
@@ -1285,7 +1285,7 @@ namespace PapayagramsClient.PapayagramsService {
     public interface IGameServiceCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/RefreshGameRoom")]
-        void RefreshGameRoom(int piecesNumber, PapayagramsClient.PapayagramsService.PlayerDC[] connectedPlayers);
+        void RefreshGameRoom(int piecesNumber, ClientTests.PapayagramsService.PlayerDC[] connectedPlayers);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/RefreshTimer")]
         void RefreshTimer(int remainingMinutes);
@@ -1301,12 +1301,12 @@ namespace PapayagramsClient.PapayagramsService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IGameServiceChannel : PapayagramsClient.PapayagramsService.IGameService, System.ServiceModel.IClientChannel {
+    public interface IGameServiceChannel : ClientTests.PapayagramsService.IGameService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GameServiceClient : System.ServiceModel.DuplexClientBase<PapayagramsClient.PapayagramsService.IGameService>, PapayagramsClient.PapayagramsService.IGameService {
+    public partial class GameServiceClient : System.ServiceModel.DuplexClientBase<ClientTests.PapayagramsService.IGameService>, ClientTests.PapayagramsService.IGameService {
         
         public GameServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
@@ -1389,12 +1389,12 @@ namespace PapayagramsClient.PapayagramsService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IGameCodeVerificationServiceChannel : PapayagramsClient.PapayagramsService.IGameCodeVerificationService, System.ServiceModel.IClientChannel {
+    public interface IGameCodeVerificationServiceChannel : ClientTests.PapayagramsService.IGameCodeVerificationService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GameCodeVerificationServiceClient : System.ServiceModel.ClientBase<PapayagramsClient.PapayagramsService.IGameCodeVerificationService>, PapayagramsClient.PapayagramsService.IGameCodeVerificationService {
+    public partial class GameCodeVerificationServiceClient : System.ServiceModel.ClientBase<ClientTests.PapayagramsService.IGameCodeVerificationService>, ClientTests.PapayagramsService.IGameCodeVerificationService {
         
         public GameCodeVerificationServiceClient() {
         }
