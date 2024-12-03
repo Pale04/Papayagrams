@@ -9,7 +9,22 @@
 //------------------------------------------------------------------------------
 
 namespace ClientTests.PapayagramsService {
+    using System.Runtime.Serialization;
     
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RelationStateDC", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
+    public enum RelationStateDC : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Friend = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Blocked = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Pending = 2,
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.ILoginService")]
@@ -50,6 +65,12 @@ namespace ClientTests.PapayagramsService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/AccessAsGuest", ReplyAction="http://tempuri.org/ILoginService/AccessAsGuestResponse")]
         System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC> AccessAsGuestAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/SendPasswordRecoveryPIN", ReplyAction="http://tempuri.org/ILoginService/SendPasswordRecoveryPINResponse")]
+        int SendPasswordRecoveryPIN(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/SendPasswordRecoveryPIN", ReplyAction="http://tempuri.org/ILoginService/SendPasswordRecoveryPINResponse")]
+        System.Threading.Tasks.Task<int> SendPasswordRecoveryPINAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -126,17 +147,43 @@ namespace ClientTests.PapayagramsService {
         public System.Threading.Tasks.Task<PapayagramsClient.PapayagramsService.PlayerDC> AccessAsGuestAsync() {
             return base.Channel.AccessAsGuestAsync();
         }
+        
+        public int SendPasswordRecoveryPIN(string username) {
+            return base.Channel.SendPasswordRecoveryPIN(username);
+        }
+        
+        public System.Threading.Tasks.Task<int> SendPasswordRecoveryPINAsync(string username) {
+            return base.Channel.SendPasswordRecoveryPINAsync(username);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.IMainMenuService", CallbackContract=typeof(ClientTests.PapayagramsService.IMainMenuServiceCallback))]
     public interface IMainMenuService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetFriends", ReplyAction="http://tempuri.org/IMainMenuService/GetFriendsResponse")]
-        System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]> GetFriends(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetAllRelationships", ReplyAction="http://tempuri.org/IMainMenuService/GetAllRelationshipsResponse")]
+        System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]> GetAllRelationships(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetFriends", ReplyAction="http://tempuri.org/IMainMenuService/GetFriendsResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]>> GetFriendsAsync(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetAllRelationships", ReplyAction="http://tempuri.org/IMainMenuService/GetAllRelationshipsResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]>> GetAllRelationshipsAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SearchNoFriendPlayer", ReplyAction="http://tempuri.org/IMainMenuService/SearchNoFriendPlayerResponse")]
+        System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC> SearchNoFriendPlayer(string searcherUsername, string searchedUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SearchNoFriendPlayer", ReplyAction="http://tempuri.org/IMainMenuService/SearchNoFriendPlayerResponse")]
+        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC>> SearchNoFriendPlayerAsync(string searcherUsername, string searchedUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SendFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/SendFriendRequestResponse")]
+        int SendFriendRequest(string senderUsername, string receiverUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SendFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/SendFriendRequestResponse")]
+        System.Threading.Tasks.Task<int> SendFriendRequestAsync(string senderUsername, string receiverUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/RespondFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/RespondFriendRequestResponse")]
+        int RespondFriendRequest(string respondentUsername, string requesterUsername, bool response);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/RespondFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/RespondFriendRequestResponse")]
+        System.Threading.Tasks.Task<int> RespondFriendRequestAsync(string respondentUsername, string requesterUsername, bool response);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/RemoveFriend", ReplyAction="http://tempuri.org/IMainMenuService/RemoveFriendResponse")]
         int RemoveFriend(string username, string friendUsername);
@@ -150,35 +197,11 @@ namespace ClientTests.PapayagramsService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/BlockFriend", ReplyAction="http://tempuri.org/IMainMenuService/BlockFriendResponse")]
         System.Threading.Tasks.Task<int> BlockFriendAsync(string username, string friendUsername);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetFriendRequests", ReplyAction="http://tempuri.org/IMainMenuService/GetFriendRequestsResponse")]
-        System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]> GetFriendRequests(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/UnblockFriend", ReplyAction="http://tempuri.org/IMainMenuService/UnblockFriendResponse")]
+        int UnblockFriend(string username, string friendUsername);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetFriendRequests", ReplyAction="http://tempuri.org/IMainMenuService/GetFriendRequestsResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]>> GetFriendRequestsAsync(string username);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/AcceptFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/AcceptFriendRequestResponse")]
-        int AcceptFriendRequest(string username, string friendUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/AcceptFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/AcceptFriendRequestResponse")]
-        System.Threading.Tasks.Task<int> AcceptFriendRequestAsync(string username, string friendUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/RejectFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/RejectFriendRequestResponse")]
-        int RejectFriendRequest(string username, string friendUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/RejectFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/RejectFriendRequestResponse")]
-        System.Threading.Tasks.Task<int> RejectFriendRequestAsync(string username, string friendUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SearchNoFriendPlayer", ReplyAction="http://tempuri.org/IMainMenuService/SearchNoFriendPlayerResponse")]
-        System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC> SearchNoFriendPlayer(string searcherUsername, string searchedUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SearchNoFriendPlayer", ReplyAction="http://tempuri.org/IMainMenuService/SearchNoFriendPlayerResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC>> SearchNoFriendPlayerAsync(string searcherUsername, string searchedUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SendFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/SendFriendRequestResponse")]
-        int SendFriendRequest(string senderUsername, string receiverUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/SendFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/SendFriendRequestResponse")]
-        System.Threading.Tasks.Task<int> SendFriendRequestAsync(string senderUsername, string receiverUsername);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/UnblockFriend", ReplyAction="http://tempuri.org/IMainMenuService/UnblockFriendResponse")]
+        System.Threading.Tasks.Task<int> UnblockFriendAsync(string username, string friendUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetPlayerProfile", ReplyAction="http://tempuri.org/IMainMenuService/GetPlayerProfileResponse")]
         System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerStatsDC> GetPlayerProfile(string username);
@@ -208,7 +231,7 @@ namespace ClientTests.PapayagramsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IMainMenuServiceCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/ReceiveFriendRequest", ReplyAction="http://tempuri.org/IMainMenuService/ReceiveFriendRequestResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMainMenuService/ReceiveFriendRequest")]
         void ReceiveFriendRequest(PapayagramsClient.PapayagramsService.PlayerDC player);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMainMenuService/ReceiveGameInvitation")]
@@ -243,12 +266,36 @@ namespace ClientTests.PapayagramsService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]> GetFriends(string username) {
-            return base.Channel.GetFriends(username);
+        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]> GetAllRelationships(string username) {
+            return base.Channel.GetAllRelationships(username);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]>> GetFriendsAsync(string username) {
-            return base.Channel.GetFriendsAsync(username);
+        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]>> GetAllRelationshipsAsync(string username) {
+            return base.Channel.GetAllRelationshipsAsync(username);
+        }
+        
+        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC> SearchNoFriendPlayer(string searcherUsername, string searchedUsername) {
+            return base.Channel.SearchNoFriendPlayer(searcherUsername, searchedUsername);
+        }
+        
+        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC>> SearchNoFriendPlayerAsync(string searcherUsername, string searchedUsername) {
+            return base.Channel.SearchNoFriendPlayerAsync(searcherUsername, searchedUsername);
+        }
+        
+        public int SendFriendRequest(string senderUsername, string receiverUsername) {
+            return base.Channel.SendFriendRequest(senderUsername, receiverUsername);
+        }
+        
+        public System.Threading.Tasks.Task<int> SendFriendRequestAsync(string senderUsername, string receiverUsername) {
+            return base.Channel.SendFriendRequestAsync(senderUsername, receiverUsername);
+        }
+        
+        public int RespondFriendRequest(string respondentUsername, string requesterUsername, bool response) {
+            return base.Channel.RespondFriendRequest(respondentUsername, requesterUsername, response);
+        }
+        
+        public System.Threading.Tasks.Task<int> RespondFriendRequestAsync(string respondentUsername, string requesterUsername, bool response) {
+            return base.Channel.RespondFriendRequestAsync(respondentUsername, requesterUsername, response);
         }
         
         public int RemoveFriend(string username, string friendUsername) {
@@ -267,44 +314,12 @@ namespace ClientTests.PapayagramsService {
             return base.Channel.BlockFriendAsync(username, friendUsername);
         }
         
-        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]> GetFriendRequests(string username) {
-            return base.Channel.GetFriendRequests(username);
+        public int UnblockFriend(string username, string friendUsername) {
+            return base.Channel.UnblockFriend(username, friendUsername);
         }
         
-        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.FriendDC[]>> GetFriendRequestsAsync(string username) {
-            return base.Channel.GetFriendRequestsAsync(username);
-        }
-        
-        public int AcceptFriendRequest(string username, string friendUsername) {
-            return base.Channel.AcceptFriendRequest(username, friendUsername);
-        }
-        
-        public System.Threading.Tasks.Task<int> AcceptFriendRequestAsync(string username, string friendUsername) {
-            return base.Channel.AcceptFriendRequestAsync(username, friendUsername);
-        }
-        
-        public int RejectFriendRequest(string username, string friendUsername) {
-            return base.Channel.RejectFriendRequest(username, friendUsername);
-        }
-        
-        public System.Threading.Tasks.Task<int> RejectFriendRequestAsync(string username, string friendUsername) {
-            return base.Channel.RejectFriendRequestAsync(username, friendUsername);
-        }
-        
-        public System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC> SearchNoFriendPlayer(string searcherUsername, string searchedUsername) {
-            return base.Channel.SearchNoFriendPlayer(searcherUsername, searchedUsername);
-        }
-        
-        public System.Threading.Tasks.Task<System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerDC>> SearchNoFriendPlayerAsync(string searcherUsername, string searchedUsername) {
-            return base.Channel.SearchNoFriendPlayerAsync(searcherUsername, searchedUsername);
-        }
-        
-        public int SendFriendRequest(string senderUsername, string receiverUsername) {
-            return base.Channel.SendFriendRequest(senderUsername, receiverUsername);
-        }
-        
-        public System.Threading.Tasks.Task<int> SendFriendRequestAsync(string senderUsername, string receiverUsername) {
-            return base.Channel.SendFriendRequestAsync(senderUsername, receiverUsername);
+        public System.Threading.Tasks.Task<int> UnblockFriendAsync(string username, string friendUsername) {
+            return base.Channel.UnblockFriendAsync(username, friendUsername);
         }
         
         public System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerStatsDC> GetPlayerProfile(string username) {

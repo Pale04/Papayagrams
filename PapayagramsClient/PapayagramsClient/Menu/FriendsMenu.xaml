@@ -16,7 +16,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Background="Yellow" Grid.Column="1" Panel.ZIndex="1">
+        <StackPanel Background="#D9C7A8" Grid.Column="1" Panel.ZIndex="1">
             <StackPanel Orientation="Horizontal" Margin="15">
                 <Button Width="60" Height="60" Style="{StaticResource PrimaryButton}" Click="CloseMenu">
                     <Image Source="../Resources/Icons/back-svgrepo-com.png"/>
@@ -31,8 +31,23 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Name="FriendListPanel" Height="570" Margin="20, 70, 20, 0" Background="Green" Panel.ZIndex="1" Grid.Column="1"/>
-        <StackPanel Name="RequestsListPanel" Height="275" VerticalAlignment="Top" Margin="20, 110, 20, 0" Background="Purple" Panel.ZIndex="2" Grid.Column="1"/>
-        <StackPanel Name="BloquedListPanel" Height="275" VerticalAlignment="Bottom" Margin="20, 70, 20, 40" Background="Blue" Panel.ZIndex="2" Grid.Column="1"/>
+        <StackPanel Name="AddFriendPanel" Orientation="Horizontal" Grid.Column="1" Panel.ZIndex="1" Height="50" VerticalAlignment="Top" Margin="20, 100, 20, 0">
+            <TextBox x:Name="NewFriendUsernameTextBox" Style="{StaticResource CustomTextBox}" Width="370" Margin="0, 0, 15, 0"/>
+            <Button BorderBrush="Transparent" Background="Transparent" Click="AddFriend">
+                <Image Source="../Resources/icons/add-friend-svgrepo-com.png"/>
+            </Button>
+        </StackPanel>
+
+        <ScrollViewer x:Name="FriendListScrollViewer" Grid.Column="1" Panel.ZIndex="1" Height="525" Margin="20, 150, 20, 0" >
+            <StackPanel Name="FriendListPanel" Background="#FFE5C1" Opacity="50"/>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="RequestsListScrollViewer" Grid.Column="1" Panel.ZIndex="2" Height="275" VerticalAlignment="Top" Margin="20, 110, 20, 0" Visibility="Hidden" IsEnabled="False">
+            <StackPanel Name="RequestsListPanel" Background="#FFE5C1" Opacity="50"/>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="BloquedListScrollViewer" Panel.ZIndex="2" Grid.Column="1" Height="275" VerticalAlignment="Bottom" Margin="20, 70, 20, 40" Visibility="Hidden" IsEnabled="False">
+            <StackPanel Name="BloquedListPanel" Background="#FFE5C1" Opacity="50"/>
+        </ScrollViewer>
     </Grid>
 </UserControl>

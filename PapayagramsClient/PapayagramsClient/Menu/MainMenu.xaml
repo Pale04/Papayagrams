@@ -19,6 +19,7 @@
             </Style>
             <Style TargetType="{x:Type menu:FriendsMenu}">
                 <EventSetter Event="ClosedFriendsMenu" Handler="CloseFriendsOverlay"/>
+                <EventSetter Event="AddedFriend" Handler="AddNewFriend"/>
             </Style>
         </Grid.Resources>
         <Label Content="Papayagrams" HorizontalAlignment="Left" Margin="95,54,0,0" VerticalAlignment="Top" FontSize="64" Width="467" HorizontalContentAlignment="Center" FontWeight="Bold"/>

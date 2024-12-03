@@ -177,13 +177,27 @@ namespace PapayagramsClient
         private void OpenFriendsOverlay(object sender, RoutedEventArgs e)
         {
             FriendsMenuPanel.Visibility = Visibility.Visible;
-            //TODO: Get use relationships
+            //TODO: Get user relationships
             FriendsMenuPanel.FillLists();
         }
 
         private void CloseFriendsOverlay(object sender, RoutedEventArgs e)
         {
             FriendsMenuPanel.Visibility = Visibility.Hidden;
+        }
+
+        private void AddNewFriend(object sender, RoutedEventArgs e)
+        {
+            string friendUsername = FriendsMenuPanel.NewFriendUsernameTextBox.Text;
+            int returnCode = _host.SendFriendRequest(CurrentPlayer.Player.Username, friendUsername);
+
+            switch (returnCode)
+            {
+                case 0:
+                    new SelectionPopUpWindow(Properties.Resources.friendsRequestSentTitle, Properties.Resources.friendsRequestSent, 0).ShowDialog();
+                    break;
+                    //TODO: Catch error codes
+            }
         }
     }
 }

@@ -23,6 +23,12 @@ namespace PapayagramsClient.Menu
             handlerType: typeof(RoutedEventHandler),
             ownerType: typeof(GameInvitation));
 
+        public static readonly RoutedEvent AddedFriendEvent = EventManager.RegisterRoutedEvent(
+            name: "AddedFriend",
+            routingStrategy: RoutingStrategy.Bubble,
+            handlerType: typeof(RoutedEventHandler),
+            ownerType: typeof(GameInvitation));
+
         public FriendsMenu()
         {
             InitializeComponent();
@@ -33,25 +39,57 @@ namespace PapayagramsClient.Menu
             throw new NotImplementedException();
         }
 
+        private void FillFriendList()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void FillRequestsList()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void FillBloquedList()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ToggleSocialLists(object sender, RoutedEventArgs e)
+        {
+            if (FriendListScrollViewer.Visibility == Visibility.Visible)
+            {
+                AddFriendPanel.Visibility = Visibility.Hidden;
+                FriendListScrollViewer.Visibility = Visibility.Hidden;
+                BloquedListScrollViewer.Visibility = Visibility.Visible;
+                RequestsListScrollViewer.Visibility = Visibility.Visible;
+
+                AddFriendPanel.IsEnabled = false;
+                FriendListScrollViewer.IsEnabled = false;
+                BloquedListScrollViewer.IsEnabled = true;
+                RequestsListScrollViewer.IsEnabled = true;
+            }
+            else
+            {
+                AddFriendPanel.Visibility = Visibility.Visible;
+                FriendListScrollViewer.Visibility = Visibility.Visible;
+                BloquedListScrollViewer.Visibility = Visibility.Hidden;
+                RequestsListScrollViewer.Visibility = Visibility.Hidden;
+
+                AddFriendPanel.IsEnabled = true;
+                FriendListScrollViewer.IsEnabled = true;
+                BloquedListScrollViewer.IsEnabled = false;
+                RequestsListScrollViewer.IsEnabled = false;
+            }
+        }
+
         private void CloseMenu(object sender, RoutedEventArgs e)
         {
             RaiseClosedFriendsMenuEvent();
         }
 
-        private void ToggleSocialLists(object sender, RoutedEventArgs e)
+        private void AddFriend(object sender, RoutedEventArgs e)
         {
-            if (FriendListPanel.Visibility == Visibility.Visible)
-            {
-                FriendListPanel.Visibility = Visibility.Hidden;
-                BloquedListPanel.Visibility = Visibility.Visible;
-                RequestsListPanel.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                FriendListPanel.Visibility = Visibility.Visible;
-                BloquedListPanel.Visibility = Visibility.Hidden;
-                RequestsListPanel.Visibility = Visibility.Hidden;
-            }
+            RaiseAddedFriendEvent();
         }
 
         public event RoutedEventHandler ClosedFriendsMenu
@@ -63,6 +101,18 @@ namespace PapayagramsClient.Menu
         public void RaiseClosedFriendsMenuEvent()
         {
             RoutedEventArgs routedEventArgs = new RoutedEventArgs(routedEvent: ClosedFriendsMenuEvent);
+            RaiseEvent(routedEventArgs);
+        }
+
+        public event RoutedEventHandler AddedFriend
+        {
+            add { AddHandler(AddedFriendEvent, value); }
+            remove { RemoveHandler(AddedFriendEvent, value); }
+        }
+
+        public void RaiseAddedFriendEvent()
+        {
+            RoutedEventArgs routedEventArgs = new RoutedEventArgs(routedEvent: AddedFriendEvent);
             RaiseEvent(routedEventArgs);
         }
     }

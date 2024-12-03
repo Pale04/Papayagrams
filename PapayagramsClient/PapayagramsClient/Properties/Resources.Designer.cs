@@ -340,6 +340,24 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The friend request has been sent.
+        /// </summary>
+        public static string friendsRequestSent {
+            get {
+                return ResourceManager.GetString("friendsRequestSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friend request sent.
+        /// </summary>
+        public static string friendsRequestSentTitle {
+            get {
+                return ResourceManager.GetString("friendsRequestSentTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Friends.
         /// </summary>
         public static string friendsTitle {

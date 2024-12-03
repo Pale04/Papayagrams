@@ -139,6 +139,9 @@
       <DependentUpon>SelectionPopUpWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WordChecker.cs" />
+    <Compile Include="WPFControls\FriendInfoPanel.xaml.cs">
+      <DependentUpon>FriendInfoPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPFControls\WPFAchievementView.xaml.cs">
       <DependentUpon>WPFAchievementView.xaml</DependentUpon>
     </Compile>
@@ -263,6 +266,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SelectionPopUpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPFControls\FriendInfoPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -443,6 +450,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\trash-bin-open-svgrepo-com.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\options-vertical-svgrepo-com.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -408,4 +408,10 @@
   <data name="friendsTitle" xml:space="preserve">
     <value>Friends</value>
   </data>
+  <data name="friendsRequestSent" xml:space="preserve">
+    <value>The friend request has been sent correctly</value>
+  </data>
+  <data name="friendsRequestSentTitle" xml:space="preserve">
+    <value>Friend request sent</value>
+  </data>
 </root>

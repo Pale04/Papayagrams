@@ -18,11 +18,20 @@
   <xs:element name="ArrayOfFriendDC" nillable="true" type="tns:ArrayOfFriendDC" />
   <xs:complexType name="FriendDC">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="RelationState" type="tns:RelationStateDC" />
       <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="FriendDC" nillable="true" type="tns:FriendDC" />
+  <xs:simpleType name="RelationStateDC">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Friend" />
+      <xs:enumeration value="Blocked" />
+      <xs:enumeration value="Pending" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="RelationStateDC" nillable="true" type="tns:RelationStateDC" />
   <xs:complexType name="PlayerStatsDC">
     <xs:sequence>
       <xs:element minOccurs="0" name="FriendsAmount" type="xs:int" />
