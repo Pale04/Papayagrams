@@ -65,13 +65,19 @@ namespace DataAccess.Tests
         }
 
         [TestMethod()]
-        public void SearchNoFriendPlayerBlockedTest()
+        public void SearchNoFriendPlayerBlockedTargetTest()
         {
-            //TODO: hacer método para bloquear a un jugador
-            Assert.Fail("Incomplet test");
-
+            UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Option<Player> result = UserRelationshipDB.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.IsTrue(result.IsNone, "SearchNoFriendPlayerBlockedTest");
+        }
+
+        [TestMethod()]
+        public void SearchNoFriendPlayerBlockedSearcherTest()
+        {
+            UserRelationshipDB.BlockPlayer(_registeredPlayer2.Username, _registeredPlayer1.Username);
+            Option<Player> result = UserRelationshipDB.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.IsTrue(result.IsNone, "SearchNoFriendPlayerBlockedSearcherTest");
         }
 
         [TestMethod()]
@@ -137,10 +143,7 @@ namespace DataAccess.Tests
         public void SendFriendRequestBlockedRelationTest()
         {
             int expected = -4;
-
-            Assert.Fail("Incomplete test");
-            //TODO Add the method to block a player
-
+            UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
             int result = UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(expected, result, "SendFriendRequestBlockedRelationTest");
         }
@@ -227,8 +230,8 @@ namespace DataAccess.Tests
         [TestMethod()]
         public void GetFriendsWithBlockedPlayersTest()
         {
-            //Todo: Add the method to block a player
-            Assert.Fail("Incomplete test");
+            UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer3.Username);
 
             List<Friend> result = UserRelationshipDB.GetFriends(_registeredPlayer1.Username);
             Assert.IsTrue(result.Count == 0, "GetFriendsWithBlockedPlayersTest");
@@ -291,11 +294,21 @@ namespace DataAccess.Tests
         [TestMethod()]
         public void GetPendingRequestsWithBlockedPlayersTest()
         {
-            //TODO: Add the method to block a player
-            Assert.Fail("Incomplete test");
+            UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            UserRelationshipDB.SendFriendRequest(_registeredPlayer3.Username, _registeredPlayer1.Username);
+
+            List<Friend> expected = new List<Friend>
+            {
+                new Friend
+                {
+                    Id = _registeredPlayer3.Id,
+                    Username = _registeredPlayer3.Username,
+                    RelationState = RelationState.Pending
+                }
+            };
 
             List<Friend> result = UserRelationshipDB.GetPendingFriendRequests(_registeredPlayer1.Username);
-
+            Assert.IsTrue(expected.SequenceEqual(result), "GetPendingRequestsWithBlockedPlayersTest");
         }
 
         [TestMethod()]
@@ -315,19 +328,62 @@ namespace DataAccess.Tests
         [TestMethod()]
         public void GetBlockedPlayersBothWaysTest()
         {
+            UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            UserRelationshipDB.BlockPlayer(_registeredPlayer3.Username, _registeredPlayer1.Username);
 
+            List<Friend> expected = new List<Friend>()
+            {
+                new Friend
+                {
+                    Id = _registeredPlayer2.Id,
+                    Username = _registeredPlayer2.Username,
+                    RelationState = RelationState.Blocked
+                }
+            };
+
+            List<Friend> result = UserRelationshipDB.GetBlockedPlayers(_registeredPlayer1.Username);
+            Assert.IsTrue(expected.SequenceEqual(result), "GetBlockedPlayersBothWaysTest");
         }
 
         [TestMethod()]
         public void GetBlockedPlayersWithFriendsTest()
         {
+            UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer3.Username);
+            UserRelationshipDB.RespondFriendRequest(_registeredPlayer3.Username, _registeredPlayer1.Username, true);
 
+            List<Friend> expected = new List<Friend>()
+            {
+                new Friend
+                {
+                    Id = _registeredPlayer2.Id,
+                    Username = _registeredPlayer2.Username,
+                    RelationState = RelationState.Blocked
+                }
+            };
+
+            List<Friend> result = UserRelationshipDB.GetBlockedPlayers(_registeredPlayer1.Username);
+            Assert.IsTrue(expected.SequenceEqual(result), "GetBlockedPlayersWithFriendsTest");
         }
 
         [TestMethod()]
         public void GetBlockedPlayersWithPendingRequestsTest()
         {
+            UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer3.Username);
 
+            List<Friend> expected = new List<Friend>()
+            {
+                new Friend
+                {
+                    Id = _registeredPlayer2.Id,
+                    Username = _registeredPlayer2.Username,
+                    RelationState = RelationState.Blocked
+                }
+            };
+
+            List<Friend> result = UserRelationshipDB.GetBlockedPlayers(_registeredPlayer1.Username);
+            Assert.IsTrue(expected.SequenceEqual(result), "GetBlockedPlayersWithPendingRequestsTest");
         }
 
         [TestMethod()]
@@ -342,6 +398,77 @@ namespace DataAccess.Tests
         {
             List<Friend> result = UserRelationshipDB.GetBlockedPlayers("deivid");
             Assert.IsTrue(result.Count == 0, "GetBlockedPlayersNonExistentPlayerTest");
+        }
+
+        [TestMethod()]
+        public void BlockPlayerSuccessfulTest()
+        {
+            int expected = 1;
+            int result = UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "BlockPlayerSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void BlockPlayerFriendSenderTest()
+        {
+            UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            UserRelationshipDB.RespondFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username, true);
+            int expected = 1;
+            int result = UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "BlockPlayerFriendReceiveTest");
+        }
+
+        [TestMethod()]
+        public void BlockPlayerFriendReceiverTest()
+        {
+            UserRelationshipDB.SendFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username);
+            UserRelationshipDB.RespondFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username, true);
+            int expected = 1;
+            int result = UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "BlockPlayerFriendSenderTest");
+        }
+
+        [TestMethod()]
+        public void BlockPlayerPendingRequestSenderTest()
+        {
+            UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            int expected = 1;
+            int result = UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "BlockPlayerPendingRequestSenderTest");
+        }
+
+        [TestMethod()]
+        public void BlockPlayerPendingReceiverTest()
+        {
+            UserRelationshipDB.SendFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username);
+            int expected = 1;
+            int result = UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "BlockPlayerPendingReceiverTest");
+        }
+
+        [TestMethod()]
+        public void BlockPlayerBlockedAgainTest()
+        {
+            UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            int expected = 1;
+            int result = UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "BlockPlayerBlockedSenderTest");
+        }
+
+        [TestMethod()]
+        public void BlockPlayerNonExistentBlockerTest()
+        {
+            int expected = 0;
+            int result = UserRelationshipDB.BlockPlayer("deivid", _registeredPlayer1.Username);
+            Assert.AreEqual(expected, result, "BlockPlayerNonExistentBlockerTest");
+        }
+
+        [TestMethod()]
+        public void BlockPlayerNonExistentBlockedTest()
+        {
+            int expected = 0;
+            int result = UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, "deivid");
+            Assert.AreEqual(expected, result, "BlockPlayerNonExistentBlockedTest");
         }
     }
 }

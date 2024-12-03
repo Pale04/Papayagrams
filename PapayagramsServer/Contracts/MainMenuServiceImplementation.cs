@@ -145,9 +145,36 @@ namespace Contracts
             throw new NotImplementedException();
         }
 
-        public int BlockFriend(string username, string friendUsername)
+        /// <summary>
+        /// Block a player
+        /// </summary>
+        /// <param name="username">Username of the player blocking</param>
+        /// <param name="friendUsername">Username of the player beeing blocked</param>
+        /// <returns>0 if the operation was successful, an error code otherwise</returns>
+        /// <remarks>Error codes that can be returned: 101, 102, 308</remarks>
+        public int BlockPlayer(string username, string friendUsername)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(friendUsername))
+            {
+                return 101;
+            }
+
+            int result;
+            try
+            {
+                result = UserRelationshipDB.BlockPlayer(username, friendUsername);
+            }
+            catch (EntityException error)
+            {
+                _logger.Fatal("Database connection failed", error);
+                return 102;
+            }
+
+            if (result != 1)
+            {
+                _logger.InfoFormat("Player block failed (Blocker username: {username}, Blocked username: {friendUsername}, Return code: {result})", username, friendUsername, result);
+            }
+            return result == 1? 0 : 308;
         }
 
         public int UnblockFriend(string username, string friendUsername)
@@ -155,6 +182,12 @@ namespace Contracts
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Return all achievements of the game an if the player has achieved them
+        /// </summary>
+        /// <param name="username">Username of the player</param>
+        /// <returns>0 and the list with AchievementDC objects, an error code and an empty list otherwise</returns>
+        /// <remarks>Error codes that can be returned: 102</remarks>
         public (int, List<AchievementDC>) GetAchievements(string username)
         {
             List<DomainClasses.Achievement> achievementsList;
@@ -172,12 +205,17 @@ namespace Contracts
             return (0, achievementsList.ConvertAll(AchievementDC.ConvertToAchievementDC));
         }
 
-
         public int GetLeaderboard(PlayerDC player)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Return the statistics of a player like the number of games played, won, lost, etc.
+        /// </summary>
+        /// <param name="username">Username of the player</param>
+        /// <returns>0 and a PlayerStatsDC object with the statistics, an error code and null otherwise</returns>
+        /// <remarks>Error codes that can be returned: 102, 205</remarks>
         public (int returnCode, PlayerStatsDC playerStats) GetPlayerProfile(string username)
         {
             Option<PlayerStats> playerStats;

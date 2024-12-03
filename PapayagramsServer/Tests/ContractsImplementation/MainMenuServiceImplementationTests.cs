@@ -40,9 +40,24 @@ namespace Contracts.Tests
             Password = "040704"
         };
 
-        private readonly List<DomainClasses.Achievement> _achievements = new List<DomainClasses.Achievement>()
+        private readonly List<AchievementDC> _achievements = new List<AchievementDC>()
         {
-            new DomainClasses.Achievement() { Id = 11, Description = "1 game won in original game mode"},
+            new AchievementDC() { Id = 1},
+            new AchievementDC() { Id = 2},
+            new AchievementDC() { Id = 3},
+            new AchievementDC() { Id = 4},
+            new AchievementDC() { Id = 5},
+            new AchievementDC() { Id = 6},
+            new AchievementDC() { Id = 7},
+            new AchievementDC() { Id = 8},
+            new AchievementDC() { Id = 9},
+            new AchievementDC() { Id = 10},
+            new AchievementDC() { Id = 11},
+            new AchievementDC() { Id = 12},
+            new AchievementDC() { Id = 13},
+            new AchievementDC() { Id = 14},
+            new AchievementDC() { Id = 15},
+            new AchievementDC() { Id = 16}
         };
 
         [TestInitialize()]
@@ -88,9 +103,7 @@ namespace Contracts.Tests
             _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
             _serviceImplementation.RespondFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username, true);
             _serviceImplementation.SendFriendRequest(_registeredPlayer3.Username, _registeredPlayer1.Username);
-            //TODO: bloquear al jugador 4
-
-            Assert.Fail("Incomplete test");
+            _serviceImplementation.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer4.Username);
 
             List<FriendDC> expected = new List<FriendDC>()
             {
@@ -168,8 +181,20 @@ namespace Contracts.Tests
         [TestMethod()]
         public void GetAllRelationshiosBlockedBothWaysTest()
         {
-            //TODO: bloquear dos relaciones en distintas direcciones
-            Assert.Fail("Incomplete test");
+            _serviceImplementation.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            _serviceImplementation.BlockPlayer(_registeredPlayer3.Username, _registeredPlayer1.Username);
+
+            List<FriendDC> expected = new List<FriendDC>()
+            {
+                new FriendDC()
+                {
+                    Id = _registeredPlayer2.Id,
+                    Username = _registeredPlayer2.Username,
+                    RelationState = RelationStateDC.Blocked
+                }
+            };
+            (_, List<FriendDC> result) = _serviceImplementation.GetAllRelationships(_registeredPlayer1.Username);
+            Assert.IsTrue(expected.SequenceEqual(result), "GetAllRelationshiosBlockedBothWaysTest");
         }
 
         [TestMethod()]
@@ -232,12 +257,21 @@ namespace Contracts.Tests
         }
 
         [TestMethod()]
-        public void SearchPlayerBlockedTest()
+        public void SearchPlayerBlockedTargetTest()
         {
-            //TODO: Implement the method to block a player
-            Assert.Fail("Incomplete test");
-            (_, PlayerDC result) = _serviceImplementation.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.AreEqual(_registeredPlayer2, result, "SearchPlayerBlockedTest");
+            _serviceImplementation.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            int expected = 103;
+            (int result, _) = _serviceImplementation.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "SearchPlayerBlockedTargetTest");
+        }
+
+        [TestMethod()]
+        public void SearchPlayerBlockedSearcherTest()
+        {
+            _serviceImplementation.BlockPlayer(_registeredPlayer2.Username, _registeredPlayer1.Username);
+            int expected = 103;
+            (int result, _) = _serviceImplementation.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "SearchPlayerBlockedSearcherTest");
         }
 
         [TestMethod()]
@@ -287,9 +321,7 @@ namespace Contracts.Tests
         [TestMethod()]
         public void SendFriendRequestBlockedRelationTest()
         {
-            Assert.Fail("Incomplet test");
-            //TODO Add the method to block a player. No matter if they are friends or not
-
+            _serviceImplementation.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
             int expected = 304;
             int result = _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(expected, result, "SendFriendRequestBlockedRelationTest");
@@ -343,6 +375,76 @@ namespace Contracts.Tests
             int expected = 307;
             int result = _serviceImplementation.RespondFriendRequest(_registeredPlayer2.Username, "Deivid", true);
             Assert.AreEqual(expected, result, "RespondFriendRequestNonExistentRequesterTest");
+        }
+
+        [TestMethod()]
+        public void BlockPlayerSuccessfulTest()
+        {
+            int expected = 0;
+            int result = _serviceImplementation.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "BlockPlayerSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void BlockPlayerInvalidParametersTest()
+        {
+            int expected = 101;
+            int result = _serviceImplementation.BlockPlayer(null, "  ");
+            Assert.AreEqual(expected, result, "BlockPlayerInvalidParametersTest");
+        }
+
+        [TestMethod()]
+        public void BlockPlayerNonExistentPlayerTest()
+        {
+            int expected = 308;
+            int result = _serviceImplementation.BlockPlayer("Deivid", _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "BlockPlayerNonExistentPlayerTest");
+        }
+
+        [TestMethod()]
+        public void BlockPlayerNonExistentFriendTest()
+        {
+            int expected = 308;
+            int result = _serviceImplementation.BlockPlayer(_registeredPlayer1.Username, "Deivid");
+            Assert.AreEqual(expected, result, "BlockPlayerNonExistentFriendTest");
+        }
+
+        [TestMethod()]
+        public void BlockPlayerFriendSenderTest()
+        {
+            _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            _serviceImplementation.RespondFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username, true);
+            int expected = 0;
+            int result = _serviceImplementation.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "BlockPlayerFriendSenderTest");
+        }
+
+        [TestMethod()]
+        public void BlockPlayerFriendReceiverTest()
+        {
+            _serviceImplementation.SendFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username);
+            _serviceImplementation.RespondFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username, true);
+            int expected = 0;
+            int result = _serviceImplementation.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "BlockPlayerFriendReceiverTest");
+        }
+
+        [TestMethod()]
+        public void BlockPlayerPendingSenderTest()
+        {
+            _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            int expected = 0;
+            int result = _serviceImplementation.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "BlockPlayerPendingSenderTest");
+        }
+
+        [TestMethod()]
+        public void BlockPlayerPendingReceiverTest()
+        {
+            _serviceImplementation.SendFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username);
+            int expected = 0;
+            int result = _serviceImplementation.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "BlockPlayerPendingReceiverTest");
         }
 
         [TestMethod()]
@@ -404,10 +506,8 @@ namespace Contracts.Tests
         public void GetAchievementsSuccessfulTest()
         {
             _achievements[0].IsAchieved = true;
-            List<AchievementDC> expected = new List<AchievementDC>()
-            {
-                AchievementDC.ConvertToAchievementDC(_achievements[0]),
-            };
+            List<AchievementDC> expected = new List<AchievementDC>(_achievements);
+            expected[0].IsAchieved = true;
             (int _, List<AchievementDC> result) = _serviceImplementation.GetAchievements(_registeredPlayer1.Username);
             Assert.IsTrue(expected.SequenceEqual(result), "GetAchievementsSuccessfulTest");
         }
@@ -416,11 +516,9 @@ namespace Contracts.Tests
         public void GetAchievementsNonExistentUserTest()
         {
             _achievements[0].IsAchieved = false;
-            List<AchievementDC> expected = new List<AchievementDC>()
-            {
-                AchievementDC.ConvertToAchievementDC(_achievements[0]),
-            };
-            (int _, List<AchievementDC> result) = _serviceImplementation.GetAchievements("juan");
+            List<AchievementDC> expected = new List<AchievementDC>(_achievements);
+            expected[0].IsAchieved = false;
+            (_, List<AchievementDC> result) = _serviceImplementation.GetAchievements("juan");
             Assert.IsTrue(expected.SequenceEqual(result), "GetAchievementsNonExistentUserTest");
         }
 
@@ -428,12 +526,11 @@ namespace Contracts.Tests
         public void GetAchievementsNullUsernameTest()
         {
             _achievements[0].IsAchieved = false;
-            List<AchievementDC> expected = new List<AchievementDC>()
-            {
-                AchievementDC.ConvertToAchievementDC(_achievements[0]),
-            };
+            List<AchievementDC> expected = new List<AchievementDC>(_achievements);
+            expected[0].IsAchieved = false;
             (int _, List<AchievementDC> result) = _serviceImplementation.GetAchievements(null);
             Assert.IsTrue(expected.SequenceEqual(result), "GetAchievementsNullUsernameTest");
         }
+
     }
 }
