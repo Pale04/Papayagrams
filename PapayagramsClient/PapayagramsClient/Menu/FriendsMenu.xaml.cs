@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PapayagramsClient.PapayagramsService;
+using PapayagramsClient.WPFControls;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PapayagramsClient.Menu
 {
@@ -34,24 +24,25 @@ namespace PapayagramsClient.Menu
             InitializeComponent();
         }
 
-        public void FillLists()
+        public void FillLists(FriendDC[] relationShips)
         {
-            throw new NotImplementedException();
-        }
+            foreach(FriendDC relationedUser in relationShips)
+            {
+                switch (relationedUser.RelationState)
+                {
+                    case RelationStateDC.Friend:
+                        FriendListPanel.Children.Add(new FriendInfoPanel(1, 1, relationedUser.Username));
+                        break;
 
-        private void FillFriendList()
-        {
-            throw new NotImplementedException();
-        }
+                    case RelationStateDC.Pending:
+                        RequestsListPanel.Children.Add(new FriendInfoPanel(2, 1, relationedUser.Username));
+                        break;
 
-        private void FillRequestsList()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void FillBloquedList()
-        {
-            throw new NotImplementedException();
+                    case RelationStateDC.Blocked:
+                        BloquedListPanel.Children.Add(new FriendInfoPanel(3, 1, relationedUser.Username));
+                        break;
+                }
+            }
         }
 
         private void ToggleSocialLists(object sender, RoutedEventArgs e)

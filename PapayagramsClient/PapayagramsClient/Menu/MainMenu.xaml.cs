@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using PapayagramsClient.PapayagramsService;
 using PapayagramsClient.Menu;
+using PapayagramsClient.WPFControls;
 
 namespace PapayagramsClient
 {
@@ -177,8 +178,13 @@ namespace PapayagramsClient
         private void OpenFriendsOverlay(object sender, RoutedEventArgs e)
         {
             FriendsMenuPanel.Visibility = Visibility.Visible;
-            //TODO: Get user relationships
-            FriendsMenuPanel.FillLists();
+            (int returnCode, FriendDC[] relationships) = _host.GetAllRelationships(CurrentPlayer.Player.Username);
+            switch (returnCode)
+            {
+                case 0:
+                    FriendsMenuPanel.FillLists(relationships);
+                    break;
+            }
         }
 
         private void CloseFriendsOverlay(object sender, RoutedEventArgs e)
@@ -196,8 +202,121 @@ namespace PapayagramsClient
                 case 0:
                     new SelectionPopUpWindow(Properties.Resources.friendsRequestSentTitle, Properties.Resources.friendsRequestSent, 0).ShowDialog();
                     break;
-                    //TODO: Catch error codes
+
+                case 101:
+                    // one of the usernames passed to the function was null
+                    new SelectionPopUpWindow(Properties.Resources.errorOccurredTitle, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
+                    break;
+
+                case 102:
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    break;
+
+                case 301:
+                    break;
+
+                case 302:
+                    break;
+
+                case 303:
+                    break;
+
+                case 304:
+                    break;
             }
+        }
+
+        private void AcceptFriendRequest(object sender, RoutedEventArgs e)
+        {
+            FriendInfoPanel friendPanel = (FriendInfoPanel)sender;
+            int returnCode = _host.RespondFriendRequest(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text, true);
+
+            switch (returnCode)
+            {
+                case 0:
+                    break;
+
+                case 101:
+                    // one of the usernames passed to the function was null
+                    new SelectionPopUpWindow(Properties.Resources.errorOccurredTitle, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
+                    break;
+
+                case 102:
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    break;
+
+                case 305:
+                    // No request exists for the specified users
+                    new SelectionPopUpWindow(Properties.Resources.errorOccurredTitle, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
+                    break;
+
+                case 306:
+                    // Wrong username for respondent
+                    new SelectionPopUpWindow(Properties.Resources.errorOccurredTitle, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
+                    break;
+
+                case 307:
+                    // Wrong username for requester
+                    new SelectionPopUpWindow(Properties.Resources.errorOccurredTitle, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
+                    break;
+            }
+        }
+
+        private void RejectFriendRequest(object sender, RoutedEventArgs e)
+        {
+            FriendInfoPanel friendPanel = (FriendInfoPanel)sender;
+            int returnCode = _host.RespondFriendRequest(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text, false);
+
+            switch (returnCode)
+            {
+                case 0:
+                    break;
+
+                case 101:
+                    // one of the usernames passed to the function was null
+                    new SelectionPopUpWindow(Properties.Resources.errorOccurredTitle, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
+                    break;
+
+                case 102:
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    break;
+
+                case 305:
+                    // No request exists for the specified users
+                    new SelectionPopUpWindow(Properties.Resources.errorOccurredTitle, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
+                    break;
+
+                case 306:
+                    // Wrong username for respondent
+                    new SelectionPopUpWindow(Properties.Resources.errorOccurredTitle, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
+                    break;
+
+                case 307:
+                    // Wrong username for requester
+                    new SelectionPopUpWindow(Properties.Resources.errorOccurredTitle, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
+                    break;
+            }
+        }
+
+        private void BlockUser(object sender, RoutedEventArgs e)
+        {
+            FriendInfoPanel friendPanel = (FriendInfoPanel)sender;
+            int returnCode = _host.BlockPlayer(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text);
+            // TODO: Catch error codes
+        }
+
+        private void UnblockUser(object sender, RoutedEventArgs e)
+        {
+            FriendInfoPanel friendPanel = (FriendInfoPanel)sender;
+            int returnCode = _host.UnblockFriend(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text);
+             
+        }
+
+        private void RemoveFriend(object sender, RoutedEventArgs e)
+        {
+            FriendInfoPanel friendPanel = (FriendInfoPanel)sender;
+            int returnCode = _host.RemoveFriend(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text);
+            // TODO: Catch error codes
         }
     }
 }

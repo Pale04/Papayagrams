@@ -350,6 +350,8 @@ namespace PapayagramsClient.Game
             CurrentGame.GameData = new GameProgressData();
             CurrentGame.PlayersInRoom = null;
             CurrentGame.RoomCode = null;
+            
+            NavigationService.Navigate(new MainMenu()); 
         }
     }
 }

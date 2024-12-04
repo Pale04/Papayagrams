@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:PapayagramsClient"
       xmlns:p="clr-namespace:PapayagramsClient.Properties"
       xmlns:menu="clr-namespace:PapayagramsClient.Menu"
+      xmlns:w="clr-namespace:PapayagramsClient.WPFControls"
       mc:Ignorable="d" 
       Title="MainMenu"
       d:DesignHeight="720" d:DesignWidth="1080"
@@ -20,6 +21,13 @@
             <Style TargetType="{x:Type menu:FriendsMenu}">
                 <EventSetter Event="ClosedFriendsMenu" Handler="CloseFriendsOverlay"/>
                 <EventSetter Event="AddedFriend" Handler="AddNewFriend"/>
+            </Style>
+            <Style TargetType="{x:Type w:FriendInfoPanel}">
+                <EventSetter Event="RejectedFriendRequest" Handler="RejectFriendRequest"/>
+                <EventSetter Event="AcceptedFriendRequest" Handler="AcceptFriendRequest"/>
+                <EventSetter Event="BloquedUser" Handler="BlockUser"/>
+                <EventSetter Event="UnblockedUser" Handler="UnblockUser"/>
+                <EventSetter Event="RemovedFriend" Handler="RemoveFriend"/>
             </Style>
         </Grid.Resources>
         <Label Content="Papayagrams" HorizontalAlignment="Left" Margin="95,54,0,0" VerticalAlignment="Top" FontSize="64" Width="467" HorizontalContentAlignment="Center" FontWeight="Bold"/>
