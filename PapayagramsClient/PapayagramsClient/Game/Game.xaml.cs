@@ -292,7 +292,7 @@ namespace PapayagramsClient.Game
             piece.MainGrid.Background = null;
         }
 
-        private static void MovePiece(object sender, RoutedEventArgs e)
+        private void MovePiece(object sender, RoutedEventArgs e)
         {
             WPFGameBoardPieceSpot piece = (WPFGameBoardPieceSpot)sender;
             Console.WriteLine("moved piece: " +  piece.LetterLabel.Content);

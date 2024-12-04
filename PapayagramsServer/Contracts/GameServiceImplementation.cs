@@ -9,7 +9,7 @@ namespace Contracts
 {
     public partial class ServiceImplementation : IGameService
     {
-        public void ReachServer(string username, string gameRoomCode)
+        public async void ReachServer(string username, string gameRoomCode)
         {
             CallbacksPool.PlayerArrivesToGame(username, OperationContext.Current.GetCallbackChannel<IGameServiceCallback>());
             CallbacksPool.RemovePregameCallbackChannel(username);
@@ -18,7 +18,7 @@ namespace Contracts
             // Permite que solamente el primero que llegó al servidor sea el que comience el juego
             if (GamesInProgressPool.GetGame(gameRoomCode).ConnectedPlayers[0].Username.Equals(username))
             {
-                Task.Delay(10000);
+                await Task.Delay(10000);
                 PlayGame(gameRoomCode);
             }
         }
@@ -93,29 +93,27 @@ namespace Contracts
             BroadcastEndGameNotification(gameRoomCode);
         }
 
-        public void CalculateWinner(string gameRoomCode, string username, int score)
+        public async void CalculateWinner(string gameRoomCode, string username, int score)
         {
             Game game = GamesInProgressPool.GetGame(gameRoomCode);
+            game.PlayersScores.Add(username, score);
 
             while (game.ConnectedPlayers.Count != game.PlayersScores.Count)
             {
-                Task.Delay(500);
+                await Task.Delay(500);
             }
             
             string winnerUsername = game.GetWinner();
 
-            foreach (Player player in game.ConnectedPlayers)
+            try
             {
-                try
-                {
-                    GameHistoryDB.UpdateGameHistory(player.Username, player.Username.Equals(winnerUsername), GameRoomsPool.GetGameRoom(gameRoomCode).GameConfiguration.GameMode);
-                }
-                catch (EntityException error)
-                {
-                    _logger.Fatal("Database connection failed", error);
-                }
+                GameHistoryDB.UpdateGameHistory(username, username.Equals(winnerUsername), GameRoomsPool.GetGameRoom(gameRoomCode).GameConfiguration.GameMode);
             }
-            
+            catch (EntityException error)
+            {
+                _logger.Fatal("Database connection failed", error);
+            }
+
             var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(username);
             channel.EndGame(winnerUsername, game.GetScore(winnerUsername));
             GamesInProgressPool.ExitGame(gameRoomCode, username);

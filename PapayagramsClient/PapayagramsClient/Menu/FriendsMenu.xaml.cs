@@ -21,13 +21,13 @@ namespace PapayagramsClient.Menu
             name: "ClosedFriendsMenu",
             routingStrategy: RoutingStrategy.Bubble,
             handlerType: typeof(RoutedEventHandler),
-            ownerType: typeof(GameInvitation));
+            ownerType: typeof(FriendsMenu));
 
         public static readonly RoutedEvent AddedFriendEvent = EventManager.RegisterRoutedEvent(
             name: "AddedFriend",
             routingStrategy: RoutingStrategy.Bubble,
             handlerType: typeof(RoutedEventHandler),
-            ownerType: typeof(GameInvitation));
+            ownerType: typeof(FriendsMenu));
 
         public FriendsMenu()
         {

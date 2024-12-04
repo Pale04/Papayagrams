@@ -172,7 +172,7 @@ namespace Contracts
 
             if (result != 1)
             {
-                _logger.InfoFormat("Player block failed (Blocker username: {username}, Blocked username: {friendUsername}, Return code: {result})", username, friendUsername, result);
+                //_logger.InfoFormat("Player block failed (Blocker username: {username}, Blocked username: {friendUsername}, Return code: {result})", username, friendUsername, result);
             }
             return result == 1? 0 : 308;
         }
