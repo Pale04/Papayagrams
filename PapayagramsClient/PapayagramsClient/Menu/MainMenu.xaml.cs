@@ -49,6 +49,7 @@ namespace PapayagramsClient
             }
 
             (int returnCode2, FriendDC[] relationships) = _host.GetAllRelationships(CurrentPlayer.Player.Username);
+            UserRelationships.FillLists(relationships);
 
             switch (returnCode2)
             {
