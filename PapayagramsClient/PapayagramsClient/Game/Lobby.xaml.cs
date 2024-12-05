@@ -6,6 +6,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Navigation;
 
 namespace PapayagramsClient.Game
@@ -37,12 +38,11 @@ namespace PapayagramsClient.Game
 
             if (returnCode != 0)
             {
-                // TODO: Add error message "an error ocurred, try again"
                 NavigationService.GoBack();
                 return;
             }
 
-            GameRoomCodeText.Content = gameRoom.RoomCode ;
+            GameRoomCodeText.Content = Properties.Resources.joinGameCode + gameRoom.RoomCode;
             CurrentGame.RoomCode = gameRoom.RoomCode;
             CurrentGame.State = CurrentGame.GameState.InLobby;
             CurrentGame.PlayersInRoom = gameRoom.Players.ToList();
@@ -77,7 +77,9 @@ namespace PapayagramsClient.Game
             {
                 case 0:
                     InitializeComponent();
-                    GameRoomCodeText.Content = gameRoomCode;
+                    CreateGameButton.Visibility = Visibility.Hidden;
+                    CreateGameButton.IsEnabled = false;
+                    GameRoomCodeText.Content = Properties.Resources.joinGameCode + gameRoomCode;
                     CurrentGame.RoomCode = gameRoom.RoomCode;
                     CurrentGame.State = CurrentGame.GameState.InLobby;
                     CurrentGame.PlayersInRoom = gameRoom.Players.ToList();
@@ -154,7 +156,7 @@ namespace PapayagramsClient.Game
             NavigationService.Navigate(new MainMenu());
         }
 
-        private void SendMessage(object sender, RoutedEventArgs e)
+        private void SendMessage()
         {
             if (string.IsNullOrEmpty(MessageTextbox.Text))
             {
@@ -195,6 +197,19 @@ namespace PapayagramsClient.Game
         public void CarryInsideGame()
         {
             NavigationService.Navigate(new Game());
+        }
+
+        private void SendMessage(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter || e.Key == Key.Return)
+            {
+                SendMessage();
+            }
+        }
+
+        private void SendMessage(object sender, RoutedEventArgs e)
+        {
+            SendMessage();
         }
     }
 }

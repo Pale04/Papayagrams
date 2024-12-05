@@ -27,7 +27,7 @@ namespace PapayagramsClient.Login
                 return;
             }
 
-            string code = CodeTextbox.Text;
+            string code = CodeTextbox.Text.Trim().ToUpper();
             int returnCode = host.VerifyAccount(_player.Username, code);
             host.Close();
 

@@ -9,22 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace ClientTests.PapayagramsService {
-    using System.Runtime.Serialization;
     
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="RelationStateDC", Namespace="http://schemas.datacontract.org/2004/07/Contracts")]
-    public enum RelationStateDC : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Friend = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Blocked = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Pending = 2,
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PapayagramsService.ILoginService")]

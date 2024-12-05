@@ -12,13 +12,12 @@ namespace PapayagramsClient
 
         public static bool ValidWord(string word, LanguageDC language)
         {
-            // throws argument exception when language is not english or spanish
             SetLanguageDictionary(language);
             bool result = false;
 
             result = WordExists(word);
 
-            if (!result)
+            if (!result && language.Equals(LanguageDC.Spanish))
             {
                 string suggestion = GetSimilarWord(word);
                 suggestion = RemoveAccents(suggestion);

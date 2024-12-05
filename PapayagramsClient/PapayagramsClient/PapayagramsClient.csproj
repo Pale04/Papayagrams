@@ -340,19 +340,19 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\PapayagramsService\item55.xsd">
+    <None Include="Connected Services\PapayagramsService\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item56.xsd">
+    <None Include="Connected Services\PapayagramsService\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item57.xsd">
+    <None Include="Connected Services\PapayagramsService\item2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item58.xsd">
+    <None Include="Connected Services\PapayagramsService\item3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item59.xsd">
+    <None Include="Connected Services\PapayagramsService\item4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.AchievementDC.datasource">
@@ -370,7 +370,7 @@
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.PlayerStatsDC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\PapayagramsService\ServiceImplementation11.wsdl" />
+    <None Include="Connected Services\PapayagramsService\ServiceImplementation.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -452,7 +452,16 @@
     <Resource Include="Resources\Icons\options-vertical-svgrepo-com.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\PapayagramsService\item11.disco" />
+    <None Include="Connected Services\PapayagramsService\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\cross-circle-svgrepo-com.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\unfriend-svgrepo-com.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\arrow-left-right-svgrepo-com.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -221,9 +221,7 @@ namespace PapayagramsClient.Game
                 }
             }
 
-            (int points, List<string> correctWords) = GetCorrectWords(builtWords);
-
-            return (points, correctWords);
+            return GetCorrectWords(builtWords);
         }
 
         private static int CalculateWordPoints(string word)

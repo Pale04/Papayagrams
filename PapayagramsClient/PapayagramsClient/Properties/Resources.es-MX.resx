@@ -414,4 +414,34 @@
   <data name="friendsRequestSentTitle" xml:space="preserve">
     <value>Solicitud de amistad enviada</value>
   </data>
+  <data name="friendsAcceptRequestTooltip" xml:space="preserve">
+    <value>Aceptar solicitud</value>
+  </data>
+  <data name="friendsRemoveFriendTooltip" xml:space="preserve">
+    <value>Eliminar amigo</value>
+  </data>
+  <data name="friendsRejectRequestTooltip" xml:space="preserve">
+    <value>Rechazar solicitud</value>
+  </data>
+  <data name="friendsBlockUserTooltip" xml:space="preserve">
+    <value>Bloquear usuario</value>
+  </data>
+  <data name="friendsUnblockUserTooltip" xml:space="preserve">
+    <value>Desbloquear usuario</value>
+  </data>
+  <data name="friendsAlreadyRequestedUser" xml:space="preserve">
+    <value>Ya existe una solicitud de amistad a este usuario</value>
+  </data>
+  <data name="friendsPendingRequestFromUser" xml:space="preserve">
+    <value>Tienes una solicitud de este usuario, usa el botón de arriba a la derecha para cambiar la vista del menú de amigos y ver tus solicitudes de amistad</value>
+  </data>
+  <data name="friendsSwitchView" xml:space="preserve">
+    <value>Cambiar vista</value>
+  </data>
+  <data name="friendsAlreadyFriends" xml:space="preserve">
+    <value>Ya eres amigo de este usuario</value>
+  </data>
+  <data name="friendsUserIsBloqued" xml:space="preserve">
+    <value>El usuario está bloqueado</value>
+  </data>
 </root>

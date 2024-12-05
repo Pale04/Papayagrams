@@ -45,6 +45,13 @@ namespace PapayagramsClient.Menu
             }
         }
 
+        public void ClearLists()
+        {
+            BloquedListPanel.Children.Clear();
+            FriendListPanel.Children.Clear();
+            RequestsListPanel.Children.Clear();
+        }
+
         private void ToggleSocialLists(object sender, RoutedEventArgs e)
         {
             if (FriendListScrollViewer.Visibility == Visibility.Visible)

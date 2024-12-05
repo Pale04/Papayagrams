@@ -13,7 +13,7 @@ namespace PapayagramsClient.Game
 
         private void JoinGameRoom(object sender, RoutedEventArgs e)
         {
-            string gameRoomCode = CodeTextbox.Text.Trim();
+            string gameRoomCode = CodeTextbox.Text.Trim().ToUpper();
             if (string.IsNullOrEmpty(gameRoomCode))
             {
                 return;

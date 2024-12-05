@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace PapayagramsClient.WPFControls
 {
@@ -48,20 +50,33 @@ namespace PapayagramsClient.WPFControls
             {
                 case 1:
                     ActionButton.Click += new RoutedEventHandler(RemoveFriend);
+                    ActionButtonImage.Source = new BitmapImage(new Uri(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Icons\\unfriend-svgrepo-com.png"));
+                    ActionButton.ToolTip = Properties.Resources.friendsRemoveFriendTooltip;
+
                     SecondaryActionButton.Click += new RoutedEventHandler(BlockUser);
+                    SecondaryActionButtonImage.Source = new BitmapImage(new Uri(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Icons\\error-svgrepo-com.png"));
+                    SecondaryActionButton.ToolTip = Properties.Resources.friendsBlockUserTooltip;
                     SecondaryActionButton.Visibility = Visibility.Visible;
                     SecondaryActionButton.IsEnabled = true;
                     break;
 
                 case 2:
                     ActionButton.Click += new RoutedEventHandler(AcceptRequest);
+                    ActionButtonImage.Source = new BitmapImage(new Uri(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Icons\\done-svgrepo-com.png"));
+                    ActionButton.ToolTip = Properties.Resources.friendsAcceptRequestTooltip;
+
                     SecondaryActionButton.Click += new RoutedEventHandler(RejectRequest);
+                    SecondaryActionButtonImage.Source = new BitmapImage(new Uri(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Icons\\cross-circle-svgrepo-com.png"));
+                    SecondaryActionButton.ToolTip = Properties.Resources.friendsRejectRequestTooltip;
                     SecondaryActionButton.Visibility = Visibility.Visible;
                     SecondaryActionButton.IsEnabled = true;
                     break;
 
                 case 3:
                     ActionButton.Click += new RoutedEventHandler(UnblockUser);
+                    ActionButtonImage.Source = new BitmapImage(new Uri(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Icons\\unfriend-svgrepo-com.png"));
+                    ActionButton.ToolTip = Properties.Resources.friendsUnblockUserTooltip;
+
                     SecondaryActionButton.Visibility = Visibility.Hidden;
                     SecondaryActionButton.IsEnabled = false;
                     break;

@@ -414,4 +414,34 @@
   <data name="friendsRequestSentTitle" xml:space="preserve">
     <value>Friend request sent</value>
   </data>
+  <data name="friendsAcceptRequestTooltip" xml:space="preserve">
+    <value>Accept request</value>
+  </data>
+  <data name="friendsRemoveFriendTooltip" xml:space="preserve">
+    <value>Remove friend</value>
+  </data>
+  <data name="friendsRejectRequestTooltip" xml:space="preserve">
+    <value>Reject request</value>
+  </data>
+  <data name="friendsBlockUserTooltip" xml:space="preserve">
+    <value>Block user</value>
+  </data>
+  <data name="friendsUnblockUserTooltip" xml:space="preserve">
+    <value>Unblock user</value>
+  </data>
+  <data name="friendsAlreadyRequestedUser" xml:space="preserve">
+    <value>There is already a friend request to this player</value>
+  </data>
+  <data name="friendsPendingRequestFromUser" xml:space="preserve">
+    <value>You have a friend request from the user, switch friend menu view with the top right button to see your requests</value>
+  </data>
+  <data name="friendsSwitchView" xml:space="preserve">
+    <value>Switch view</value>
+  </data>
+  <data name="friendsAlreadyFriends" xml:space="preserve">
+    <value>You are already friend of this user</value>
+  </data>
+  <data name="friendsUserIsBlocked" xml:space="preserve">
+    <value>The user is blocked by you</value>
+  </data>
 </root>

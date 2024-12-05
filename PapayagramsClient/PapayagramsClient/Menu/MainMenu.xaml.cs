@@ -131,7 +131,7 @@ namespace PapayagramsClient
 
         private void GoToConfiguration(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Configuration());
+            NavigationService.Navigate(new Menu.Configuration());
         }
 
         public void ReceiveGameInvitation(GameInvitationDC invitation)
@@ -177,6 +177,7 @@ namespace PapayagramsClient
 
         private void OpenFriendsOverlay(object sender, RoutedEventArgs e)
         {
+            FriendsMenuPanel.ClearLists();
             FriendsMenuPanel.Visibility = Visibility.Visible;
             FriendsMenuPanel.IsEnabled = true;
             (int returnCode, FriendDC[] relationships) = _host.GetAllRelationships(CurrentPlayer.Player.Username);
@@ -203,6 +204,7 @@ namespace PapayagramsClient
             {
                 case 0:
                     new SelectionPopUpWindow(Properties.Resources.friendsRequestSentTitle, Properties.Resources.friendsRequestSent, 0).ShowDialog();
+                    FriendsMenuPanel.NewFriendUsernameTextBox.Clear();
                     break;
 
                 case 101:
@@ -215,15 +217,19 @@ namespace PapayagramsClient
                     break;
 
                 case 301:
+                    new SelectionPopUpWindow(Properties.Resources.friendsAlreadyRequestedUser, Properties.Resources.friendsAlreadyRequestedUser, 3).ShowDialog();
                     break;
 
                 case 302:
+                    new SelectionPopUpWindow(Properties.Resources.friendsPendingRequestFromUser, Properties.Resources.friendsPendingRequestFromUser, 3).ShowDialog();
                     break;
 
                 case 303:
+                    new SelectionPopUpWindow(Properties.Resources.friendsAlreadyFriends, Properties.Resources.friendsAlreadyFriends, 3).ShowDialog();
                     break;
 
                 case 304:
+                    new SelectionPopUpWindow(Properties.Resources.friendsUserIsBlocked, Properties.Resources.friendsUserIsBlocked, 3).ShowDialog();
                     break;
             }
         }
@@ -236,6 +242,9 @@ namespace PapayagramsClient
             switch (returnCode)
             {
                 case 0:
+                    (int returnCode2, FriendDC[] relationships) = _host.GetAllRelationships(CurrentPlayer.Player.Username);
+                    FriendsMenuPanel.ClearLists();
+                    FriendsMenuPanel.FillLists(relationships);
                     break;
 
                 case 101:

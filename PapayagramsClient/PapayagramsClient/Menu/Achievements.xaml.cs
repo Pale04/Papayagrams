@@ -20,9 +20,7 @@ namespace PapayagramsClient.Menu
         {
             foreach (AchievementDC achievement in _achievements)
             {
-                string achievementDescription = (string)FindResource("addFriend");
-                Console.WriteLine(achievementDescription);
-                WPFAchievementView achievementView = new WPFAchievementView(achievementDescription, achievement.IsAchieved);
+                WPFAchievementView achievementView = new WPFAchievementView(achievement.Description, achievement.IsAchieved);
                 AchievementListPanel.Children.Add(achievementView);
             }
         }

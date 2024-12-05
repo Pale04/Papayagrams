@@ -86,6 +86,10 @@
     <None Include="Properties\DataSources\PapayagramsClient.PapayagramsService.GameRoomDC.datasource" />
     <None Include="Properties\DataSources\PapayagramsClient.PapayagramsService.PlayerDC.datasource" />
     <None Include="Properties\DataSources\PapayagramsClient.PapayagramsService.PlayerStatsDC.datasource" />
+    <None Include="Resources\Dictionaries\en_US.aff" />
+    <None Include="Resources\Dictionaries\en_US.dic" />
+    <None Include="Resources\Dictionaries\es_MX.aff" />
+    <None Include="Resources\Dictionaries\es_MX.dic" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

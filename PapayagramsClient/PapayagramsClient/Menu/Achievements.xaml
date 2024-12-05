@@ -23,7 +23,7 @@
             <Image Source="../Resources/Icons/trophy-svgrepo-com.png" HorizontalAlignment="Right"/>
         </StackPanel>
 
-        <ScrollViewer Width="1000" Margin="40,254,40,0" VerticalAlignment="Top" Height="435">
+        <ScrollViewer Margin="10,254,10,0" VerticalAlignment="Top" Height="435">
             <StackPanel Name="AchievementListPanel" Margin="40,256,40,34"/>
         </ScrollViewer>
     </Grid>

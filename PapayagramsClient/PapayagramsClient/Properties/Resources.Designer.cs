@@ -340,6 +340,69 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Accept request.
+        /// </summary>
+        public static string friendsAcceptRequestTooltip {
+            get {
+                return ResourceManager.GetString("friendsAcceptRequestTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You are already friend of this user.
+        /// </summary>
+        public static string friendsAlreadyFriends {
+            get {
+                return ResourceManager.GetString("friendsAlreadyFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a There is already a friend request to this player.
+        /// </summary>
+        public static string friendsAlreadyRequestedUser {
+            get {
+                return ResourceManager.GetString("friendsAlreadyRequestedUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Block user.
+        /// </summary>
+        public static string friendsBlockUserTooltip {
+            get {
+                return ResourceManager.GetString("friendsBlockUserTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have a friend request from the user, switch friend menu view with the top right button to see your requests.
+        /// </summary>
+        public static string friendsPendingRequestFromUser {
+            get {
+                return ResourceManager.GetString("friendsPendingRequestFromUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reject request.
+        /// </summary>
+        public static string friendsRejectRequestTooltip {
+            get {
+                return ResourceManager.GetString("friendsRejectRequestTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Remove friend.
+        /// </summary>
+        public static string friendsRemoveFriendTooltip {
+            get {
+                return ResourceManager.GetString("friendsRemoveFriendTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a The friend request has been sent.
         /// </summary>
         public static string friendsRequestSent {
@@ -358,11 +421,38 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Switch view.
+        /// </summary>
+        public static string friendsSwitchView {
+            get {
+                return ResourceManager.GetString("friendsSwitchView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Friends.
         /// </summary>
         public static string friendsTitle {
             get {
                 return ResourceManager.GetString("friendsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Unblock user.
+        /// </summary>
+        public static string friendsUnblockUserTooltip {
+            get {
+                return ResourceManager.GetString("friendsUnblockUserTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The user is blocked by you.
+        /// </summary>
+        public static string friendsUserIsBlocked {
+            get {
+                return ResourceManager.GetString("friendsUserIsBlocked", resourceCulture);
             }
         }
         

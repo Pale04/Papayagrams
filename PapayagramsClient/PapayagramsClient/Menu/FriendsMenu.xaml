@@ -25,8 +25,8 @@
                 <Separator Width="30" Opacity="0"/>
                 <TextBlock Text="{x:Static p:Resources.friendsTitle}" FontSize="40" VerticalAlignment="Center" Width="300"/>
 
-                <Button Width="60" Height="60" HorizontalAlignment="Right" Background="Transparent" BorderBrush="Transparent" Click="ToggleSocialLists">
-                    <Image Source="../Resources/icons/friend-svgrepo-com.png"/>
+                <Button Width="60" Height="60" HorizontalAlignment="Right" Background="Transparent" BorderBrush="Transparent" Click="ToggleSocialLists" ToolTip="{x:Static p:Resources.friendsSwitchView}">
+                    <Image Source="../Resources/icons/arrow-left-right-svgrepo-com.png"/>
                 </Button>
             </StackPanel>
         </StackPanel>
