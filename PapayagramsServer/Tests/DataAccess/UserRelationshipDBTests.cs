@@ -413,7 +413,7 @@ namespace DataAccess.Tests
         {
             UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
             UserRelationshipDB.RespondFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username, true);
-            int expected = 1;
+            int expected = 2;
             int result = UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(expected, result, "BlockPlayerFriendReceiveTest");
         }
@@ -423,7 +423,7 @@ namespace DataAccess.Tests
         {
             UserRelationshipDB.SendFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username);
             UserRelationshipDB.RespondFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username, true);
-            int expected = 1;
+            int expected = 2;
             int result = UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(expected, result, "BlockPlayerFriendSenderTest");
         }
@@ -432,7 +432,7 @@ namespace DataAccess.Tests
         public void BlockPlayerPendingRequestSenderTest()
         {
             UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            int expected = 1;
+            int expected = 2;
             int result = UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(expected, result, "BlockPlayerPendingRequestSenderTest");
         }
@@ -441,7 +441,7 @@ namespace DataAccess.Tests
         public void BlockPlayerPendingReceiverTest()
         {
             UserRelationshipDB.SendFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username);
-            int expected = 1;
+            int expected = 2;
             int result = UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(expected, result, "BlockPlayerPendingReceiverTest");
         }
@@ -450,7 +450,7 @@ namespace DataAccess.Tests
         public void BlockPlayerBlockedAgainTest()
         {
             UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            int expected = 1;
+            int expected = 2;
             int result = UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(expected, result, "BlockPlayerBlockedSenderTest");
         }
@@ -469,6 +469,50 @@ namespace DataAccess.Tests
             int expected = 0;
             int result = UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, "deivid");
             Assert.AreEqual(expected, result, "BlockPlayerNonExistentBlockedTest");
+        }
+
+        [TestMethod()]
+        public void RemoveFriendReceiverSuccessfulTest()
+        {
+            UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            UserRelationshipDB.RespondFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username, true);
+            int expected = 1;
+            int result = UserRelationshipDB.RemoveFriend(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "RemoveFriendSuccesfulTest");
+        }
+
+        [TestMethod()]
+        public void RemoveFriendSenderSuccessfulTest()
+        {
+            UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            UserRelationshipDB.RespondFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username, true);
+            int expected = 1;
+            int result = UserRelationshipDB.RemoveFriend(_registeredPlayer2.Username, _registeredPlayer1.Username);
+            Assert.AreEqual(expected, result, "RemoveFriendSuccesfulTest");
+        }
+
+        [TestMethod()]
+        public void RemoveFriendNonExistentRelationTest()
+        {
+            int expected = 0;
+            int result = UserRelationshipDB.RemoveFriend(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "RemoveFriendNonExistentRelationTest");
+        }
+
+        [TestMethod()]
+        public void RemoveFriendNonExistentFriendTest()
+        {
+            int expected = -2;
+            int result = UserRelationshipDB.RemoveFriend(_registeredPlayer1.Username, "deivid");
+            Assert.AreEqual(expected, result, "RemoveFriendNonExistentFriendTest");
+        }
+
+        [TestMethod()]
+        public void RemoveFriendNonExistentPlayerTest()
+        {
+            int expected = -1;
+            int result = UserRelationshipDB.RemoveFriend("deivid", _registeredPlayer1.Username);
+            Assert.AreEqual(expected, result, "RemoveFriendNonExistentPlayerTest");
         }
     }
 }

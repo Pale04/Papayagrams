@@ -96,7 +96,7 @@ namespace Contracts
             }
             else if (loginResult == -2)
             {
-                //_logger.InfoFormat("Login attempt failed (username id: {username})",username);
+                _logger.InfoFormat("Login attempt failed (username id: {0})",username);
                 return (206, null);
             }
 
@@ -108,7 +108,7 @@ namespace Contracts
             }
 
             PlayersOnlinePool.AddPlayer((Player)playerLogged.Case);
-            //_logger.InfoFormat("Login successful (username id: {username})", username);
+            _logger.InfoFormat("Login successful (username id: {0})", username);
 
             return (code, PlayerDC.ConvertToPlayerDC((Player)playerLogged.Case));
         }
@@ -132,7 +132,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Error("Database connection failed", error);
+                _logger.Fatal("Database connection failed", error);
                 return 102;
             }
 
@@ -156,7 +156,7 @@ namespace Contracts
 
             if (!VerificationCodesPool.AccountVerificationCodeCorrect(username, code))
             {
-                //_logger.InfoFormat("Account verification attempt failed (username id: {username})", username);
+                _logger.InfoFormat("Account verification attempt failed (username id: {0})", username);
                 return 208;
             }
 
@@ -167,14 +167,14 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Error("Database connection failed", error);
+                _logger.Fatal("Database connection failed", error);
                 return 102;
             }
 
             if (codeResult == 1)
             {
                 VerificationCodesPool.RemoveAccountVerificationCode(username);
-                //_logger.InfoFormat("Account verification successful (username id: {username})",username);
+                _logger.InfoFormat("Account verification successful (username id: {0})",username);
                 return 0;
             }
             else
@@ -193,7 +193,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Error("Database connection failed",error);
+                _logger.Fatal("Database connection failed",error);
                 return 102;
             }
 

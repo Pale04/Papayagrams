@@ -378,6 +378,58 @@ namespace Contracts.Tests
         }
 
         [TestMethod()]
+        public void RemoveFriendReceiverSuccessfulTest()
+        {
+            _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            _serviceImplementation.RespondFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username, true);
+            int expected = 0;
+            int result = _serviceImplementation.RemoveFriend(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "RemoveFriendSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void RemoveFriendSenderSuccessfulTest()
+        {
+            _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            _serviceImplementation.RespondFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username, true);
+            int expected = 0;
+            int result = _serviceImplementation.RemoveFriend(_registeredPlayer2.Username, _registeredPlayer1.Username);
+            Assert.AreEqual(expected, result, "RemoveFriendSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void RemoveFriendInvalidParametersTest()
+        {
+            int expected = 101;
+            int result = _serviceImplementation.RemoveFriend(null, "  ");
+            Assert.AreEqual(expected, result, "RemoveFriendInvalidParametersTest");
+        }
+
+        [TestMethod()]
+        public void RemoveFriendNonExistentUserTest()
+        {
+            int expected = 309;
+            int result = _serviceImplementation.RemoveFriend("Deivid", _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "RemoveFriendNonExistentUserTest");
+        }
+
+        [TestMethod()]
+        public void RemoveFriendNonExistentFriendTest()
+        {
+            int expected = 309;
+            int result = _serviceImplementation.RemoveFriend(_registeredPlayer1.Username, "Deivid");
+            Assert.AreEqual(expected, result, "RemoveFriendNonExistentFriendTest");
+        }
+
+        [TestMethod()]
+        public void RemoveFriendNoRelationTest()
+        {
+            int expected = 309;
+            int result = _serviceImplementation.RemoveFriend(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "RemoveFriendNoRelationTest");
+        }
+
+        [TestMethod()]
         public void BlockPlayerSuccessfulTest()
         {
             int expected = 0;

@@ -135,18 +135,6 @@ namespace Contracts
             }
         }
 
-        public void ReturnToLobby(string gameRoomCode, string username)
-        {
-            CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
-            CallbacksPool.RemoveMainMenuCallbackChannel(username);
-            GameRoom room = GameRoomsPool.GetGameRoom(gameRoomCode);
-
-            if (room.State.Equals(GameRoomState.InGame))
-            {
-                room.State = GameRoomState.Waiting;
-            }
-        }
-
         /// <summary>
         /// Verify if the game room exists and if has available slots for players
         /// </summary>
@@ -156,6 +144,24 @@ namespace Contracts
         {
             GameRoom room = GameRoomsPool.GetGameRoom(gameCode);
             return room != null && room.State.Equals(GameRoomState.Waiting) && room.Players.Count < room.GameConfiguration.MaxPlayers;
+        }
+
+        /// <summary>
+        /// Notify to server that someone has returned to the lobby after a game ended
+        /// </summary>
+        /// <param name="gameRoomCode">Code of the game room</param>
+        /// <param name="username">Username who has returned</param>
+        public void ReturnToLobby(string gameRoomCode, string username)
+        {
+            CallbacksPool.RemoveGameCallbackChannel(username);
+            GamesInProgressPool.ExitGame(gameRoomCode, username);
+            CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
+            GameRoom room = GameRoomsPool.GetGameRoom(gameRoomCode);
+
+            if (room.State.Equals(GameRoomState.InGame))
+            {
+                room.State = GameRoomState.Waiting;
+            }
         }
 
         private static void BroadcastRefreshLobby(GameRoomDC gameRoom)
