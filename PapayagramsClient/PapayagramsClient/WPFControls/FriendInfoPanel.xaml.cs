@@ -38,11 +38,18 @@ namespace PapayagramsClient.WPFControls
             handlerType: typeof(RoutedEventHandler),
             ownerType: typeof(FriendInfoPanel));
 
+        public static readonly RoutedEvent FriendInvitedEvent = EventManager.RegisterRoutedEvent(
+            name: "FriendInvited",
+            routingStrategy: RoutingStrategy.Bubble,
+            handlerType: typeof(RoutedEventHandler),
+            ownerType: typeof(FriendInfoPanel));
+
         // panelType: what does the panel holds,
         // determines what action needs to occur when the button is pressed
         // 1: Friend
         // 2: Request
         // 3: Bloqued
+        // 4: For invitations
         public FriendInfoPanel(int panelType, int imageId, string Username)
         {
             InitializeComponent();
@@ -76,6 +83,14 @@ namespace PapayagramsClient.WPFControls
                     ActionButton.Click += new RoutedEventHandler(UnblockUser);
                     ActionButtonImage.Source = new BitmapImage(new Uri(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Icons\\unfriend-svgrepo-com.png"));
                     ActionButton.ToolTip = Properties.Resources.friendsUnblockUserTooltip;
+
+                    SecondaryActionButton.Visibility = Visibility.Hidden;
+                    SecondaryActionButton.IsEnabled = false;
+                    break;
+
+                case 4:
+                    ActionButton.Click += new RoutedEventHandler(InviteFriendToGame);
+                    ActionButtonImage.Source = new BitmapImage(new Uri(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Icons\\invitation-svgrepo-com.png"));
 
                     SecondaryActionButton.Visibility = Visibility.Hidden;
                     SecondaryActionButton.IsEnabled = false;
@@ -116,6 +131,23 @@ namespace PapayagramsClient.WPFControls
         private void RemoveFriend(object sender, RoutedEventArgs e)
         {
             RaiseRemovedFriendEvent();
+        }
+
+        private void InviteFriendToGame(object sender, RoutedEventArgs e)
+        {
+            RaiseFriendInvitedEvent();
+        }
+
+        public event RoutedEventHandler FriendInvited
+        {
+            add { AddHandler(FriendInvitedEvent, value); }
+            remove { RemoveHandler(FriendInvitedEvent, value); }
+        }
+
+        public void RaiseFriendInvitedEvent()
+        {
+            RoutedEventArgs routedEventArgs = new RoutedEventArgs(routedEvent: FriendInvitedEvent);
+            RaiseEvent(routedEventArgs);
         }
 
         public event RoutedEventHandler RejectedFriendRequest

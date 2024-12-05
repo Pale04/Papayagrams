@@ -4,17 +4,32 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PapayagramsClient.Game"
+      xmlns:m="clr-namespace:PapayagramsClient.Menu"
       xmlns:p="clr-namespace:PapayagramsClient.Properties"
+      xmlns:w="clr-namespace:PapayagramsClient.WPFControls"
       mc:Ignorable="d" 
       Title="Lobby"
       d:DesignHeight="720" d:DesignWidth="1080"
       Background="#D9D9D9">
 
     <Grid>
+        <Grid.Resources>
+            <Style TargetType="{x:Type w:FriendInfoPanel}">
+                <EventSetter Event="FriendInvited" Handler="InviteFriendToGame"/>
+            </Style>
+            <Style TargetType="{x:Type m:FriendsMenu}">
+                <EventSetter Event="ClosedFriendsMenu" Handler="CloseFriendsOverlay"/>
+            </Style>
+        </Grid.Resources>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+
+        <Button HorizontalAlignment="Left" Grid.Column="1" Margin="36,36,0,0" VerticalAlignment="Top" Height="47" Width="46" Click="OpenFriendOverlay" BorderBrush="Transparent" Background="Transparent">
+            <Image Source="../Resources/Icons/friend-svgrepo-com.png"/>
+        </Button>
 
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" Margin="0, 30, 0, 10">
             <Label Content="Chat" FontSize="30" HorizontalAlignment="Center"/>
@@ -33,5 +48,7 @@
         <Label Name="GameRoomCodeText" Content="Label" HorizontalAlignment="Center" Margin="0,44,0,0" VerticalAlignment="Top"/>
         <StackPanel Name="PlayersStackPanel" Margin="10,330,260,160"/>
         <Button Style="{StaticResource PrimaryButton}" Content="{x:Static p:Resources.createGameCreate}" Name="CreateGameButton" HorizontalAlignment="Center" Margin="0,600,0,0" VerticalAlignment="Top" Width="300" Click="CreateGame"/>
+
+        <m:FriendsMenu x:Name="FriendsOverlay" Panel.ZIndex="2" Grid.ColumnSpan="2" Visibility="Hidden" IsEnabled="False"/>
     </Grid>
 </Page>

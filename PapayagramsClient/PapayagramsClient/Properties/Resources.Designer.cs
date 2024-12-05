@@ -457,6 +457,15 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a .
+        /// </summary>
+        public static string friendsUserIsBloqued {
+            get {
+                return ResourceManager.GetString("friendsUserIsBloqued", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Calculating results.
         /// </summary>
         public static string gameEndCalculating {
@@ -705,6 +714,15 @@ namespace PapayagramsClient.Properties {
         public static string joinGameWrongCode {
             get {
                 return ResourceManager.GetString("joinGameWrongCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invitation sent successfully.
+        /// </summary>
+        public static string lobbyFriendInvited {
+            get {
+                return ResourceManager.GetString("lobbyFriendInvited", resourceCulture);
             }
         }
         

@@ -444,4 +444,10 @@
   <data name="friendsUserIsBlocked" xml:space="preserve">
     <value>The user is blocked by you</value>
   </data>
+  <data name="friendsUserIsBloqued" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lobbyFriendInvited" xml:space="preserve">
+    <value>Invitation sent successfully</value>
+  </data>
 </root>

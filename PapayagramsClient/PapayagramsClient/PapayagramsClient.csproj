@@ -126,6 +126,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClientData\UserRelationships.cs" />
     <Compile Include="Login\JoinAsGuest.xaml.cs">
       <DependentUpon>JoinAsGuest.xaml</DependentUpon>
     </Compile>
@@ -462,6 +463,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\arrow-left-right-svgrepo-com.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\invitation-svgrepo-com.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

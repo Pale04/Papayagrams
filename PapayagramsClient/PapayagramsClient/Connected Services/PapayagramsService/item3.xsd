@@ -192,7 +192,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="UnblockFriend">
+  <xs:element name="UnblockPlayer">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
@@ -200,10 +200,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="UnblockFriendResponse">
+  <xs:element name="UnblockPlayerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="UnblockFriendResult" type="xs:int" />
+        <xs:element minOccurs="0" name="UnblockPlayerResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -430,6 +430,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="gameRoomCode" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="gameEnded" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -7,6 +7,7 @@ using System.Windows.Navigation;
 using PapayagramsClient.PapayagramsService;
 using PapayagramsClient.Menu;
 using PapayagramsClient.WPFControls;
+using PapayagramsClient.ClientData;
 
 namespace PapayagramsClient
 {
@@ -37,6 +38,19 @@ namespace PapayagramsClient
             int returnCode = _host.ReportToServer(CurrentPlayer.Player.Username);
 
             switch (returnCode)
+            {
+                case 0:
+                    break;
+
+                case 102:
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    NavigationService.GoBack();
+                    return;
+            }
+
+            (int returnCode2, FriendDC[] relationships) = _host.GetAllRelationships(CurrentPlayer.Player.Username);
+
+            switch (returnCode2)
             {
                 case 0:
                     break;
@@ -181,11 +195,19 @@ namespace PapayagramsClient
             FriendsMenuPanel.Visibility = Visibility.Visible;
             FriendsMenuPanel.IsEnabled = true;
             (int returnCode, FriendDC[] relationships) = _host.GetAllRelationships(CurrentPlayer.Player.Username);
+
             switch (returnCode)
             {
                 case 0:
-                    FriendsMenuPanel.FillLists(relationships);
+                    UserRelationships.FillLists(relationships);
+                    FriendsMenuPanel.FillLists();
                     break;
+
+                case 102:
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    FriendsMenuPanel.Visibility = Visibility.Hidden;
+                    FriendsMenuPanel.IsEnabled = false;
+                    return;
             }
         }
 
@@ -242,9 +264,9 @@ namespace PapayagramsClient
             switch (returnCode)
             {
                 case 0:
-                    (int returnCode2, FriendDC[] relationships) = _host.GetAllRelationships(CurrentPlayer.Player.Username);
+                    UserRelationships.FriendRequestsList.Remove(friendPanel.UsernameLabel.Text);
                     FriendsMenuPanel.ClearLists();
-                    FriendsMenuPanel.FillLists(relationships);
+                    FriendsMenuPanel.FillLists();
                     break;
 
                 case 101:
@@ -281,6 +303,10 @@ namespace PapayagramsClient
             switch (returnCode)
             {
                 case 0:
+                    UserRelationships.FriendsList.Add(friendPanel.UsernameLabel.Text, 1);
+                    UserRelationships.FriendRequestsList.Remove(friendPanel.UsernameLabel.Text);
+                    FriendsMenuPanel.ClearLists();
+                    FriendsMenuPanel.FillLists();
                     break;
 
                 case 101:
@@ -319,8 +345,9 @@ namespace PapayagramsClient
         private void UnblockUser(object sender, RoutedEventArgs e)
         {
             FriendInfoPanel friendPanel = (FriendInfoPanel)sender;
-            int returnCode = _host.UnblockFriend(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text);
+            int returnCode = _host.UnblockPlayer(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text);
              
+            // TODO: Catch error codes
         }
 
         private void RemoveFriend(object sender, RoutedEventArgs e)

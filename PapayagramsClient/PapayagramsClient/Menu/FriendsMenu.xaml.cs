@@ -1,5 +1,7 @@
-﻿using PapayagramsClient.PapayagramsService;
+﻿using PapayagramsClient.ClientData;
+using PapayagramsClient.PapayagramsService;
 using PapayagramsClient.WPFControls;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -24,24 +26,29 @@ namespace PapayagramsClient.Menu
             InitializeComponent();
         }
 
-        public void FillLists(FriendDC[] relationShips)
+        public void FillFriendsListForInvitations()
         {
-            foreach(FriendDC relationedUser in relationShips)
+            foreach(KeyValuePair<string, int> friend in UserRelationships.FriendsList)
             {
-                switch (relationedUser.RelationState)
-                {
-                    case RelationStateDC.Friend:
-                        FriendListPanel.Children.Add(new FriendInfoPanel(1, 1, relationedUser.Username));
-                        break;
+                FriendListPanel.Children.Add(new FriendInfoPanel(4, friend.Value, friend.Key));
+            }
+        }
 
-                    case RelationStateDC.Pending:
-                        RequestsListPanel.Children.Add(new FriendInfoPanel(2, 1, relationedUser.Username));
-                        break;
+        public void FillLists()
+        {
+            foreach(KeyValuePair<string, int> friend in UserRelationships.FriendsList)
+            {
+                FriendListPanel.Children.Add(new FriendInfoPanel(1, friend.Value, friend.Key));
+            }
 
-                    case RelationStateDC.Blocked:
-                        BloquedListPanel.Children.Add(new FriendInfoPanel(3, 1, relationedUser.Username));
-                        break;
-                }
+            foreach(KeyValuePair<string, int> request in UserRelationships.FriendRequestsList)
+            {
+                FriendListPanel.Children.Add(new FriendInfoPanel(2, request.Value, request.Key));
+            }
+
+            foreach(KeyValuePair<string, int> user in UserRelationships.BloquedUsersList)
+            {
+                FriendListPanel.Children.Add(new FriendInfoPanel(3, user.Value, user.Key));
             }
         }
 

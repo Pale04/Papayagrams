@@ -1,5 +1,6 @@
 ﻿using PapayagramsClient.ClientData;
 using PapayagramsClient.PapayagramsService;
+using PapayagramsClient.WPFControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,14 @@ namespace PapayagramsClient.Game
             CurrentGame.PlayersInRoom = gameRoom.Players.ToList();
             CurrentGame.GameConfig = gameConfig;
             RefreshLobby(gameRoom);
+
+            FriendsOverlay.AddFriendButton.Visibility = Visibility.Hidden;
+            FriendsOverlay.AddFriendButton.IsEnabled = false;
+            FriendsOverlay.NewFriendUsernameTextBox.IsEnabled = false;
+            FriendsOverlay.NewFriendUsernameTextBox.Visibility = Visibility.Hidden;
+            FriendsOverlay.SwitchViewButton.IsEnabled = false;
+            FriendsOverlay.SwitchViewButton.Visibility = Visibility.Hidden;
+            FriendsOverlay.FillFriendsListForInvitations();
         }
 
         // Join to game room with code x
@@ -88,6 +97,13 @@ namespace PapayagramsClient.Game
                     {
                         Players = CurrentGame.PlayersInRoom.ToArray(),
                     });
+                    FriendsOverlay.AddFriendButton.Visibility = Visibility.Hidden;
+                    FriendsOverlay.AddFriendButton.IsEnabled = false;
+                    FriendsOverlay.NewFriendUsernameTextBox.IsEnabled = false;
+                    FriendsOverlay.NewFriendUsernameTextBox.Visibility = Visibility.Hidden;
+                    FriendsOverlay.SwitchViewButton.IsEnabled = false;
+                    FriendsOverlay.SwitchViewButton.Visibility = Visibility.Hidden;
+                    FriendsOverlay.FillFriendsListForInvitations();
                     return;
 
                 case 102:
@@ -210,6 +226,34 @@ namespace PapayagramsClient.Game
         private void SendMessage(object sender, RoutedEventArgs e)
         {
             SendMessage();
+        }
+
+        private void OpenFriendOverlay(object sender, RoutedEventArgs e)
+        {
+            FriendsOverlay.Visibility = Visibility.Visible;
+            FriendsOverlay.IsEnabled = true;
+        }
+
+        private void InviteFriendToGame(object sender, RoutedEventArgs e)
+        {
+            FriendInfoPanel friendPanel = (FriendInfoPanel)sender;
+
+            foreach(PlayerDC player in CurrentGame.PlayersInRoom)
+            {
+                if (player.Username == friendPanel.UsernameLabel.Text)
+                {
+                    return;
+                }
+            }
+
+            _host.InviteFriend(friendPanel.UsernameLabel.Text);
+            new SelectionPopUpWindow(Properties.Resources.lobbyFriendInvited, Properties.Resources.lobbyFriendInvited, 0).ShowDialog();
+        }
+
+        private void CloseFriendsOverlay(object sender, RoutedEventArgs e)
+        {
+            FriendsOverlay.Visibility = Visibility.Hidden;
+            FriendsOverlay.IsEnabled = false;
         }
     }
 }

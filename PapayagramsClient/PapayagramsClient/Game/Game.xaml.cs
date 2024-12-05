@@ -91,7 +91,7 @@ namespace PapayagramsClient.Game
         {
             if ((bool)new SelectionPopUpWindow(Properties.Resources.gameLeaveGameTitle, Properties.Resources.gameLeaveGame, 4).ShowDialog())
             {
-                _host.LeaveGame(CurrentGame.RoomCode, CurrentPlayer.Player.Username);
+                _host.LeaveGame(CurrentGame.RoomCode, CurrentPlayer.Player.Username, false);
                 NavigationService.Navigate(new MainMenu());
             }
         }
@@ -349,6 +349,7 @@ namespace PapayagramsClient.Game
             CurrentGame.PlayersInRoom = null;
             CurrentGame.RoomCode = null;
             
+            _host.LeaveGame(CurrentGame.RoomCode, CurrentPlayer.Player.Username, true);
             NavigationService.Navigate(new MainMenu()); 
         }
     }

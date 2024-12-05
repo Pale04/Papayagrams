@@ -967,11 +967,11 @@ namespace PapayagramsClient.PapayagramsService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/BlockPlayer", ReplyAction="http://tempuri.org/IMainMenuService/BlockPlayerResponse")]
         System.Threading.Tasks.Task<int> BlockPlayerAsync(string username, string friendUsername);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/UnblockFriend", ReplyAction="http://tempuri.org/IMainMenuService/UnblockFriendResponse")]
-        int UnblockFriend(string username, string friendUsername);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/UnblockPlayer", ReplyAction="http://tempuri.org/IMainMenuService/UnblockPlayerResponse")]
+        int UnblockPlayer(string username, string friendUsername);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/UnblockFriend", ReplyAction="http://tempuri.org/IMainMenuService/UnblockFriendResponse")]
-        System.Threading.Tasks.Task<int> UnblockFriendAsync(string username, string friendUsername);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/UnblockPlayer", ReplyAction="http://tempuri.org/IMainMenuService/UnblockPlayerResponse")]
+        System.Threading.Tasks.Task<int> UnblockPlayerAsync(string username, string friendUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainMenuService/GetPlayerProfile", ReplyAction="http://tempuri.org/IMainMenuService/GetPlayerProfileResponse")]
         System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerStatsDC> GetPlayerProfile(string username);
@@ -1084,12 +1084,12 @@ namespace PapayagramsClient.PapayagramsService {
             return base.Channel.BlockPlayerAsync(username, friendUsername);
         }
         
-        public int UnblockFriend(string username, string friendUsername) {
-            return base.Channel.UnblockFriend(username, friendUsername);
+        public int UnblockPlayer(string username, string friendUsername) {
+            return base.Channel.UnblockPlayer(username, friendUsername);
         }
         
-        public System.Threading.Tasks.Task<int> UnblockFriendAsync(string username, string friendUsername) {
-            return base.Channel.UnblockFriendAsync(username, friendUsername);
+        public System.Threading.Tasks.Task<int> UnblockPlayerAsync(string username, string friendUsername) {
+            return base.Channel.UnblockPlayerAsync(username, friendUsername);
         }
         
         public System.ValueTuple<int, PapayagramsClient.PapayagramsService.PlayerStatsDC> GetPlayerProfile(string username) {
@@ -1305,10 +1305,10 @@ namespace PapayagramsClient.PapayagramsService {
         System.Threading.Tasks.Task CalculateWinnerAsync(string gameRoomCode, string username, int score);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/LeaveGame", ReplyAction="http://tempuri.org/IGameService/LeaveGameResponse")]
-        void LeaveGame(string gameRoomCode, string username);
+        void LeaveGame(string gameRoomCode, string username, bool gameEnded);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/LeaveGame", ReplyAction="http://tempuri.org/IGameService/LeaveGameResponse")]
-        System.Threading.Tasks.Task LeaveGameAsync(string gameRoomCode, string username);
+        System.Threading.Tasks.Task LeaveGameAsync(string gameRoomCode, string username, bool gameEnded);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1398,12 +1398,12 @@ namespace PapayagramsClient.PapayagramsService {
             return base.Channel.CalculateWinnerAsync(gameRoomCode, username, score);
         }
         
-        public void LeaveGame(string gameRoomCode, string username) {
-            base.Channel.LeaveGame(gameRoomCode, username);
+        public void LeaveGame(string gameRoomCode, string username, bool gameEnded) {
+            base.Channel.LeaveGame(gameRoomCode, username, gameEnded);
         }
         
-        public System.Threading.Tasks.Task LeaveGameAsync(string gameRoomCode, string username) {
-            return base.Channel.LeaveGameAsync(gameRoomCode, username);
+        public System.Threading.Tasks.Task LeaveGameAsync(string gameRoomCode, string username, bool gameEnded) {
+            return base.Channel.LeaveGameAsync(gameRoomCode, username, gameEnded);
         }
     }
     

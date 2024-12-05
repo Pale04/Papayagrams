@@ -127,11 +127,11 @@
   <wsdl:message name="IMainMenuService_BlockPlayer_OutputMessage">
     <wsdl:part name="parameters" element="tns:BlockPlayerResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainMenuService_UnblockFriend_InputMessage">
-    <wsdl:part name="parameters" element="tns:UnblockFriend" />
+  <wsdl:message name="IMainMenuService_UnblockPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnblockPlayer" />
   </wsdl:message>
-  <wsdl:message name="IMainMenuService_UnblockFriend_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UnblockFriendResponse" />
+  <wsdl:message name="IMainMenuService_UnblockPlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnblockPlayerResponse" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_GetPlayerProfile_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPlayerProfile" />
@@ -308,9 +308,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/BlockPlayer" message="tns:IMainMenuService_BlockPlayer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/BlockPlayerResponse" message="tns:IMainMenuService_BlockPlayer_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="UnblockFriend">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/UnblockFriend" message="tns:IMainMenuService_UnblockFriend_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/UnblockFriendResponse" message="tns:IMainMenuService_UnblockFriend_OutputMessage" />
+    <wsdl:operation name="UnblockPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/UnblockPlayer" message="tns:IMainMenuService_UnblockPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/UnblockPlayerResponse" message="tns:IMainMenuService_UnblockPlayer_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetPlayerProfile">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/GetPlayerProfile" message="tns:IMainMenuService_GetPlayerProfile_InputMessage" />
@@ -539,8 +539,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="UnblockFriend">
-      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/UnblockFriend" style="document" />
+    <wsdl:operation name="UnblockPlayer">
+      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/UnblockPlayer" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
