@@ -117,7 +117,7 @@ namespace PapayagramsClient.Game
 
         private bool DumpSeed(string letter)
         {
-            if (CurrentGame.GameData.PilePieces < CurrentGame.PlayersInRoom.Count)
+            if (CurrentGame.GameData.PilePieces <= 3)
             {
                 // message of not enough pieces
                 return false;

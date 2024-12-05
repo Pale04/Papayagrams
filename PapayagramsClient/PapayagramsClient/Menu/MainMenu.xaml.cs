@@ -178,6 +178,7 @@ namespace PapayagramsClient
         private void OpenFriendsOverlay(object sender, RoutedEventArgs e)
         {
             FriendsMenuPanel.Visibility = Visibility.Visible;
+            FriendsMenuPanel.IsEnabled = true;
             (int returnCode, FriendDC[] relationships) = _host.GetAllRelationships(CurrentPlayer.Player.Username);
             switch (returnCode)
             {
@@ -190,6 +191,7 @@ namespace PapayagramsClient
         private void CloseFriendsOverlay(object sender, RoutedEventArgs e)
         {
             FriendsMenuPanel.Visibility = Visibility.Hidden;
+            FriendsMenuPanel.IsEnabled = false;
         }
 
         private void AddNewFriend(object sender, RoutedEventArgs e)

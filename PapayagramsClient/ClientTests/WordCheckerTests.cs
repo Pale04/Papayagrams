@@ -21,7 +21,7 @@ namespace ClientTests
         [TestMethod]
         public void CheckIncorrectSpanishWord()
         {
-            Assert.IsTrue(WordChecker.ValidWord("rtnrrrrh", PapayagramsClient.PapayagramsService.LanguageDC.Spanish));
+            Assert.IsFalse(WordChecker.ValidWord("rtnrrrrh", PapayagramsClient.PapayagramsService.LanguageDC.Spanish));
         }
 
         [TestMethod]
@@ -33,7 +33,13 @@ namespace ClientTests
         [TestMethod]
         public void CheckIncorrectEnglishWord()
         {
-            Assert.IsTrue(WordChecker.ValidWord("rtnrrrrh", PapayagramsClient.PapayagramsService.LanguageDC.Spanish));
+            Assert.IsFalse(WordChecker.ValidWord("rtnrrrrh", PapayagramsClient.PapayagramsService.LanguageDC.Spanish));
+        }
+
+        [TestMethod]
+        public void CheckOneLetter()
+        {
+            Assert.IsFalse(WordChecker.ValidWord("l", PapayagramsClient.PapayagramsService.LanguageDC.Spanish));
         }
     }
 }

@@ -10,7 +10,7 @@
         <StackPanel Orientation="Horizontal">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
                 <Image x:Name="UserImage" Source="../Resources/Icons/friend-svgrepo-com.png" Height="70" Margin="10, 0, 15, 0"/>
-                <TextBlock Text="1234567890123456"  Name="UsernameLabel" FontSize="24" Width="280" VerticalAlignment="Center" Margin="5, 0, 10, 0"/>
+                <TextBlock Text="1234567890123456"  Name="UsernameLabel" FontSize="24" Width="205" VerticalAlignment="Center" Margin="5, 0, 10, 0"/>
             </StackPanel>
 
             <Button Name="ActionButton" VerticalAlignment="Center" HorizontalAlignment="Right" Height="40" Margin="10" Background="Transparent" BorderBrush="Transparent">

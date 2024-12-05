@@ -340,19 +340,19 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\PapayagramsService\item.xsd">
+    <None Include="Connected Services\PapayagramsService\item55.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item1.xsd">
+    <None Include="Connected Services\PapayagramsService\item56.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item2.xsd">
+    <None Include="Connected Services\PapayagramsService\item57.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item3.xsd">
+    <None Include="Connected Services\PapayagramsService\item58.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item4.xsd">
+    <None Include="Connected Services\PapayagramsService\item59.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.AchievementDC.datasource">
@@ -370,7 +370,7 @@
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.PlayerStatsDC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\PapayagramsService\ServiceImplementation.wsdl" />
+    <None Include="Connected Services\PapayagramsService\ServiceImplementation11.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -425,9 +425,6 @@
     <Resource Include="Resources\Icons\trophy-svgrepo-com.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\PapayagramsService\item.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Hunspellx64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -453,6 +450,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\options-vertical-svgrepo-com.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PapayagramsService\item11.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
