@@ -22,7 +22,7 @@ namespace Contracts
         void CalculateWinner(string gameRoomCode, string username, int score);
 
         [OperationContract]
-        void LeaveGame(string gameRoomCode, string username);
+        void LeaveGame(string gameRoomCode, string username, bool gameEnded);
     }
 
     [ServiceContract]

@@ -140,9 +140,37 @@ namespace Contracts
             }
         }
 
+        /// <summary>
+        /// Remove a friend from the friend list of a player
+        /// </summary>
+        /// <param name="username">Username of the player removing</param>
+        /// <param name="friendUsername">Username of the friend being removed</param>
+        /// <returns>0 if the operation was successful, an error code otherwise</returns>
+        /// <remarks>Error codes that can be returned: 101, 102, 309</remarks>
         public int RemoveFriend(string username, string friendUsername)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(friendUsername))
+            {
+                return 101;
+            }
+            
+            int result;
+            try
+            {
+                result = UserRelationshipDB.RemoveFriend(username, friendUsername);
+            }
+            catch (EntityException error)
+            {
+                _logger.Fatal("Database connection failed", error);
+                return 102;
+            }
+
+            if (result != 1)
+            {
+                _logger.WarnFormat("Friend removal failed (Username: {0}, Friend username: {1}, Return code: {2})", username, friendUsername, result);
+                return 309;
+            }
+            return 0;
         }
 
         /// <summary>
@@ -170,15 +198,16 @@ namespace Contracts
                 return 102;
             }
 
-            if (result != 1)
+            if (result == 0)
             {
-                //_logger.InfoFormat("Player block failed (Blocker username: {username}, Blocked username: {friendUsername}, Return code: {result})", username, friendUsername, result);
+                _logger.InfoFormat("Player block failed (Blocker username: {0}, Blocked username: {1})", username, friendUsername);
             }
-            return result == 1? 0 : 308;
+            return result > 0? 0 : 308;
         }
 
-        public int UnblockFriend(string username, string friendUsername)
+        public int UnblockPlayer(string username, string friendUsername)
         {
+            //TODO
             throw new NotImplementedException();
         }
 
@@ -207,6 +236,7 @@ namespace Contracts
 
         public int GetLeaderboard(PlayerDC player)
         {
+            //TODO
             throw new NotImplementedException();
         }
 

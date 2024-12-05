@@ -205,7 +205,7 @@ namespace DataAccess
         /// </summary>
         /// <param name="username">Username ot the player blocking</param>
         /// <param name="blockedUsername">Username of the player being blocked</param>
-        /// <returns>1 if the operation was successful, 0 otherwise</returns>
+        /// <returns>More than 0 if the operation was successful, 0 otherwise</returns>
         /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
         public static int BlockPlayer(string username, string blockedUsername)
         {
@@ -217,13 +217,13 @@ namespace DataAccess
 
                 if (player != null && blockedPlayer != null)
                 {
-                    var relationWithOther = player.UserRelationship.Where(r => r.receiverId == blockedPlayer.id).FirstOrDefault();
-                    var relationWithOther2 = player.UserRelationship1.Where(r => r.senderId == blockedPlayer.id).FirstOrDefault();
+                    var relationWithOther = player.UserRelationship.Where(r => r.senderId == blockedPlayer.id).FirstOrDefault();
+                    var relationWithOther2 = player.UserRelationship1.Where(r => r.receiverId == blockedPlayer.id).FirstOrDefault();
 
                     if (relationWithOther != null || relationWithOther2 != null)
                     {
-                        context.UserRelationship.Remove(relationWithOther != null ? relationWithOther : relationWithOther2);
-                        context.SaveChanges();
+                        context.UserRelationship.Remove(relationWithOther ?? relationWithOther2);
+                        result += context.SaveChanges();
                     }
 
                     context.UserRelationship.Add(new UserRelationship
@@ -232,11 +232,53 @@ namespace DataAccess
                         receiverId = blockedPlayer.id,
                         relationState = "blocked"
                     });
-                    result = context.SaveChanges();
+                    result += context.SaveChanges();
                 }
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Remove a friend from the friend list of a player
+        /// </summary>
+        /// <param name="username">Username of the player removing</param>
+        /// <param name="friendUsername">Username of the player being removed</param>
+        /// <returns>1 if the operation was successful, -1 if the player does'nt exist, -2 if the friend does'nt exist or 0 if they are'nt friends</returns>
+        /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
+        public static int RemoveFriend(string username, string friendUsername)
+        {
+            int result = 0;
+            using (var context = new papayagramsEntities())
+            {
+                var player = context.User.Where(p => p.username == username).FirstOrDefault();
+                var friend = context.User.Where(p => p.username == friendUsername).FirstOrDefault();
+
+                if (player == null)
+                {
+                    result = -1;
+                }
+                else if (friend == null)
+                {
+                    result = -2;
+                }
+                else 
+                {
+                    var friendRelation = context.UserRelationship.Where(r => ((r.senderId == player.id && r.receiverId == friend.id) || (r.senderId == friend.id && r.receiverId == player.id)) && r.relationState.Equals("friend")).FirstOrDefault();
+                    if (friendRelation != null)
+                    {
+                        context.UserRelationship.Remove(friendRelation);
+                        result = context.SaveChanges();
+                    }
+                }
+            }
+            return result;
+        }
+    
+        public static int UnblockPlayer(string username, string blockedUsername)
+        {
+            //TODO
+            return 0;
         }
     }
 }

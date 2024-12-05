@@ -27,16 +27,20 @@ namespace BussinessLogic
             return _gamesInProgress[gameRoomCode];
         }
 
+        public static bool GameExists(string gameRoomCode)
+        {
+            return _gamesInProgress.ContainsKey(gameRoomCode);
+        }
+
         /// <summary>
-        /// Remove a player from a game, if no players are left in the game, remove the game
+        /// Remove a player from a game, if no players are left in the game, remove the game in progress
         /// </summary>
         /// <param name="gameRoomCode">Code of the game room</param>
         /// <param name="username">Username of the player</param>
         public static void ExitGame(string gameRoomCode, string username)
         {
-            Player player = PlayersOnlinePool.GetPlayer(username);
             Game game = _gamesInProgress[gameRoomCode];
-            game.ConnectedPlayers.Remove(player);
+            game.ConnectedPlayers.Remove(PlayersOnlinePool.GetPlayer(username));
 
             if (game.ConnectedPlayers.Count == 0)
             {

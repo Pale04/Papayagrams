@@ -112,30 +112,38 @@ namespace Contracts
             catch (EntityException error)
             {
                 _logger.Fatal("Database connection failed", error);
+                _logger.WarnFormat("Game history not updated in data base (username: {0}, winner: {1})",username, username.Equals(winnerUsername));
             }
 
             var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(username);
             channel.EndGame(winnerUsername, game.GetScore(winnerUsername));
-            GamesInProgressPool.ExitGame(gameRoomCode, username);
-            CallbacksPool.RemoveGameCallbackChannel(username);
         }
 
-        public void LeaveGame(string gameRoomCode, string username)
+        /// <summary>
+        /// Leave the game room and notify the other players if the game has not ended
+        /// </summary>
+        /// <param name="gameRoomCode">Code of the game room</param>
+        /// <param name="username">Username of the player leaving the room</param>
+        /// <param name="gameEnded">True if the game has ended, false otherwise</param>
+        public void LeaveGame(string gameRoomCode, string username, bool gameEnded)
         {
             CallbacksPool.RemoveGameCallbackChannel(username);
             GamesInProgressPool.ExitGame(gameRoomCode, username);
             GameRoomsPool.RemovePlayerFromGameRoom(username, gameRoomCode);
-            Game game = GamesInProgressPool.GetGame(gameRoomCode);
 
-            if (game != null)
+            if (!gameEnded)
             {
-                foreach (Player player in game.ConnectedPlayers)
+                if (GamesInProgressPool.GameExists(gameRoomCode))
                 {
-                    var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
-                    channel.RefreshGameRoom(game.PiecesPile.Count, game.ConnectedPlayers.ConvertAll(PlayerDC.ConvertToPlayerDC));
+                    Game game = GamesInProgressPool.GetGame(gameRoomCode);
+                    foreach (Player player in game.ConnectedPlayers)
+                    {
+                        var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(player.Username);
+                        channel.RefreshGameRoom(game.PiecesPile.Count, game.ConnectedPlayers.ConvertAll(PlayerDC.ConvertToPlayerDC));
+                    }
                 }
             }
-
+            
             if (!PlayersOnlinePool.IsGuest(username))
             {
                 try
@@ -145,6 +153,7 @@ namespace Contracts
                 catch (EntityException error)
                 {
                     _logger.Fatal("Database connection failed", error);
+                    _logger.WarnFormat("User status not updated in data base (username: {0}, to status: {1})", username, PlayerStatus.online);
                 }
             }
         }

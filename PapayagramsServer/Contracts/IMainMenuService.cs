@@ -25,7 +25,7 @@ namespace Contracts
         int BlockPlayer(string username, string friendUsername);
 
         [OperationContract]
-        int UnblockFriend(string username, string friendUsername);
+        int UnblockPlayer(string username, string friendUsername);
 
         [OperationContract]
         (int returnCode, PlayerStatsDC playerStats) GetPlayerProfile(string username);
