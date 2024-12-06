@@ -169,6 +169,8 @@ namespace PapayagramsClient.Game
         private void ReturnToMainMenu(object sender, RoutedEventArgs e)
         {
             _host.LeaveLobby(CurrentPlayer.Player.Username, CurrentGame.RoomCode);
+            CurrentGame.RoomCode = "";
+            CurrentGame.PlayersInRoom = new List<PlayerDC>();
             NavigationService.Navigate(new MainMenu());
         }
 
@@ -246,7 +248,7 @@ namespace PapayagramsClient.Game
                 }
             }
 
-            _host.InviteFriend(friendPanel.UsernameLabel.Text);
+            _host.InviteFriend(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text, CurrentGame.RoomCode);
             new SelectionPopUpWindow(Properties.Resources.lobbyFriendInvited, Properties.Resources.lobbyFriendInvited, 0).ShowDialog();
         }
 

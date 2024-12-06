@@ -35,7 +35,7 @@
         <Button Style="{StaticResource PrimaryButton}" Name="CreateGameButton" Content="{x:Static p:Resources.mainMenuCreateGame}" HorizontalAlignment="Left" Margin="125,185,0,0" VerticalAlignment="Top" Width="400" Click="CreateNewGame"/>
         <Button Style="{StaticResource SecondaryButton}" Name="JoinGameButton" Content="{x:Static p:Resources.mainMenuJoinGame}" HorizontalAlignment="Left" Margin="125,285,0,0" VerticalAlignment="Top" Width="400" Click="JoinGame"/>
         <Button Style="{StaticResource SecondaryButton}" Name="ProfileButton" Content="{x:Static p:Resources.mainMenuProfile}" HorizontalAlignment="Left" Margin="125,385,0,0" VerticalAlignment="Top" Width="400" Click="GoToProfile"/>
-        <Button Style="{StaticResource SecondaryButton}" Name="LeaderboardButton" Content="{x:Static p:Resources.globalLeaderboard}" HorizontalAlignment="Left" Margin="125,485,0,0" VerticalAlignment="Top" Width="400"/>
+        <Button Style="{StaticResource SecondaryButton}" Name="LeaderboardButton" Content="{x:Static p:Resources.globalLeaderboard}" HorizontalAlignment="Left" Margin="125,485,0,0" VerticalAlignment="Top" Width="400" Click="GoToLeaderboard"/>
 
         <Button HorizontalAlignment="Left" Margin="968,611,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="OpenFriendsOverlay" BorderBrush="Transparent">
             <Image Source="../Resources/Icons/friend-svgrepo-com.png"/>

@@ -58,44 +58,13 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AchievementDC" nillable="true" type="tns:AchievementDC" />
-  <xs:complexType name="ArrayOfLeaderboardStatsDC">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="LeaderboardStatsDC" nillable="true" type="tns:LeaderboardStatsDC" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfLeaderboardStatsDC" nillable="true" type="tns:ArrayOfLeaderboardStatsDC" />
-  <xs:complexType name="LeaderboardStatsDC">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="GamesLost" type="xs:int" />
-      <xs:element minOccurs="0" name="GamesWon" type="xs:int" />
-      <xs:element minOccurs="0" name="PlayerUsername" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="TotalGames" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="LeaderboardStatsDC" nillable="true" type="tns:LeaderboardStatsDC" />
   <xs:complexType name="GameInvitationDC">
     <xs:sequence>
       <xs:element minOccurs="0" name="GameRoomCode" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="SenderUsername" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PlayerUsername" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GameInvitationDC" nillable="true" type="tns:GameInvitationDC" />
-  <xs:complexType name="ApplicationSettingsDC">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Cursor" type="xs:int" />
-      <xs:element minOccurs="0" name="PieceColor" type="xs:int" />
-      <xs:element minOccurs="0" name="SelectedLanguage" type="tns:ApplicationLanguageDC" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ApplicationSettingsDC" nillable="true" type="tns:ApplicationSettingsDC" />
-  <xs:simpleType name="ApplicationLanguageDC">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="english" />
-      <xs:enumeration value="spanish" />
-      <xs:enumeration value="auto" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="ApplicationLanguageDC" nillable="true" type="tns:ApplicationLanguageDC" />
   <xs:complexType name="GameConfigurationDC">
     <xs:sequence>
       <xs:element minOccurs="0" name="GameMode" type="tns:GameModeDC" />

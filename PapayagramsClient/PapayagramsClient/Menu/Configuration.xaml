@@ -42,14 +42,14 @@
                 </StackPanel>
 
                 <Separator Height="40" Opacity="0"/>
-                <ComboBox FontSize="30" SelectedIndex="0">
+                <ComboBox Name="LanguageCombobox" FontSize="30" SelectedIndex="0">
                     <ComboBoxItem Content="{x:Static p:Resources.createGameEnglishLanguage}"/>
                     <ComboBoxItem Content="{x:Static p:Resources.createGameSpanishLanguage}"/>
                     <ComboBoxItem Content="{x:Static p:Resources.configurationSystemLanguage}"/>
                 </ComboBox>
 
                 <Separator Height="30" Opacity="0"/>
-                <ComboBox FontSize="30" SelectedIndex="0">
+                <ComboBox Name="CursorCombobox" FontSize="30" SelectedIndex="0">
                     <ComboBoxItem Content="{x:Static p:Resources.cursorClassic}"/>
                     <ComboBoxItem Content="{x:Static p:Resources.cursorPapaya}"/>
                 </ComboBox>

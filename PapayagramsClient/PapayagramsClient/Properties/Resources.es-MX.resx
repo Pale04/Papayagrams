@@ -441,10 +441,52 @@
   <data name="friendsAlreadyFriends" xml:space="preserve">
     <value>Ya eres amigo de este usuario</value>
   </data>
-  <data name="friendsUserIsBloqued" xml:space="preserve">
+  <data name="friendsUserIsBlocked" xml:space="preserve">
     <value>El usuario está bloqueado</value>
   </data>
   <data name="lobbyFriendInvited" xml:space="preserve">
     <value>Invitación enviada</value>
+  </data>
+  <data name="errorCouldntBlockPlayer" xml:space="preserve">
+    <value>No se pudo bloquear al usuario</value>
+  </data>
+  <data name="friendsPlayerBlockedSuccessfully" xml:space="preserve">
+    <value>Jugador bloqueado correctamente</value>
+  </data>
+  <data name="friendsPlayerUnblockedSuccessfully" xml:space="preserve">
+    <value>Jugador desbloqueado correctamente</value>
+  </data>
+  <data name="errorCouldntUnfriendPlayer" xml:space="preserve">
+    <value>No se pudo eliminar al usuario de la lista de amigos</value>
+  </data>
+  <data name="globalFriends" xml:space="preserve">
+    <value>Amigos</value>
+  </data>
+  <data name="globalBlockedUsers" xml:space="preserve">
+    <value>Bloqueados</value>
+  </data>
+  <data name="globalRequests" xml:space="preserve">
+    <value>Solicitudes de amistad</value>
+  </data>
+  <data name="statsGamesLost" xml:space="preserve">
+    <value>Juegos perdidos</value>
+  </data>
+  <data name="recoverTitle" xml:space="preserve">
+    <value>Recuperar contraseña</value>
+  </data>
+  <data name="recoverSendCode" xml:space="preserve">
+    <value>Mandar código de recuperación</value>
+  </data>
+  <data name="globalNewPassword" xml:space="preserve">
+    <value>Nueva contraseña</value>
+  </data>
+  <data name="globalNewPasswordAgain" xml:space="preserve">
+    <value>Repite la nueva contraseña</value>
+  </data>
+  <data name="recoverPasswordsDontMatch" xml:space="preserve">
+    <value>Las contraseñas no coinciden</value>
+  </data>
+  <data name="globalPasswordChanged" xml:space="preserve">
+    <value>Contraseña actualizada exitosamente</value>
   </data>
 </root>

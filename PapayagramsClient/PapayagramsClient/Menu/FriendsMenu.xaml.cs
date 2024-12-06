@@ -36,6 +36,10 @@ namespace PapayagramsClient.Menu
 
         public void FillLists()
         {
+            FriendListPanel.Children.Add(new TextBlock { Text = Properties.Resources.globalFriends, FontSize = 20});
+            BloquedListPanel.Children.Add(new TextBlock { Text = Properties.Resources.globalBlockedUsers, FontSize = 20});
+            RequestsListPanel.Children.Add(new TextBlock { Text = Properties.Resources.globalRequests, FontSize = 20});
+
             foreach(KeyValuePair<string, int> friend in UserRelationships.FriendsList)
             {
                 FriendListPanel.Children.Add(new FriendInfoPanel(1, friend.Value, friend.Key));

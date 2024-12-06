@@ -130,11 +130,22 @@
     <Compile Include="Login\JoinAsGuest.xaml.cs">
       <DependentUpon>JoinAsGuest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Login\RecoverPassword.xaml.cs">
+      <DependentUpon>RecoverPassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\ChangePassword.xaml.cs">
+      <DependentUpon>ChangePassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Menu\FriendsMenu.xaml.cs">
       <DependentUpon>FriendsMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Menu\GameInvitation.xaml.cs">
       <DependentUpon>GameInvitation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SelectionPopUpWindow.xaml.cs">
       <DependentUpon>SelectionPopUpWindow.xaml</DependentUpon>
@@ -179,11 +190,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Login\RecoverPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login\VerificationCode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Menu\Achievements.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Menu\ChangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -303,11 +322,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources.en.Designer.cs">
       <DependentUpon>Resources.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -359,10 +373,16 @@
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.AchievementDC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.ApplicationSettingsDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.FriendDC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.GameRoomDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.LeaderboardStatsDC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.PlayerDC.datasource">

@@ -343,14 +343,22 @@ namespace PapayagramsClient.Game
 
         private void ExitFinishedGame(object sender, RoutedEventArgs e)
         {
+            _host.LeaveGame(CurrentGame.RoomCode, CurrentPlayer.Player.Username, true);
+
             CurrentGame.State = CurrentGame.GameState.Finished;
             CurrentGame.GameConfig = null;
             CurrentGame.GameData = new GameProgressData();
             CurrentGame.PlayersInRoom = null;
             CurrentGame.RoomCode = null;
-            
-            _host.LeaveGame(CurrentGame.RoomCode, CurrentPlayer.Player.Username, true);
-            NavigationService.Navigate(new MainMenu()); 
+
+            if (CurrentPlayer.IsGuest)
+            {
+                NavigationService.Navigate(new Login.Login());
+            }
+            else
+            {
+                NavigationService.Navigate(new MainMenu()); 
+            }
         }
     }
 }

@@ -77,6 +77,7 @@ namespace PapayagramsClient.Login
             }
 
             CurrentPlayer.Player = player;
+            CurrentPlayer.IsGuest = false;
             NavigationService.Navigate(new MainMenu());
         }
 
