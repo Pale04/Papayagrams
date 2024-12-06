@@ -45,6 +45,7 @@
     <Compile Include="Friend.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameRoom.cs" />
+    <Compile Include="LeaderboardStats.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerStats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -256,5 +256,42 @@ namespace DataAccess.Tests
             List<DomainClasses.Achievement> result = UserDB.GetPlayerAchievements("Pale");
             Assert.IsTrue(result.Count == 2, "GetPlayerAchievementsNonExistentUserTest");
         }
+
+        [TestMethod()]
+        public void GetPlayerStatusSuccessfulTest()
+        {
+            UserDB.UpdateUserStatus(_registeredPlayer1.Username, PlayerStatus.online);
+            PlayerStatus expected = PlayerStatus.online;
+            PlayerStatus result = UserDB.GetPlayerStatus(_registeredPlayer1.Username);
+            Assert.AreEqual(expected, result, "GetPlayerStatusSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void GetGlobalLeaderboardSuccessfulTest()
+        {
+            List<LeaderboardStats> expected = new List<LeaderboardStats>
+            {
+                new LeaderboardStats(_registeredPlayer1.Username, new PlayerStats()
+                {
+                    OriginalGamesPlayed = 60,
+                    TimeAttackGamesPlayed = 30,
+                    SuddenDeathGamesPlayed = 103,
+                    OriginalGamesWon = 10,
+                    TimeAttackGamesWon = 5,
+                    SuddenDeathGamesWon = 3
+                }),
+                new LeaderboardStats(_registeredPlayer2.Username, new PlayerStats()
+                {
+                    OriginalGamesPlayed = 0,
+                    TimeAttackGamesPlayed = 0,
+                    SuddenDeathGamesPlayed = 0,
+                    OriginalGamesWon = 0,
+                    TimeAttackGamesWon = 0,
+                    SuddenDeathGamesWon = 0
+                })
+            };
+            List<LeaderboardStats> result = UserDB.GetGlobalLeaderboard();
+            Assert.IsTrue(expected.SequenceEqual(result), "GetGlobalLeaderboardSuccessfulTest");
+        }
     }
 }

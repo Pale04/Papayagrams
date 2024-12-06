@@ -218,7 +218,7 @@ namespace Contracts
         [DataMember]
         public string GameRoomCode { get; set; }
         [DataMember]
-        public string PlayerUsername { get; set; }
+        public string SenderUsername { get; set; }
     }
 
     [DataContract]
@@ -323,6 +323,30 @@ namespace Contracts
                 Players = players,
                 GameConfiguration = GameConfigurationDC.ConvertToGameConfigurationDC(room.GameConfiguration)
             };
+        }
+    }
+
+    [DataContract]
+    public class LeaderboardStatsDC
+    {
+        [DataMember]
+        public string PlayerUsername { get; set; }
+
+        [DataMember]
+        public int TotalGames { get; set; }
+
+        [DataMember]
+        public int GamesWon { get; set; }
+
+        [DataMember]
+        public int GamesLost { get; set; }
+
+        public static LeaderboardStatsDC ConvertToLeaderboardStatsDC(LeaderboardStats leaderboardStats)
+        {
+            
+
+            return null;
+            //todo
         }
     }
 }

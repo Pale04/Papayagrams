@@ -33,9 +33,8 @@ namespace Contracts
         [OperationContract]
         (int returnCode, List<AchievementDC> achievementsList) GetAchievements(string username);
 
-        //TODO: crear una clase serializada para recuperar el leaderboard
         [OperationContract]
-        int GetLeaderboard(PlayerDC player);
+        List<LeaderboardStatsDC> GetGlobalLeaderboard();
 
         [OperationContract]
         int ReportToServer(string username);

@@ -32,8 +32,8 @@ namespace Contracts
         [OperationContract]
         void StartGame(string roomCode);
 
-        [OperationContract]
-        void InviteFriend(string username);
+        [OperationContract(IsOneWay = true)]
+        void InviteFriend(string username, string guestUsername, string gameRoomCode);
 
         [OperationContract]
         void ReturnToLobby(string gameRoomCode, string username);

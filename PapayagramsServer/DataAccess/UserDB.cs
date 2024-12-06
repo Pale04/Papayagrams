@@ -250,6 +250,42 @@ namespace DataAccess
             return achievementsList;
         }
 
+        /// <summary>
+        /// Retrieves the player's status
+        /// </summary>
+        /// <param name="username">Username of the player</param>
+        /// <returns>Status of the player, offline if the player does'nt exist</returns>
+        public static PlayerStatus GetPlayerStatus(string username)
+        {
+            PlayerStatus status = PlayerStatus.offline;
+            using (var context = new papayagramsEntities())
+            {
+                var player = context.User.Where(p => p.username == username).Include(p => p.UserStatus);
+                if (player.Any())
+                {
+                    status = (PlayerStatus)Enum.Parse(typeof(PlayerStatus), player.First().UserStatus.status);
+                }
+            }
+            return status;
+        }
 
+        /// <summary>
+        /// Obtains the statistics of all players in papayagrams
+        /// </summary>
+        /// <returns>A list with every player and his statistics</returns>
+        public static List<LeaderboardStats> GetGlobalLeaderboard()
+        {
+            List<LeaderboardStats> leaderboardStats = new List<LeaderboardStats>();
+            using (var context = new papayagramsEntities())
+            {
+                var allPlayers = context.User;
+                foreach (var player in allPlayers)
+                {
+                    Option<PlayerStats> playerStats = GetPlayerStats(player.username);
+                    leaderboardStats.Add(new LeaderboardStats(player.username, (PlayerStats)playerStats.Case));
+                }
+            }
+            return leaderboardStats;
+        }
     }
 }
