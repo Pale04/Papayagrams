@@ -9,11 +9,6 @@ namespace Contracts
 {
     public partial class ServiceImplementation : IGameService
     {
-        /// <summary>
-        /// Notify the server that a player has arrived to the game after the host has started it
-        /// </summary>
-        /// <param name="username">Username of the player arriving</param>
-        /// <param name="gameRoomCode">Code of the game room</param>
         public async void ReachServer(string username, string gameRoomCode)
         {
             CallbacksPool.PlayerArrivesToGame(username, OperationContext.Current.GetCallbackChannel<IGameServiceCallback>());
@@ -60,12 +55,6 @@ namespace Contracts
             }
         }
 
-        /// <summary>
-        /// Send 1 piece to the "dump" and get 3 pieces through the "AddSeedsToHand" callback method
-        /// </summary>
-        /// <param name="gameRoomCode">Code of the game room</param>
-        /// <param name="username">Username of the player sending the pieces</param>
-        /// <param name="piece">Piece sent to dump</param>
         public void DumpPiece(string gameRoomCode, string username, char piece)
         {
             Game game = GamesInProgressPool.GetGame(gameRoomCode);
@@ -79,10 +68,6 @@ namespace Contracts
             }
         }
 
-        /// <summary>
-        /// Send 1 piece to every player after a player finished his pieces
-        /// </summary>
-        /// <param name="gameRoomCode">Code of the game room</param>
         public void TakeSeed(string gameRoomCode)
         {
             Game game = GamesInProgressPool.GetGame(gameRoomCode);
@@ -103,21 +88,11 @@ namespace Contracts
             }
         }
 
-        /// <summary>
-        /// Notify to every player that someone has finished his pieces.
-        /// </summary>
-        /// <param name="gameRoomCode">Code of the game room</param>
         public void ShoutPapaya(string gameRoomCode)
         {
             BroadcastEndGameNotification(gameRoomCode);
         }
 
-        /// <summary>
-        /// Calculate the winner of the game and notify the players, after someone shouted "Papaya"
-        /// </summary>
-        /// <param name="gameRoomCode">Code of the game room</param>
-        /// <param name="username">Username of the player sending his score</param>
-        /// <param name="score">Score of the player</param>
         public async void CalculateWinner(string gameRoomCode, string username, int score)
         {
             Game game = GamesInProgressPool.GetGame(gameRoomCode);
@@ -144,12 +119,6 @@ namespace Contracts
             channel.EndGame(winnerUsername, game.GetScore(winnerUsername));
         }
 
-        /// <summary>
-        /// Leave the game room and if the game has not ended notify to other players 
-        /// </summary>
-        /// <param name="gameRoomCode">Code of the game room</param>
-        /// <param name="username">Username of the player leaving the room</param>
-        /// <param name="gameEnded">True if the game has ended, false otherwise</param>
         public void LeaveGame(string gameRoomCode, string username, bool gameEnded)
         {
             if (string.IsNullOrEmpty(gameRoomCode) || string.IsNullOrEmpty(username))
