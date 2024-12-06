@@ -49,10 +49,42 @@ namespace Contracts
             return (0, GameRoomDC.ConvertToGameRoomDC(gameRoom));
         }
 
-        public void InviteFriend(string username)
+        /// <summary>
+        /// Send an invitation to a friend to join a game room.
+        /// </summary>
+        /// <param name="username">Username of the player sending the invitation</param>
+        /// <param name="guestUsername">Username of the player receiving the invitation</param>
+        /// <param name="gameRoomCode">Code of the game room</param>
+        public void InviteFriend(string username, string guestUsername, string gameRoomCode)
         {
-            //TODO
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(guestUsername) || string.IsNullOrEmpty(gameRoomCode))
+            {
+                _logger.WarnFormat("Invalid parameters for InviteFriend method (username: {0}, guestUsername: {1}, gameRoomCode: {2})", username, guestUsername, gameRoomCode);
+                return;
+            }
+
+            PlayerStatus status;
+            try
+            {
+                status = UserDB.GetPlayerStatus(username);
+            }
+            catch (EntityException error)
+            {
+                _logger.Fatal("Database connection failed", error);
+                return;
+            }
+
+            if (status == PlayerStatus.in_game)
+            {
+                GameInvitationDC invitation = new GameInvitationDC
+                {
+                    GameRoomCode = gameRoomCode,
+                    SenderUsername = username
+                };
+
+                var callbackChannel = (IMainMenuServiceCallback)CallbacksPool.GetPregameCallbackChannel(guestUsername);
+                callbackChannel.ReceiveGameInvitation(invitation);
+            }
         }
 
         /// <summary>

@@ -260,7 +260,11 @@ namespace Contracts
             return (0, achievementsList.ConvertAll(AchievementDC.ConvertToAchievementDC));
         }
 
-        public int GetLeaderboard(PlayerDC player)
+        /// <summary>
+        /// Retrive the global leaderboard of the game
+        /// </summary>
+        /// <returns></returns>
+        public List<LeaderboardStatsDC> GetGlobalLeaderboard()
         {
             //TODO
             throw new NotImplementedException();
