@@ -10,10 +10,15 @@ namespace Contracts
 {
     public partial class ServiceImplementation : IPregameService, IGameCodeVerificationService
     {
+        /// <summary>
+        /// Create a new game room.
+        /// </summary>
+        /// <param name="username">Username of the player creating the room</param>
+        /// <param name="gameConfiguration">Configuration of the game room</param>
+        /// <returns>0 and the game room created, an error code and null if an error occurs</returns>
+        /// <remarks>Error codes that can be returned: 102</remarks>
         public (int, GameRoomDC) CreateGame(string username, GameConfigurationDC gameConfiguration)
         {
-            int resultCode = 0;
-
             try
             {
                 UserDB.UpdateUserStatus(username, PlayerStatus.in_game);
@@ -41,7 +46,7 @@ namespace Contracts
             CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
             Console.WriteLine($"sala de juego creada: {gameRoom.RoomCode}");
 
-            return (resultCode, GameRoomDC.ConvertToGameRoomDC(gameRoom));
+            return (0, GameRoomDC.ConvertToGameRoomDC(gameRoom));
         }
 
         public void InviteFriend(string username)
@@ -50,10 +55,16 @@ namespace Contracts
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Put a player into a game room, if it´s in waiting state and has available slots.
+        /// </summary>
+        /// <param name="username">username of the player joining into the room</param>
+        /// <param name="roomCode">code of the game room</param>
+        /// <returns>0 and the joined game room object, an error code and null if an error occurss</returns>
+        /// <remarks>Error codes that can be returned: 102, 401</remarks>
         public (int returnCode, GameRoomDC joinedGameRoom) JoinGame(string username, string roomCode)
         {
-            int code = 0;
-            GameRoomDC serializedGameRoom = null;
+            int returnCode = 0;
             GameRoom room = GameRoomsPool.GetGameRoom(roomCode);
 
             if (room != null && room.State.Equals(GameRoomState.Waiting) && room.Players.Count < room.GameConfiguration.MaxPlayers)
@@ -67,27 +78,48 @@ namespace Contracts
                     catch (EntityException error)
                     {
                         _logger.Fatal("Database connection failed", error);
+                        _logger.WarnFormat("User status not updated in data base (username: {0}, to status: {1})", username, PlayerStatus.in_game);
                         return (102, null);
                     }
                 }
                 
                 CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
                 room.Players.Add(PlayersOnlinePool.GetPlayer(username));
-                serializedGameRoom = GameRoomDC.ConvertToGameRoomDC(room);
-                BroadcastRefreshLobby(serializedGameRoom);
+
+                List<Player> players = room.Players;
+                for (int i = 0; i < players.Count - 1; i++)
+                {
+                    var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(players[i].Username);
+                    callbackChannel.RefreshLobby(GameRoomDC.ConvertToGameRoomDC(room));
+                }
             }
             else
             {
-                code = 401;
+                returnCode = 401;
             }
 
-            return (code, serializedGameRoom);
+            return (returnCode, GameRoomDC.ConvertToGameRoomDC(room));
         }
 
-        public int LeaveLobby(string username, string roomCode)
+        /// <summary>
+        /// Leave the game room in waiting state and notify to other players
+        /// </summary>
+        /// <param name="username">Username of the player leaving the room</param>
+        /// <param name="roomCode">code of the game room</param>
+        public void LeaveLobby(string username, string roomCode)
         {
             GameRoomsPool.RemovePlayerFromGameRoom(username, roomCode);
             CallbacksPool.RemovePregameCallbackChannel(username);
+
+            GameRoom room = GameRoomsPool.GetGameRoom(roomCode);
+            if (room != null)
+            {
+                foreach (Player player in room.Players)
+                {
+                    var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(player.Username);
+                    callbackChannel.RefreshLobby(GameRoomDC.ConvertToGameRoomDC(room));
+                }
+            }
 
             if (!PlayersOnlinePool.IsGuest(username))
             {
@@ -98,13 +130,15 @@ namespace Contracts
                 catch (EntityException error)
                 {
                     _logger.Fatal("Database connection failed", error);
-                    return 102;
+                    _logger.WarnFormat("User status not updated in data base (username: {0}, to status: {1})", username, PlayerStatus.online);
                 }
             }
-
-            return 0;
         }
 
+        /// <summary>
+        /// Send a message through the chat to all players in the game room
+        /// </summary>
+        /// <param name="message">Message to be sent</param>
         public void SendMessage(Message message)
         {
             GameRoom room = GameRoomsPool.GetGameRoom(message.GameRoomCode);
@@ -118,7 +152,7 @@ namespace Contracts
         }
 
         /// <summary>
-        /// Prepare the game and bring in every player except the admin.
+        /// Prepare the game and bring into every player except the admin.
         /// </summary>
         /// <param name="roomCode">Code of the game room</param>
         public void StartGame(string roomCode)
@@ -161,20 +195,6 @@ namespace Contracts
             if (room.State.Equals(GameRoomState.InGame))
             {
                 room.State = GameRoomState.Waiting;
-            }
-        }
-
-        private static void BroadcastRefreshLobby(GameRoomDC gameRoom)
-        {
-            if (gameRoom != null)
-            {
-                List<PlayerDC> players = gameRoom.Players;
-                for (int i = 0; i < players.Count -1; i++)
-                {
-                    PlayerDC p = players[i];
-                    var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(p.Username);
-                    callbackChannel.RefreshLobby(gameRoom);
-                }
             }
         }
     }

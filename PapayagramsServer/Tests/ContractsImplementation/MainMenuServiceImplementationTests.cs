@@ -124,7 +124,7 @@ namespace Contracts.Tests
                     Id = _registeredPlayer4.Id,
                     Username = _registeredPlayer4.Username,
                     RelationState = RelationStateDC.Blocked
-                }   
+                }
             };
             (int _, List<FriendDC> result) = _serviceImplementation.GetAllRelationships(_registeredPlayer1.Username);
             Assert.IsTrue(expected.SequenceEqual(result), "GetAllRelationshipsSuccessfulTest");
@@ -497,6 +497,55 @@ namespace Contracts.Tests
             int expected = 0;
             int result = _serviceImplementation.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(expected, result, "BlockPlayerPendingReceiverTest");
+        }
+
+        [TestMethod()]
+        public void UnblockPlayerSuccessfulTest()
+        {
+            _serviceImplementation.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            int expected = 0;
+            int result = _serviceImplementation.UnblockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "UnblockPlayerSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void UnblockPlayerInvalidWayTest()
+        {
+            _serviceImplementation.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            int expected = 310;
+            int result = _serviceImplementation.UnblockPlayer(_registeredPlayer2.Username, _registeredPlayer1.Username);
+            Assert.AreEqual(expected, result, "UnblockPlayerInvalidWayTest");
+        }
+
+        [TestMethod()]
+        public void UnblockPlayerInvaliParametersTest() {
+            int expected = 101;
+            int result = _serviceImplementation.UnblockPlayer(null, "  ");
+            Assert.AreEqual(expected, result, "UnblockPlayerInvaliParametersTest");
+        }
+
+        [TestMethod()]
+        public void UnblockPlayerNonExistentBlockerTest()
+        {
+            int expected = 310;
+            int result = _serviceImplementation.UnblockPlayer("Deivid", _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "UnblockPlayerNonExistentPlayerTest");
+        }
+
+        [TestMethod()]
+        public void UnblockPlayerNonExistentBlockedTest()
+        {
+            int expected = 310;
+            int result = _serviceImplementation.UnblockPlayer(_registeredPlayer1.Username, "Deivid");
+            Assert.AreEqual(expected, result, "UnblockPlayerNonExistentFriendTest");
+        }
+
+        [TestMethod()]
+        public void UblockPlayerNoBlockedRelationTest()
+        {
+            int expected = 310;
+            int result = _serviceImplementation.UnblockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "UblockPlayerNoBlockedRelationTest");
         }
 
         [TestMethod()]

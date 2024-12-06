@@ -200,15 +200,41 @@ namespace Contracts
 
             if (result == 0)
             {
-                _logger.InfoFormat("Player block failed (Blocker username: {0}, Blocked username: {1})", username, friendUsername);
+                _logger.WarnFormat("Player block failed (Blocker username: {0}, Blocked username: {1})", username, friendUsername);
             }
             return result > 0? 0 : 308;
         }
 
+        /// <summary>
+        /// Unblock a player of the blocked plyers list
+        /// </summary>
+        /// <param name="username">Username of the player unblocking the other one</param>
+        /// <param name="friendUsername">Username of the player who will be unblocked</param>
+        /// <returns>0 if the operation was successful, an error code otherwise</returns>
+        /// <remarks>Error codes that can be returned: 101, 102, 310</remarks>
         public int UnblockPlayer(string username, string friendUsername)
         {
-            //TODO
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(friendUsername))
+            {
+                return 101;
+            }
+
+            int result;
+            try
+            {
+                result = UserRelationshipDB.UnblockPlayer(username, friendUsername);
+            }
+            catch (EntityException error)
+            {
+                _logger.Fatal("Database connection failed", error);
+                return 102;
+            }
+
+            if (result != 1)
+            {
+                _logger.WarnFormat("Unblocking player failed (Player unblocking: {0}, Blocked username: {1}, return code: {2})", username, friendUsername, result);
+            }
+            return result == 1 ? 0 : 310;
         }
 
         /// <summary>
@@ -264,9 +290,11 @@ namespace Contracts
         }
 
         /// <summary>
-        /// Add the callback channel of the player to the callbacks pool
+        /// Notify the server that a player has arrived to the main menu after login.
         /// </summary>
         /// <param name="username">Username of the player</param>
+        /// <returns>0 if the operation was successful, an error code otherwise</returns>
+        /// <remarks>Error codes that can be returned: 102</remarks>
         public int ReportToServer(string username)
         {
             try
@@ -276,6 +304,7 @@ namespace Contracts
             catch (EntityException error)
             {
                 _logger.Fatal("Database connection failed", error);
+                _logger.WarnFormat("Player status update failed (Username: {0}, To status: {1})", username, PlayerStatus.online.ToString());
                 return 102;
             }
 

@@ -274,11 +274,40 @@ namespace DataAccess
             }
             return result;
         }
-    
+
+        /// <summary>
+        /// Unblock a player of the blocked player list
+        /// </summary>
+        /// <param name="username">Username of the player unblocking</param>
+        /// <param name="blockedUsername">Username of the blocked player</param>
+        /// <returns>1 if the operation was successful, -1 if the player unblocking is´nt found, -2 if the blocked player is'nt found, 0 if the blocked relation does´nt exist</returns>
         public static int UnblockPlayer(string username, string blockedUsername)
         {
-            //TODO
-            return 0;
+            int result = 0;
+            using (var context = new papayagramsEntities())
+            {
+                var player = context.User.Where(p => p.username == username).Include(p => p.UserRelationship1).FirstOrDefault();
+                var blockedPlayer = context.User.Where(p => p.username == blockedUsername).FirstOrDefault();
+
+                if (player == null)
+                {
+                    result = -1;
+                }
+                else if (blockedPlayer == null)
+                {
+                    result = -2;
+                }
+                else
+                {
+                    var blockedRelation = player.UserRelationship1.Where(r => r.receiverId == blockedPlayer.id && r.relationState.Equals("blocked")).FirstOrDefault();
+                    if (blockedRelation != null)
+                    {
+                        context.UserRelationship.Remove(blockedRelation);
+                        result = context.SaveChanges();
+                    }
+                }
+            }
+            return result;
         }
     }
 }
