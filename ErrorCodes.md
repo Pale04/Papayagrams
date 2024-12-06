@@ -16,6 +16,8 @@
 207. Unverified account
 208. Incorrect verification code.
 209. Error while trying to verify account.
+210. Wrong PIN for recovery password.
+211. Password update failed.
 
 ## Main menu
 301. Cannot send a friend request. You have sent a friend request before and is pending
@@ -27,10 +29,14 @@
 307. Friend request response failed. Requester not found.
 308. Player blocking fail
 309. Friend removal failed
-310. Unblocking player failed
+310. Unblocking player failed.
 
 ## Pregame
 401. Game room not found or doesn't exist.
- 
+
+## Configuration
+501. Application settings update failed.
+502. Profile icon update failed.
+503. Incorrect current password. The password can´t be changed.
 
 ## Game

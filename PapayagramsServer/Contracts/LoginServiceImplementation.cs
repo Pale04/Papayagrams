@@ -244,20 +244,53 @@ namespace Contracts
         /// <summary>
         /// Send an email with a password recovery PIN for recovering the password
         /// </summary>
-        /// <param name="username">Username of the player to send the PIN</param>
+        /// <param name="email">Email of the account to send the PIN</param>
         /// <returns>0 if the operation was successful, an error code otherwise</returns>
-        /// <remarks>Error codes that can be returned: 101, 102, 104, 205</remarks>
-        public int SendPasswordRecoveryPIN(string username)
+        /// <remarks>Error codes that can be returned: 101, 104</remarks>
+        public int SendPasswordRecoveryPIN(string email)
         {
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrEmpty(email))
             {
                 return 101;
             }
 
-            Option<Player> wrappedPlayer;
+            string pin = VerificationCodesPool.GeneratePasswordRecoveryPIN(email);
             try
             {
-                wrappedPlayer = UserDB.GetPlayerByUsername(username);
+                return MailService.MailService.SendMail(email, "Password recovery PIN", $"Your password recovery PIN is: {pin}");
+            }
+            catch (SmtpCommandException error)
+            {
+                _logger.WarnFormat("Password recovery email sending failed (Account email: {0})", email);
+                return 104;
+            }
+        }
+
+        /// <summary>
+        /// Change the password of an account if the pin is correct
+        /// </summary>
+        /// <param name="pin">PIN that was sent to palyer's email</param>
+        /// <param name="email">email of the account</param>
+        /// <param name="newPassword">new password for account</param>
+        /// <returns>0 if the operation was successful, an error code otherwise</returns>
+        /// <remarks>Error codes that can be returned: 101, 102, 210, 211</remarks>
+        public int RecoverPassword(string pin, string email, string newPassword)
+        {
+            if (string.IsNullOrEmpty(pin) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(newPassword))
+            {
+                return 101;
+            }
+
+            if (!VerificationCodesPool.PasswordRecoveryPINCorrect(email, pin))
+            {
+                _logger.InfoFormat("Password recovery attempt failed (Account email: {0})", email);
+                return 210;
+            }
+
+            int codeResult;
+            try
+            {
+                codeResult = UserDB.UpdatePassword(email, newPassword);
             }
             catch (EntityException error)
             {
@@ -265,23 +298,14 @@ namespace Contracts
                 return 102;
             }
 
-            if (wrappedPlayer.IsNone)
+            if (codeResult == 0)
             {
-                return 205;
+                _logger.WarnFormat("Password recovery failed (Account email: {0})", email);
+                return 211;
             }
 
-            Player player = (Player)wrappedPlayer.Case;
-            string pin = VerificationCodesPool.GeneratePasswordRecoveryPIN(username);
-
-            try
-            {
-                return MailService.MailService.SendMail(player.Email, "Password recovery PIN", $"Your password recovery PIN is: {pin}");
-            }
-            catch (SmtpCommandException error)
-            {
-                _logger.Warn($"Password recovery email sending failed (username id: {username})", error);
-                return 104;
-            }
+            VerificationCodesPool.RemovePasswordRecoveryPIN(email);
+            return 0;
         }
     }
 }

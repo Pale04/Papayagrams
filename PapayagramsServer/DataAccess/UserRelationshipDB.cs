@@ -127,12 +127,13 @@ namespace DataAccess
                     foreach (var friend in friendsAdded.Concat(friendsAccepted))
                     {
                         int friendId = (int)(friend.receiverId == player.id ? friend.senderId : friend.receiverId);
-                        var friendData = context.User.Where(p => p.id == friendId).First();
+                        var friendData = context.User.Where(p => p.id == friendId).Include(p => p.UserConfiguration).First();
                         friends.Add(new Friend
                         {
                             Id = friendData.id,
                             Username = friendData.username,
-                            RelationState = RelationState.Friend
+                            RelationState = RelationState.Friend,
+                            ProfileIcon = friendData.UserConfiguration.icon
                         });
                     }
                 }

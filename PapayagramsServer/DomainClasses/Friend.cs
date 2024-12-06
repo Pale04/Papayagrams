@@ -18,7 +18,7 @@ namespace DomainClasses
             if (obj != null && GetType() == obj.GetType())
             {
                 Friend friend = (Friend)obj;
-                isEqual = Id == friend.Id && Username.Equals(friend.Username) && RelationState.Equals(friend.RelationState);
+                isEqual = Id == friend.Id && Username.Equals(friend.Username) && RelationState.Equals(friend.RelationState) && ProfileIcon == friend.ProfileIcon;
             }
             return isEqual;
         }

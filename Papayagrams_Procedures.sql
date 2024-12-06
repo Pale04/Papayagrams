@@ -132,3 +132,33 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE update_password
+	@username VARCHAR(50),
+	@currentPassword VARCHAR(100),
+	@newPassword VARCHAR(100)
+AS
+BEGIN
+	BEGIN
+		DECLARE @correctPassword VARCHAR(100)
+		SELECT @correctPassword = CAST(DecryptByAsymKey (AsymKey_ID('asy_triggerdb'),password,N'RD_afAmGsRMYi29') AS VARCHAR(100)) FROM [User] WHERE username = @username;
+		IF @currentPassword = @correctPassword
+		BEGIN
+			UPDATE [User] SET password = ENCRYPTBYASYMKEY(ASYMKEY_ID('asy_TRIGGERDB'), @newPassword) WHERE username = @username;
+			RETURN 0
+		END
+		ELSE
+		BEGIN
+			RETURN -1
+		END
+	END
+END;
+GO
+
+CREATE PROCEDURE update_password_no_verification
+	@username VARCHAR(50),
+	@newPassword VARCHAR(100)
+AS
+BEGIN
+	UPDATE [User] SET password = ENCRYPTBYASYMKEY(ASYMKEY_ID('asy_TRIGGERDB'), @newPassword) WHERE username = @username;
+END;
+GO

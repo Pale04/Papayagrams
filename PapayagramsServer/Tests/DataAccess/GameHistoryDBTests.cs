@@ -1,6 +1,8 @@
 ﻿using DomainClasses;
+using LanguageExt;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Linq;
 using Tests;
 
 namespace DataAccess.Tests
@@ -35,6 +37,7 @@ namespace DataAccess.Tests
         {
             UserDB.RegisterUser(_registeredPlayer1);
             UserDB.RegisterUser(_registeredPlayer2);
+            DataBaseOperation.CreateGameHistoryPlayer(_registeredPlayer1.Id);
         }
 
         [TestCleanup()]
@@ -65,6 +68,59 @@ namespace DataAccess.Tests
             int expected = 0;
             int result = GameHistoryDB.UpdateGameHistory("ABCD", true, GameMode.Original);
             Assert.AreEqual(expected, result, "UpdateOriginalGameHistoryNonExistentUserTest");
+        }
+
+        [TestMethod()]
+        public void GetPlayerStatsSuccessfulTest()
+        {
+            PlayerStats expected = new PlayerStats()
+            {
+                OriginalGamesPlayed = 60,
+                TimeAttackGamesPlayed = 30,
+                SuddenDeathGamesPlayed = 103,
+                OriginalGamesWon = 10,
+                TimeAttackGamesWon = 5,
+                SuddenDeathGamesWon = 3,
+                FriendsAmount = 0
+            };
+
+            Option<PlayerStats> result = GameHistoryDB.GetPlayerStats(_registeredPlayer1.Username);
+            Assert.AreEqual(expected, (PlayerStats)result.Case, "GetPlayerStatsSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void GetPlayerStatsNonExistentUserTest()
+        {
+            Option<PlayerStats> result = GameHistoryDB.GetPlayerStats("Pale");
+            Assert.IsTrue(result.IsNone, "GetPlayerStatsNonExistentUserTest");
+        }
+
+        [TestMethod()]
+        public void GetGlobalLeaderboardSuccessfulTest()
+        {
+            List<LeaderboardStats> expected = new List<LeaderboardStats>
+            {
+                new LeaderboardStats(_registeredPlayer1.Username, new PlayerStats()
+                {
+                    OriginalGamesPlayed = 60,
+                    TimeAttackGamesPlayed = 30,
+                    SuddenDeathGamesPlayed = 103,
+                    OriginalGamesWon = 10,
+                    TimeAttackGamesWon = 5,
+                    SuddenDeathGamesWon = 3
+                }),
+                new LeaderboardStats(_registeredPlayer2.Username, new PlayerStats()
+                {
+                    OriginalGamesPlayed = 0,
+                    TimeAttackGamesPlayed = 0,
+                    SuddenDeathGamesPlayed = 0,
+                    OriginalGamesWon = 0,
+                    TimeAttackGamesWon = 0,
+                    SuddenDeathGamesWon = 0
+                })
+            };
+            List<LeaderboardStats> result = GameHistoryDB.GetGlobalLeaderboard();
+            Assert.IsTrue(expected.SequenceEqual(result), "GetGlobalLeaderboardSuccessfulTest");
         }
     }
 }

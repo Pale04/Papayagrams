@@ -62,5 +62,20 @@ namespace BussinessLogic
             _passwordRecoveryPINes.Add(username, pin);
             return pin;
         }
+
+        public static bool PasswordRecoveryPINCorrect(string email, string pin)
+        {
+            bool pinCorrect = false;
+            if (_passwordRecoveryPINes.ContainsKey(email))
+            {
+                pinCorrect = pin.Equals(_passwordRecoveryPINes[email]);
+            }
+            return pinCorrect;
+        }
+
+        public static void RemovePasswordRecoveryPIN(string email)
+        {
+            _passwordRecoveryPINes.Remove(email);
+        }
     }
 }
