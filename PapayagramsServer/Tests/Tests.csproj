@@ -137,6 +137,7 @@
     <Compile Include="search_no_friend_player_Result.cs">
       <DependentUpon>PapayagramsModel2.tt</DependentUpon>
     </Compile>
+    <Compile Include="ContractsImplementation\ApplicationSettingsServiceImplementation.cs" />
     <Compile Include="SuddenDeathHistory.cs">
       <DependentUpon>PapayagramsModel2.tt</DependentUpon>
     </Compile>
@@ -162,6 +163,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BussinessLogic\BussinessLogic.csproj">
+      <Project>{c72d3471-500c-45e7-bf83-744ceaa44bce}</Project>
+      <Name>BussinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Contracts\Contracts.csproj">
       <Project>{4D29DBA0-353A-4C4B-A438-7FEEF958D621}</Project>
       <Name>Contracts</Name>

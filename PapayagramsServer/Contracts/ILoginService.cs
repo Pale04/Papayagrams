@@ -24,6 +24,9 @@ namespace Contracts
         PlayerDC AccessAsGuest();
 
         [OperationContract]
-        int SendPasswordRecoveryPIN(string username);
+        int SendPasswordRecoveryPIN(string email);
+
+        [OperationContract]
+        int RecoverPassword(string pin, string email, string newPassword);
     }
 }

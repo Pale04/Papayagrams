@@ -1,6 +1,7 @@
 ﻿using DataAccess;
 using Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BussinessLogic;
 
 namespace Contracts.Tests
 {
@@ -83,7 +84,7 @@ namespace Contracts.Tests
         public void LogInSuccesfulTest()
         {
             UserDB.VerifyAccount(_registeredPlayer.Username);
-            (int code,PlayerDC result) = _serviceImplementation.Login(_registeredPlayer.Username, _registeredPlayer.Password);
+            (int code, PlayerDC result) = _serviceImplementation.Login(_registeredPlayer.Username, _registeredPlayer.Password);
             Assert.AreEqual(_registeredPlayer, result, "LogInSuccesfulTest");
         }
 
@@ -217,6 +218,40 @@ namespace Contracts.Tests
             int expected = 205;
             int result = _serviceImplementation.SendPasswordRecoveryPIN("DavidXD");
             Assert.AreEqual(expected, result, "SendPasswordRecoveryPINNonExistentUsernameTest");
+        }
+
+        [TestMethod()]
+        public void RecoverPasswordSuccessfulTest()
+        {
+            string pin = VerificationCodesPool.GeneratePasswordRecoveryPIN(_registeredPlayer.Email);
+            int expected = 0;
+            int result = _serviceImplementation.RecoverPassword(pin, _registeredPlayer.Email, "abcdefg");
+            Assert.AreEqual(expected, result, "RecoverPasswordSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void RecoverPasswordEmptyParametersTest()
+        {
+            int expected = 101;
+            int result = _serviceImplementation.RecoverPassword("", "", "");
+            Assert.AreEqual(expected, result, "RecoverPasswordEmptyParametersTest");
+        }
+
+        [TestMethod()]
+        public void RecoverPasswordIncorrectPINTest()
+        {
+            VerificationCodesPool.GeneratePasswordRecoveryPIN(_registeredPlayer.Email);
+            int expected = 210;
+            int result = _serviceImplementation.RecoverPassword("456789", _registeredPlayer.Email, "abcdefg");
+            Assert.AreEqual(expected, result, "RecoverPasswordIncorrectPINTest");
+        }
+
+        [TestMethod()]
+        public void RecoverPasswordNonExistentEmailTest()
+        {
+            int expected = 210;
+            int result = _serviceImplementation.RecoverPassword("123", "epale@gmail.com", "abcdefg");
+            Assert.AreEqual(expected, result, "RecoverPasswordNonExistentEmailTest");
         }
     }
 }

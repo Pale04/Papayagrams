@@ -343,10 +343,79 @@ namespace Contracts
 
         public static LeaderboardStatsDC ConvertToLeaderboardStatsDC(LeaderboardStats leaderboardStats)
         {
-            
+            return new LeaderboardStatsDC
+            {
+                PlayerUsername = leaderboardStats.PlayerUsername,
+                TotalGames = leaderboardStats.TotalGames,
+                GamesWon = leaderboardStats.GamesWon,
+                GamesLost = leaderboardStats.GamesLost
+            };
+        }
 
-            return null;
-            //todo
+        public override bool Equals(object obj)
+        {
+            bool isEqual = false;
+            if (obj != null && GetType() == obj.GetType())
+            {
+                LeaderboardStatsDC stats = (LeaderboardStatsDC)obj;
+                isEqual = PlayerUsername.Equals(stats.PlayerUsername) && TotalGames == stats.TotalGames && GamesWon == stats.GamesWon && GamesLost == stats.GamesLost;
+            }
+            return isEqual;
+        }
+
+        public override int GetHashCode()
+        {
+            return PlayerUsername.GetHashCode() ^ TotalGames ^ GamesWon ^ GamesLost;
+        }
+    }
+
+    [DataContract]
+    public enum ApplicationLanguageDC
+    {
+        [EnumMember]
+        english,
+        [EnumMember]
+        spanish,
+        [EnumMember]
+        auto
+    }
+
+    [DataContract]
+    public class ApplicationSettingsDC
+    {
+        [DataMember]
+        public int PieceColor { get; set; }
+
+        [DataMember]
+        public ApplicationLanguageDC SelectedLanguage { get; set; }
+
+        [DataMember]
+        public int Cursor { get; set; }
+
+        public static ApplicationSettingsDC ConvertToApplicationSettingsDC(ApplicationSettings applicationSettings)
+        {
+            return new ApplicationSettingsDC
+            {
+                PieceColor = applicationSettings.PieceColor,
+                SelectedLanguage = (ApplicationLanguageDC)Enum.Parse(typeof(ApplicationLanguageDC), applicationSettings.SelectedLanguage.ToString()),
+                Cursor = applicationSettings.Cursor
+            };
+        }
+
+        public override bool Equals(object obj)
+        {
+            bool isEqual = false;
+            if (obj != null && GetType() == obj.GetType())
+            {
+                ApplicationSettingsDC settings = (ApplicationSettingsDC)obj;
+                isEqual = PieceColor == settings.PieceColor && SelectedLanguage.Equals(settings.SelectedLanguage) && Cursor == settings.Cursor;
+            }
+            return isEqual;
+        }
+
+        public override int GetHashCode()
+        {
+            return PieceColor.GetHashCode() ^ SelectedLanguage.GetHashCode() ^ Cursor.GetHashCode();
         }
     }
 }

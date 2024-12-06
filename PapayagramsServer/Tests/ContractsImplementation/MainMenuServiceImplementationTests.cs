@@ -633,5 +633,43 @@ namespace Contracts.Tests
             Assert.IsTrue(expected.SequenceEqual(result), "GetAchievementsNullUsernameTest");
         }
 
+        [TestMethod()]
+        public void GetGlobalLeaderboardSuccessfulTest()
+        {
+            List<LeaderboardStatsDC> expected = new List<LeaderboardStatsDC>()
+            {
+                new LeaderboardStatsDC()
+                {
+                    PlayerUsername = _registeredPlayer1.Username,
+                    TotalGames = 193,
+                    GamesWon = 18,
+                    GamesLost = 175
+                },
+                new LeaderboardStatsDC()
+                {
+                    PlayerUsername = _registeredPlayer2.Username,
+                    TotalGames = 0,
+                    GamesWon = 0,
+                    GamesLost = 0
+                },
+                new LeaderboardStatsDC()
+                {
+                    PlayerUsername = _registeredPlayer3.Username,
+                    TotalGames = 0,
+                    GamesWon = 0,
+                    GamesLost = 0
+                },
+                new LeaderboardStatsDC()
+                {
+                    PlayerUsername = _registeredPlayer4.Username,
+                    TotalGames = 0,
+                    GamesWon = 0,
+                    GamesLost = 0
+                }
+            };
+            List<LeaderboardStatsDC> result = _serviceImplementation.GetGlobalLeaderboard();
+            Assert.IsTrue(expected.SequenceEqual(result), "GetGlobalLeaderboardSuccessfulTest");
+        }
+
     }
 }

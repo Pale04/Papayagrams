@@ -204,13 +204,15 @@ namespace DataAccess.Tests
                 {
                     Id = _registeredPlayer2.Id,
                     Username = _registeredPlayer2.Username,
-                    RelationState = RelationState.Friend
+                    RelationState = RelationState.Friend,
+                    ProfileIcon = 1
                 },
                 new Friend
                 {
                     Id = _registeredPlayer3.Id,
                     Username = _registeredPlayer3.Username,
-                    RelationState = RelationState.Friend
+                    RelationState = RelationState.Friend,
+                    ProfileIcon = 1
                 }
             };
             List<Friend> result = UserRelationshipDB.GetFriends(_registeredPlayer1.Username);

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Achievement.cs" />
+    <Compile Include="ApplicationSettings.cs" />
     <Compile Include="Friend.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameRoom.cs" />

@@ -2,7 +2,6 @@
 using DataAccess;
 using DomainClasses;
 using LanguageExt;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Linq;
@@ -263,11 +262,19 @@ namespace Contracts
         /// <summary>
         /// Retrive the global leaderboard of the game
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A list with every player stats of the games</returns>
         public List<LeaderboardStatsDC> GetGlobalLeaderboard()
         {
-            //TODO
-            throw new NotImplementedException();
+            List<LeaderboardStats> globalLeaderboardStats = new List<LeaderboardStats>();
+            try
+            {
+                globalLeaderboardStats = GameHistoryDB.GetGlobalLeaderboard();
+            }
+            catch (EntityException error)
+            {
+                _logger.Fatal("Database connection failed", error);
+            }
+            return globalLeaderboardStats.ConvertAll(LeaderboardStatsDC.ConvertToLeaderboardStatsDC);
         }
 
         /// <summary>
@@ -282,7 +289,7 @@ namespace Contracts
 
             try
             {
-                playerStats = UserDB.GetPlayerStats(username); 
+                playerStats = GameHistoryDB.GetPlayerStats(username); 
             }
             catch (EntityException error)
             {

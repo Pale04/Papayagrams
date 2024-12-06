@@ -39,7 +39,6 @@ namespace DataAccess.Tests
         {
             UserDB.RegisterUser(_registeredPlayer1);
             UserDB.RegisterUser(_registeredPlayer2);
-            DataBaseOperation.CreateGameHistoryPlayer(_registeredPlayer1.Id);
             DataBaseOperation.RegisterUserAchievement(_registeredPlayer1.Id, _achievements[0].Id);
         }
 
@@ -201,31 +200,6 @@ namespace DataAccess.Tests
         }
 
         [TestMethod()]
-        public void GetPlayerStatsSuccessfulTest()
-        {
-            PlayerStats expected = new PlayerStats()
-            {
-                OriginalGamesPlayed = 60,
-                TimeAttackGamesPlayed = 30,
-                SuddenDeathGamesPlayed = 103,
-                OriginalGamesWon = 10,
-                TimeAttackGamesWon = 5,
-                SuddenDeathGamesWon = 3,
-                FriendsAmount = 0
-            };
-
-            Option<PlayerStats> result = UserDB.GetPlayerStats(_registeredPlayer1.Username);
-            Assert.AreEqual(expected, (PlayerStats)result.Case, "GetPlayerStatsSuccessfulTest");
-        }
-
-        [TestMethod()]
-        public void GetPlayerStatsNonExistentUserTest()
-        {
-            Option<PlayerStats> result = UserDB.GetPlayerStats("Pale");
-            Assert.IsTrue(result.IsNone, "GetPlayerStatsNonExistentUserTest");
-        }
-
-        [TestMethod()]
         public void GetPlayerAchievementsSuccessfulTest()
         {
             _achievements[0].IsAchieved = true;
@@ -267,31 +241,107 @@ namespace DataAccess.Tests
         }
 
         [TestMethod()]
-        public void GetGlobalLeaderboardSuccessfulTest()
+        public void UpdateApplicationSettingsSuccessfulTest()
         {
-            List<LeaderboardStats> expected = new List<LeaderboardStats>
+            ApplicationSettings settings = new ApplicationSettings()
             {
-                new LeaderboardStats(_registeredPlayer1.Username, new PlayerStats()
-                {
-                    OriginalGamesPlayed = 60,
-                    TimeAttackGamesPlayed = 30,
-                    SuddenDeathGamesPlayed = 103,
-                    OriginalGamesWon = 10,
-                    TimeAttackGamesWon = 5,
-                    SuddenDeathGamesWon = 3
-                }),
-                new LeaderboardStats(_registeredPlayer2.Username, new PlayerStats()
-                {
-                    OriginalGamesPlayed = 0,
-                    TimeAttackGamesPlayed = 0,
-                    SuddenDeathGamesPlayed = 0,
-                    OriginalGamesWon = 0,
-                    TimeAttackGamesWon = 0,
-                    SuddenDeathGamesWon = 0
-                })
+                PieceColor = 10,
+                SelectedLanguage = ApplicationLanguage.auto,
+                Cursor = 2
             };
-            List<LeaderboardStats> result = UserDB.GetGlobalLeaderboard();
-            Assert.IsTrue(expected.SequenceEqual(result), "GetGlobalLeaderboardSuccessfulTest");
+            int expected = 1;
+            int result = UserDB.UpdateApplicationSettings(_registeredPlayer1.Username, settings);
+            Assert.AreEqual(expected, result, "UpdateApplicationSettingsSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void UpdateApplicationSettingsNonExistentUserTest()
+        {
+            ApplicationSettings settings = new ApplicationSettings()
+            {
+                PieceColor = 1,
+                SelectedLanguage = ApplicationLanguage.spanish,
+                Cursor = 1
+            };
+            int expected = 0;
+            int result = UserDB.UpdateApplicationSettings("Pale", settings);
+            Assert.AreEqual(expected, result, "UpdateApplicationSettingsNonExistentUserTest");
+        }
+
+        [TestMethod()]
+        public void GetApplicationSettingsSuccessfulTest()
+        {
+            ApplicationSettings expected = new ApplicationSettings()
+            {
+                PieceColor = 1,
+                SelectedLanguage = ApplicationLanguage.auto,
+                Cursor = 1
+            };
+            Option<ApplicationSettings> result = UserDB.GetApplicationSettings(_registeredPlayer1.Username);
+            Assert.AreEqual(expected, (ApplicationSettings)result.Case, "GetApplicationSettingsSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void GetApplicationSettingsNonExistentUserTest()
+        {
+            Option<ApplicationSettings> result = UserDB.GetApplicationSettings("Pale");
+            Assert.IsTrue(result.IsNone, "GetApplicationSettingsNonExistentUserTest");
+        }
+
+        [TestMethod()]
+        public void UpdateProfileIconSuccessfulTest()
+        {
+            int expected = 1;
+            int result = UserDB.UpdateProfileIcon(_registeredPlayer1.Username, 2);
+            Assert.AreEqual(expected, result, "UpdateProfileIconSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void UpdateProfileIconSameIconTest()
+        {
+            int expected = 0;
+            int result = UserDB.UpdateProfileIcon(_registeredPlayer1.Username, 1);
+            Assert.AreEqual(expected, result, "UpdateProfileIconSameIconTest");
+        }
+
+        [TestMethod()]
+        public void UpdateProfileIconNonExistentUserTest()
+        {
+            int expected = -1;
+            int result = UserDB.UpdateProfileIcon("Pale", 2);
+            Assert.AreEqual(expected, result, "UpdateProfileIconNonExistentUserTest");
+        }
+
+        [TestMethod()]
+        public void UpdatePasswordSuccessfulTest()
+        {
+            int expected = 0;
+            int result = UserDB.UpdatePassword(_registeredPlayer1.Username, _registeredPlayer1.Password, "123456");
+            Assert.AreEqual(expected, result, "UpdatePasswordSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void UpdatePasswordIncorrectCurrentPasswordTest()
+        {
+            int expected = -1;
+            int result = UserDB.UpdatePassword(_registeredPlayer1.Username, "abc", "123456");
+            Assert.AreEqual(expected, result, "UpdatePasswordIncorrectCurrentPasswordTest");
+        }
+
+        [TestMethod()]
+        public void UpdatePasswordWithoutVerificationSuccessfulTest()
+        {
+            int expected = 1;
+            int result = UserDB.UpdatePassword(_registeredPlayer1.Username, "123456");
+            Assert.AreEqual(expected, result, "UpdatePasswordWithoutVerificationSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void UpdatePasswordWithoutVerificationNonExistentPlayerTest()
+        {
+            int expected = 0;
+            int result = UserDB.UpdatePassword("Deivid", "abc");
+            Assert.AreEqual(expected, result, "UpdatePasswordWithoutVerificationNonExistentPlayerTest");
         }
     }
 }
