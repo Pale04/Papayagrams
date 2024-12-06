@@ -26,7 +26,6 @@ namespace PapayagramsClient
         public MainWindow()
         {
             InitializeComponent();
-            Cursor = new Cursor(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Cursors\\papaya.cur");
             MainFrame.Navigate(new Login.Login());
         }
 

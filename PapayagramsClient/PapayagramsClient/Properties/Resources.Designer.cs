@@ -304,6 +304,24 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Couldn&apos;t block player.
+        /// </summary>
+        public static string errorCouldntBlockPlayer {
+            get {
+                return ResourceManager.GetString("errorCouldntBlockPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Couldn&apos;t remove player from friends.
+        /// </summary>
+        public static string errorCouldntUnfriendPlayer {
+            get {
+                return ResourceManager.GetString("errorCouldntUnfriendPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Could not connect to Papayagrams services, try again later..
         /// </summary>
         public static string errorDatabaseConnection {
@@ -385,6 +403,24 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Player blocked successfully.
+        /// </summary>
+        public static string friendsPlayerBlockedSuccessfully {
+            get {
+                return ResourceManager.GetString("friendsPlayerBlockedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Player unblocked successfully.
+        /// </summary>
+        public static string friendsPlayerUnblockedSuccessfully {
+            get {
+                return ResourceManager.GetString("friendsPlayerUnblockedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Reject request.
         /// </summary>
         public static string friendsRejectRequestTooltip {
@@ -448,20 +484,11 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a The user is blocked by you.
+        ///   Busca una cadena traducida similar a The user is blocked.
         /// </summary>
         public static string friendsUserIsBlocked {
             get {
                 return ResourceManager.GetString("friendsUserIsBlocked", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a .
-        /// </summary>
-        public static string friendsUserIsBloqued {
-            get {
-                return ResourceManager.GetString("friendsUserIsBloqued", resourceCulture);
             }
         }
         
@@ -583,6 +610,15 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Blocked users.
+        /// </summary>
+        public static string globalBlockedUsers {
+            get {
+                return ResourceManager.GetString("globalBlockedUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Close.
         /// </summary>
         public static string globalClose {
@@ -628,6 +664,15 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Friends.
+        /// </summary>
+        public static string globalFriends {
+            get {
+                return ResourceManager.GetString("globalFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Leaderboard.
         /// </summary>
         public static string globalLeaderboard {
@@ -637,11 +682,47 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a New password.
+        /// </summary>
+        public static string globalNewPassword {
+            get {
+                return ResourceManager.GetString("globalNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Repeat new password.
+        /// </summary>
+        public static string globalNewPasswordAgain {
+            get {
+                return ResourceManager.GetString("globalNewPasswordAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Password.
         /// </summary>
         public static string globalPassword {
             get {
                 return ResourceManager.GetString("globalPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Password updated successfully.
+        /// </summary>
+        public static string globalPasswordChanged {
+            get {
+                return ResourceManager.GetString("globalPasswordChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friend requests.
+        /// </summary>
+        public static string globalRequests {
+            get {
+                return ResourceManager.GetString("globalRequests", resourceCulture);
             }
         }
         
@@ -898,6 +979,33 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The passwords dont match.
+        /// </summary>
+        public static string recoverPasswordsDontMatch {
+            get {
+                return ResourceManager.GetString("recoverPasswordsDontMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Send recover code.
+        /// </summary>
+        public static string recoverSendCode {
+            get {
+                return ResourceManager.GetString("recoverSendCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Recover password.
+        /// </summary>
+        public static string recoverTitle {
+            get {
+                return ResourceManager.GetString("recoverTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Already have an account? Sign in.
         /// </summary>
         public static string registerAlreadyRegistered {
@@ -1020,6 +1128,15 @@ namespace PapayagramsClient.Properties {
         public static string signInWrongCredentials {
             get {
                 return ResourceManager.GetString("signInWrongCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Lost games.
+        /// </summary>
+        public static string statsGamesLost {
+            get {
+                return ResourceManager.GetString("statsGamesLost", resourceCulture);
             }
         }
         

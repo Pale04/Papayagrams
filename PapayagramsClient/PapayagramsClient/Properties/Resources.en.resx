@@ -385,7 +385,7 @@
     <value>The winner is</value>
   </data>
   <data name="globalConfiguration" xml:space="preserve">
-    <value>Configuratio</value>
+    <value>Configuration</value>
   </data>
   <data name="configurationPieceColor" xml:space="preserve">
     <value>Piece color</value>
@@ -441,10 +441,52 @@
   <data name="friendsAlreadyFriends" xml:space="preserve">
     <value>You are already friend of this user</value>
   </data>
-  <data name="friendsUserIsBloqued" xml:space="preserve">
+  <data name="friendsUserIsBlocked" xml:space="preserve">
     <value>The user is blocked</value>
   </data>
   <data name="lobbyFriendInvited" xml:space="preserve">
     <value>Invitation set</value>
+  </data>
+  <data name="errorCouldntBlockPlayer" xml:space="preserve">
+    <value>Couldn't block player</value>
+  </data>
+  <data name="friendsPlayerBlockedSuccessfully" xml:space="preserve">
+    <value>Player blocked successfully</value>
+  </data>
+  <data name="friendsPlayerUnblockedSuccessfully" xml:space="preserve">
+    <value>Player unblocked successfully</value>
+  </data>
+  <data name="errorCouldntUnfriendPlayer" xml:space="preserve">
+    <value>Couldn't unfriend player</value>
+  </data>
+  <data name="globalFriends" xml:space="preserve">
+    <value>Friends</value>
+  </data>
+  <data name="globalBlockedUsers" xml:space="preserve">
+    <value>Blocked users</value>
+  </data>
+  <data name="globalRequests" xml:space="preserve">
+    <value>Friend requests</value>
+  </data>
+  <data name="statsGamesLost" xml:space="preserve">
+    <value>Lost games</value>
+  </data>
+  <data name="recoverTitle" xml:space="preserve">
+    <value>Recover password</value>
+  </data>
+  <data name="recoverSendCode" xml:space="preserve">
+    <value>Send recover code</value>
+  </data>
+  <data name="globalNewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="globalNewPasswordAgain" xml:space="preserve">
+    <value>Repeat new password</value>
+  </data>
+  <data name="recoverPasswordsDontMatch" xml:space="preserve">
+    <value>The passwords dont match</value>
+  </data>
+  <data name="globalPasswordChanged" xml:space="preserve">
+    <value>Password updated successfully</value>
   </data>
 </root>

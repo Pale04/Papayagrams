@@ -84,6 +84,7 @@ namespace PapayagramsClient.Login
                     new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                     return;
                 default:
+                    new SelectionPopUpWindow(Properties.Resources.verificationCode, Properties.Resources.verificationCode, 1).ShowDialog();
                     break;
             }
         }

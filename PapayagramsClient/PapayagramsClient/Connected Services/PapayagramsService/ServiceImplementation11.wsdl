@@ -16,14 +16,6 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="NetTcpBinding_IApplicationSettingsService_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <wsaw:UsingAddressing />
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
   <wsp:Policy wsu:Id="NetTcpBinding_IPregameService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -50,11 +42,11 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Contracts" />
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://192.168.175.91:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.175.91:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.175.91:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Contracts" />
+      <xsd:import schemaLocation="http://192.168.175.91:8080/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import schemaLocation="http://192.168.175.91:8080/?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ILoginService_RegisterUser_InputMessage">
@@ -98,12 +90,6 @@
   </wsdl:message>
   <wsdl:message name="ILoginService_SendPasswordRecoveryPIN_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendPasswordRecoveryPINResponse" />
-  </wsdl:message>
-  <wsdl:message name="ILoginService_RecoverPassword_InputMessage">
-    <wsdl:part name="parameters" element="tns:RecoverPassword" />
-  </wsdl:message>
-  <wsdl:message name="ILoginService_RecoverPassword_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RecoverPasswordResponse" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_GetAllRelationships_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllRelationships" />
@@ -159,11 +145,11 @@
   <wsdl:message name="IMainMenuService_GetAchievements_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAchievementsResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainMenuService_GetGlobalLeaderboard_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetGlobalLeaderboard" />
+  <wsdl:message name="IMainMenuService_GetLeaderboard_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaderboard" />
   </wsdl:message>
-  <wsdl:message name="IMainMenuService_GetGlobalLeaderboard_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetGlobalLeaderboardResponse" />
+  <wsdl:message name="IMainMenuService_GetLeaderboard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaderboardResponse" />
   </wsdl:message>
   <wsdl:message name="IMainMenuService_ReportToServer_InputMessage">
     <wsdl:part name="parameters" element="tns:ReportToServer" />
@@ -176,30 +162,6 @@
   </wsdl:message>
   <wsdl:message name="IMainMenuService_ReceiveGameInvitation_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReceiveGameInvitation" />
-  </wsdl:message>
-  <wsdl:message name="IApplicationSettingsService_UpdateAplicationSettings_InputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateAplicationSettings" />
-  </wsdl:message>
-  <wsdl:message name="IApplicationSettingsService_UpdateAplicationSettings_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateAplicationSettingsResponse" />
-  </wsdl:message>
-  <wsdl:message name="IApplicationSettingsService_GetApplicationSettings_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetApplicationSettings" />
-  </wsdl:message>
-  <wsdl:message name="IApplicationSettingsService_GetApplicationSettings_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetApplicationSettingsResponse" />
-  </wsdl:message>
-  <wsdl:message name="IApplicationSettingsService_UpdateProfileIcon_InputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateProfileIcon" />
-  </wsdl:message>
-  <wsdl:message name="IApplicationSettingsService_UpdateProfileIcon_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateProfileIconResponse" />
-  </wsdl:message>
-  <wsdl:message name="IApplicationSettingsService_UpdatePassword_InputMessage">
-    <wsdl:part name="parameters" element="tns:UpdatePassword" />
-  </wsdl:message>
-  <wsdl:message name="IApplicationSettingsService_UpdatePassword_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UpdatePasswordResponse" />
   </wsdl:message>
   <wsdl:message name="IPregameService_CreateGame_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateGame" />
@@ -216,6 +178,9 @@
   <wsdl:message name="IPregameService_LeaveLobby_InputMessage">
     <wsdl:part name="parameters" element="tns:LeaveLobby" />
   </wsdl:message>
+  <wsdl:message name="IPregameService_LeaveLobby_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveLobbyResponse" />
+  </wsdl:message>
   <wsdl:message name="IPregameService_SendMessage_InputMessage">
     <wsdl:part name="parameters" element="tns:SendMessage" />
   </wsdl:message>
@@ -227,6 +192,9 @@
   </wsdl:message>
   <wsdl:message name="IPregameService_InviteFriend_InputMessage">
     <wsdl:part name="parameters" element="tns:InviteFriend" />
+  </wsdl:message>
+  <wsdl:message name="IPregameService_InviteFriend_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InviteFriendResponse" />
   </wsdl:message>
   <wsdl:message name="IPregameService_ReturnToLobby_InputMessage">
     <wsdl:part name="parameters" element="tns:ReturnToLobby" />
@@ -314,10 +282,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/SendPasswordRecoveryPIN" message="tns:ILoginService_SendPasswordRecoveryPIN_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/SendPasswordRecoveryPINResponse" message="tns:ILoginService_SendPasswordRecoveryPIN_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RecoverPassword">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/RecoverPassword" message="tns:ILoginService_RecoverPassword_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/RecoverPasswordResponse" message="tns:ILoginService_RecoverPassword_OutputMessage" />
-    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMainMenuService">
     <wsdl:operation name="GetAllRelationships">
@@ -356,9 +320,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/GetAchievements" message="tns:IMainMenuService_GetAchievements_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/GetAchievementsResponse" message="tns:IMainMenuService_GetAchievements_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetGlobalLeaderboard">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/GetGlobalLeaderboard" message="tns:IMainMenuService_GetGlobalLeaderboard_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/GetGlobalLeaderboardResponse" message="tns:IMainMenuService_GetGlobalLeaderboard_OutputMessage" />
+    <wsdl:operation name="GetLeaderboard">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/GetLeaderboard" message="tns:IMainMenuService_GetLeaderboard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/GetLeaderboardResponse" message="tns:IMainMenuService_GetLeaderboard_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ReportToServer">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainMenuService/ReportToServer" message="tns:IMainMenuService_ReportToServer_InputMessage" />
@@ -369,24 +333,6 @@
     </wsdl:operation>
     <wsdl:operation name="ReceiveGameInvitation">
       <wsdl:output wsaw:Action="http://tempuri.org/IMainMenuService/ReceiveGameInvitation" message="tns:IMainMenuService_ReceiveGameInvitation_OutputCallbackMessage" />
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:portType name="IApplicationSettingsService">
-    <wsdl:operation name="UpdateAplicationSettings">
-      <wsdl:input wsaw:Action="http://tempuri.org/IApplicationSettingsService/UpdateAplicationSettings" message="tns:IApplicationSettingsService_UpdateAplicationSettings_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IApplicationSettingsService/UpdateAplicationSettingsResponse" message="tns:IApplicationSettingsService_UpdateAplicationSettings_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetApplicationSettings">
-      <wsdl:input wsaw:Action="http://tempuri.org/IApplicationSettingsService/GetApplicationSettings" message="tns:IApplicationSettingsService_GetApplicationSettings_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IApplicationSettingsService/GetApplicationSettingsResponse" message="tns:IApplicationSettingsService_GetApplicationSettings_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="UpdateProfileIcon">
-      <wsdl:input wsaw:Action="http://tempuri.org/IApplicationSettingsService/UpdateProfileIcon" message="tns:IApplicationSettingsService_UpdateProfileIcon_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IApplicationSettingsService/UpdateProfileIconResponse" message="tns:IApplicationSettingsService_UpdateProfileIcon_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="UpdatePassword">
-      <wsdl:input wsaw:Action="http://tempuri.org/IApplicationSettingsService/UpdatePassword" message="tns:IApplicationSettingsService_UpdatePassword_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IApplicationSettingsService/UpdatePasswordResponse" message="tns:IApplicationSettingsService_UpdatePassword_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IPregameService">
@@ -400,6 +346,7 @@
     </wsdl:operation>
     <wsdl:operation name="LeaveLobby">
       <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/LeaveLobby" message="tns:IPregameService_LeaveLobby_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/LeaveLobbyResponse" message="tns:IPregameService_LeaveLobby_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendMessage">
       <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/SendMessage" message="tns:IPregameService_SendMessage_InputMessage" />
@@ -410,6 +357,7 @@
     </wsdl:operation>
     <wsdl:operation name="InviteFriend">
       <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/InviteFriend" message="tns:IPregameService_InviteFriend_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPregameService/InviteFriendResponse" message="tns:IPregameService_InviteFriend_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ReturnToLobby">
       <wsdl:input wsaw:Action="http://tempuri.org/IPregameService/ReturnToLobby" message="tns:IPregameService_ReturnToLobby_InputMessage" />
@@ -533,15 +481,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="RecoverPassword">
-      <soap12:operation soapAction="http://tempuri.org/ILoginService/RecoverPassword" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IMainMenuService" type="tns:IMainMenuService">
     <wsp:PolicyReference URI="#NetTcpBinding_IMainMenuService_policy" />
@@ -627,8 +566,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetGlobalLeaderboard">
-      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/GetGlobalLeaderboard" style="document" />
+    <wsdl:operation name="GetLeaderboard">
+      <soap12:operation soapAction="http://tempuri.org/IMainMenuService/GetLeaderboard" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -653,46 +592,6 @@
     </wsdl:operation>
     <wsdl:operation name="ReceiveGameInvitation">
       <soap12:operation soapAction="http://tempuri.org/IMainMenuService/ReceiveGameInvitation" style="document" />
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:binding name="NetTcpBinding_IApplicationSettingsService" type="tns:IApplicationSettingsService">
-    <wsp:PolicyReference URI="#NetTcpBinding_IApplicationSettingsService_policy" />
-    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="UpdateAplicationSettings">
-      <soap12:operation soapAction="http://tempuri.org/IApplicationSettingsService/UpdateAplicationSettings" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetApplicationSettings">
-      <soap12:operation soapAction="http://tempuri.org/IApplicationSettingsService/GetApplicationSettings" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="UpdateProfileIcon">
-      <soap12:operation soapAction="http://tempuri.org/IApplicationSettingsService/UpdateProfileIcon" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="UpdatePassword">
-      <soap12:operation soapAction="http://tempuri.org/IApplicationSettingsService/UpdatePassword" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -724,6 +623,9 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SendMessage">
       <soap12:operation soapAction="http://tempuri.org/IPregameService/SendMessage" style="document" />
@@ -745,6 +647,9 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ReturnToLobby">
       <soap12:operation soapAction="http://tempuri.org/IPregameService/ReturnToLobby" style="document" />
@@ -862,39 +767,33 @@
   </wsdl:binding>
   <wsdl:service name="ServiceImplementation">
     <wsdl:port name="NetTcpBinding_ILoginService" binding="tns:NetTcpBinding_ILoginService">
-      <soap12:address location="net.tcp://localhost:8090/Contracts" />
+      <soap12:address location="net.tcp://192.168.175.91:8090/Contracts" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.175.91:8090/Contracts</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IMainMenuService" binding="tns:NetTcpBinding_IMainMenuService">
-      <soap12:address location="net.tcp://localhost:8090/Contracts" />
+      <soap12:address location="net.tcp://192.168.175.91:8090/Contracts" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
-      </wsa10:EndpointReference>
-    </wsdl:port>
-    <wsdl:port name="NetTcpBinding_IApplicationSettingsService" binding="tns:NetTcpBinding_IApplicationSettingsService">
-      <soap12:address location="net.tcp://localhost:8090/Contracts" />
-      <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.175.91:8090/Contracts</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IPregameService" binding="tns:NetTcpBinding_IPregameService">
-      <soap12:address location="net.tcp://localhost:8090/Contracts" />
+      <soap12:address location="net.tcp://192.168.175.91:8090/Contracts" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.175.91:8090/Contracts</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGameService" binding="tns:NetTcpBinding_IGameService">
-      <soap12:address location="net.tcp://localhost:8090/Contracts" />
+      <soap12:address location="net.tcp://192.168.175.91:8090/Contracts" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.175.91:8090/Contracts</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGameCodeVerificationService" binding="tns:NetTcpBinding_IGameCodeVerificationService">
-      <soap12:address location="net.tcp://localhost:8090/Contracts" />
+      <soap12:address location="net.tcp://192.168.175.91:8090/Contracts" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8090/Contracts</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.175.91:8090/Contracts</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

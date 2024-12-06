@@ -32,6 +32,7 @@ namespace PapayagramsClient.Login
             }
 
             CurrentPlayer.Player = host.AccessAsGuest();
+            CurrentPlayer.IsGuest = true;
             host.Close();
 
             InitializeComponent();
