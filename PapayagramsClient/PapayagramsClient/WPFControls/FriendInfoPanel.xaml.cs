@@ -69,7 +69,7 @@ namespace PapayagramsClient.WPFControls
 
                 case 2:
                     ActionButton.Click += new RoutedEventHandler(AcceptRequest);
-                    ActionButtonImage.Source = new BitmapImage(new Uri(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Icons\\done-svgrepo-com.png"));
+                    ActionButtonImage.Source = new BitmapImage(new Uri(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Icons\\done-ring-round-svgrepo-com.png"));
                     ActionButton.ToolTip = Properties.Resources.friendsAcceptRequestTooltip;
 
                     SecondaryActionButton.Click += new RoutedEventHandler(RejectRequest);

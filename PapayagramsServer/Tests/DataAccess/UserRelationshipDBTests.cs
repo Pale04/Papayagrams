@@ -514,5 +514,38 @@ namespace DataAccess.Tests
             int result = UserRelationshipDB.RemoveFriend("deivid", _registeredPlayer1.Username);
             Assert.AreEqual(expected, result, "RemoveFriendNonExistentPlayerTest");
         }
+
+        [TestMethod()]
+        public void UblockPlayerSuccessfulTest()
+        {
+            UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            int expected = 1;
+            int result = UserRelationshipDB.UnblockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "UnblockPlayerSuccessfulTest");
+        }
+
+        [TestMethod()]
+        public void UnblockPlayerNonExistentRelationTest()
+        {
+            int expected = 0;
+            int result = UserRelationshipDB.UnblockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "UnblockPlayerNonExistentRelationTest");
+        }
+
+        [TestMethod()]
+        public void UnblockPlayerNonExistentBlockerTest()
+        {
+            int expected = -1;
+            int result = UserRelationshipDB.UnblockPlayer("deivid", _registeredPlayer1.Username);
+            Assert.AreEqual(expected, result, "UnblockPlayerNonExistentBlockerTest");
+        }
+
+        [TestMethod()]
+        public void UnblockPlayerNonExistentBlockedTest()
+        {
+            int expected = -2;
+            int result = UserRelationshipDB.UnblockPlayer(_registeredPlayer1.Username, "deivid");
+            Assert.AreEqual(expected, result, "UnblockPlayerNonExistentBlockedTest");
+        }
     }
 }

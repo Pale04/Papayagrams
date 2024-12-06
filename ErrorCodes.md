@@ -27,6 +27,7 @@
 307. Friend request response failed. Requester not found.
 308. Player blocking fail
 309. Friend removal failed
+310. Unblocking player failed
 
 ## Pregame
 401. Game room not found or doesn't exist.

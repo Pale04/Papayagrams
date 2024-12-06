@@ -23,8 +23,8 @@ namespace Contracts
         /// </summary>
         /// <param name="roomCode">The game room code to remove the player from</param>
         /// <returns>0 if the player was removed successfully</returns>
-        [OperationContract]
-        int LeaveLobby(string username,string roomCode);
+        [OperationContract(IsOneWay = true)]
+        void LeaveLobby(string username,string roomCode);
 
         [OperationContract(IsOneWay = true)]
         void SendMessage(Message message);

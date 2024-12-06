@@ -77,7 +77,7 @@ namespace DomainClasses
             if (obj != null && GetType() == obj.GetType())
             {
                 Player player = (Player)obj;
-                isEqual = Id == player.Id && Username.Equals(player.Username) && Email.Equals(player.Email);
+                isEqual = Id == player.Id && Username.Equals(player.Username);
             }
 
             return isEqual;
