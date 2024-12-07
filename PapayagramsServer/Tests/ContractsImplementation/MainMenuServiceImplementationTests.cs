@@ -222,14 +222,14 @@ namespace Contracts.Tests
         public void SearchPlayerNonExistentTest()
         {
             (int code, _) = _serviceImplementation.SearchNoFriendPlayer(_registeredPlayer1.Username, "juan");
-            Assert.AreEqual(103, code, "SearchPlayerNonExistentTest");
+            Assert.AreEqual(311, code, "SearchPlayerNonExistentTest");
         }
 
         [TestMethod()]
         public void SearchPlayerNullUsernameTest()
         {
             (int code, _) = _serviceImplementation.SearchNoFriendPlayer(_registeredPlayer1.Username, null);
-            Assert.AreEqual(103, code, "SearchPlayerNonExistentTest");
+            Assert.AreEqual(311, code, "SearchPlayerNonExistentTest");
         }
 
         [TestMethod()]
@@ -246,21 +246,21 @@ namespace Contracts.Tests
             _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
             _serviceImplementation.RespondFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username, true);
             (int code, _) = _serviceImplementation.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.AreEqual(103, code, "SearchPlayerFriendTest");
+            Assert.AreEqual(311, code, "SearchPlayerFriendTest");
         }
 
         [TestMethod()]
         public void SearchPlayerSameUserTest()
         {
             (int code, _) = _serviceImplementation.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer1.Username);
-            Assert.AreEqual(103, code, "SearchPlayerSameUserTest");
+            Assert.AreEqual(311, code, "SearchPlayerSameUserTest");
         }
 
         [TestMethod()]
         public void SearchPlayerBlockedTargetTest()
         {
             _serviceImplementation.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            int expected = 103;
+            int expected = 311;
             (int result, _) = _serviceImplementation.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(expected, result, "SearchPlayerBlockedTargetTest");
         }
@@ -269,7 +269,7 @@ namespace Contracts.Tests
         public void SearchPlayerBlockedSearcherTest()
         {
             _serviceImplementation.BlockPlayer(_registeredPlayer2.Username, _registeredPlayer1.Username);
-            int expected = 103;
+            int expected = 311;
             (int result, _) = _serviceImplementation.SearchNoFriendPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(expected, result, "SearchPlayerBlockedSearcherTest");
         }
@@ -291,6 +291,67 @@ namespace Contracts.Tests
         }
 
         [TestMethod()]
+        public void SendFriendRequestNonExistentSenderTest()
+        {
+            int expected = 205;
+            int result = _serviceImplementation.SendFriendRequest("juan", _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "SendFriendRequestNonExistentSenderTest");
+        }
+
+        [TestMethod()]
+        public void SendFriendRequestNonExistentReceiverTest()
+        {
+            int expected = 205;
+            int result = _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, "juan");
+            Assert.AreEqual(expected, result, "SendFriendRequestNonExistentReceiverTest");
+        }
+
+        [TestMethod()]
+        public void SendFriendRequestToHimSelfTest()
+        {
+            int expected = 311;
+            int result = _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer1.Username);
+            Assert.AreEqual(expected, result, "SendFriendRequestToHimSelfTest");
+        }
+
+        [TestMethod()]
+        public void SendFriendRequestAlreadyFriendsTest()
+        {
+            _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            _serviceImplementation.RespondFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username, true);
+            int expected = 303;
+            int result = _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "SendFriendRequestAlreadyFriendsTest");
+        }
+
+        [TestMethod()]
+        public void SendFriendRequestAlreadyFriendsBothWaysTest()
+        {
+            _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            _serviceImplementation.RespondFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username, true);
+            int expected = 303;
+            int result = _serviceImplementation.SendFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username);
+            Assert.AreEqual(expected, result, "SendFriendRequestAlreadyFriendsTest");
+        }
+
+        [TestMethod()]
+        public void SendFriendRequestBlockedRelationTest()
+        {
+            _serviceImplementation.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            int expected = 304;
+            int result = _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "SendFriendRequestBlockedRelationTest");
+        }
+
+        public void SendFriendRequestBlockedRelationBothWaysTest()
+        {
+            _serviceImplementation.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            int expected = 304;
+            int result = _serviceImplementation.SendFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username);
+            Assert.AreEqual(expected, result, "SendFriendRequestBlockedRelationBothWaysTest");
+        }
+
+        [TestMethod()]
         public void SendFriendRequestSenderRequestedBefore()
         {
             int expected = 301;
@@ -306,25 +367,6 @@ namespace Contracts.Tests
             _serviceImplementation.SendFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username);
             int result = _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(expected, result, "SendFriendRequestReceiverRequestedBefore");
-        }
-
-        [TestMethod()]
-        public void SendFriendRequestAlreadyFriendsTest()
-        {
-            _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            _serviceImplementation.RespondFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username, true);
-            int expected = 303;
-            int result = _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.AreEqual(expected, result, "SendFriendRequestAlreadyFriendsTest");
-        }
-
-        [TestMethod()]
-        public void SendFriendRequestBlockedRelationTest()
-        {
-            _serviceImplementation.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            int expected = 304;
-            int result = _serviceImplementation.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.AreEqual(expected, result, "SendFriendRequestBlockedRelationTest");
         }
 
         [TestMethod()]

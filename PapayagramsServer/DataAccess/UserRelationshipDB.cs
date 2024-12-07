@@ -12,7 +12,7 @@ namespace DataAccess
     public static class UserRelationshipDB
     {
         /// <summary>
-        /// Retrieve the player searched if exists, is not friend and is not blocked
+        /// Retrieve the player searched if exists, is not the player himself and the relation is not blocked. 
         /// </summary>
         /// <param name="searcherUsername">Username of the player who is searching</param>
         /// <param name="searchedUsername">Username of the player who needs to be found</param>
@@ -39,31 +39,59 @@ namespace DataAccess
         }
 
         /// <summary>
-        /// Send a friend request to another player
+        /// Send a friend request to another player who is not a friend or they are not blocked
         /// </summary>
         /// <param name="senderUsername">Username of the player who sends the friend request</param>
         /// <param name="receiverUsername">Username of the player who receives the friend request</param>
-        /// <returns>0 if the sending was successful, -1 if the sender has already sent a request before, -2 if the receiver has already sent a request to sender before, -3 if they are friends and -4 if the relationship is blocked</returns>
+        /// <returns>1 if the sending was successful, 0 if the operation was wrong,-1 if they are friends, -2 if the relation is blocked, -3 if sender requested before, and -4 if receiver requested before</returns>
         /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
         public static int SendFriendRequest(string senderUsername, string receiverUsername)
         {
             int result;
             using (var context = new papayagramsEntities())
             {
-                //this approach is used because the stored procedure send_friend_request returns five different values
-                SqlParameter returnValue = new SqlParameter
+                var senderPlayer = context.User.Where(p => p.username == senderUsername).FirstOrDefault();
+                var receiverPlayer = context.User.Where(p => p.username == receiverUsername).FirstOrDefault();
+                if (senderPlayer == null || receiverPlayer == null)
                 {
-                    ParameterName = "@ReturnValue",
-                    SqlDbType = SqlDbType.Int,
-                    Direction = ParameterDirection.Output
-                };
-
-                SqlParameter senderParameter = new SqlParameter("@senderUsername", senderUsername);
-                SqlParameter receiverParameter = new SqlParameter("@receiverUsername", receiverUsername);
-                context.Database.ExecuteSqlCommand("EXEC @ReturnValue = send_friend_request @senderUsername, @receiverUsername", returnValue, senderParameter, receiverParameter);
-                result = (int)returnValue.Value;
+                    result = 0;
+                }
+                else
+                {
+                    var relation = context.UserRelationship.Where(r => (r.senderId == senderPlayer.id && r.receiverId == receiverPlayer.id) || (r.senderId == receiverPlayer.id && r.receiverId == senderPlayer.id)).FirstOrDefault();
+                    if (relation == null)
+                    {
+                        context.UserRelationship.Add(new UserRelationship
+                        {
+                            senderId = senderPlayer.id,
+                            receiverId = receiverPlayer.id,
+                            relationState = "request_pending"
+                        });
+                        result = context.SaveChanges();
+                    }
+                    else
+                    {
+                        string relationState = relation.relationState;
+                        if (relationState.Equals("friend"))
+                        {
+                            result = -1;
+                        }
+                        else if (relationState.Equals("blocked"))
+                        {
+                            result = -2;
+                        }
+                        else if (relation.senderId == senderPlayer.id)
+                        {
+                            result = -3;
+                        }
+                        else
+                        {
+                            result = -4;
+                        }
+                    }
+                }
+                return result;
             }
-            return result;
         }
 
         /// <summary>

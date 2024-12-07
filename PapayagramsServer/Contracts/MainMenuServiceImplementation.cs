@@ -49,15 +49,19 @@ namespace Contracts
 
         public int SendFriendRequest(string senderUsername, string receiverUsername)
         {
-            if (string.IsNullOrEmpty(senderUsername))
+            if (string.IsNullOrEmpty(senderUsername) || string.IsNullOrEmpty(receiverUsername))
             {
                 return 101;
             }
+            else if (senderUsername.Equals(receiverUsername))
+            {
+                return 311;
+            }
 
-            int result;
+            int operationResult;
             try
             {
-                result = UserRelationshipDB.SendFriendRequest(senderUsername, receiverUsername);
+                operationResult = UserRelationshipDB.SendFriendRequest(senderUsername, receiverUsername);
             }
             catch (EntityException error)
             {
@@ -65,20 +69,23 @@ namespace Contracts
                 return 102;
             }
 
-            switch (result)
+            switch (operationResult)
             {
-                case 0:
+                case 1:
                     return 0;
+                case 0:
+                    return 205;
                 case -1:
-                    return 301;
-                case -2:
-                    return 302;
-                case -3:
                     return 303;
-                case -4:
+                case -2:
                     return 304;
+                case -3:
+                    return 301;
+                case -4:
+                    return 302;
                 default:
-                    return -1;
+                    _logger.WarnFormat("Unknown result after to send friend request  (Sender username: {0}, Receiver username: {1}, Return code: {2})", senderUsername, receiverUsername, operationResult);
+                    return 0;
             }
         }
 

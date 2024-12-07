@@ -106,15 +106,59 @@ namespace DataAccess.Tests
         [TestMethod()]
         public void SendFriendRequestSuccessfulTest()
         {
-            int expected = 0;
+            int expected = 1;
             int result = UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(expected, result, "SendFriendRequestSuccessfulTest");
         }
 
         [TestMethod()]
-        public void SendFriendRequestSenderRequestedBefore()
+        public void SendFriendRequestNonExistentSenderTest()
+        {
+            int expected = 0;
+            int result = UserRelationshipDB.SendFriendRequest("deivid", _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "SendFriendRequestNonExistentSenderTest");
+        }
+
+        [TestMethod()]
+        public void SendFriendRequestNonExistentReceiverTest()
+        {
+            int expected = 0;
+            int result = UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, "deivid");
+            Assert.AreEqual(expected, result, "SendFriendRequestNonExistentReceiverTest");
+        }
+
+        [TestMethod()]
+        public void SendFriendRequestAlreadyFriendsTest()
         {
             int expected = -1;
+            UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            UserRelationshipDB.RespondFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username, true);
+            int result = UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "SendFriendRequestAlreadyFriendsTest");
+        }
+
+        [TestMethod()]
+        public void SendFriendRequestSenderBlockedTest()
+        {
+            int expected = -2;
+            UserRelationshipDB.BlockPlayer(_registeredPlayer2.Username, _registeredPlayer1.Username);
+            int result = UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "SendFriendRequestSenderBlockedTest");
+        }
+
+        [TestMethod()]
+        public void SendFriendRequestReceiverBlockedTest()
+        {
+            int expected = -2;
+            UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            int result = UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
+            Assert.AreEqual(expected, result, "SendFriendRequestSenderBlockedTest");
+        }
+
+        [TestMethod()]
+        public void SendFriendRequestSenderRequestedBefore()
+        {
+            int expected = -3;
             UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
             int result = UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(expected, result, "SendFriendRequestSenderRequestedBefore");
@@ -123,29 +167,10 @@ namespace DataAccess.Tests
         [TestMethod()]
         public void SendFriendRequestReceiverRequestedBefore()
         {
-            int expected = -2;
+            int expected = -4;
             UserRelationshipDB.SendFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username);
             int result = UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
             Assert.AreEqual(expected, result, "SendFriendRequestReceiverRequestedBefore");
-        }
-
-        [TestMethod()]
-        public void SendFriendRequestAlreadyFriendsTest()
-        {
-            int expected = -3;
-            UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            UserRelationshipDB.RespondFriendRequest(_registeredPlayer2.Username, _registeredPlayer1.Username, true);
-            int result = UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.AreEqual(expected, result, "SendFriendRequestAlreadyFriendsTest");
-        }
-
-        [TestMethod()]
-        public void SendFriendRequestBlockedRelationTest()
-        {
-            int expected = -4;
-            UserRelationshipDB.BlockPlayer(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            int result = UserRelationshipDB.SendFriendRequest(_registeredPlayer1.Username, _registeredPlayer2.Username);
-            Assert.AreEqual(expected, result, "SendFriendRequestBlockedRelationTest");
         }
 
         [TestMethod()]
