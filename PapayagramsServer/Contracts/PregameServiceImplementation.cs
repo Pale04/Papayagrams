@@ -4,7 +4,7 @@ using System;
 using System.ServiceModel;
 using System.Collections.Generic;
 using DataAccess;
-using System.Data;
+using System.Data.Entity.Core;
 
 namespace Contracts
 {
@@ -19,6 +19,7 @@ namespace Contracts
             catch (EntityException error)
             {
                 _logger.Fatal("Database connection failed", error);
+                _logger.WarnFormat("User status not updated in data base (username: {0}, to status: {1})", username, PlayerStatus.in_game.ToString());
                 return (102, null);
             }
 
@@ -50,10 +51,10 @@ namespace Contracts
                 return;
             }
 
-            PlayerStatus status;
+            PlayerStatus guestStatus;
             try
             {
-                status = UserDB.GetPlayerStatus(username);
+                guestStatus = UserDB.GetPlayerStatus(guestUsername);
             }
             catch (EntityException error)
             {
@@ -61,7 +62,7 @@ namespace Contracts
                 return;
             }
 
-            if (status == PlayerStatus.in_game)
+            if (guestStatus == PlayerStatus.online)
             {
                 GameInvitationDC invitation = new GameInvitationDC
                 {
@@ -69,8 +70,16 @@ namespace Contracts
                     SenderUsername = username
                 };
 
-                var callbackChannel = (IMainMenuServiceCallback)CallbacksPool.GetPregameCallbackChannel(guestUsername);
-                callbackChannel.ReceiveGameInvitation(invitation);
+                var callbackChannel = (IMainMenuServiceCallback)CallbacksPool.GetMainMenuCallbackChannel(guestUsername);
+                try
+                {
+                    callbackChannel.ReceiveGameInvitation(invitation);
+                }
+                catch (ObjectDisposedException error)
+                {
+                    _logger.Info($"Callback channel disposed (Game room: {gameRoomCode}, Username with callback disposed: {guestUsername})", error);
+                    ManageCallbackDispose(guestUsername);
+                }
             }
         }
 
@@ -90,7 +99,7 @@ namespace Contracts
                     catch (EntityException error)
                     {
                         _logger.Fatal("Database connection failed", error);
-                        _logger.WarnFormat("User status not updated in data base (username: {0}, to status: {1})", username, PlayerStatus.in_game);
+                        _logger.WarnFormat("User status update failed (username: {0}, to status: {1})", username, PlayerStatus.in_game.ToString());
                         return (102, null);
                     }
                 }
@@ -137,7 +146,7 @@ namespace Contracts
                 catch (EntityException error)
                 {
                     _logger.Fatal("Database connection failed", error);
-                    _logger.WarnFormat("User status not updated in data base (username: {0}, to status: {1})", username, PlayerStatus.online);
+                    _logger.WarnFormat("User status not updated in data base (username: {0}, to status: {1})", username, PlayerStatus.online.ToString());
                 }
             }
         }
@@ -150,7 +159,16 @@ namespace Contracts
             foreach (Player p in players)
             {
                 var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(p.Username);
-                callbackChannel.ReceiveMessage(message);    
+                try
+                {
+                    callbackChannel.ReceiveMessage(message);
+                }
+                catch (ObjectDisposedException error)
+                {
+                    _logger.Info($"Callback channel disposed (Game room: {message.GameRoomCode}, Username with callback disposed: {p.Username})", error);
+                    GameRoomsPool.RemovePlayerFromGameRoom(p.Username, message.GameRoomCode);
+                    ManageCallbackDispose(p.Username);
+                }
             }
         }
 
@@ -185,6 +203,22 @@ namespace Contracts
             {
                 room.State = GameRoomState.Waiting;
             }
+        }
+
+        private void ManageCallbackDispose(string username)
+        {
+            try
+            {
+                UserDB.UpdateUserStatus(username, PlayerStatus.offline);
+            }
+            catch (EntityException error)
+            {
+                _logger.Fatal("Database connection failed", error);
+                _logger.WarnFormat("User status not updated in data base (username: {0}, to status: {1})", username, PlayerStatus.offline.ToString());
+
+            }
+            CallbacksPool.RemoveAllCallbacksChannels(username);
+            PlayersOnlinePool.RemovePlayer(username);
         }
     }
 }

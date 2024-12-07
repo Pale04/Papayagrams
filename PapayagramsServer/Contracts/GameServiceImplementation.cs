@@ -1,7 +1,7 @@
 ﻿using BussinessLogic;
 using DataAccess;
 using DomainClasses;
-using System.Data;
+using System.Data.Entity.Core;
 using System.ServiceModel;
 using System.Threading.Tasks;
 
@@ -105,14 +105,17 @@ namespace Contracts
             
             string winnerUsername = game.GetWinner();
 
-            try
+            if (!PlayersOnlinePool.IsGuest(username))
             {
-                GameHistoryDB.UpdateGameHistory(username, username.Equals(winnerUsername), GameRoomsPool.GetGameRoom(gameRoomCode).GameConfiguration.GameMode);
-            }
-            catch (EntityException error)
-            {
-                _logger.Fatal("Database connection failed", error);
-                _logger.WarnFormat("Game history not updated in data base (username: {0}, winner: {1})",username, username.Equals(winnerUsername));
+                try
+                {
+                    GameHistoryDB.UpdateGameHistory(username, username.Equals(winnerUsername), GameRoomsPool.GetGameRoom(gameRoomCode).GameConfiguration.GameMode);
+                }
+                catch (EntityException error)
+                {
+                    _logger.Fatal("Database connection failed", error);
+                    _logger.WarnFormat("Game history not updated in data base (username: {0}, winner: {1})", username, username.Equals(winnerUsername));
+                }
             }
 
             var channel = (IGameServiceCallback)CallbacksPool.GetGameCallbackChannel(username);
@@ -152,7 +155,7 @@ namespace Contracts
                 catch (EntityException error)
                 {
                     _logger.Fatal("Database connection failed", error);
-                    _logger.WarnFormat("User status not updated in data base (username: {0}, to status: {1})", username, PlayerStatus.online);
+                    _logger.WarnFormat("User status not updated in data base (username: {0}, to status: {1})", username, PlayerStatus.online.ToString());
                 }
             }
         }

@@ -2,7 +2,7 @@
 using DomainClasses;
 using LanguageExt;
 using System;
-using System.Data;
+using System.Data.Entity.Core;
 
 namespace Contracts
 {

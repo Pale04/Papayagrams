@@ -67,6 +67,8 @@ namespace Contracts
 
             switch (result)
             {
+                case 0:
+                    return 0;
                 case -1:
                     return 301;
                 case -2:
@@ -76,7 +78,7 @@ namespace Contracts
                 case -4:
                     return 304;
                 default:
-                    return result;
+                    return -1;
             }
         }
 
