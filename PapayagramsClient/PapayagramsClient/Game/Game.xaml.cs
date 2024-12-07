@@ -323,16 +323,19 @@ namespace PapayagramsClient.Game
             _createdWords = words;
 
             _host.CalculateWinner(CurrentGame.RoomCode, CurrentPlayer.Player.Username, points);
-        }
-
-        public void EndGame(string winnerUsername, int score)
-        {
-            WinnerLabel.Content = Properties.Resources.gameEndWinner + " " + winnerUsername;
 
             foreach (string word in _createdWords)
             {
                 CorrectWordsPanel.Children.Add(new Label() { Content = word });
             }
+
+            ScoreLabel.Content = Properties.Resources.globalScore + points.ToString();
+        }
+
+        public void EndGame(string winnerUsername, int score)
+        {
+            WinnerLabel.Content = Properties.Resources.gameEndWinner + " " + winnerUsername;
+            WinnerScoreLabel.Content = Properties.Resources.globalScore + score;
 
             CalculatingResultsOverlay.Visibility = Visibility.Hidden;
             CalculatingResultsOverlay.IsEnabled = false;

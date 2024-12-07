@@ -38,7 +38,11 @@ namespace PapayagramsClient.Menu
                 return;
             }
 
-            host.UpdateAplicationSettings(CurrentPlayer.Player.Username, CurrentPlayer.Configuration);
+            if (CurrentPlayer.Configuration == null)
+            {
+                host.UpdateAplicationSettings(CurrentPlayer.Player.Username, CurrentPlayer.Configuration);
+            }
+
             host.Close();
         }
 

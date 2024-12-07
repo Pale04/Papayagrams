@@ -18,12 +18,19 @@ namespace PapayagramsClient
     {
         private MainMenuServiceClient _host;
         private string _invitationGameCode;
+        private MainWindow _mainWindow;
 
         public MainMenu()
         {
+            _mainWindow = (MainWindow)Application.Current.MainWindow;
             RetrieveConfiguration();
-            ApplyLanguageConfiguration();
-            ApplyCursorConfiguration();
+
+            if (CurrentPlayer.Configuration != null)
+            {
+                ApplyLanguageConfiguration();
+                ApplyCursorConfiguration();
+            }
+
             InitializeComponent();
 
             InstanceContext context = new InstanceContext(this);
@@ -37,7 +44,6 @@ namespace PapayagramsClient
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
-                NavigationService.GoBack();
                 return;
             }
 
@@ -50,7 +56,6 @@ namespace PapayagramsClient
 
                 case 102:
                     new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
-                    NavigationService.GoBack();
                     return;
             }
 
@@ -59,7 +64,14 @@ namespace PapayagramsClient
 
         ~MainMenu()
         {
-            _host.Close();
+            try
+            {
+                _host.Close();
+            }
+            catch (CommunicationObjectFaultedException)
+            { 
+                
+            }
         }
 
         private void RetrieveConfiguration()
@@ -72,11 +84,11 @@ namespace PapayagramsClient
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
-                NavigationService.GoBack();
                 return;
             }
 
             (int returnCode1, ApplicationSettingsDC userSettings) = settingsHost.GetApplicationSettings(CurrentPlayer.Player.Username);
+            settingsHost.Close();
             CurrentPlayer.Configuration = userSettings;
 
             switch (returnCode1)
@@ -86,14 +98,11 @@ namespace PapayagramsClient
 
                 case 102:
                     new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
-                    NavigationService.GoBack();
                     return;
 
                 case 205:
                     break;
             }
-
-            settingsHost.Close();
         }
 
         private void ApplyLanguageConfiguration()
@@ -139,16 +148,14 @@ namespace PapayagramsClient
         private void RetrieveRelationships()
         {
             (int returnCode, FriendDC[] relationships) = _host.GetAllRelationships(CurrentPlayer.Player.Username);
-            UserRelationships.FillLists(relationships);
 
             switch (returnCode)
             {
                 case 0:
+                    UserRelationships.FillLists(relationships);
                     break;
 
                 case 102:
-                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
-                    NavigationService.GoBack();
                     return;
             }
         }
@@ -165,7 +172,19 @@ namespace PapayagramsClient
 
         private void GoToProfile(object sender, RoutedEventArgs e)
         {
-            (int returnCode, PlayerStatsDC userStats) = _host.GetPlayerProfile(CurrentPlayer.Player.Username);
+            PlayerStatsDC userStats;
+            int returnCode;
+
+            try
+            {
+                (returnCode, userStats) = _host.GetPlayerProfile(CurrentPlayer.Player.Username);
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                NavigationService.Navigate(new Login.Login());
+                return;
+            }
+
             switch (returnCode)
             {
                 case 102:
@@ -308,7 +327,7 @@ namespace PapayagramsClient
             string friendUsername = FriendsMenuPanel.NewFriendUsernameTextBox.Text;
             int returnCode = 1;
 
-            if (string.IsNullOrWhiteSpace(friendUsername))
+            if (!string.IsNullOrWhiteSpace(friendUsername))
             {
                 returnCode = _host.SendFriendRequest(CurrentPlayer.Player.Username, friendUsername);
             }

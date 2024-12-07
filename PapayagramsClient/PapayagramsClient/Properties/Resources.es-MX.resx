@@ -489,4 +489,7 @@
   <data name="globalPasswordChanged" xml:space="preserve">
     <value>Contraseña actualizada exitosamente</value>
   </data>
+  <data name="globalScore" xml:space="preserve">
+    <value>Puntaje: </value>
+  </data>
 </root>

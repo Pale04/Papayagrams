@@ -20,9 +20,11 @@
         <Rectangle HorizontalAlignment="Left" Height="230" Margin="46,159,0,0" VerticalAlignment="Top" Width="650" Fill="#F3ECCD"/>
         <Rectangle HorizontalAlignment="Left" Height="250" Margin="46,414,0,0" VerticalAlignment="Top" Width="950" Fill="#F3ECCD"/>
 
-        <Image Name="ProfilePictureImage" Width="175" Height="175" Margin="78,186,828,358"/>
-        <Label Name="UsernameLabel" Margin="272,188,481,470" FontSize="32"/>
-        <Label Name="EmailLabel" Margin="272,274,481,382" FontSize="20"/>
+        <Button Click="ShowAvailableImages" Margin="78,186,828,358">
+            <Image Name="ProfilePictureImage" Width="175" Height="175"/>
+        </Button>
+        <Label Name="UsernameLabel" Margin="272,188,481,470" FontSize="28" VerticalContentAlignment="Top"/>
+        <Label Name="EmailLabel" Margin="272,274,481,382" FontSize="18" VerticalContentAlignment="Top"/>
 
         <Label Content="{x:Static p:Resources.profileStatsTitle}" HorizontalAlignment="Left" Margin="86,417,0,0" VerticalAlignment="Top" FontSize="30" FontWeight="Bold"/>
 
@@ -37,5 +39,19 @@
         <Label Name="WonSuddenDeathLabel" Content="Label" HorizontalAlignment="Left" Margin="423,593,0,0" VerticalAlignment="Top" FontSize="16"/>
 
         <Label Name="NuberFriendsLabel" Content="Label" HorizontalAlignment="Left" Margin="716,480,0,0" VerticalAlignment="Top" FontSize="20"/>
+
+        <Grid Panel.ZIndex="2" IsEnabled="False" Visibility="Hidden" Name="ImagesViewPanel" MouseDown="CloseImages">
+            <StackPanel Background="Yellow" Margin="272,159,191,331" Orientation="Horizontal">
+                <Button Margin="20, 20, 0, 20" Click="SetImage1">
+                    <Image Source="../Resources/PlayerImages/image1.jpg"/>
+                </Button>
+                <Button Margin="20, 20, 0, 20" Click="SetImage2">
+                    <Image Source="../Resources/PlayerImages/image2.jpg"/>
+                </Button>
+                <Button Margin="20, 20, 0, 20" Click="SetImage3">
+                    <Image Source="../Resources/PlayerImages/image3.jpg"/>
+                </Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

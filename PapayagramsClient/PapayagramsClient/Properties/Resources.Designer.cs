@@ -727,6 +727,15 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Score: .
+        /// </summary>
+        public static string globalScore {
+            get {
+                return ResourceManager.GetString("globalScore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Sign in.
         /// </summary>
         public static string globalSignIn {

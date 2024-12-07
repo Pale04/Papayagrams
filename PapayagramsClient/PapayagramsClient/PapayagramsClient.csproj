@@ -355,19 +355,19 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\PapayagramsService\item.xsd">
+    <None Include="Connected Services\PapayagramsService\item510.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item1.xsd">
+    <None Include="Connected Services\PapayagramsService\item511.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item2.xsd">
+    <None Include="Connected Services\PapayagramsService\item512.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item3.xsd">
+    <None Include="Connected Services\PapayagramsService\item513.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item4.xsd">
+    <None Include="Connected Services\PapayagramsService\item514.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.AchievementDC.datasource">
@@ -391,7 +391,7 @@
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.PlayerStatsDC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\PapayagramsService\ServiceImplementation.wsdl" />
+    <None Include="Connected Services\PapayagramsService\ServiceImplementation12.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -432,9 +432,7 @@
     <Resource Include="Resources\PopUpIcons\success-svgrepo-com.svg" />
     <Resource Include="Resources\PopUpIcons\warning-svgrepo-com.svg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\PlayerImages\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\Icons\add-friend-svgrepo-com.png" />
     <Resource Include="Resources\Icons\back-svgrepo-com.png" />
@@ -473,9 +471,6 @@
     <Resource Include="Resources\Icons\options-vertical-svgrepo-com.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\PapayagramsService\item.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Icons\cross-circle-svgrepo-com.png" />
   </ItemGroup>
   <ItemGroup>
@@ -486,6 +481,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\invitation-svgrepo-com.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PapayagramsService\item12.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\PlayerImages\image1.jpg" />
+    <Resource Include="Resources\PlayerImages\image2.jpg" />
+    <Resource Include="Resources\PlayerImages\image3.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
