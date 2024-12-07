@@ -171,7 +171,14 @@ namespace PapayagramsClient.Game
             _host.LeaveLobby(CurrentPlayer.Player.Username, CurrentGame.RoomCode);
             CurrentGame.RoomCode = "";
             CurrentGame.PlayersInRoom = new List<PlayerDC>();
-            NavigationService.Navigate(new MainMenu());
+            if (CurrentPlayer.IsGuest)
+            {
+                NavigationService.Navigate(new Login.Login());
+            }
+            else
+            {
+                NavigationService.Navigate(new MainMenu());
+            }
         }
 
         private void SendMessage()

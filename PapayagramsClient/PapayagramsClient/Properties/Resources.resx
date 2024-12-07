@@ -489,4 +489,7 @@
   <data name="globalPasswordChanged" xml:space="preserve">
     <value>Password updated successfully</value>
   </data>
+  <data name="globalScore" xml:space="preserve">
+    <value>Score: </value>
+  </data>
 </root>

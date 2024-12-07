@@ -1199,9 +1199,6 @@ namespace PapayagramsClient.PapayagramsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IMainMenuServiceCallback {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMainMenuService/ReceiveFriendRequest")]
-        void ReceiveFriendRequest(PapayagramsClient.PapayagramsService.PlayerDC player);
-        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMainMenuService/ReceiveGameInvitation")]
         void ReceiveGameInvitation(PapayagramsClient.PapayagramsService.GameInvitationDC invitation);
     }
