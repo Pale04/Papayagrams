@@ -1,6 +1,7 @@
 ﻿using log4net;
 using PapayagramsClient.PapayagramsService;
 using System.ServiceModel;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -19,6 +20,12 @@ namespace PapayagramsClient.Menu
         private void ReturnToConfig(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        private bool IsSafePassword(string password)
+        {
+            string safePasswordPattern = "[!-#*-/=_@\\dA-z]{8,}";
+            return Regex.IsMatch(password, safePasswordPattern);
         }
 
         private void SavePassword(object sender, RoutedEventArgs e)
@@ -40,6 +47,12 @@ namespace PapayagramsClient.Menu
             if (!newPassword.Equals(RepeatNewPasswordTextbox.Text))
             {
                 RepeatPasswordErrorText.Content = Properties.Resources.recoverPasswordsDontMatch;
+                return;
+            }
+
+            if (!IsSafePassword(password))
+            {
+                new SelectionPopUpWindow(Properties.Resources.globalWeakPassword, Properties.Resources.globalWeakPassword, 2).ShowDialog();
                 return;
             }
 

@@ -2,6 +2,7 @@
 using log4net.Repository.Hierarchy;
 using PapayagramsClient.PapayagramsService;
 using System.ServiceModel;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -20,6 +21,18 @@ namespace PapayagramsClient.Login
         private void ReturnToLogin(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Login());
+        }
+
+        private bool IsValiEmail(string email)
+        {
+            string emailPattern = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+            return Regex.IsMatch(email, emailPattern);
+        }
+
+        private bool IsSafePassword(string password)
+        {
+            string safePasswordPattern = "[!-#*-/=_@\\dA-z]{8,}";
+            return Regex.IsMatch(password, safePasswordPattern);
         }
 
         private void StartRecoveringPassword(object sender, RoutedEventArgs e)
@@ -45,6 +58,12 @@ namespace PapayagramsClient.Login
             }
 
             _userEmail = EmailTextbox.Text;
+
+            if (!IsValiEmail(_userEmail))
+            {
+                new SelectionPopUpWindow(Properties.Resources.globalNotEmail, Properties.Resources.globalNotEmail, 2).ShowDialog();
+                return;
+            }
 
             loginHost.SendPasswordRecoveryPIN(_userEmail);
             loginHost.Close();
@@ -74,6 +93,12 @@ namespace PapayagramsClient.Login
             if (!password.Equals(RepeatPasswordTextbox.Text))
             {
                 RepeatPasswordErrorText.Content = Properties.Resources.recoverPasswordsDontMatch;
+                return;
+            }
+
+            if (!IsSafePassword(password))
+            {
+                new SelectionPopUpWindow(Properties.Resources.globalWeakPassword, Properties.Resources.globalWeakPassword, 2).ShowDialog();
                 return;
             }
 
