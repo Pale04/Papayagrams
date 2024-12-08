@@ -23,8 +23,8 @@
         <Button Click="ShowAvailableImages" Margin="78,186,828,358">
             <Image Name="ProfilePictureImage" Width="175" Height="175"/>
         </Button>
-        <Label Name="UsernameLabel" Margin="272,188,481,470" FontSize="28" VerticalContentAlignment="Top"/>
-        <Label Name="EmailLabel" Margin="272,274,481,382" FontSize="18" VerticalContentAlignment="Top"/>
+        <Label Name="UsernameLabel" Content="nombre de usuario" Margin="272,188,440,446" FontSize="30" VerticalContentAlignment="Top"/>
+        <Label Name="EmailLabel" Content="correo" Margin="272,274,470,360" FontSize="20" VerticalContentAlignment="Top"/>
 
         <Label Content="{x:Static p:Resources.profileStatsTitle}" HorizontalAlignment="Left" Margin="86,417,0,0" VerticalAlignment="Top" FontSize="30" FontWeight="Bold"/>
 

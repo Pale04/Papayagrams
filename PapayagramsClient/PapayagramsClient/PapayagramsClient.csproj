@@ -359,19 +359,19 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\PapayagramsService\item510.xsd">
+    <None Include="Connected Services\PapayagramsService\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item511.xsd">
+    <None Include="Connected Services\PapayagramsService\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item512.xsd">
+    <None Include="Connected Services\PapayagramsService\item2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item513.xsd">
+    <None Include="Connected Services\PapayagramsService\item3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item514.xsd">
+    <None Include="Connected Services\PapayagramsService\item4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.AchievementDC.datasource">
@@ -395,7 +395,7 @@
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.PlayerStatsDC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\PapayagramsService\ServiceImplementation12.wsdl" />
+    <None Include="Connected Services\PapayagramsService\ServiceImplementation.wsdl" />
     <None Include="log4net.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -437,7 +437,9 @@
     <Resource Include="Resources\PopUpIcons\success-svgrepo-com.svg" />
     <Resource Include="Resources\PopUpIcons\warning-svgrepo-com.svg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Connected Services\PapayagramsService\item.disco" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\add-friend-svgrepo-com.png" />
     <Resource Include="Resources\Icons\back-svgrepo-com.png" />
@@ -486,9 +488,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\invitation-svgrepo-com.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\PapayagramsService\item12.disco" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\PlayerImages\image1.jpg" />

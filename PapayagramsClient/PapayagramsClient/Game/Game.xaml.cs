@@ -89,9 +89,35 @@ namespace PapayagramsClient.Game
 
             foreach (PlayerDC player in CurrentGame.PlayersInRoom)
             {
-                Label playerLabel = new Label();
-                playerLabel.Content = player.Username;
-                PlayersStackPanel.Children.Add(playerLabel);
+                Grid playerGrid = new Grid
+                {
+                    ColumnDefinitions =
+                    {
+                        new ColumnDefinition(),
+                        new ColumnDefinition(),
+                    }
+                };
+
+                Label usernameLabel = new Label
+                {
+                    Content = player.Username,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    VerticalAlignment = VerticalAlignment.Center,
+                };
+                playerGrid.Children.Add(usernameLabel);
+                Grid.SetColumn(usernameLabel, 1);
+
+                Image playerImage = new Image 
+                { 
+                    Source = ImagesService.GetImageFromId(player.ProfileIcon), 
+                    Height = 30, 
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    VerticalAlignment = VerticalAlignment.Center,
+                };
+                playerGrid.Children.Add(playerImage);
+                Grid.SetColumn(playerImage, 0);
+
+                PlayersStackPanel.Children.Add(playerGrid);
             }
         }
 

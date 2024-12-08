@@ -45,7 +45,7 @@ namespace PapayagramsClient.Menu
 
         private void ShowUserImage()
         {
-            ProfilePictureImage.Source = new BitmapImage(new Uri(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\PlayerImages\\image" + CurrentPlayer.Player.ProfileIcon + ".jpg"));
+            ProfilePictureImage.Source = ImagesService.GetImageFromId(CurrentPlayer.Player.ProfileIcon);
         }
 
         private void ReturnToMainMenu(object sender, RoutedEventArgs e)
