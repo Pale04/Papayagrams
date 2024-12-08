@@ -260,5 +260,10 @@ namespace Contracts
             CallbacksPool.PlayerArrivesToMainMenu(username,OperationContext.Current.GetCallbackChannel<IMainMenuServiceCallback>());
             return 0;
         }
+
+        private void ManageMainMenuCallbackDispose(string username)
+        {
+            Logout(username);
+        }
     }
 }

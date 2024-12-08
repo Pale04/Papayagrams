@@ -1,4 +1,5 @@
-﻿using DataAccess;
+﻿using BussinessLogic;
+using DataAccess;
 using DomainClasses;
 using LanguageExt;
 using System;
@@ -116,6 +117,7 @@ namespace Contracts
                 return 502;
             }
 
+            PlayersOnlinePool.GetPlayer(username).ProfileIcon = profileIcon;
             return 0;
         }
     }
