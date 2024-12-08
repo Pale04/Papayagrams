@@ -295,6 +295,15 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a You cannot befriend yourself.
+        /// </summary>
+        public static string errorBefriendYourself {
+            get {
+                return ResourceManager.GetString("errorBefriendYourself", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error while connecting.
         /// </summary>
         public static string errorConnectionTitle {

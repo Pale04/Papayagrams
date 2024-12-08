@@ -53,13 +53,7 @@ namespace PapayagramsClient.Game
             CurrentGame.GameConfig = gameConfig;
             RefreshLobby(gameRoom);
 
-            FriendsOverlay.AddFriendButton.Visibility = Visibility.Hidden;
-            FriendsOverlay.AddFriendButton.IsEnabled = false;
-            FriendsOverlay.NewFriendUsernameTextBox.IsEnabled = false;
-            FriendsOverlay.NewFriendUsernameTextBox.Visibility = Visibility.Hidden;
-            FriendsOverlay.SwitchViewButton.IsEnabled = false;
-            FriendsOverlay.SwitchViewButton.Visibility = Visibility.Hidden;
-            FriendsOverlay.FillFriendsListForInvitations();
+            SetFriendsOverlay();
         }
 
         // Join to game room with code x
@@ -101,13 +95,7 @@ namespace PapayagramsClient.Game
                     {
                         Players = CurrentGame.PlayersInRoom.ToArray(),
                     });
-                    FriendsOverlay.AddFriendButton.Visibility = Visibility.Hidden;
-                    FriendsOverlay.AddFriendButton.IsEnabled = false;
-                    FriendsOverlay.NewFriendUsernameTextBox.IsEnabled = false;
-                    FriendsOverlay.NewFriendUsernameTextBox.Visibility = Visibility.Hidden;
-                    FriendsOverlay.SwitchViewButton.IsEnabled = false;
-                    FriendsOverlay.SwitchViewButton.Visibility = Visibility.Hidden;
-                    FriendsOverlay.FillFriendsListForInvitations();
+                    SetFriendsOverlay();
                     return;
 
                 case 102:
@@ -118,6 +106,17 @@ namespace PapayagramsClient.Game
                     new SelectionPopUpWindow(Properties.Resources.lobbyRoomNotFoundTitle, Properties.Resources.lobbyRoomNotFound, 2).ShowDialog();
                     break;
             }
+        }
+
+        private void SetFriendsOverlay()
+        {
+            FriendsOverlay.AddFriendButton.Visibility = Visibility.Hidden;
+            FriendsOverlay.AddFriendButton.IsEnabled = false;
+            FriendsOverlay.NewFriendUsernameTextBox.IsEnabled = false;
+            FriendsOverlay.NewFriendUsernameTextBox.Visibility = Visibility.Hidden;
+            FriendsOverlay.SwitchViewButton.IsEnabled = false;
+            FriendsOverlay.SwitchViewButton.Visibility = Visibility.Hidden;
+            FriendsOverlay.FillFriendsListForInvitations();
         }
 
         ~Lobby()
@@ -142,6 +141,17 @@ namespace PapayagramsClient.Game
         public void RefreshLobby(GameRoomDC gameRoom)
         {
             CurrentGame.PlayersInRoom = gameRoom.Players.ToList();
+
+            if (CurrentPlayer.Player.Username == CurrentGame.PlayersInRoom[0].Username)
+            {
+                CreateGameButton.Visibility = Visibility.Visible;
+                CreateGameButton.IsEnabled = true;
+            }
+            else
+            {
+                CreateGameButton.Visibility = Visibility.Hidden;
+                CreateGameButton.IsEnabled = false;
+            }
 
             PlayersStackPanel.Children.Clear();
 

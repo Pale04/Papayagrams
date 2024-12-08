@@ -492,4 +492,7 @@
   <data name="globalScore" xml:space="preserve">
     <value>Puntaje: </value>
   </data>
+  <data name="errorBefriendYourself" xml:space="preserve">
+    <value>No puedes hacerte amigo de ti mismo</value>
+  </data>
 </root>

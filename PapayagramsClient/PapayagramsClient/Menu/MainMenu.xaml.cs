@@ -420,6 +420,11 @@ namespace PapayagramsClient
                     return;
                 }
             }
+            else if (friendUsername.Equals(CurrentPlayer.Player.Username))
+            {
+                new SelectionPopUpWindow(Properties.Resources.errorBefriendYourself, Properties.Resources.errorBefriendYourself, 3).ShowDialog();
+                return;
+            }
 
             switch (returnCode)
             {

@@ -492,4 +492,7 @@
   <data name="globalScore" xml:space="preserve">
     <value>Score: </value>
   </data>
+  <data name="errorBefriendYourself" xml:space="preserve">
+    <value>You cannot befriend yourself</value>
+  </data>
 </root>
