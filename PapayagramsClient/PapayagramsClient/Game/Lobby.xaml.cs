@@ -1,4 +1,5 @@
-﻿using PapayagramsClient.ClientData;
+﻿using log4net;
+using PapayagramsClient.ClientData;
 using PapayagramsClient.PapayagramsService;
 using PapayagramsClient.WPFControls;
 using System;
@@ -15,6 +16,8 @@ namespace PapayagramsClient.Game
     public partial class Lobby : Page, IPregameServiceCallback
     {
         private PregameServiceClient _host;
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(Lobby));
+
 
         // Create game room with configuration x
         public Lobby(GameConfigurationDC gameConfig)
@@ -31,7 +34,7 @@ namespace PapayagramsClient.Game
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
-                NavigationService.GoBack();
+                _logger.Fatal("Couldn't connect to server to create lobby");
                 return;
             }
 
@@ -39,7 +42,7 @@ namespace PapayagramsClient.Game
 
             if (returnCode != 0)
             {
-                NavigationService.GoBack();
+                new SelectionPopUpWindow(Properties.Resources.errorUnexpectedError, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
                 return;
             }
 
@@ -77,6 +80,7 @@ namespace PapayagramsClient.Game
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server to join lobby");
                 return;
             }
 
@@ -118,7 +122,14 @@ namespace PapayagramsClient.Game
 
         ~Lobby()
         {
-            _host.Close();
+            try
+            {
+                _host.Close();
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                _logger.Fatal("Couldn't close server connection at lobby");
+            }
         }
 
         public void ReceiveMessage(Message message)
@@ -168,7 +179,18 @@ namespace PapayagramsClient.Game
 
         private void ReturnToMainMenu(object sender, RoutedEventArgs e)
         {
-            _host.LeaveLobby(CurrentPlayer.Player.Username, CurrentGame.RoomCode);
+            try
+            {
+                _host.LeaveLobby(CurrentPlayer.Player.Username, CurrentGame.RoomCode);
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server to leave game");
+                NavigationService.Navigate(new MainMenu());
+                return;
+            }
+
             CurrentGame.RoomCode = "";
             CurrentGame.PlayersInRoom = new List<PlayerDC>();
             if (CurrentPlayer.IsGuest)
@@ -195,8 +217,19 @@ namespace PapayagramsClient.Game
                 GameRoomCode = CurrentGame.RoomCode
             };
 
-            _host.SendMessage(message);
             MessageTextbox.Text = "";
+
+            try
+            {
+                _host.SendMessage(message);
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server to send message");
+                NavigationService.Navigate(new MainMenu());
+                return;
+            }
         }
 
         private void CreateGame(object sender, RoutedEventArgs e)
@@ -214,7 +247,18 @@ namespace PapayagramsClient.Game
 
             if (CurrentGame.PlayersInRoom[0].Username == CurrentPlayer.Player.Username)
             {
-                _host.StartGame(CurrentGame.RoomCode);
+                try
+                {
+                    _host.StartGame(CurrentGame.RoomCode);
+                }
+                catch (CommunicationObjectFaultedException)
+                {
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                    _logger.Fatal("Couldn't connect to server to start game");
+                    NavigationService.Navigate(new MainMenu());
+                    return;
+                }
+
                 NavigationService.Navigate(new Game());
             }
         }
@@ -255,7 +299,18 @@ namespace PapayagramsClient.Game
                 }
             }
 
-            _host.InviteFriend(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text, CurrentGame.RoomCode);
+            try
+            {
+                _host.InviteFriend(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text, CurrentGame.RoomCode);
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server to invite friend");
+                NavigationService.Navigate(new MainMenu());
+                return;
+            }
+
             new SelectionPopUpWindow(Properties.Resources.lobbyFriendInvited, Properties.Resources.lobbyFriendInvited, 0).ShowDialog();
         }
 

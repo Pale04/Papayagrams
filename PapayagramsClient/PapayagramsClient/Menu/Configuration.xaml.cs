@@ -1,4 +1,5 @@
-﻿using PapayagramsClient.PapayagramsService;
+﻿using log4net;
+using PapayagramsClient.PapayagramsService;
 using System;
 using System.ServiceModel;
 using System.Windows;
@@ -9,6 +10,8 @@ namespace PapayagramsClient.Menu
 {
     public partial class Configuration : Page
     {
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(Leaderboards));
+
         public Configuration()
         {
             InitializeComponent();
@@ -34,6 +37,7 @@ namespace PapayagramsClient.Menu
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server to update user settings");
                 NavigationService.GoBack();
                 return;
             }

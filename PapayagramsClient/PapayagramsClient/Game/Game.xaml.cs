@@ -7,12 +7,14 @@ using System.Windows;
 using PapayagramsClient.WPFControls;
 using System.Collections.Generic;
 using System.Linq;
+using log4net;
 
 namespace PapayagramsClient.Game
 {
     public partial class Game : Page, IGameServiceCallback
     {
         private GameServiceClient _host;
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(Game));
 
         private List<string> _createdWords;
 
@@ -22,7 +24,6 @@ namespace PapayagramsClient.Game
 
         public Game()
         {
-            Console.WriteLine("Entering game...");
             InitializeComponent();
             FillGameGrids();
 
@@ -36,7 +37,7 @@ namespace PapayagramsClient.Game
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
-                NavigationService.GoBack();
+                _logger.Fatal("Couldn't reach server when joining game: " + CurrentGame.RoomCode);
                 return;
             }
 
@@ -52,7 +53,14 @@ namespace PapayagramsClient.Game
 
         ~Game()
         {
-            _host.Close();
+            try
+            {
+                _host.Close();
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                _logger.Fatal("Couldn't close server connection at game");
+            }
         }
 
         private void FillGameGrids()
@@ -91,7 +99,18 @@ namespace PapayagramsClient.Game
         {
             if ((bool)new SelectionPopUpWindow(Properties.Resources.gameLeaveGameTitle, Properties.Resources.gameLeaveGame, 4).ShowDialog())
             {
-                _host.LeaveGame(CurrentGame.RoomCode, CurrentPlayer.Player.Username, false);
+                try
+                {
+                    _host.LeaveGame(CurrentGame.RoomCode, CurrentPlayer.Player.Username, false);
+                }
+                catch (CommunicationObjectFaultedException)
+                {
+                    _logger.Fatal("Couldn't connect to server to leave game");
+                    NavigationService.Navigate(new Login.Login());
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                    return;
+                }
+
                 NavigationService.Navigate(new MainMenu());
             }
         }
@@ -124,7 +143,17 @@ namespace PapayagramsClient.Game
             }
 
             Console.WriteLine("piece " + letter + " dumped.");
-            _host.DumpPiece(CurrentGame.RoomCode, CurrentPlayer.Player.Username, char.Parse(letter));
+            try
+            {
+                _host.DumpPiece(CurrentGame.RoomCode, CurrentPlayer.Player.Username, char.Parse(letter));
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                _logger.Fatal("Couldn't connect to server to dump piece");
+                NavigationService.Navigate(new Login.Login());
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                return false;
+            }
 
             return true;
         }
@@ -142,9 +171,20 @@ namespace PapayagramsClient.Game
                     return;
                 }
 
-                _host.TakeSeed(CurrentGame.RoomCode);
-                CurrentGame.GameData.Points += FINISH_PIECES_POINTS;
-            }
+                    try
+                    {
+                        _host.TakeSeed(CurrentGame.RoomCode);
+                    }
+                    catch (CommunicationObjectFaultedException)
+                    {
+                        _logger.Fatal("Couldn't connect to server to take seeds");
+                        NavigationService.Navigate(new Login.Login());
+                        new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                        return;
+                    }
+
+                    CurrentGame.GameData.Points += FINISH_PIECES_POINTS;
+                }
         }
 
         private WPFGameBoardPieceSpot GetPieceAt(int column, int row)
@@ -322,7 +362,17 @@ namespace PapayagramsClient.Game
             (int points, List<string> words) = EvaluateBoard();
             _createdWords = words;
 
-            _host.CalculateWinner(CurrentGame.RoomCode, CurrentPlayer.Player.Username, points);
+            try
+            {
+                _host.CalculateWinner(CurrentGame.RoomCode, CurrentPlayer.Player.Username, points);
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                _logger.Fatal("Couldn't connect to server to end game");
+                NavigationService.Navigate(new Login.Login());
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                return;
+            }
 
             foreach (string word in _createdWords)
             {
@@ -346,7 +396,17 @@ namespace PapayagramsClient.Game
 
         private void ExitFinishedGame(object sender, RoutedEventArgs e)
         {
-            _host.LeaveGame(CurrentGame.RoomCode, CurrentPlayer.Player.Username, true);
+            try
+            {
+                _host.LeaveGame(CurrentGame.RoomCode, CurrentPlayer.Player.Username, true);
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                _logger.Fatal("Couldn't connect to server to leave game");
+                NavigationService.Navigate(new Login.Login());
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                return;
+            }
 
             CurrentGame.State = CurrentGame.GameState.Finished;
             CurrentGame.GameConfig = null;

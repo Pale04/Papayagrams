@@ -1,8 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Windows;
+﻿using System.Windows;
 
 namespace PapayagramsClient
 {

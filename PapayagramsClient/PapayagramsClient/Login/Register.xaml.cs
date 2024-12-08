@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using log4net;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -6,6 +7,8 @@ namespace PapayagramsClient.Login
 {
     public partial class Register : Page
     {
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(Register));
+
         public Register()
         {
             InitializeComponent();
@@ -44,6 +47,8 @@ namespace PapayagramsClient.Login
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server for registering");
+                NavigationService.GoBack();
                 return;
             }
 

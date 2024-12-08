@@ -1,4 +1,5 @@
-﻿using PapayagramsClient.PapayagramsService;
+﻿using log4net;
+using PapayagramsClient.PapayagramsService;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,6 +9,7 @@ namespace PapayagramsClient.Login
     public partial class VerificationCode : Page
     {
         PlayerDC _player;
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(VerificationCode));
         public VerificationCode(PlayerDC player)
         {
             _player = player;
@@ -24,6 +26,8 @@ namespace PapayagramsClient.Login
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server for verification");
+                NavigationService.GoBack();
                 return;
             }
 
@@ -70,6 +74,8 @@ namespace PapayagramsClient.Login
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server for resending verification code");
+                NavigationService.GoBack();
                 return;
             }
 

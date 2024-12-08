@@ -1,14 +1,16 @@
-﻿using PapayagramsClient.PapayagramsService;
+﻿using log4net;
+using log4net.Repository.Hierarchy;
+using PapayagramsClient.PapayagramsService;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Markup;
 
 namespace PapayagramsClient.Login
 {
     public partial class RecoverPassword : Page
     {
         private string _userEmail;
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(RecoverPassword));
 
         public RecoverPassword()
         {
@@ -31,6 +33,7 @@ namespace PapayagramsClient.Login
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server for recovering password");
                 NavigationService.GoBack();
                 return;
             }
@@ -83,6 +86,7 @@ namespace PapayagramsClient.Login
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server for saving new password");
                 NavigationService.GoBack();
                 return;
             }
@@ -125,6 +129,7 @@ namespace PapayagramsClient.Login
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server for sending recovery code");
                 NavigationService.GoBack();
                 return;
             }

@@ -1,27 +1,16 @@
-﻿using PapayagramsClient.PapayagramsService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using log4net;
+using PapayagramsClient.PapayagramsService;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PapayagramsClient.Menu
 {
-    /// <summary>
-    /// Lógica de interacción para ChangePassword.xaml
-    /// </summary>
     public partial class ChangePassword : Page
     {
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(ChangePassword));
+
         public ChangePassword()
         {
             InitializeComponent();
@@ -34,19 +23,6 @@ namespace PapayagramsClient.Menu
 
         private void SavePassword(object sender, RoutedEventArgs e)
         {
-            ApplicationSettingsServiceClient host = new ApplicationSettingsServiceClient();
-
-            try
-            {
-                host.Open();
-            }
-            catch (EndpointNotFoundException)
-            {
-                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
-                NavigationService.GoBack();
-                return;
-            }
-
             string password = PasswordTextbox.Text;
             if (string.IsNullOrWhiteSpace(password))
             {
@@ -64,6 +40,20 @@ namespace PapayagramsClient.Menu
             if (!newPassword.Equals(RepeatNewPasswordTextbox.Text))
             {
                 RepeatPasswordErrorText.Content = Properties.Resources.recoverPasswordsDontMatch;
+                return;
+            }
+
+            ApplicationSettingsServiceClient host = new ApplicationSettingsServiceClient();
+
+            try
+            {
+                host.Open();
+            }
+            catch (EndpointNotFoundException)
+            {
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Could't reach server to save new password");
+                NavigationService.GoBack();
                 return;
             }
 

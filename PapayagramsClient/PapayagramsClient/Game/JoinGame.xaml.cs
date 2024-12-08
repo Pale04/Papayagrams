@@ -1,4 +1,8 @@
-﻿using System.Windows;
+﻿using log4net;
+using System.Net;
+using System.ServiceModel;
+using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
@@ -6,6 +10,8 @@ namespace PapayagramsClient.Game
 {
     public partial class JoinGame : Page
     {
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(JoinGame));
+
         public JoinGame()
         {
             InitializeComponent();
@@ -19,7 +25,19 @@ namespace PapayagramsClient.Game
                 return;
             }
 
-            bool roomAvailable = new PapayagramsService.GameCodeVerificationServiceClient().VerifyGameRoom(gameRoomCode);
+            bool roomAvailable = false;
+
+            try
+            {
+                roomAvailable = new PapayagramsService.GameCodeVerificationServiceClient().VerifyGameRoom(gameRoomCode);
+            }
+            catch (EndpointNotFoundException)
+            {
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server for checking room availability");
+                NavigationService.GoBack();
+                return;
+            }
 
             if (roomAvailable)
             {

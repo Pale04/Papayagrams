@@ -1,4 +1,5 @@
-﻿using PapayagramsClient.PapayagramsService;
+﻿using log4net;
+using PapayagramsClient.PapayagramsService;
 using System;
 using System.IO;
 using System.ServiceModel;
@@ -12,6 +13,7 @@ namespace PapayagramsClient.Menu
     public partial class Profile : Page
     {
         private PlayerStatsDC _userStats;
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(Profile));
 
         public Profile(PlayerStatsDC userStats)
         {
@@ -70,49 +72,20 @@ namespace PapayagramsClient.Menu
 
         private void SetImage1(object sender, RoutedEventArgs e)
         {
-            ApplicationSettingsServiceClient host = new ApplicationSettingsServiceClient();
-
-            try
-            {
-                host.Open();
-            }
-            catch (EndpointNotFoundException)
-            {
-                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
-                NavigationService.GoBack();
-                return;
-            }
-
-            host.UpdateProfileIcon(CurrentPlayer.Player.Username, 1);
-            host.Close();
-            CurrentPlayer.Player.ProfileIcon = 1;
-            ShowUserImage();
-            CloseImages();
+            UpdateUserImage(1);
         }
 
         private void SetImage2(object sender, RoutedEventArgs e)
         {
-            ApplicationSettingsServiceClient host = new ApplicationSettingsServiceClient();
-
-            try
-            {
-                host.Open();
-            }
-            catch (EndpointNotFoundException)
-            {
-                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
-                NavigationService.GoBack();
-                return;
-            }
-
-            host.UpdateProfileIcon(CurrentPlayer.Player.Username, 2);
-            host.Close();
-            CurrentPlayer.Player.ProfileIcon = 2;
-            ShowUserImage();
-            CloseImages();
+            UpdateUserImage(2);
         }
 
         private void SetImage3(object sender, RoutedEventArgs e)
+        {
+            UpdateUserImage(3);
+        }
+
+        private void UpdateUserImage(int imageId)
         {
             ApplicationSettingsServiceClient host = new ApplicationSettingsServiceClient();
 
@@ -123,14 +96,14 @@ namespace PapayagramsClient.Menu
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't reach server for updating profile image");
                 NavigationService.GoBack();
                 return;
             }
 
-            host.UpdateProfileIcon(CurrentPlayer.Player.Username, 3);
+            host.UpdateProfileIcon(CurrentPlayer.Player.Username, imageId);
             host.Close();
-
-            CurrentPlayer.Player.ProfileIcon = 3;
+            CurrentPlayer.Player.ProfileIcon = imageId;
             ShowUserImage();
             CloseImages();
         }
