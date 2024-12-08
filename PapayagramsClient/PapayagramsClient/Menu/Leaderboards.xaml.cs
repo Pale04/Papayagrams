@@ -27,8 +27,8 @@ namespace PapayagramsClient.Menu
                 userPanel.Children.Add(usernameLabel);
 
                 TextBlock TotalGamesLabel = new TextBlock { Text = userStats.TotalGames.ToString() };
-                Grid.SetColumn(usernameLabel, 0);
-                userPanel.Children.Add(usernameLabel);
+                Grid.SetColumn(TotalGamesLabel, 0);
+                userPanel.Children.Add(TotalGamesLabel);
 
                 TextBlock GamesWonLabel = new TextBlock { Text = userStats.GamesWon.ToString() };
                 Grid.SetColumn(GamesWonLabel, 0);

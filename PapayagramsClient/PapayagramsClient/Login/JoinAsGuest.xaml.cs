@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -18,6 +19,8 @@ namespace PapayagramsClient.Login
 {
     public partial class JoinAsGuest : Page
     {
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(JoinAsGuest));
+
         public JoinAsGuest()
         {
             PapayagramsService.LoginServiceClient host = new PapayagramsService.LoginServiceClient();
@@ -28,6 +31,7 @@ namespace PapayagramsClient.Login
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server for login as guest");
                 return;
             }
 

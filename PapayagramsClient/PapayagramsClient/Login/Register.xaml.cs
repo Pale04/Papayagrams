@@ -1,4 +1,7 @@
-﻿using System.ServiceModel;
+﻿using log4net;
+using System;
+using System.ServiceModel;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -6,6 +9,8 @@ namespace PapayagramsClient.Login
 {
     public partial class Register : Page
     {
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(Register));
+
         public Register()
         {
             InitializeComponent();
@@ -36,6 +41,17 @@ namespace PapayagramsClient.Login
             player.Password = PasswordTextbox.Text;
             player.Email = EmailTextbox.Text;
 
+            if (!IsSafePassword(player.Password))
+            {
+                new SelectionPopUpWindow(Properties.Resources.globalWeakPassword, Properties.Resources.globalWeakPassword, 2).ShowDialog();
+                return;
+            }
+            else if (!IsValiEmail(player.Email))
+            {
+                new SelectionPopUpWindow(Properties.Resources.globalNotEmail, Properties.Resources.globalNotEmail, 2).ShowDialog();
+                return;
+            }
+
             PapayagramsService.LoginServiceClient host = new PapayagramsService.LoginServiceClient();
             try
             {
@@ -44,6 +60,8 @@ namespace PapayagramsClient.Login
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server for registering");
+                NavigationService.GoBack();
                 return;
             }
 
@@ -55,10 +73,13 @@ namespace PapayagramsClient.Login
                 switch (returnCode)
                 {
                     case 101:
+                        _logger.Error("One of the passed parameters on register user was null or empty");
+                        new SelectionPopUpWindow(Properties.Resources.errorUnexpectedError, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
                         return;
 
                     case 102:
                         EmailErrorText.Content = Properties.Resources.errorDatabaseConnection;
+                        _logger.Error("Could not register user to database");
                         return;
 
                     case 201:
@@ -73,6 +94,18 @@ namespace PapayagramsClient.Login
 
             new SelectionPopUpWindow(Properties.Resources.registerSuccessfulTitle, Properties.Resources.registerSuccessful, 0).ShowDialog();
             this.NavigationService.GoBack();
+        }
+
+        private bool IsValiEmail(string email)
+        {
+            string emailPattern = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+            return Regex.IsMatch(email, emailPattern);
+        }
+
+        private bool IsSafePassword(string password)
+        {
+            string safePasswordPattern = "[!-#*-/=_@\\dA-z]{8,}";
+            return Regex.IsMatch(password, safePasswordPattern);
         }
         
         private void GoToLogin(object sender, RoutedEventArgs e)

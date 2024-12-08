@@ -492,4 +492,17 @@
   <data name="globalScore" xml:space="preserve">
     <value>Score: </value>
   </data>
+  <data name="errorBefriendYourself" xml:space="preserve">
+    <value>You cannot befriend yourself</value>
+  </data>
+  <data name="globalWeakPassword" xml:space="preserve">
+    <value>The password must be at least 8 characters and contain at least one of each:
+- Uppercase letter
+- Lowercase letter
+- Number
+- Special character</value>
+  </data>
+  <data name="globalNotEmail" xml:space="preserve">
+    <value>The email address is not valid</value>
+  </data>
 </root>

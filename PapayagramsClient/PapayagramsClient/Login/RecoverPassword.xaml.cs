@@ -1,14 +1,17 @@
-﻿using PapayagramsClient.PapayagramsService;
+﻿using log4net;
+using log4net.Repository.Hierarchy;
+using PapayagramsClient.PapayagramsService;
 using System.ServiceModel;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Markup;
 
 namespace PapayagramsClient.Login
 {
     public partial class RecoverPassword : Page
     {
         private string _userEmail;
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(RecoverPassword));
 
         public RecoverPassword()
         {
@@ -18,6 +21,18 @@ namespace PapayagramsClient.Login
         private void ReturnToLogin(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Login());
+        }
+
+        private bool IsValiEmail(string email)
+        {
+            string emailPattern = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+            return Regex.IsMatch(email, emailPattern);
+        }
+
+        private bool IsSafePassword(string password)
+        {
+            string safePasswordPattern = "[!-#*-/=_@\\dA-z]{8,}";
+            return Regex.IsMatch(password, safePasswordPattern);
         }
 
         private void StartRecoveringPassword(object sender, RoutedEventArgs e)
@@ -31,6 +46,7 @@ namespace PapayagramsClient.Login
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server for recovering password");
                 NavigationService.GoBack();
                 return;
             }
@@ -42,6 +58,12 @@ namespace PapayagramsClient.Login
             }
 
             _userEmail = EmailTextbox.Text;
+
+            if (!IsValiEmail(_userEmail))
+            {
+                new SelectionPopUpWindow(Properties.Resources.globalNotEmail, Properties.Resources.globalNotEmail, 2).ShowDialog();
+                return;
+            }
 
             loginHost.SendPasswordRecoveryPIN(_userEmail);
             loginHost.Close();
@@ -74,6 +96,12 @@ namespace PapayagramsClient.Login
                 return;
             }
 
+            if (!IsSafePassword(password))
+            {
+                new SelectionPopUpWindow(Properties.Resources.globalWeakPassword, Properties.Resources.globalWeakPassword, 2).ShowDialog();
+                return;
+            }
+
             LoginServiceClient loginHost = new LoginServiceClient();
 
             try
@@ -83,6 +111,7 @@ namespace PapayagramsClient.Login
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server for saving new password");
                 NavigationService.GoBack();
                 return;
             }
@@ -125,6 +154,7 @@ namespace PapayagramsClient.Login
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server for sending recovery code");
                 NavigationService.GoBack();
                 return;
             }

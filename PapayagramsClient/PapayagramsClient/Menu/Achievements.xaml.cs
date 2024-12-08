@@ -1,4 +1,5 @@
-﻿using PapayagramsClient.PapayagramsService;
+﻿using log4net;
+using PapayagramsClient.PapayagramsService;
 using PapayagramsClient.WPFControls;
 using System;
 using System.Windows.Controls;
@@ -8,6 +9,7 @@ namespace PapayagramsClient.Menu
     public partial class Achievements : Page
     {
         private AchievementDC[] _achievements;
+
         public Achievements(AchievementDC[] achievements)
         {
             _achievements = achievements;

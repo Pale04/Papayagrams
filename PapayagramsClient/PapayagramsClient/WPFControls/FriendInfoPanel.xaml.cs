@@ -105,7 +105,7 @@ namespace PapayagramsClient.WPFControls
             }
 
             UsernameLabel.Text = Username;
-            // TODO: Add image
+            UserImage.Source = ImagesService.GetImageFromId(imageId);
         }
 
         private void UnblockUser(object sender, RoutedEventArgs e)

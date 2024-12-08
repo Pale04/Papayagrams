@@ -1,4 +1,5 @@
-﻿using PapayagramsClient.ClientData;
+﻿using log4net;
+using PapayagramsClient.ClientData;
 using PapayagramsClient.PapayagramsService;
 using PapayagramsClient.WPFControls;
 using System;
@@ -15,6 +16,8 @@ namespace PapayagramsClient.Game
     public partial class Lobby : Page, IPregameServiceCallback
     {
         private PregameServiceClient _host;
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(Lobby));
+
 
         // Create game room with configuration x
         public Lobby(GameConfigurationDC gameConfig)
@@ -31,7 +34,7 @@ namespace PapayagramsClient.Game
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
-                NavigationService.GoBack();
+                _logger.Fatal("Couldn't connect to server to create lobby");
                 return;
             }
 
@@ -39,7 +42,7 @@ namespace PapayagramsClient.Game
 
             if (returnCode != 0)
             {
-                NavigationService.GoBack();
+                new SelectionPopUpWindow(Properties.Resources.errorUnexpectedError, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
                 return;
             }
 
@@ -50,13 +53,7 @@ namespace PapayagramsClient.Game
             CurrentGame.GameConfig = gameConfig;
             RefreshLobby(gameRoom);
 
-            FriendsOverlay.AddFriendButton.Visibility = Visibility.Hidden;
-            FriendsOverlay.AddFriendButton.IsEnabled = false;
-            FriendsOverlay.NewFriendUsernameTextBox.IsEnabled = false;
-            FriendsOverlay.NewFriendUsernameTextBox.Visibility = Visibility.Hidden;
-            FriendsOverlay.SwitchViewButton.IsEnabled = false;
-            FriendsOverlay.SwitchViewButton.Visibility = Visibility.Hidden;
-            FriendsOverlay.FillFriendsListForInvitations();
+            SetFriendsOverlay();
         }
 
         // Join to game room with code x
@@ -77,6 +74,7 @@ namespace PapayagramsClient.Game
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server to join lobby");
                 return;
             }
 
@@ -97,13 +95,7 @@ namespace PapayagramsClient.Game
                     {
                         Players = CurrentGame.PlayersInRoom.ToArray(),
                     });
-                    FriendsOverlay.AddFriendButton.Visibility = Visibility.Hidden;
-                    FriendsOverlay.AddFriendButton.IsEnabled = false;
-                    FriendsOverlay.NewFriendUsernameTextBox.IsEnabled = false;
-                    FriendsOverlay.NewFriendUsernameTextBox.Visibility = Visibility.Hidden;
-                    FriendsOverlay.SwitchViewButton.IsEnabled = false;
-                    FriendsOverlay.SwitchViewButton.Visibility = Visibility.Hidden;
-                    FriendsOverlay.FillFriendsListForInvitations();
+                    SetFriendsOverlay();
                     return;
 
                 case 102:
@@ -116,9 +108,27 @@ namespace PapayagramsClient.Game
             }
         }
 
+        private void SetFriendsOverlay()
+        {
+            FriendsOverlay.AddFriendButton.Visibility = Visibility.Hidden;
+            FriendsOverlay.AddFriendButton.IsEnabled = false;
+            FriendsOverlay.NewFriendUsernameTextBox.IsEnabled = false;
+            FriendsOverlay.NewFriendUsernameTextBox.Visibility = Visibility.Hidden;
+            FriendsOverlay.SwitchViewButton.IsEnabled = false;
+            FriendsOverlay.SwitchViewButton.Visibility = Visibility.Hidden;
+            FriendsOverlay.FillFriendsListForInvitations();
+        }
+
         ~Lobby()
         {
-            _host.Close();
+            try
+            {
+                _host.Close();
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                _logger.Fatal("Couldn't close server connection at lobby");
+            }
         }
 
         public void ReceiveMessage(Message message)
@@ -132,35 +142,48 @@ namespace PapayagramsClient.Game
         {
             CurrentGame.PlayersInRoom = gameRoom.Players.ToList();
 
+            if (CurrentPlayer.Player.Username == CurrentGame.PlayersInRoom[0].Username)
+            {
+                CreateGameButton.Visibility = Visibility.Visible;
+                CreateGameButton.IsEnabled = true;
+            }
+            else
+            {
+                CreateGameButton.Visibility = Visibility.Hidden;
+                CreateGameButton.IsEnabled = false;
+            }
+
             PlayersStackPanel.Children.Clear();
 
             foreach (PlayerDC player in CurrentGame.PlayersInRoom)
             {
                 Grid playerGrid = new Grid
                 {
-                    RowDefinitions =
-                    {
-                        new RowDefinition(),
-                        new RowDefinition(),
-                    },
                     ColumnDefinitions =
                     {
+                        new ColumnDefinition(),
                         new ColumnDefinition(),
                     }
                 };
 
                 Label usernameLabel = new Label
                 {
-                    Content = player.Username
+                    Content = player.Username,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    VerticalAlignment = VerticalAlignment.Center,
                 };
                 playerGrid.Children.Add(usernameLabel);
-                Grid.SetColumn(usernameLabel, 0);
-                Grid.SetRow(usernameLabel, 1);
+                Grid.SetColumn(usernameLabel, 1);
 
-                Image playerImage = new Image();
+                Image playerImage = new Image 
+                { 
+                    Source = ImagesService.GetImageFromId(player.ProfileIcon), 
+                    Height = 30, 
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    VerticalAlignment = VerticalAlignment.Center,
+                };
                 playerGrid.Children.Add(playerImage);
                 Grid.SetColumn(playerImage, 0);
-                Grid.SetRow(playerImage, 0);
 
                 PlayersStackPanel.Children.Add(playerGrid);
             }
@@ -168,7 +191,18 @@ namespace PapayagramsClient.Game
 
         private void ReturnToMainMenu(object sender, RoutedEventArgs e)
         {
-            _host.LeaveLobby(CurrentPlayer.Player.Username, CurrentGame.RoomCode);
+            try
+            {
+                _host.LeaveLobby(CurrentPlayer.Player.Username, CurrentGame.RoomCode);
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server to leave game");
+                NavigationService.Navigate(new MainMenu());
+                return;
+            }
+
             CurrentGame.RoomCode = "";
             CurrentGame.PlayersInRoom = new List<PlayerDC>();
             if (CurrentPlayer.IsGuest)
@@ -195,8 +229,19 @@ namespace PapayagramsClient.Game
                 GameRoomCode = CurrentGame.RoomCode
             };
 
-            _host.SendMessage(message);
             MessageTextbox.Text = "";
+
+            try
+            {
+                _host.SendMessage(message);
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server to send message");
+                NavigationService.Navigate(new MainMenu());
+                return;
+            }
         }
 
         private void CreateGame(object sender, RoutedEventArgs e)
@@ -214,7 +259,18 @@ namespace PapayagramsClient.Game
 
             if (CurrentGame.PlayersInRoom[0].Username == CurrentPlayer.Player.Username)
             {
-                _host.StartGame(CurrentGame.RoomCode);
+                try
+                {
+                    _host.StartGame(CurrentGame.RoomCode);
+                }
+                catch (CommunicationObjectFaultedException)
+                {
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                    _logger.Fatal("Couldn't connect to server to start game");
+                    NavigationService.Navigate(new MainMenu());
+                    return;
+                }
+
                 NavigationService.Navigate(new Game());
             }
         }
@@ -255,7 +311,18 @@ namespace PapayagramsClient.Game
                 }
             }
 
-            _host.InviteFriend(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text, CurrentGame.RoomCode);
+            try
+            {
+                _host.InviteFriend(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text, CurrentGame.RoomCode);
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server to invite friend");
+                NavigationService.Navigate(new MainMenu());
+                return;
+            }
+
             new SelectionPopUpWindow(Properties.Resources.lobbyFriendInvited, Properties.Resources.lobbyFriendInvited, 0).ShowDialog();
         }
 

@@ -295,6 +295,15 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a You cannot befriend yourself.
+        /// </summary>
+        public static string errorBefriendYourself {
+            get {
+                return ResourceManager.GetString("errorBefriendYourself", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error while connecting.
         /// </summary>
         public static string errorConnectionTitle {
@@ -700,6 +709,15 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a That&apos;s not a valid email address.
+        /// </summary>
+        public static string globalNotEmail {
+            get {
+                return ResourceManager.GetString("globalNotEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Password.
         /// </summary>
         public static string globalPassword {
@@ -750,6 +768,19 @@ namespace PapayagramsClient.Properties {
         public static string globalUsername {
             get {
                 return ResourceManager.GetString("globalUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The password must be at least 8 characters and contain at least one of each:
+        ///- Uppercase letter
+        ///- Lowercase letter
+        ///- Number
+        ///- Special character.
+        /// </summary>
+        public static string globalWeakPassword {
+            get {
+                return ResourceManager.GetString("globalWeakPassword", resourceCulture);
             }
         }
         

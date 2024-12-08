@@ -38,6 +38,9 @@
     <Reference Include="ExCSS, Version=4.2.3.0, Culture=neutral, PublicKeyToken=bdbe16be9b936b9a, processorArchitecture=MSIL">
       <HintPath>..\packages\ExCSS.4.2.3\lib\net48\ExCSS.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=3.0.3.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.3.0.3\lib\net462\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -78,6 +81,7 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Pipelines, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -355,19 +359,19 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\PapayagramsService\item510.xsd">
+    <None Include="Connected Services\PapayagramsService\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item511.xsd">
+    <None Include="Connected Services\PapayagramsService\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item512.xsd">
+    <None Include="Connected Services\PapayagramsService\item2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item513.xsd">
+    <None Include="Connected Services\PapayagramsService\item3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PapayagramsService\item514.xsd">
+    <None Include="Connected Services\PapayagramsService\item4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.AchievementDC.datasource">
@@ -391,7 +395,8 @@
     <None Include="Connected Services\PapayagramsService\PapayagramsClient.PapayagramsService.PlayerStatsDC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\PapayagramsService\ServiceImplementation12.wsdl" />
+    <None Include="Connected Services\PapayagramsService\ServiceImplementation.wsdl" />
+    <None Include="log4net.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -432,7 +437,9 @@
     <Resource Include="Resources\PopUpIcons\success-svgrepo-com.svg" />
     <Resource Include="Resources\PopUpIcons\warning-svgrepo-com.svg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Connected Services\PapayagramsService\item.disco" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\add-friend-svgrepo-com.png" />
     <Resource Include="Resources\Icons\back-svgrepo-com.png" />
@@ -481,9 +488,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\invitation-svgrepo-com.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\PapayagramsService\item12.disco" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\PlayerImages\image1.jpg" />

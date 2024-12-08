@@ -11,6 +11,7 @@ using PapayagramsClient.ClientData;
 using System.Threading;
 using System.Windows.Input;
 using System.IO;
+using log4net;
 
 namespace PapayagramsClient
 {
@@ -18,11 +19,10 @@ namespace PapayagramsClient
     {
         private MainMenuServiceClient _host;
         private string _invitationGameCode;
-        private MainWindow _mainWindow;
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(MainMenu));
 
         public MainMenu()
         {
-            _mainWindow = (MainWindow)Application.Current.MainWindow;
             RetrieveConfiguration();
 
             if (CurrentPlayer.Configuration != null)
@@ -44,10 +44,21 @@ namespace PapayagramsClient
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server");
                 return;
             }
 
-            int returnCode = _host.ReportToServer(CurrentPlayer.Player.Username);
+            int returnCode;
+
+            try
+            {
+                returnCode = _host.ReportToServer(CurrentPlayer.Player.Username);
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                _logger.Fatal("Couldn't connect to server");
+                return;
+            }
 
             switch (returnCode)
             {
@@ -56,6 +67,7 @@ namespace PapayagramsClient
 
                 case 102:
                     new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    _logger.Error("Couldn't update user status on database");
                     return;
             }
 
@@ -69,8 +81,8 @@ namespace PapayagramsClient
                 _host.Close();
             }
             catch (CommunicationObjectFaultedException)
-            { 
-                
+            {
+                _logger.Fatal("Can't close connection, couldn't connect to server");
             }
         }
 
@@ -84,6 +96,7 @@ namespace PapayagramsClient
             catch (EndpointNotFoundException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server");
                 return;
             }
 
@@ -98,6 +111,7 @@ namespace PapayagramsClient
 
                 case 102:
                     new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    _logger.Error("Couldn't retrieve user settings");
                     return;
 
                 case 205:
@@ -115,16 +129,16 @@ namespace PapayagramsClient
 
             switch (CurrentPlayer.Configuration.SelectedLanguage)
             {
-                case ApplicationLanguageDC.auto:
-                    Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.InvariantCulture;
-                    break;
-
                 case ApplicationLanguageDC.english:
                     Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
                     break;
 
                 case ApplicationLanguageDC.spanish:
                     Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es-MX");
+                    break;
+
+                default:
+                    Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.InvariantCulture;
                     break;
             }
         }
@@ -147,7 +161,19 @@ namespace PapayagramsClient
 
         private void RetrieveRelationships()
         {
-            (int returnCode, FriendDC[] relationships) = _host.GetAllRelationships(CurrentPlayer.Player.Username);
+            int returnCode;
+            FriendDC[] relationships;
+
+            try
+            {
+                (returnCode, relationships) = _host.GetAllRelationships(CurrentPlayer.Player.Username);
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                _logger.Fatal("Couldn't connect to server");
+                NavigationService.Navigate(new Login.Login());
+                return;
+            }
 
             switch (returnCode)
             {
@@ -156,6 +182,7 @@ namespace PapayagramsClient
                     break;
 
                 case 102:
+                    _logger.Error("Couldn't retrieve user relationships");
                     return;
             }
         }
@@ -181,6 +208,7 @@ namespace PapayagramsClient
             }
             catch (CommunicationObjectFaultedException)
             {
+                _logger.Fatal("Couldn't connect to server");
                 NavigationService.Navigate(new Login.Login());
                 return;
             }
@@ -189,6 +217,7 @@ namespace PapayagramsClient
             {
                 case 102:
                     new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    _logger.Error("Couldn't retrieve profile info");
                     return;
                 case 205:
                     new SelectionPopUpWindow(Properties.Resources.errorOccurredTitle, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
@@ -217,8 +246,21 @@ namespace PapayagramsClient
                 return;
             }
 
-            int returnCode = host.Logout(CurrentPlayer.Player.Username);
-            host.Close();
+            int returnCode;
+
+            try
+            {
+                returnCode = host.Logout(CurrentPlayer.Player.Username);
+
+                host.Close();
+            }
+            catch (EndpointNotFoundException)
+            {
+                _logger.Fatal("Couldn't connect to server");
+                NavigationService.Navigate(new Login.Login());
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                return;
+            }
 
             switch (returnCode)
             {
@@ -238,7 +280,19 @@ namespace PapayagramsClient
 
         private void GoToAchievements(object sender, RoutedEventArgs e)
         {
-            (int returnCode, AchievementDC[] achievements) = _host.GetAchievements(CurrentPlayer.Player.Username);
+            int returnCode;
+            AchievementDC[] achievements;
+            try
+            {
+                (returnCode, achievements) = _host.GetAchievements(CurrentPlayer.Player.Username);
+            }
+            catch (EndpointNotFoundException)
+            {
+                _logger.Fatal("Couldn't connect to server");
+                NavigationService.Navigate(new Login.Login());
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                return;
+            }
 
             switch (returnCode)
             {
@@ -271,7 +325,19 @@ namespace PapayagramsClient
 
             if (!string.IsNullOrWhiteSpace(_invitationGameCode))
             {
-                bool roomAvailable = new GameCodeVerificationServiceClient().VerifyGameRoom(_invitationGameCode);
+                bool roomAvailable;
+
+                try
+                {
+                    roomAvailable = new GameCodeVerificationServiceClient().VerifyGameRoom(_invitationGameCode);
+                }
+                catch (CommunicationObjectFaultedException)
+                {
+                    _logger.Fatal("Couldn't connect to server");
+                    NavigationService.Navigate(new Login.Login());
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                    return;
+                }
 
                 if (roomAvailable)
                 {
@@ -299,7 +365,20 @@ namespace PapayagramsClient
             FriendsMenuPanel.ClearLists();
             FriendsMenuPanel.Visibility = Visibility.Visible;
             FriendsMenuPanel.IsEnabled = true;
-            (int returnCode, FriendDC[] relationships) = _host.GetAllRelationships(CurrentPlayer.Player.Username);
+            int returnCode;
+            FriendDC[] relationships;
+
+            try
+            {
+                (returnCode, relationships) = _host.GetAllRelationships(CurrentPlayer.Player.Username);
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                _logger.Fatal("Couldn't connect to server");
+                NavigationService.Navigate(new Login.Login());
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                return;
+            }
 
             switch (returnCode)
             {
@@ -329,7 +408,22 @@ namespace PapayagramsClient
 
             if (!string.IsNullOrWhiteSpace(friendUsername))
             {
-                returnCode = _host.SendFriendRequest(CurrentPlayer.Player.Username, friendUsername);
+                try
+                {
+                    _logger.Fatal("Couldn't connect to server");
+                    NavigationService.Navigate(new Login.Login());
+                    returnCode = _host.SendFriendRequest(CurrentPlayer.Player.Username, friendUsername);
+                }
+                catch (CommunicationObjectFaultedException)
+                {
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                    return;
+                }
+            }
+            else if (friendUsername.Equals(CurrentPlayer.Player.Username))
+            {
+                new SelectionPopUpWindow(Properties.Resources.errorBefriendYourself, Properties.Resources.errorBefriendYourself, 3).ShowDialog();
+                return;
             }
 
             switch (returnCode)
@@ -373,7 +467,19 @@ namespace PapayagramsClient
         private void AcceptFriendRequest(object sender, RoutedEventArgs e)
         {
             FriendInfoPanel friendPanel = (FriendInfoPanel)sender;
-            int returnCode = _host.RespondFriendRequest(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text, true);
+            int returnCode;
+
+            try
+            {
+                returnCode = _host.RespondFriendRequest(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text, true);
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                _logger.Fatal("Couldn't connect to server");
+                NavigationService.Navigate(new Login.Login());
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                return;
+            }
 
             switch (returnCode)
             {
@@ -413,7 +519,19 @@ namespace PapayagramsClient
         private void RejectFriendRequest(object sender, RoutedEventArgs e)
         {
             FriendInfoPanel friendPanel = (FriendInfoPanel)sender;
-            int returnCode = _host.RespondFriendRequest(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text, false);
+            int returnCode;
+
+            try
+            {
+                returnCode = _host.RespondFriendRequest(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text, false);
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                _logger.Fatal("Couldn't connect to server");
+                NavigationService.Navigate(new Login.Login());
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                return;
+            }
 
             switch (returnCode)
             {
@@ -452,7 +570,18 @@ namespace PapayagramsClient
         private void BlockUser(object sender, RoutedEventArgs e)
         {
             FriendInfoPanel friendPanel = (FriendInfoPanel)sender;
-            int returnCode = _host.BlockPlayer(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text);
+            int returnCode;
+            try
+            {
+                returnCode = _host.BlockPlayer(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text);
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                _logger.Fatal("Couldn't connect to server");
+                NavigationService.Navigate(new Login.Login());
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                return;
+            }
 
             switch (returnCode)
             {
@@ -482,8 +611,19 @@ namespace PapayagramsClient
         private void UnblockUser(object sender, RoutedEventArgs e)
         {
             FriendInfoPanel friendPanel = (FriendInfoPanel)sender;
-            int returnCode = _host.UnblockPlayer(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text);
-             
+            int returnCode;
+            try
+            {
+                returnCode = _host.UnblockPlayer(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text);
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                _logger.Fatal("Couldn't connect to server");
+                NavigationService.Navigate(new Login.Login());
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                return;
+            }
+
             switch (returnCode)
             {
                 case 0:
@@ -512,7 +652,19 @@ namespace PapayagramsClient
         private void RemoveFriend(object sender, RoutedEventArgs e)
         {
             FriendInfoPanel friendPanel = (FriendInfoPanel)sender;
-            int returnCode = _host.RemoveFriend(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text);
+            int returnCode;
+
+            try
+            {
+                returnCode = _host.RemoveFriend(CurrentPlayer.Player.Username, friendPanel.UsernameLabel.Text);
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                _logger.Fatal("Couldn't connect to server");
+                NavigationService.Navigate(new Login.Login());
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                return;
+            }
 
             switch (returnCode)
             {
@@ -540,8 +692,18 @@ namespace PapayagramsClient
 
         private void GoToLeaderboard(object sender, RoutedEventArgs e)
         {
-            LeaderboardStatsDC[] stats = _host.GetGlobalLeaderboard();
-            NavigationService.Navigate(new Leaderboards(stats));
+            try
+            {
+                LeaderboardStatsDC[] stats = _host.GetGlobalLeaderboard();
+                NavigationService.Navigate(new Leaderboards(stats));
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                _logger.Fatal("Couldn't connect to server");
+                NavigationService.Navigate(new Login.Login());
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                return;
+            }
         }
     }
 }

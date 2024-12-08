@@ -1,4 +1,5 @@
-﻿using PapayagramsClient.PapayagramsService;
+﻿using log4net.Config;
+using PapayagramsClient.PapayagramsService;
 using System;
 using System.Windows;
 
@@ -8,6 +9,9 @@ namespace PapayagramsClient
     {
         public MainWindow()
         {
+            var logRepository = log4net.LogManager.GetRepository(System.Reflection.Assembly.GetEntryAssembly());
+            XmlConfigurator.Configure(logRepository, new System.IO.FileInfo("log4net.config"));
+
             InitializeComponent();
             MainFrame.Navigate(new Login.Login());
         }

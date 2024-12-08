@@ -1,4 +1,5 @@
-﻿using PapayagramsClient.PapayagramsService;
+﻿using log4net;
+using PapayagramsClient.PapayagramsService;
 using System.Diagnostics.Eventing.Reader;
 
 namespace PapayagramsClient.Game

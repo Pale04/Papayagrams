@@ -358,7 +358,7 @@
     <value>No se pudo unir al lobby</value>
   </data>
   <data name="joinGameCantJoin" xml:space="preserve">
-    <value>El código es incorrecto o el lobby está lleno</value>
+    <value>El código es incorrecto o la sala está llena</value>
   </data>
   <data name="globalClose" xml:space="preserve">
     <value>Cerrar</value>
@@ -491,5 +491,18 @@
   </data>
   <data name="globalScore" xml:space="preserve">
     <value>Puntaje: </value>
+  </data>
+  <data name="errorBefriendYourself" xml:space="preserve">
+    <value>No puedes hacerte amigo de ti mismo</value>
+  </data>
+  <data name="globalWeakPassword" xml:space="preserve">
+    <value>La contraseña debe ser de almenos 8 de largo y contener almenos uno de los siguientes:
+- Letra minuscula
+- Letra mayuscula
+- Numero
+- Caracter especial</value>
+  </data>
+  <data name="globalNotEmail" xml:space="preserve">
+    <value>El correo ingresado no es valido</value>
   </data>
 </root>
