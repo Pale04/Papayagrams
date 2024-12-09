@@ -11,11 +11,11 @@ namespace PapayagramsClient.Menu
         public Leaderboards(LeaderboardStatsDC[] stats)
         {
             InitializeComponent();
-
+            SetTitleGrid();
 
             foreach (LeaderboardStatsDC userStats in stats)
             {
-                Grid userPanel = new Grid { Margin = new Thickness(10), HorizontalAlignment = HorizontalAlignment.Center, Background = Brushes.Beige };
+                Grid userPanel = new Grid { Margin = new Thickness(10), HorizontalAlignment = HorizontalAlignment.Center, Background = Brushes.Beige, Width = 800 };
 
                 for (int i = 0; i < 4; i++)
                 {
@@ -27,15 +27,15 @@ namespace PapayagramsClient.Menu
                 userPanel.Children.Add(usernameLabel);
 
                 TextBlock TotalGamesLabel = new TextBlock { Text = userStats.TotalGames.ToString() };
-                Grid.SetColumn(TotalGamesLabel, 0);
+                Grid.SetColumn(TotalGamesLabel, 1);
                 userPanel.Children.Add(TotalGamesLabel);
 
                 TextBlock GamesWonLabel = new TextBlock { Text = userStats.GamesWon.ToString() };
-                Grid.SetColumn(GamesWonLabel, 0);
+                Grid.SetColumn(GamesWonLabel, 2);
                 userPanel.Children.Add(GamesWonLabel);
 
                 TextBlock GamesLostLabel = new TextBlock { Text = userStats.GamesLost.ToString() };
-                Grid.SetColumn(GamesLostLabel, 0);
+                Grid.SetColumn(GamesLostLabel, 3);
                 userPanel.Children.Add(GamesLostLabel);
 
                 StatsPanel.Children.Add(userPanel);
@@ -44,7 +44,7 @@ namespace PapayagramsClient.Menu
 
         private void SetTitleGrid()
         {
-            Grid titlesPanel = new Grid { Margin = new Thickness(10), HorizontalAlignment = HorizontalAlignment.Center, Background = Brushes.Beige };
+            Grid titlesPanel = new Grid { Margin = new Thickness(10), HorizontalAlignment = HorizontalAlignment.Center, Background = Brushes.Beige, Width = 800 };
 
             for (int i = 0; i < 4; i++)
             {
@@ -56,15 +56,15 @@ namespace PapayagramsClient.Menu
             titlesPanel.Children.Add(usernameLabel);
 
             TextBlock TotalGamesLabel = new TextBlock { Text = Properties.Resources.profilePlayedGames };
-            Grid.SetColumn(usernameLabel, 0);
-            titlesPanel.Children.Add(usernameLabel);
+            Grid.SetColumn(TotalGamesLabel, 1);
+            titlesPanel.Children.Add(TotalGamesLabel);
 
             TextBlock GamesWonLabel = new TextBlock { Text = Properties.Resources.profileGamesWon };
-            Grid.SetColumn(GamesWonLabel, 0);
+            Grid.SetColumn(GamesWonLabel, 2);
             titlesPanel.Children.Add(GamesWonLabel);
 
             TextBlock GamesLostLabel = new TextBlock { Text = Properties.Resources.statsGamesLost };
-            Grid.SetColumn(GamesLostLabel, 0);
+            Grid.SetColumn(GamesLostLabel, 3);
             titlesPanel.Children.Add(GamesLostLabel);
 
             StatsPanel.Children.Add(titlesPanel);

@@ -16,7 +16,7 @@
             <ColumnDefinition Width="600"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
+
         <StackPanel Grid.Column="0" VerticalAlignment="Center">
             <Label Content="{x:Static p:Resources.globalSignIn}" Focusable="False" HorizontalContentAlignment="Center" FontSize="64" FontWeight="Bold"/>
             <Separator Opacity="0" Height="40" Focusable="False"/>
@@ -31,7 +31,7 @@
             <Label Name="PasswordErrorText" HorizontalContentAlignment="Center" Foreground="Red" FontSize="20" Height="35"/>
             <Separator Opacity="0" Height="20"/>
 
-            <Button Style="{StaticResource PrimaryButton}" x:Name="SigninButton" Content="{x:Static p:Resources.globalSignIn}" Click="SignIn" VerticalAlignment="Center" FontSize="36" Width="220"/>
+            <Button Style="{StaticResource PrimaryButton}" x:Name="SigninButton" Content="{x:Static p:Resources.globalSignIn}" Click="SignIn" FontSize="36" Width="290"/>
             <Separator Opacity="0" Height="10"/>
             <Button Style="{StaticResource LinkButton}" x:Name="ForgotPasswordButton" Content="{x:Static p:Resources.signInForgotPassword}" VerticalAlignment="Center" FontSize="16" Click="RecoverPassword"/>
             <Separator Opacity="0" Height="5"/>
