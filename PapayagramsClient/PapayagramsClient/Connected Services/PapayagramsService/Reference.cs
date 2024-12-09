@@ -1444,10 +1444,10 @@ namespace PapayagramsClient.PapayagramsService {
         System.Threading.Tasks.Task StartGameAsync(string roomCode);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/InviteFriend")]
-        void InviteFriend(string username, string guestUsername, string gameRoomCode);
+        void InviteFriend(string username, string invitedFriend, string gameRoomCode);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPregameService/InviteFriend")]
-        System.Threading.Tasks.Task InviteFriendAsync(string username, string guestUsername, string gameRoomCode);
+        System.Threading.Tasks.Task InviteFriendAsync(string username, string invitedFriend, string gameRoomCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPregameService/ReturnToLobby", ReplyAction="http://tempuri.org/IPregameService/ReturnToLobbyResponse")]
         void ReturnToLobby(string gameRoomCode, string username);
@@ -1537,12 +1537,12 @@ namespace PapayagramsClient.PapayagramsService {
             return base.Channel.StartGameAsync(roomCode);
         }
         
-        public void InviteFriend(string username, string guestUsername, string gameRoomCode) {
-            base.Channel.InviteFriend(username, guestUsername, gameRoomCode);
+        public void InviteFriend(string username, string invitedFriend, string gameRoomCode) {
+            base.Channel.InviteFriend(username, invitedFriend, gameRoomCode);
         }
         
-        public System.Threading.Tasks.Task InviteFriendAsync(string username, string guestUsername, string gameRoomCode) {
-            return base.Channel.InviteFriendAsync(username, guestUsername, gameRoomCode);
+        public System.Threading.Tasks.Task InviteFriendAsync(string username, string invitedFriend, string gameRoomCode) {
+            return base.Channel.InviteFriendAsync(username, invitedFriend, gameRoomCode);
         }
         
         public void ReturnToLobby(string gameRoomCode, string username) {

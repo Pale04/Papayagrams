@@ -189,11 +189,13 @@ namespace PapayagramsClient
 
         private void CreateNewGame(object sender, RoutedEventArgs e)
         {
+            RetrieveRelationships();
             NavigationService.Navigate(new GameCreation());
         }
 
         private void JoinGame(object sender, RoutedEventArgs e)
         {
+            RetrieveRelationships();
             NavigationService.Navigate(new JoinGame());
         }
 
@@ -225,11 +227,6 @@ namespace PapayagramsClient
             }
 
             NavigationService.Navigate(new Profile(userStats));
-        }
-
-        public void ReceiveFriendRequest(PlayerDC player)
-        {
-            throw new NotImplementedException();
         }
 
         private void Logout(object sender, RoutedEventArgs e)
@@ -341,6 +338,7 @@ namespace PapayagramsClient
 
                 if (roomAvailable)
                 {
+                    RetrieveRelationships();
                     NavigationService.Navigate(new Lobby(_invitationGameCode));
                 }
                 else
