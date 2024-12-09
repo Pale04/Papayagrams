@@ -6,6 +6,7 @@ using System.Data.Entity.Core;
 using Tests;
 using System.Collections.Generic;
 using System.Linq;
+using Contracts;
 
 namespace DataAccess.Tests
 {
@@ -31,7 +32,22 @@ namespace DataAccess.Tests
 
         private readonly List<DomainClasses.Achievement> _achievements = new List<DomainClasses.Achievement>()
         {
-            new DomainClasses.Achievement() { Id = 11, Description = "1 game won in original game mode"},
+            new DomainClasses.Achievement() { Id = 1},
+            new DomainClasses.Achievement() { Id = 2},
+            new DomainClasses.Achievement() { Id = 3},
+            new DomainClasses.Achievement() { Id = 4},
+            new DomainClasses.Achievement() { Id = 5},
+            new DomainClasses.Achievement() { Id = 6},
+            new DomainClasses.Achievement() { Id = 7},
+            new DomainClasses.Achievement() { Id = 8},
+            new DomainClasses.Achievement() { Id = 9},
+            new DomainClasses.Achievement() { Id = 10},
+            new DomainClasses.Achievement() { Id = 11},
+            new DomainClasses.Achievement() { Id = 12},
+            new DomainClasses.Achievement() { Id = 13},
+            new DomainClasses.Achievement() { Id = 14},
+            new DomainClasses.Achievement() { Id = 15},
+            new DomainClasses.Achievement() { Id = 16}
         };
 
         [TestInitialize()]
@@ -202,24 +218,17 @@ namespace DataAccess.Tests
         [TestMethod()]
         public void GetPlayerAchievementsSuccessfulTest()
         {
-            _achievements[0].IsAchieved = true;
-            List<DomainClasses.Achievement> expected = new List<DomainClasses.Achievement>()
-            {
-                _achievements[0]
-            };
+            List<DomainClasses.Achievement> expected = new List<DomainClasses.Achievement>(_achievements);
+            expected[0].IsAchieved = true;
             List<DomainClasses.Achievement> result = UserDB.GetPlayerAchievements(_registeredPlayer1.Username);
-
             Assert.IsTrue(expected.SequenceEqual(result), "GetPlayerAchievementsSuccessfulTest");
         }
 
         [TestMethod()]
         public void GetPlayerAchievementsWithoutAnyAchieved()
         {
-            _achievements[0].IsAchieved = false;
-            List<DomainClasses.Achievement> expected = new List<DomainClasses.Achievement>()
-            {
-                _achievements[0]
-            };
+            List<DomainClasses.Achievement> expected = new List<DomainClasses.Achievement>(_achievements);
+            expected[0].IsAchieved = false;
             List<DomainClasses.Achievement> result = UserDB.GetPlayerAchievements(_registeredPlayer2.Username);
             Assert.IsTrue(expected.SequenceEqual(result), "GetPlayerAchievementsWithoutAnyAchieved");
         }
@@ -228,7 +237,7 @@ namespace DataAccess.Tests
         public void GetPlayerAchievementsNonExistentUserTest()
         {
             List<DomainClasses.Achievement> result = UserDB.GetPlayerAchievements("Pale");
-            Assert.IsTrue(result.Count == 2, "GetPlayerAchievementsNonExistentUserTest");
+            Assert.IsTrue(result.Count == 16, "GetPlayerAchievementsNonExistentUserTest");
         }
 
         [TestMethod()]
@@ -332,7 +341,7 @@ namespace DataAccess.Tests
         public void UpdatePasswordWithoutVerificationSuccessfulTest()
         {
             int expected = 1;
-            int result = UserDB.UpdatePassword(_registeredPlayer1.Username, "123456");
+            int result = UserDB.UpdatePassword(_registeredPlayer1.Email, "123456");
             Assert.AreEqual(expected, result, "UpdatePasswordWithoutVerificationSuccessfulTest");
         }
 

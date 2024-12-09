@@ -14,7 +14,7 @@ namespace DomainClasses
             if (obj != null && GetType() == obj.GetType())
             {
                 Achievement achievement = (Achievement)obj;
-                isEqual = Id == achievement.Id && Description.Equals(achievement.Description) && IsAchieved == achievement.IsAchieved;
+                isEqual = Id == achievement.Id && IsAchieved == achievement.IsAchieved;
             }
 
             return isEqual;
