@@ -8,6 +8,8 @@ using PapayagramsClient.WPFControls;
 using System.Collections.Generic;
 using System.Linq;
 using log4net;
+using System.Runtime.CompilerServices;
+using System.ServiceModel.Activation.Configuration;
 
 namespace PapayagramsClient.Game
 {
@@ -133,7 +135,14 @@ namespace PapayagramsClient.Game
                 {
                     _logger.Fatal("Couldn't connect to server to leave game");
                     NavigationService.Navigate(new Login.Login());
-                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                    return;
+                }
+                catch (CommunicationException)
+                {
+                    _logger.Fatal("Couldn't connect to server to leave game");
+                    NavigationService.Navigate(new Login.Login());
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                     return;
                 }
 
@@ -204,20 +213,20 @@ namespace PapayagramsClient.Game
                     return;
                 }
 
-                    try
-                    {
-                        _host.TakeSeed(CurrentGame.RoomCode);
-                    }
-                    catch (CommunicationObjectFaultedException)
-                    {
-                        _logger.Fatal("Couldn't connect to server to take seeds");
-                        NavigationService.Navigate(new Login.Login());
-                        new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
-                        return;
-                    }
-
-                    CurrentGame.GameData.Points += FINISH_PIECES_POINTS;
+                try
+                {
+                    _host.TakeSeed(CurrentGame.RoomCode);
                 }
+                catch (CommunicationObjectFaultedException)
+                {
+                    _logger.Fatal("Couldn't connect to server to take seeds");
+                    NavigationService.Navigate(new Login.Login());
+                    new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                    return;
+                }
+
+                CurrentGame.GameData.Points += FINISH_PIECES_POINTS;
+            }
         }
 
         private WPFGameBoardPieceSpot GetPieceAt(int column, int row)

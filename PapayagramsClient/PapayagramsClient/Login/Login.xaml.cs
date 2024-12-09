@@ -111,6 +111,22 @@ namespace PapayagramsClient.Login
 
         private void JoinAsGuest(object sender, RoutedEventArgs e)
         {
+            PapayagramsService.LoginServiceClient host = new PapayagramsService.LoginServiceClient();
+            try
+            {
+                host.Open();
+            }
+            catch (EndpointNotFoundException)
+            {
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                _logger.Fatal("Couldn't connect to server for login as guest");
+                return;
+            }
+
+            CurrentPlayer.Player = host.AccessAsGuest();
+            CurrentPlayer.IsGuest = true;
+            host.Close();
+
             NavigationService.Navigate(new JoinAsGuest());
         }
 

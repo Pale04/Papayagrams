@@ -713,7 +713,7 @@ namespace PapayagramsClient
                 return;
             }
 
-            if (stats == null)
+            if (stats.Length == 0)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
             }

@@ -1,19 +1,8 @@
 ﻿using log4net;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PapayagramsClient.Login
 {
@@ -23,22 +12,6 @@ namespace PapayagramsClient.Login
 
         public JoinAsGuest()
         {
-            PapayagramsService.LoginServiceClient host = new PapayagramsService.LoginServiceClient();
-            try
-            {
-                host.Open();
-            }
-            catch (EndpointNotFoundException)
-            {
-                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
-                _logger.Fatal("Couldn't connect to server for login as guest");
-                return;
-            }
-
-            CurrentPlayer.Player = host.AccessAsGuest();
-            CurrentPlayer.IsGuest = true;
-            host.Close();
-
             InitializeComponent();
         }
 
@@ -54,7 +27,7 @@ namespace PapayagramsClient.Login
 
         private void JoinGameRoom(object sender, RoutedEventArgs e)
         {
-            string gameRoomCode = CodeTextbox.Text.Trim();
+            string gameRoomCode = CodeTextbox.Text.Trim().ToUpper();
             if (string.IsNullOrEmpty(gameRoomCode))
             {
                 return;
