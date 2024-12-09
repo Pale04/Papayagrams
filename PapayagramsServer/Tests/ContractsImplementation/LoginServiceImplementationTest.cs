@@ -200,7 +200,7 @@ namespace Contracts.Tests
         public void SendPasswordRecoveryPINSuccessfulTest()
         {
             int expected = 0;
-            int result = _serviceImplementation.SendPasswordRecoveryPIN(_registeredPlayer.Username);
+            int result = _serviceImplementation.SendPasswordRecoveryPIN(_registeredPlayer.Email);
             Assert.AreEqual(expected, result, "SendPasswordRecoveryPINSuccessfulTest");
         }
 
@@ -213,11 +213,11 @@ namespace Contracts.Tests
         }
 
         [TestMethod()]
-        public void SendPasswordRecoveryPINNonExistentUsernameTest()
+        public void SendPasswordRecoveryPINNonExistentEmailTest()
         {
-            int expected = 205;
+            int expected = 104;
             int result = _serviceImplementation.SendPasswordRecoveryPIN("DavidXD");
-            Assert.AreEqual(expected, result, "SendPasswordRecoveryPINNonExistentUsernameTest");
+            Assert.AreEqual(expected, result, "SendPasswordRecoveryPINNonExistentEmailTest");
         }
 
         [TestMethod()]

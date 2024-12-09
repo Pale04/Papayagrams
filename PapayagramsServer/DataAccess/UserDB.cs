@@ -341,13 +341,16 @@ namespace DataAccess
         /// <exception cref="EntityException">When it cannot establish connection with the database server</exception>
         public static int UpdatePassword(string email, string newPassword)
         {
-            int result;
+            int result = 0;
             using (var context = new papayagramsEntities())
             {
                 var player = context.User.FirstOrDefault(p => p.email == email);
-                SqlParameter usernameParameter = new SqlParameter("@username", player.username);
-                SqlParameter newPasswordParameter = new SqlParameter("@newPassword", newPassword);
-                result = context.Database.ExecuteSqlCommand("EXEC update_password_no_verification @username, @newPassword", usernameParameter, newPasswordParameter);
+                if (player != null)
+                {
+                    SqlParameter usernameParameter = new SqlParameter("@username", player.username);
+                    SqlParameter newPasswordParameter = new SqlParameter("@newPassword", newPassword);
+                    result = context.Database.ExecuteSqlCommand("EXEC update_password_no_verification @username, @newPassword", usernameParameter, newPasswordParameter);
+                }
             }
             return result;
         }

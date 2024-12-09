@@ -132,6 +132,7 @@ namespace Contracts.Tests
         [TestMethod()]
         public void UpdateProfileIconSuccessfulTest()
         {
+            _serviceImplementation.Login(_registeredPlayer1.Username, _registeredPlayer1.Password);
             int expected = 0;
             int result = _serviceImplementation.UpdateProfileIcon(_registeredPlayer1.Username, 2);
             Assert.AreEqual(expected, result, "UpdateProfileIconSuccessfulTest");
@@ -140,6 +141,7 @@ namespace Contracts.Tests
         [TestMethod()]
         public void UpdateProfileIconSameIconTest()
         {
+            _serviceImplementation.Login(_registeredPlayer1.Username, _registeredPlayer1.Password);
             int expected = 0;
             int result = _serviceImplementation.UpdateProfileIcon(_registeredPlayer1.Username, 1);
             Assert.AreEqual(expected, result, "UpdateProfileIconSuccessfulTest");

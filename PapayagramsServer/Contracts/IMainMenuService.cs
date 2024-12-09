@@ -21,7 +21,7 @@ namespace Contracts
         /// <param name="searcherUsername">Username ot the player who is searching</param>
         /// <param name="searchedUsername">Username of the player who needs to be found</param>
         /// <returns>PlayerDC object with its id, username and email if is found, an error code otherwise</returns>
-        /// <remarks>Error code that can be returned: 102, 311</remarks>
+        /// <remarks>Error code that can be returned: 102, 103</remarks>
         [OperationContract]
         (int returnCode, PlayerDC foundPlayer) SearchNoFriendPlayer(string searcherUsername, string searchedUsername);
 
