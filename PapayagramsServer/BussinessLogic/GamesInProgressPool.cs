@@ -22,9 +22,18 @@ namespace BussinessLogic
             _gamesInProgress[gameRoomCode].ConnectedPlayers.Add(PlayersOnlinePool.GetPlayer(username));
         }
 
+        /// <summary>
+        /// Return the game object if exists
+        /// </summary>
+        /// <param name="gameRoomCode">Code of the game room</param>
+        /// <returns>Game object if exists, null otherwise</returns>
         public static Game GetGame(string gameRoomCode)
         {
-            return _gamesInProgress[gameRoomCode];
+            if (_gamesInProgress.ContainsKey(gameRoomCode))
+            {
+                return _gamesInProgress[gameRoomCode];
+            }
+            return null;
         }
 
         public static bool GameExists(string gameRoomCode)
@@ -39,13 +48,15 @@ namespace BussinessLogic
         /// <param name="username">Username of the player</param>
         public static void ExitGame(string gameRoomCode, string username)
         {
-            Game game = _gamesInProgress[gameRoomCode];
-            game.ConnectedPlayers.Remove(PlayersOnlinePool.GetPlayer(username));
-
-            if (game.ConnectedPlayers.Count == 0)
+            if (_gamesInProgress.ContainsKey(gameRoomCode))
             {
-                _gamesInProgress.Remove(gameRoomCode);
-                GameRoomsPool.GetGameRoom(gameRoomCode).State = GameRoomState.Waiting;
+                Game game = _gamesInProgress[gameRoomCode];
+                game.ConnectedPlayers.Remove(PlayersOnlinePool.GetPlayer(username));
+
+                if (game.ConnectedPlayers.Count == 0)
+                {
+                    _gamesInProgress.Remove(gameRoomCode);
+                }
             }
         }
     }

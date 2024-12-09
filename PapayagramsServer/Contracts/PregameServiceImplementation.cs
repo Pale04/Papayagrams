@@ -5,7 +5,6 @@ using System.ServiceModel;
 using System.Collections.Generic;
 using DataAccess;
 using System.Data.Entity.Core;
-using System.ServiceModel.Channels;
 
 namespace Contracts
 {
@@ -19,8 +18,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
-                _logger.WarnFormat("User status not updated in data base (username: {0}, to status: {1})", username, PlayerStatus.in_game.ToString());
+                _logger.Fatal($"Database connection failed. User status not updated in data base (username: {username}, to status: {PlayerStatus.in_game})", error);
                 return (102, null);
             }
 
@@ -59,11 +57,11 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
+                _logger.Fatal("Database connection failed. Get player status attempt", error);
                 return;
             }
 
-            if (invitedFriendStatus == PlayerStatus.online)
+            if (invitedFriendStatus.Equals(PlayerStatus.online) && CheckMainMenuCallbackState(invitedFriend))
             {
                 GameInvitationDC invitation = new GameInvitationDC
                 {
@@ -72,15 +70,7 @@ namespace Contracts
                 };
 
                 var callbackChannel = (IMainMenuServiceCallback)CallbacksPool.GetMainMenuCallbackChannel(invitedFriend);
-                try
-                {
-                    callbackChannel.ReceiveGameInvitation(invitation);
-                }
-                catch (ObjectDisposedException error)
-                {
-                    _logger.Info($"Callback channel disposed (Username: {invitedFriend}, Game room: {gameRoomCode})", error);
-                    ManageMainMenuCallbackDispose(invitedFriend);
-                }
+                callbackChannel.ReceiveGameInvitation(invitation);
             }
         }
 
@@ -99,19 +89,18 @@ namespace Contracts
                     }
                     catch (EntityException error)
                     {
-                        _logger.Fatal("Database connection failed", error);
-                        _logger.WarnFormat("User status update failed (username: {0}, to status: {1})", username, PlayerStatus.in_game.ToString());
+                        _logger.Fatal("Database connection failed. User status update failed (username: {username}, to status: {PlayerStatus.in_game})", error);
                         return (102, null);
                     }
                 }
                 
                 CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
                 room.Players.Add(PlayersOnlinePool.GetPlayer(username));
-
-                List<Player> players = room.Players;
-                for (int i = 0; i < players.Count - 1; i++)
+                
+                CheckPregameCallbackChannelState(roomCode);
+                for (int i = 0; i < room.Players.Count - 1; i++)
                 {
-                    var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(players[i].Username);
+                    var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(room.Players[i].Username);
                     callbackChannel.RefreshLobby(GameRoomDC.ConvertToGameRoomDC(room));
                 }
             }
@@ -125,6 +114,7 @@ namespace Contracts
 
         public void LeaveLobby(string username, string roomCode)
         {
+            CheckPregameCallbackChannelState(roomCode);
             GameRoomsPool.RemovePlayerFromGameRoom(username, roomCode);
             CallbacksPool.RemovePregameCallbackChannel(username);
 
@@ -153,22 +143,13 @@ namespace Contracts
 
         public void SendMessage(Message message)
         {
-            GameRoom room = GameRoomsPool.GetGameRoom(message.GameRoomCode);
-            List<Player> players = new List<Player>(room.Players);
+            CheckPregameCallbackChannelState(message.GameRoomCode);
+            List<Player> players = new List<Player>(GameRoomsPool.GetGameRoom(message.GameRoomCode).Players);
 
             foreach (Player p in players)
             {
                 var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(p.Username);
-                try
-                {
-                    callbackChannel.ReceiveMessage(message);
-                }
-                catch (ObjectDisposedException error)
-                {
-                    _logger.Info($"Callback channel disposed (Game room: {message.GameRoomCode}, Username with callback disposed: {p.Username})", error);
-                    LeaveLobby(p.Username, message.GameRoomCode);
-                    ManagePregameCallbackDispose(p.Username, message.GameRoomCode);
-                }
+                callbackChannel.ReceiveMessage(message);
             }
         }
 
@@ -183,15 +164,15 @@ namespace Contracts
             for (int i = 1; i < players.Count; i++)
             {
                 var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(players[i].Username);
-                try
+                if (((ICommunicationObject)callbackChannel).State == CommunicationState.Closed)
+                {
+                    _logger.InfoFormat("PregameCallback channel disposed (Game room: {0}, Username with callback disposed: {1})", roomCode, players[i].Username);
+                    GameRoomsPool.RemovePlayerFromGameRoom(players[i].Username, roomCode);
+                    ManageCallbackDispose(players[i].Username, roomCode);
+                }
+                else
                 {
                     callbackChannel.CarryInsideGame();
-                }
-                catch (ObjectDisposedException error)
-                {
-                    _logger.Info($"Callback channel disposed (Game room: {roomCode}, Username with callback disposed: {players[i].Username})", error);
-                    GameRoomsPool.RemovePlayerFromGameRoom(players[i].Username, roomCode);
-                    ManagePregameCallbackDispose(players[i].Username, roomCode);
                 }
             }
         }
@@ -215,7 +196,7 @@ namespace Contracts
             }
         }
 
-        private void ManagePregameCallbackDispose(string username, string gameRoomCode)
+        private void ManageCallbackDispose(string username, string gameRoomCode)
         {
             if (!PlayersOnlinePool.IsGuest(username))
             {
@@ -224,6 +205,21 @@ namespace Contracts
             else
             {
                 PlayersOnlinePool.RemoveGuest(username);
+            }
+        }
+
+        private void CheckPregameCallbackChannelState(string gameRoomCode)
+        {
+            List<Player> players = new List<Player>(GameRoomsPool.GetGameRoom(gameRoomCode).Players);
+            foreach (Player player in players)
+            {
+                var callbackChannel = (IPregameServiceCallback)CallbacksPool.GetPregameCallbackChannel(player.Username);
+                if (((ICommunicationObject)callbackChannel).State == CommunicationState.Closed)
+                {
+                    _logger.InfoFormat("PregameCallback channel disposed (Game room: {0}, Username with callback disposed: {1})", gameRoomCode, player.Username);
+                    GameRoomsPool.RemovePlayerFromGameRoom(player.Username, gameRoomCode);
+                    ManageCallbackDispose(player.Username, gameRoomCode);
+                }
             }
         }
     }

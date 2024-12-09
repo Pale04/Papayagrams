@@ -18,7 +18,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
+                _logger.Fatal("Database connection failed. Get application settings", error);
                 return (102, null);
             }
 
@@ -37,7 +37,6 @@ namespace Contracts
         {
             if (string.IsNullOrEmpty(username) || updatedConfiguration == null)
             {
-                _logger.WarnFormat("UpdateAplicationSettings method called with invalid parameters (Username: {0})", username);
                 return 101;
             }
 
@@ -53,7 +52,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
+                _logger.Fatal("Database connection failed. Update application settings attempt", error);
                 return 102;
             }
 
@@ -80,13 +79,13 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
+                _logger.Fatal("Database connection failed. Update password attempt", error);
                 return 102;
             }
 
             if (operationResult == -1)
             {
-                _logger.InfoFormat("Password update failed (Username: {0})", username);
+                _logger.InfoFormat("Password update failed, current password wrong (Username: {0})", username);
                 return 503;
             }
             return 0;
@@ -96,7 +95,6 @@ namespace Contracts
         {
             if (string.IsNullOrEmpty(username) || profileIcon < 1)
             {
-                _logger.WarnFormat("UpdateProfileIcon method called with invalid parameters (Username: {0}, ProfileIcon: {1})", username, profileIcon);
                 return 101;
             }
 
@@ -107,7 +105,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
+                _logger.Fatal("Database connection failed. Update profile icon attempt", error);
                 return 102;
             }
 

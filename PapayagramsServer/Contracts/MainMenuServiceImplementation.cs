@@ -23,7 +23,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
+                _logger.Fatal("Database connection failed. Obtain relationships attempt", error);
                 return (102, null);
             }
 
@@ -40,7 +40,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
+                _logger.Fatal("Database connection failed. Search a player attempt", error);
                 return (102, null);
             }
 
@@ -65,7 +65,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
+                _logger.Fatal("Database connection failed. Send friend request attempt", error);
                 return 102;
             }
 
@@ -84,7 +84,7 @@ namespace Contracts
                 case -4:
                     return 302;
                 default:
-                    _logger.WarnFormat("Unknown result after to send friend request  (Sender username: {0}, Receiver username: {1}, Return code: {2})", senderUsername, receiverUsername, operationResult);
+                    _logger.WarnFormat("Unknown result after to send friend request (Sender username: {0}, Receiver username: {1}, Return code: {2})", senderUsername, receiverUsername, operationResult);
                     return 0;
             }
         }
@@ -103,7 +103,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
+                _logger.Fatal("Database connection failed. Respond Friend request attempt.", error);
                 return 102;
             }
 
@@ -134,7 +134,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
+                _logger.Fatal("Database connection failed. Remove friend attempt", error);
                 return 102;
             }
 
@@ -160,7 +160,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
+                _logger.Fatal("Database connection failed. Block player attempt", error);
                 return 102;
             }
 
@@ -185,7 +185,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
+                _logger.Fatal("Database connection failed. Unblock player attempt", error);
                 return 102;
             }
 
@@ -206,7 +206,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connnection failed", error);
+                _logger.Fatal("Database connnection failed. Get player achievements attempt", error);
                 return (102, null);
             }
 
@@ -222,7 +222,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
+                _logger.Fatal("Database connection failed. Get global leaderboard attempt", error);
             }
             return globalLeaderboardStats.ConvertAll(LeaderboardStatsDC.ConvertToLeaderboardStatsDC);
         }
@@ -237,7 +237,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
+                _logger.Fatal("Database connection failed. Get player profile attempt", error);
                 return (102, null);
             }
 
@@ -252,18 +252,29 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
-                _logger.WarnFormat("Player status update failed (Username: {0}, To status: {1})", username, PlayerStatus.online.ToString());
+                _logger.Fatal($"Database connection failed. Player status update failed (Username: {username}, To status: {PlayerStatus.online})", error);
                 return 102;
             }
 
-            CallbacksPool.PlayerArrivesToMainMenu(username,OperationContext.Current.GetCallbackChannel<IMainMenuServiceCallback>());
+            CallbacksPool.PlayerArrivesToMainMenu(username, OperationContext.Current.GetCallbackChannel<IMainMenuServiceCallback>());
             return 0;
         }
 
-        private void ManageMainMenuCallbackDispose(string username)
+        private bool CheckMainMenuCallbackState(string username)
         {
-            Logout(username);
+            bool isAvailable;
+            var callbackChannel = (IMainMenuServiceCallback)CallbacksPool.GetMainMenuCallbackChannel(username);
+            if (((ICommunicationObject)callbackChannel).State == CommunicationState.Closed)
+            {
+                _logger.InfoFormat("MainMenuCallback channel disposed (Username with callback disposed: {0})", username);
+                Logout(username);
+                isAvailable = false;
+            }
+            else
+            {
+                isAvailable = true;
+            }
+            return isAvailable;
         }
     }
 }
