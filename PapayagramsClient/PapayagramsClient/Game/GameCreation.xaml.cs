@@ -40,14 +40,14 @@ namespace PapayagramsClient.Game
             {
                 gameMode = GameModeDC.Original;
             }
-            else if (GameModeComboBox.Text.Equals(Properties.Resources.createGameSuddenDeathMode))
-            {
-                gameMode = GameModeDC.SuddenDeath;
-            }
-            else if (GameModeComboBox.Text.Equals(Properties.Resources.createGameTimeAttackMode))
-            {
-                gameMode = GameModeDC.TimeAttack;
-            }
+            // else if (GameModeComboBox.Text.Equals(Properties.Resources.createGameSuddenDeathMode))
+            // {
+                // gameMode = GameModeDC.SuddenDeath;
+            // }
+            // else if (GameModeComboBox.Text.Equals(Properties.Resources.createGameTimeAttackMode))
+            // {
+                // gameMode = GameModeDC.TimeAttack;
+            // }
             else
             {
                 return;

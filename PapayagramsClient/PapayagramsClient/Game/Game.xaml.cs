@@ -137,7 +137,14 @@ namespace PapayagramsClient.Game
                     return;
                 }
 
-                NavigationService.Navigate(new MainMenu());
+                if (!CurrentPlayer.IsGuest)
+                {
+                    NavigationService.Navigate(new MainMenu());
+                }
+                else
+                {
+                    NavigationService.Navigate(new Login.Login());
+                }
             }
         }
 

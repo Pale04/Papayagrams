@@ -259,7 +259,7 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Time limit.
+        ///   Busca una cadena traducida similar a Time limit (minutes).
         /// </summary>
         public static string createGameTimeLimit {
             get {
