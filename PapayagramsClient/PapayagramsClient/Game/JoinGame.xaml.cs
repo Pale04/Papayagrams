@@ -1,7 +1,5 @@
 ﻿using log4net;
-using System.Net;
 using System.ServiceModel;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -22,6 +20,7 @@ namespace PapayagramsClient.Game
             string gameRoomCode = CodeTextbox.Text.Trim().ToUpper();
             if (string.IsNullOrEmpty(gameRoomCode))
             {
+                new SelectionPopUpWindow(Properties.Resources.verificationEmptyCode, Properties.Resources.verificationEmptyCode, 3).ShowDialog();
                 return;
             }
 

@@ -456,6 +456,14 @@ namespace PapayagramsClient
                     new SelectionPopUpWindow(Properties.Resources.friendsUserIsBlocked, Properties.Resources.friendsUserIsBlocked, 3).ShowDialog();
                     break;
 
+                case 205:
+                    new SelectionPopUpWindow(Properties.Resources.errorNonExistingUser., Properties.Resources.errorNonExistingUser, 3).ShowDialog();
+                    break;
+
+                case 311:
+                    new SelectionPopUpWindow(Properties.Resources.errorBefriendYourself, Properties.Resources.errorBefriendYourself, 3).ShowDialog();
+                    break;
+
                 default:
                     new SelectionPopUpWindow(Properties.Resources.errorOccurredTitle, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
                     break;

@@ -508,4 +508,7 @@
   <data name="friendsFriendRemovedSuccessfully" xml:space="preserve">
     <value>Friend removed successfully</value>
   </data>
+  <data name="errorNonExistingUser" xml:space="preserve">
+    <value>The user doesn't exist</value>
+  </data>
 </root>

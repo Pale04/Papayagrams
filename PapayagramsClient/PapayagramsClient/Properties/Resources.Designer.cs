@@ -340,6 +340,15 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The user doesn&apos;t exist.
+        /// </summary>
+        public static string errorNonExistingUser {
+            get {
+                return ResourceManager.GetString("errorNonExistingUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a An error occurred.
         /// </summary>
         public static string errorOccurredTitle {
