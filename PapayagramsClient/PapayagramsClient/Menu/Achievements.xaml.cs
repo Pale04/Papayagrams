@@ -52,7 +52,7 @@ namespace PapayagramsClient.Menu
 
         private void ReturnToMainMenu(object sender, System.Windows.RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            NavigationService.Navigate(new MainMenu());
         }
     }
 }

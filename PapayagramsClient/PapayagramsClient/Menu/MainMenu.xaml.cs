@@ -410,13 +410,13 @@ namespace PapayagramsClient
             {
                 try
                 {
-                    _logger.Fatal("Couldn't connect to server");
-                    NavigationService.Navigate(new Login.Login());
                     returnCode = _host.SendFriendRequest(CurrentPlayer.Player.Username, friendUsername);
                 }
                 catch (CommunicationObjectFaultedException)
                 {
                     new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
+                    _logger.Fatal("Couldn't connect to server to send friend request");
+                    NavigationService.Navigate(new Login.Login());
                     return;
                 }
             }
@@ -485,7 +485,7 @@ namespace PapayagramsClient
             {
                 case 0:
                     UserRelationships.FriendRequestsList.Remove(friendPanel.UsernameLabel.Text);
-                    UserRelationships.FriendsList.Add(friendPanel.UsernameLabel.Text, 1);
+                    UserRelationships.FriendsList.Add(friendPanel.UsernameLabel.Text, friendPanel.ImageId);
                     FriendsMenuPanel.ClearLists();
                     FriendsMenuPanel.FillLists();
                     break;
@@ -586,8 +586,8 @@ namespace PapayagramsClient
             switch (returnCode)
             {
                 case 0:
-                    UserRelationships.BloquedUsersList.Add(friendPanel.UsernameLabel.Text, 1);
                     UserRelationships.FriendsList.Remove(friendPanel.UsernameLabel.Text);
+                    UserRelationships.BloquedUsersList.Add(friendPanel.UsernameLabel.Text, friendPanel.ImageId);
                     new SelectionPopUpWindow(Properties.Resources.friendsPlayerBlockedSuccessfully, Properties.Resources.friendsPlayerBlockedSuccessfully, 0).ShowDialog();
                     FriendsMenuPanel.ClearLists();
                     FriendsMenuPanel.FillLists();
@@ -627,9 +627,9 @@ namespace PapayagramsClient
             switch (returnCode)
             {
                 case 0:
-                    new SelectionPopUpWindow(Properties.Resources.friendsPlayerUnblockedSuccessfully, Properties.Resources.friendsPlayerBlockedSuccessfully, 0).ShowDialog();
+                    new SelectionPopUpWindow(Properties.Resources.friendsPlayerUnblockedSuccessfully, Properties.Resources.friendsPlayerUnblockedSuccessfully, 0).ShowDialog();
                     UserRelationships.BloquedUsersList.Remove(friendPanel.UsernameLabel.Text);
-                    UserRelationships.FriendsList.Add(friendPanel.UsernameLabel.Text, 1);
+                    UserRelationships.FriendsList.Add(friendPanel.UsernameLabel.Text, friendPanel.ImageId);
                     FriendsMenuPanel.ClearLists();
                     FriendsMenuPanel.FillLists();
                     break;
@@ -669,7 +669,7 @@ namespace PapayagramsClient
             switch (returnCode)
             {
                 case 0:
-                    new SelectionPopUpWindow(Properties.Resources.friendsPlayerUnblockedSuccessfully, Properties.Resources.friendsPlayerBlockedSuccessfully, 0).ShowDialog();
+                    new SelectionPopUpWindow(Properties.Resources.friendsFriendRemovedSuccessfully, Properties.Resources.friendsFriendRemovedSuccessfully, 0).ShowDialog();
                     UserRelationships.FriendsList.Remove(friendPanel.UsernameLabel.Text);
                     FriendsMenuPanel.ClearLists();
                     FriendsMenuPanel.FillLists();

@@ -505,4 +505,7 @@
   <data name="globalNotEmail" xml:space="preserve">
     <value>That's not a valid email address</value>
   </data>
+  <data name="friendsFriendRemovedSuccessfully" xml:space="preserve">
+    <value>Friend removed successfully</value>
+  </data>
 </root>

@@ -13,7 +13,7 @@ namespace PapayagramsClient.Game
 
         private void ReturnToMainMenu(object sender, System.Windows.RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            NavigationService.Navigate(new MainMenu());
         }
 
         private void CreateGame(object sender, System.Windows.RoutedEventArgs e)

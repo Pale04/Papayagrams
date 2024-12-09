@@ -403,6 +403,15 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Friend removed successfully.
+        /// </summary>
+        public static string friendsFriendRemovedSuccessfully {
+            get {
+                return ResourceManager.GetString("friendsFriendRemovedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a You have a friend request from the user, switch friend menu view with the top right button to see your requests.
         /// </summary>
         public static string friendsPendingRequestFromUser {

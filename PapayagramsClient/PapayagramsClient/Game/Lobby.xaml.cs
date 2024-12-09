@@ -319,7 +319,7 @@ namespace PapayagramsClient.Game
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                 _logger.Fatal("Couldn't connect to server to invite friend");
-                NavigationService.Navigate(new MainMenu());
+                NavigationService.Navigate(new Login.Login());
                 return;
             }
 

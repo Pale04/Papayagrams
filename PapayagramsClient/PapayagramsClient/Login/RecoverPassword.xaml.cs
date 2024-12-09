@@ -155,7 +155,7 @@ namespace PapayagramsClient.Login
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                 _logger.Fatal("Couldn't connect to server for sending recovery code");
-                NavigationService.GoBack();
+                NavigationService.Navigate(new MainMenu());
                 return;
             }
 

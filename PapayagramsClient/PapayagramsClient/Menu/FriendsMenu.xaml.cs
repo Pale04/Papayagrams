@@ -47,12 +47,12 @@ namespace PapayagramsClient.Menu
 
             foreach(KeyValuePair<string, int> request in UserRelationships.FriendRequestsList)
             {
-                FriendListPanel.Children.Add(new FriendInfoPanel(2, request.Value, request.Key));
+                RequestsListPanel.Children.Add(new FriendInfoPanel(2, request.Value, request.Key));
             }
 
             foreach(KeyValuePair<string, int> user in UserRelationships.BloquedUsersList)
             {
-                FriendListPanel.Children.Add(new FriendInfoPanel(3, user.Value, user.Key));
+                BloquedListPanel.Children.Add(new FriendInfoPanel(3, user.Value, user.Key));
             }
         }
 
