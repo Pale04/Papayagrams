@@ -457,7 +457,7 @@ namespace PapayagramsClient
                     break;
 
                 case 205:
-                    new SelectionPopUpWindow(Properties.Resources.errorNonExistingUser., Properties.Resources.errorNonExistingUser, 3).ShowDialog();
+                    new SelectionPopUpWindow(Properties.Resources.errorNonExistingUser, Properties.Resources.errorNonExistingUser, 3).ShowDialog();
                     break;
 
                 case 311:

@@ -113,5 +113,10 @@ namespace PapayagramsClient.Login
         {
             NavigationService.Navigate(new JoinAsGuest());
         }
+
+        private void RecoverPassword(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new RecoverPassword());
+        }
     }
 }

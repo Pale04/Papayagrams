@@ -104,8 +104,10 @@ namespace PapayagramsClient.Login
 
         private bool IsSafePassword(string password)
         {
-            string safePasswordPattern = "[!-#*-/=_@\\dA-z]{8,}";
-            return Regex.IsMatch(password, safePasswordPattern);
+            string containsLettersPasswordPattern = "[A-z]+";
+            string containsDigitPattern = "[\\d]+";
+            string containsSpecialSimbolPattern = "[!-#*-/=_@]+";
+            return Regex.IsMatch(password, containsLettersPasswordPattern) && Regex.IsMatch(password, containsSpecialSimbolPattern) && Regex.IsMatch(password, containsDigitPattern) && password.Length >= 8;
         }
         
         private void GoToLogin(object sender, RoutedEventArgs e)

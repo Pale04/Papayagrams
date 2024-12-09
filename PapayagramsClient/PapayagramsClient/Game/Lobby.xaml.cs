@@ -199,7 +199,7 @@ namespace PapayagramsClient.Game
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                 _logger.Fatal("Couldn't connect to server to leave game");
-                NavigationService.Navigate(new MainMenu());
+                NavigationService.Navigate(new Login.Login());
                 return;
             }
 
@@ -233,25 +233,19 @@ namespace PapayagramsClient.Game
 
             try
             {
+                Console.WriteLine(_host.State);
                 _host.SendMessage(message);
             }
             catch (CommunicationObjectFaultedException)
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
-                _logger.Fatal("Couldn't connect to server to send message");
-                NavigationService.Navigate(new MainMenu());
+                _logger.Fatal("Couldn't connect to server to join lobby");
                 return;
             }
         }
 
         private void CreateGame(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Players in game:");
-            foreach (PlayerDC player in CurrentGame.PlayersInRoom)
-            {
-                Console.WriteLine(player.Username);
-            }
-
             if (CurrentGame.PlayersInRoom.Count < 1)
             {
                 return;
@@ -267,7 +261,7 @@ namespace PapayagramsClient.Game
                 {
                     new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                     _logger.Fatal("Couldn't connect to server to start game");
-                    NavigationService.Navigate(new MainMenu());
+                    NavigationService.Navigate(new Login.Login());
                     return;
                 }
 

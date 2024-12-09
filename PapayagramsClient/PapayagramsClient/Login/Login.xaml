@@ -33,7 +33,7 @@
 
             <Button Style="{StaticResource PrimaryButton}" x:Name="SigninButton" Content="{x:Static p:Resources.globalSignIn}" Click="SignIn" VerticalAlignment="Center" FontSize="36" Width="220"/>
             <Separator Opacity="0" Height="10"/>
-            <Button Style="{StaticResource LinkButton}" x:Name="ForgotPasswordButton" Content="{x:Static p:Resources.signInForgotPassword}" VerticalAlignment="Center" FontSize="16"/>
+            <Button Style="{StaticResource LinkButton}" x:Name="ForgotPasswordButton" Content="{x:Static p:Resources.signInForgotPassword}" VerticalAlignment="Center" FontSize="16" Click="RecoverPassword"/>
             <Separator Opacity="0" Height="5"/>
             <Button Style="{StaticResource LinkButton}" x:Name="RegisterButton" Content="{x:Static p:Resources.signInSignUp}" Click="RegisterNewUser" VerticalAlignment="Center" FontSize="16"/>
             <Separator Opacity="0" Height="5"/>
