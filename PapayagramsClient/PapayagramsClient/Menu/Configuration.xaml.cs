@@ -38,7 +38,7 @@ namespace PapayagramsClient.Menu
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                 _logger.Fatal("Couldn't connect to server to update user settings");
-                NavigationService.GoBack();
+                NavigationService.Navigate(new MainMenu());
                 return;
             }
 

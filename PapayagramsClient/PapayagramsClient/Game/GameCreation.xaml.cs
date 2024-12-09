@@ -13,7 +13,7 @@ namespace PapayagramsClient.Game
 
         private void ReturnToMainMenu(object sender, System.Windows.RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            NavigationService.Navigate(new MainMenu());
         }
 
         private void CreateGame(object sender, System.Windows.RoutedEventArgs e)
@@ -40,14 +40,14 @@ namespace PapayagramsClient.Game
             {
                 gameMode = GameModeDC.Original;
             }
-            else if (GameModeComboBox.Text.Equals(Properties.Resources.createGameSuddenDeathMode))
-            {
-                gameMode = GameModeDC.SuddenDeath;
-            }
-            else if (GameModeComboBox.Text.Equals(Properties.Resources.createGameTimeAttackMode))
-            {
-                gameMode = GameModeDC.TimeAttack;
-            }
+            // else if (GameModeComboBox.Text.Equals(Properties.Resources.createGameSuddenDeathMode))
+            // {
+                // gameMode = GameModeDC.SuddenDeath;
+            // }
+            // else if (GameModeComboBox.Text.Equals(Properties.Resources.createGameTimeAttackMode))
+            // {
+                // gameMode = GameModeDC.TimeAttack;
+            // }
             else
             {
                 return;

@@ -24,7 +24,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0" Margin="0, 0 ,25, 0">
+                <StackPanel Grid.Column="0" Margin="-44,0,25,0">
                     <Label Content="{x:Static p:Resources.createGameGameMode}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="32" Height="50"/>
                     <Separator Height="25" Opacity="0"/>
                     <Label Content="{x:Static p:Resources.createGamePieces}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="32" Height="50"/>
@@ -40,8 +40,6 @@
                 <StackPanel Grid.Column="1">
                     <ComboBox Name="GameModeComboBox" FontSize="32" VerticalAlignment="Center" Height="50" SelectedIndex="0">
                         <ComboBoxItem Content="{x:Static p:Resources.createGameClassicMode}"/>
-                        <ComboBoxItem Content="{x:Static p:Resources.createGameTimeAttackMode}"/>
-                        <ComboBoxItem Content="{x:Static p:Resources.createGameSuddenDeathMode}"/>
                     </ComboBox>
                     <Separator Height="25" Opacity="0"/>
                     <ComboBox Name="InitialPiecesComboBox" FontSize="32" VerticalAlignment="Center" Height="50" SelectedIndex="0">
@@ -64,6 +62,8 @@
                     <Separator Height="31" Opacity="0"/>
                     <ComboBox Name="TimeLimitComboBox" FontSize="32" VerticalAlignment="Center" Height="50" SelectedIndex="0">
                         <ComboBoxItem Content="{x:Static p:Resources.createGameNoTimeLimit}"/>
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="5"/>
                     </ComboBox>
                     <Separator Height="25" Opacity="0"/>
                 </StackPanel>

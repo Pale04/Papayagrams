@@ -259,7 +259,7 @@ namespace PapayagramsClient.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Time limit.
+        ///   Busca una cadena traducida similar a Time limit (minutes).
         /// </summary>
         public static string createGameTimeLimit {
             get {
@@ -399,6 +399,15 @@ namespace PapayagramsClient.Properties {
         public static string friendsBlockUserTooltip {
             get {
                 return ResourceManager.GetString("friendsBlockUserTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friend removed successfully.
+        /// </summary>
+        public static string friendsFriendRemovedSuccessfully {
+            get {
+                return ResourceManager.GetString("friendsFriendRemovedSuccessfully", resourceCulture);
             }
         }
         

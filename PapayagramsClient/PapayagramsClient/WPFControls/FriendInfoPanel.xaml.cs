@@ -44,6 +44,8 @@ namespace PapayagramsClient.WPFControls
             handlerType: typeof(RoutedEventHandler),
             ownerType: typeof(FriendInfoPanel));
 
+        public int ImageId = 0;
+
         // panelType: what does the panel holds,
         // determines what action needs to occur when the button is pressed
         // 1: Friend
@@ -52,6 +54,7 @@ namespace PapayagramsClient.WPFControls
         // 4: For invitations
         public FriendInfoPanel(int panelType, int imageId, string Username)
         {
+            ImageId = imageId;
             InitializeComponent();
             switch (panelType)
             {

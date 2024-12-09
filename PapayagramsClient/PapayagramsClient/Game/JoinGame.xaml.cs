@@ -35,7 +35,7 @@ namespace PapayagramsClient.Game
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                 _logger.Fatal("Couldn't connect to server for checking room availability");
-                NavigationService.GoBack();
+                NavigationService.Navigate(new MainMenu());
                 return;
             }
 
@@ -51,7 +51,7 @@ namespace PapayagramsClient.Game
 
         private void ReturnToMainMenu(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            NavigationService.Navigate(new MainMenu());
         }
     }
 }

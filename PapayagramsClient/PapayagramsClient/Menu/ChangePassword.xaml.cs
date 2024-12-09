@@ -19,7 +19,7 @@ namespace PapayagramsClient.Menu
 
         private void ReturnToConfig(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            NavigationService.Navigate(new MainMenu());
         }
 
         private bool IsSafePassword(string password)

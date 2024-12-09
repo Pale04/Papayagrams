@@ -50,7 +50,7 @@ namespace PapayagramsClient.Menu
 
         private void ReturnToMainMenu(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            NavigationService.Navigate(new MainMenu());
         }
 
         private void ShowAvailableImages(object sender, RoutedEventArgs e)

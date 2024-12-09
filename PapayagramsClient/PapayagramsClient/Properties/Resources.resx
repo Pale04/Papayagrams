@@ -190,7 +190,7 @@
     <value>Words language</value>
   </data>
   <data name="createGameTimeLimit" xml:space="preserve">
-    <value>Time limit</value>
+    <value>Time limit (minutes)</value>
   </data>
   <data name="createGameCreate" xml:space="preserve">
     <value>Create papaya</value>
@@ -504,5 +504,8 @@
   </data>
   <data name="globalNotEmail" xml:space="preserve">
     <value>That's not a valid email address</value>
+  </data>
+  <data name="friendsFriendRemovedSuccessfully" xml:space="preserve">
+    <value>Friend removed successfully</value>
   </data>
 </root>
