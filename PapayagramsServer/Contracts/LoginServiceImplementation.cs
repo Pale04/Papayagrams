@@ -39,6 +39,7 @@ namespace Contracts
                     }
                     else if (UserDB.GetPlayerByEmail(newPlayer.Email).IsSome)
                     {
+                        _logger.InfoFormat("Attempt to register with email in use(email: {0})", newPlayer.Email);
                         codeResult = 202;
                     }
                     else
@@ -116,7 +117,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
+                _logger.Fatal($"Database connection failed. User status not updated in data base (username: {username}, to status: {PlayerStatus.offline})", error);
                 return 102;
             }
 
@@ -127,7 +128,6 @@ namespace Contracts
 
             CallbacksPool.RemoveAllCallbacksChannels(username);
             PlayersOnlinePool.RemovePlayer(username);
-
             return 0;
         }
 
@@ -151,7 +151,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
+                _logger.Fatal($"Database connection failed. Account verification update (Username: {username})", error);
                 return 102;
             }
 
@@ -163,17 +163,18 @@ namespace Contracts
             }
             else
             {
+                _logger.WarnFormat("Account verification failed. Unknown return code (username: {0}, return code: {1})", username, codeResult);
                 return 209;
             }
         }
 
         public int SendAccountVerificationCode(string username)
         {
-            Option<Player> player;
+            Option<Player> wrappedPlayer;
 
             try
             {
-                player = UserDB.GetPlayerByUsername(username);
+                wrappedPlayer = UserDB.GetPlayerByUsername(username);
             }
             catch (EntityException error)
             {
@@ -181,21 +182,21 @@ namespace Contracts
                 return 102;
             }
 
-            if (player.IsNone)
+            if (wrappedPlayer.IsNone)
             {
                 return 205;
             }
 
-            Player playerChecking = (Player)player.Case;
+            Player player = (Player)wrappedPlayer.Case;
             string code = VerificationCodesPool.GenerateAccountVerificationCode(username);
 
             try
             {
-                return MailService.MailService.SendMail(playerChecking.Email, "Account verification code", $"Your account verification code is: {code}");
+                return MailService.MailService.SendMail(player.Email, "Account verification code", $"Your account verification code is: {code}");
             }
             catch (SmtpCommandException error)
             {
-                _logger.Warn($"Verificaton email sending failed (username id: {username})", error);
+                _logger.Warn($"Verificaton email sending failed (username: {username})", error);
                 return 104;
             }
         }
@@ -219,7 +220,7 @@ namespace Contracts
             }
             catch (SmtpCommandException error)
             {
-                _logger.WarnFormat("Password recovery email sending failed (Account email: {0})", email);
+                _logger.Warn($"Password recovery email sending failed (Account email: {email})", error);
                 return 104;
             }
         }
@@ -244,7 +245,7 @@ namespace Contracts
             }
             catch (EntityException error)
             {
-                _logger.Fatal("Database connection failed", error);
+                _logger.Fatal($"Database connection failed. Password update (Account email: {email})", error);
                 return 102;
             }
 

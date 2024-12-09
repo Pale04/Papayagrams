@@ -15,12 +15,15 @@ namespace BussinessLogic
         /// <param name="gameRoomCode">The game room code of the player</param>
         public static void RemovePlayerFromGameRoom(string username, string gameRoomCode)
         {
-            GameRoom gameRoom = (GameRoom)_gameRooms[gameRoomCode];
-            gameRoom.Players.Remove(PlayersOnlinePool.GetPlayer(username));
-
-            if (gameRoom.Players.Count == 0)
+            if (_gameRooms.ContainsKey(gameRoomCode))
             {
-                _gameRooms.Remove(gameRoomCode);
+                GameRoom gameRoom = (GameRoom)_gameRooms[gameRoomCode];
+                gameRoom.Players.Remove(PlayersOnlinePool.GetPlayer(username));
+
+                if (gameRoom.Players.Count == 0)
+                {
+                    _gameRooms.Remove(gameRoomCode);
+                }
             }
         }
 

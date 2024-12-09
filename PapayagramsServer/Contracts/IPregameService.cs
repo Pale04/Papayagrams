@@ -51,10 +51,10 @@ namespace Contracts
         /// Send an invitation to a friend to join a game room.
         /// </summary>
         /// <param name="username">Username of the player sending the invitation</param>
-        /// <param name="guestUsername">Username of the player receiving the invitation</param>
+        /// <param name="invitedFriend">Username of the player receiving the invitation</param>
         /// <param name="gameRoomCode">Code of the game room</param>
         [OperationContract(IsOneWay = true)]
-        void InviteFriend(string username, string guestUsername, string gameRoomCode);
+        void InviteFriend(string username, string invitedFriend, string gameRoomCode);
 
         /// <summary>
         /// Notify to server that someone has returned to the lobby after a game ended

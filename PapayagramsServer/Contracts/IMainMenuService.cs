@@ -16,12 +16,12 @@ namespace Contracts
         (int returnCode, List<FriendDC> relationshipsList) GetAllRelationships(string username);
 
         /// <summary>
-        /// Search a player who does'nt belong to friend list and blocked list of the searcher
+        /// Search a player who does'nt belong to friend list, blocked list or is him self
         /// </summary>
         /// <param name="searcherUsername">Username ot the player who is searching</param>
         /// <param name="searchedUsername">Username of the player who needs to be found</param>
         /// <returns>PlayerDC object with its id, username and email if is found, an error code otherwise</returns>
-        /// <remarks>Error code that can be returned: 102, 103</remarks>
+        /// <remarks>Error code that can be returned: 102, 311</remarks>
         [OperationContract]
         (int returnCode, PlayerDC foundPlayer) SearchNoFriendPlayer(string searcherUsername, string searchedUsername);
 
@@ -31,7 +31,7 @@ namespace Contracts
         /// <param name="senderUsername">Username of the player who sends the friend request</param>
         /// <param name="receiverUsername">Username of the player who receives the friend request</param>
         /// <returns>0 if the operation was successful, an error code otherwise </returns>
-        /// <remarks> Error codes that can be returned: 101, 102, 301, 302, 303, 304 </remarks>
+        /// <remarks> Error codes that can be returned: 101, 102, 205, 301, 302, 303, 304, 311</remarks>
         [OperationContract]
         int SendFriendRequest(string senderUsername, string receiverUsername);
 

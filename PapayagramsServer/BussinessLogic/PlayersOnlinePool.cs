@@ -51,5 +51,10 @@ namespace BussinessLogic
         {
             return _guests.ContainsKey(username);
         }
+
+        public static bool RemoveGuest(string username)
+        {
+            return _guests.Remove(username) && _players.Remove(username);
+        }
     }
 }

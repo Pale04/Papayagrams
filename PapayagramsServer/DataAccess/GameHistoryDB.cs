@@ -23,15 +23,12 @@ namespace DataAccess
             switch (gameMode) {
                 case GameMode.Original:
                     return UpdateOriginalGameHistory(username, gameWon);
-                case GameMode.SuddenDeath:
-                    return UpdateSuddenDeathHistory(username, gameWon);
-                case GameMode.TimeAttack:
-                    return UpdateTimeAtackHistory(username, gameWon);
                 default:
                     return 0;
             }
         }
         
+
         private static int UpdateOriginalGameHistory(string username, bool gameWon)
         {
             int result = 0;
@@ -54,18 +51,6 @@ namespace DataAccess
                 }
             }
             return result;
-        }
-
-        private static int UpdateSuddenDeathHistory(string username, bool gameWon)
-        {
-            //todo
-            throw new NotImplementedException();
-        }
-
-        private static int UpdateTimeAtackHistory(string username, bool gameWon)
-        {
-            //todo
-            throw new NotImplementedException();
         }
 
         /// <summary>

@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using DomainClasses;
+using System.Collections;
+using System.Collections.Generic;
+using System.ServiceModel;
 
 namespace BussinessLogic
 {

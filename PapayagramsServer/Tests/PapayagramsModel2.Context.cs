@@ -13,7 +13,6 @@ namespace Tests
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
-    using System.Linq;
     using System.Configuration;
 
     public partial class papayagramsEntities : DbContext
@@ -25,15 +24,16 @@ namespace Tests
 
         private static string GetConnectionString()
         {
+            string serverName = Environment.GetEnvironmentVariable("Papayagrams_DataBaseServerName");
             string password = Environment.GetEnvironmentVariable("Papayagrams_DataBasePassword");
 
-            if (string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(serverName) || string.IsNullOrEmpty(password))
             {
-                throw new InvalidOperationException("Enviroment variable not found");
+                throw new InvalidOperationException("Environment variables not configured");
             }
 
             string connectionString = ConfigurationManager.ConnectionStrings["papayagramsEntities"].ConnectionString;
-            return connectionString.Replace("{password_placeholder}", password);
+            return connectionString.Replace("{server_placeholder}", serverName).Replace("{password_placeholder}", password);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
