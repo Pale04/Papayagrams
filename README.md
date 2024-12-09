@@ -242,25 +242,20 @@ La bitácora debe manejarse prioritariamente en la clase que implemente los cont
 
 Las siguientes listas muestran una guía para identificar en qué nivel registrar cada elemento en la bitácora.
 
-**FATAL**: errores que afectan al sistema completamente
+**FATAL**: errores que afectan al sistema completamente. Generalmente conexiones fallidas a la base de datos o archivos no encontrados en el sistema.
 - EntityException
 - FileNotFoundException
 
-**WARNING**: situaciones anormales que pueden indicar futuros problemas
+**WARNING**: situaciones anormales que pueden indicar futuros problemas. Por ejemplo, información que no es actualizada debido a un error de conexión en la base de datos, o correos no enviados.
 - SmtpCommandException
 
-**INFO**: eventos significativos en la ejecución del sistema.
-- Intentos de inicio de sesión
-- Intentos de verificación de la cuenta
-- 
+**INFO**: eventos significativos en la ejecución del sistema. Pueden ir desde registrar el inicio de sesión de un jugador, intentos fallidos de inicio de sesión, canales de comunicación cerrados inesperadamente, entre otros.
+
 
 ### Códigos de error
 Para manejar los diferentes resultados o flujos que puede generar la ejecución de un método en la parte del servidor, estos devolverán un código de acuerdo al resultado obtenido.
 
 Todos los códigos manejados se encuntran en el archivo ==ErrorCodes.md==
-
-### Errores personalizados
-Para facilitar el registro de errores en bitacora y mensajes de error para el usuario, se manejará la clase _(nombre de clase)_ para propagar los errores y mensajes para el usuario y bitacora.
 
 ---
 
