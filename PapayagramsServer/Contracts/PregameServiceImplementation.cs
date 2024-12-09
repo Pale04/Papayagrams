@@ -19,7 +19,6 @@ namespace Contracts
             catch (EntityException error)
             {
                 _logger.Fatal($"Database connection failed. User status not updated in data base (username: {username}, to status: {PlayerStatus.in_game})", error);
-                return (102, null);
             }
 
             GameRoom gameRoom = new GameRoom
@@ -90,7 +89,6 @@ namespace Contracts
                     catch (EntityException error)
                     {
                         _logger.Fatal("Database connection failed. User status update failed (username: {username}, to status: {PlayerStatus.in_game})", error);
-                        return (102, null);
                     }
                 }
                 
