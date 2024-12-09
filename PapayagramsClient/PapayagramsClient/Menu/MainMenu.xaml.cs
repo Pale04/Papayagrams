@@ -699,10 +699,11 @@ namespace PapayagramsClient
 
         private void GoToLeaderboard(object sender, RoutedEventArgs e)
         {
+            LeaderboardStatsDC[] stats = null;
+
             try
             {
-                LeaderboardStatsDC[] stats = _host.GetGlobalLeaderboard();
-                NavigationService.Navigate(new Leaderboards(stats));
+                stats = _host.GetGlobalLeaderboard();
             }
             catch (CommunicationObjectFaultedException)
             {
@@ -710,6 +711,14 @@ namespace PapayagramsClient
                 NavigationService.Navigate(new Login.Login());
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                 return;
+            }
+
+            if (stats == null)
+            {
+                new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+            }
+            else {
+                NavigationService.Navigate(new Leaderboards(stats));
             }
         }
     }
