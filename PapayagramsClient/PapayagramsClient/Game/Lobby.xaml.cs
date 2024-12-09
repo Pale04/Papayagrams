@@ -50,7 +50,7 @@ namespace PapayagramsClient.Game
                     break;
             }
 
-            GameRoomCodeText.Content = Properties.Resources.joinGameCode + gameRoom.RoomCode;
+            GameRoomCodeText.Content = Properties.Resources.joinGameCode + ": " + gameRoom.RoomCode;
             CurrentGame.RoomCode = gameRoom.RoomCode;
             CurrentGame.State = CurrentGame.GameState.InLobby;
             CurrentGame.PlayersInRoom = gameRoom.Players.ToList();
@@ -90,7 +90,7 @@ namespace PapayagramsClient.Game
                     InitializeComponent();
                     CreateGameButton.Visibility = Visibility.Hidden;
                     CreateGameButton.IsEnabled = false;
-                    GameRoomCodeText.Content = Properties.Resources.joinGameCode + gameRoomCode;
+                    GameRoomCodeText.Content = Properties.Resources.joinGameCode + ": " + gameRoomCode;
                     CurrentGame.RoomCode = gameRoom.RoomCode;
                     CurrentGame.State = CurrentGame.GameState.InLobby;
                     CurrentGame.PlayersInRoom = gameRoom.Players.ToList();
@@ -237,7 +237,6 @@ namespace PapayagramsClient.Game
 
             try
             {
-                Console.WriteLine(_host.State);
                 _host.SendMessage(message);
             }
             catch (CommunicationObjectFaultedException)
