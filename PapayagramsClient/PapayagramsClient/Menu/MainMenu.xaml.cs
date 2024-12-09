@@ -112,6 +112,7 @@ namespace PapayagramsClient
                 case 102:
                     new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
                     _logger.Error("Couldn't retrieve user settings");
+                    CurrentPlayer.Configuration = null;
                     return;
 
                 case 205:
@@ -301,7 +302,7 @@ namespace PapayagramsClient
 
         private void GoToConfiguration(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Menu.Configuration());
+            NavigationService.Navigate(new Configuration());
         }
 
         public void ReceiveGameInvitation(GameInvitationDC invitation)

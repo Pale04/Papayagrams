@@ -40,10 +40,14 @@ namespace PapayagramsClient.Game
 
             (int returnCode, GameRoomDC gameRoom) = _host.CreateGame(CurrentPlayer.Player.Username, gameConfig);
 
-            if (returnCode != 0)
+            switch (returnCode)
             {
-                new SelectionPopUpWindow(Properties.Resources.errorUnexpectedError, Properties.Resources.errorUnexpectedError, 3).ShowDialog();
-                return;
+                case 102:
+                    new SelectionPopUpWindow(Properties.Resources.errorDatabaseConnection, Properties.Resources.errorDatabaseConnection, 3).ShowDialog();
+                    break ;
+
+                case 0:
+                    break;
             }
 
             GameRoomCodeText.Content = Properties.Resources.joinGameCode + gameRoom.RoomCode;
@@ -240,6 +244,7 @@ namespace PapayagramsClient.Game
             {
                 new SelectionPopUpWindow(Properties.Resources.errorConnectionTitle, Properties.Resources.errorServerConnection, 3).ShowDialog();
                 _logger.Fatal("Couldn't connect to server to join lobby");
+                NavigationService.Navigate(new Login.Login());
                 return;
             }
         }

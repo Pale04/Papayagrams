@@ -73,13 +73,20 @@ namespace PapayagramsClient.Menu
 
             int cursor = CursorCombobox.SelectedIndex;
 
-            ApplicationSettingsDC configuration = new ApplicationSettingsDC { SelectedLanguage = language, Cursor = cursor, PieceColor = CurrentPlayer.Configuration.PieceColor };
+            ApplicationSettingsDC configuration = new ApplicationSettingsDC { SelectedLanguage = language, Cursor = cursor, PieceColor = 0 };
 
             return configuration;
         }
 
         private void ShowCurrentConfiguration()
         {
+            if (CurrentPlayer.Configuration == null)
+            {
+                CursorCombobox.SelectedIndex = 0;
+                LanguageCombobox.SelectedIndex = 0;
+                return;
+            }
+
             switch (CurrentPlayer.Configuration.SelectedLanguage)
             {
                 case ApplicationLanguageDC.auto:
