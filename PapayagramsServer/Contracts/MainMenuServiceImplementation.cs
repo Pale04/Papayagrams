@@ -126,7 +126,7 @@ namespace Contracts
             {
                 return 101;
             }
-            
+
             int result;
             try
             {
@@ -168,7 +168,7 @@ namespace Contracts
             {
                 _logger.WarnFormat("Player block failed (Blocker username: {0}, Blocked username: {1})", username, friendUsername);
             }
-            return result > 0? 0 : 308;
+            return result > 0 ? 0 : 308;
         }
 
         public int UnblockPlayer(string username, string friendUsername)
@@ -233,7 +233,7 @@ namespace Contracts
 
             try
             {
-                playerStats = GameHistoryDB.GetPlayerStats(username); 
+                playerStats = GameHistoryDB.GetPlayerStats(username);
             }
             catch (EntityException error)
             {
@@ -241,7 +241,7 @@ namespace Contracts
                 return (102, null);
             }
 
-            return playerStats.IsSome? (0, PlayerStatsDC.ConvertToPlayerStatsDC((PlayerStats)playerStats.Case)) : (205, null);
+            return playerStats.IsSome ? (0, PlayerStatsDC.ConvertToPlayerStatsDC((PlayerStats)playerStats.Case)) : (205, null);
         }
 
         public int ReportToServer(string username)

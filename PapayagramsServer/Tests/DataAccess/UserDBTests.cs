@@ -273,7 +273,7 @@ namespace DataAccess.Tests
                 Cursor = 1
             };
             int expected = 0;
-            int result = UserDB.UpdateApplicationSettings("Pale", settings);
+            int result = UserDB.UpdateApplicationSettings("deivid", settings);
             Assert.AreEqual(expected, result, "UpdateApplicationSettingsNonExistentUserTest");
         }
 

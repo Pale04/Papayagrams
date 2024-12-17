@@ -31,7 +31,7 @@ namespace Contracts
         /// <param name="username">Username of the player leaving the room</param>
         /// <param name="roomCode">code of the game room</param>
         [OperationContract(IsOneWay = true)]
-        void LeaveLobby(string username,string roomCode);
+        void LeaveLobby(string username, string roomCode);
 
         /// <summary>
         /// Send a message through the chat to all players in the game room
@@ -66,7 +66,7 @@ namespace Contracts
     }
 
     [ServiceContract]
-    public interface IPregameServiceCallback 
+    public interface IPregameServiceCallback
     {
         /// <summary>
         /// Recieve a message from the chat in the game room.

@@ -91,10 +91,10 @@ namespace Contracts
                         _logger.Fatal("Database connection failed. User status update failed (username: {username}, to status: {PlayerStatus.in_game})", error);
                     }
                 }
-                
+
                 CallbacksPool.PlayerArrivesToPregame(username, OperationContext.Current.GetCallbackChannel<IPregameServiceCallback>());
                 room.Players.Add(PlayersOnlinePool.GetPlayer(username));
-                
+
                 CheckPregameCallbackChannelState(roomCode);
                 for (int i = 0; i < room.Players.Count - 1; i++)
                 {
